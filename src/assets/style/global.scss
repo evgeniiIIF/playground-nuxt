@@ -1,0 +1,52 @@
+@import './variables.scss';
+
+*,
+html,
+body {
+  box-sizing: border-box;
+  font-family: $font-main;
+  
+  padding: 0;
+  margin: 0;
+}
+
+// body {
+//   background-color: $background-main;
+// }
+
+.v-enter-active,
+.v-leave-active {
+  transition: $transition-1;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+.accordion-enter-active,
+.accordion-leave-active {
+  transition:  opacity 0.8s, height 1s, max-height 1s;
+}
+
+.accordion-enter-from,
+.accordion-leave-to {
+  height: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: $transition-1;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+
+

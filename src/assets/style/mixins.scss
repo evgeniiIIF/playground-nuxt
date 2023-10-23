@@ -1,0 +1,242 @@
+@import './variables.scss';
+// typography
+
+@mixin title-main-big {
+	font-family: $font-main;
+	font-size: 56px;
+	font-weight: 300;
+	line-height: 66px;
+}
+
+@mixin title-main-medium {
+	font-family: $font-main;
+	font-size: 48px;
+	font-weight: 300;
+	line-height: 56px;
+	
+}
+
+@mixin title-main-small {
+	font-family: $font-main;
+	font-size: 40px;
+	font-weight: 300;
+	line-height: 47px;
+}
+
+@mixin title-main-xsmall {
+	font-family: $font-main;
+	font-size: 32px;
+	font-weight: 400;
+	line-height: 42px;
+}
+
+@mixin text-main {
+	font-family: $font-main;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+}
+
+@mixin text-main-grow {
+	font-family: $font-main;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+}
+
+@mixin text-main-big {
+	font-family: $font-main;
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 32px;	
+}
+
+@mixin text-main-medium {
+	font-family: $font-main;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 26px;
+}
+
+@mixin text-main-medium-grow {
+	font-family: $font-main;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 26px;
+}
+
+@mixin text-main-standard-small {
+	font-family: $font-main;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;	
+}
+
+@mixin text-main-small {
+	font-family: $font-main;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16px;
+}
+
+@mixin text-main-small-grow {
+	font-family: $font-main;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 16px;
+}
+
+// breakpoints
+$screen-small-max: 768px;
+
+@mixin mobile {
+    @media screen and (max-width: #{$screen-small-max}) {
+        @content;
+    }
+}
+
+$tablet-from: 769px;;
+$tablet-to: 1024px;
+
+@mixin tablet {
+    @media screen and (min-width: #{$tablet-from}) and (max-width: #{$tablet-to}) {
+        @content;
+    }
+}
+
+$desktop-form: 1025px;
+
+@mixin desktop {
+    @media screen and (min-width: #{$desktop-form}) {
+        @content;
+    }
+}
+
+@mixin footer-media {
+    @media screen and (max-width: #{$tablet-to}) {
+        @content;
+    }
+}
+
+$screen-xsmall-max: 567px;
+
+@mixin xsmall {
+    @media screen and (max-width: #{$screen-xsmall-max}) {
+        @content;
+    }
+}
+
+$screen-medium-min: 1200px;
+
+$screen-large-min: 1600px;
+
+@mixin media-start-from($val) {
+    @media screen and (min-width: #{$val}) {
+        @content;
+    }
+}
+
+@mixin media-end-to($val) {
+    @media screen and (max-width: #{$val}) {
+        @content;
+    }
+}
+
+@mixin media-range($min, $max) {
+    @media screen and (max-width: #{$max}) and (min-width: #{$min}) {
+        @content;
+    }
+}
+
+@mixin reset-h {
+	margin: 0;
+	padding: 0;
+}
+
+@mixin container($max-width: 1232px) {
+	padding: 0 16px;
+	margin: 0 auto;
+	max-width: $max-width;
+}
+
+@mixin centered-flexbox {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@mixin window-popup {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}
+
+@mixin fill-svg-and-path($color, $transition-duration: 200ms) {
+	transition: all $transition-duration;
+	fill: $color;
+
+	path {
+			transition: all $transition-duration;
+			fill: inherit;
+	}
+}
+
+@mixin cut-for-n-rows($n: 2) {
+	display: -webkit-box;
+	overflow: hidden;
+	white-space: pre-line;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: $n;
+	-webkit-box-orient: vertical;
+}
+
+@mixin no-scrollbar {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	&::-webkit-scrollbar {
+			display: none;
+	}
+}
+
+@mixin custom-scrollbar($track: $color-main) {
+	&::-webkit-scrollbar {
+			position: absolute;
+			width: 8px;
+			height: 8px;
+	}
+
+	/* Track */
+	&::-webkit-scrollbar-track {
+			background: $color-main-light;
+			border-radius: 10px;
+	}
+
+	&::-webkit-scrollbar-track:disabled {
+		background: transparent;
+		border-radius: 10px;
+	}
+
+	/* Handle */
+	&::-webkit-scrollbar-thumb {
+			background: $color-second;
+			border: 2px solid $track;
+			border-radius: 10px;
+	}
+
+	/* Handle on hover */
+	&::-webkit-scrollbar-thumb:hover {
+			background: $color-second-dark;
+	}
+}
+
+@mixin hover {
+	@media (any-hover: hover) {
+    &:hover {
+      @content
+    }
+  }
+}
