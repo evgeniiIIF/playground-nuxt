@@ -1,43 +1,85 @@
-$color-main: #e3e6e8;
-$color-main-light: #e5e5e5;
-$color-main-lighter: #ffffff;
-
-$color-main-dark: #b3b3b3;
-$color-main-darkness: #999999;
-$color-main-darker: #495159;
+$color-main: #3f3f41;
 
 $color-second: #00a19c;
-$color-second-light: #00bfb5;
-$color-second-dark: #009a93;
-$color-second-lighter: #e8f7f6;
+$color-second-light: #00ABA5;
+$color-second-lighter: #00B5AF;
+$color-second-lightest: #33B4B0;
 
-$color-tertiary: #111212;
-$color-tertiary-dark: #072227;
-$color-tertiary-light: #2a2a2a;
-$color-tertiary-lighter: #717171;
+$color-white: #fff;
+$color-white-light: #FAFAFF;
+$color-white-lighter: #F0F2F2;
 
-$color-danger: #cc0002;
-$color-danger-light: #e06666;
+$color-gray: #868789;
+$color-gray-dark: #6B6F6E;
+$color-gray-light: #B3BABA;
+$color-gray-lighter: #A7B0B0;
 
-$background-main: #0c0b0f;
-$background-main-light: #171a1c;
-$background-main-lighter: #171a1c;
-$background-main-lightest: #1d1d21;
-$background-second: #f8f8f8;
+$color-light-gray: #E3E5E5;
+$color-light-gray-light: #F3F3F3;
+$color-light-gray-lighter: #F0F0F5;
+$color-light-gray-darker: #C4CCCC;
+$color-light-gray-darkest: #C4C4C4;
 
-// fonts
-$font-main:
-  'Roboto',
-  system-ui,
-  -apple-system,
-  BlinkMacSystemFont,
-  'Segoe UI',
-  Roboto,
-  Oxygen,
-  Ubuntu,
-  Cantarell,
-  'Open Sans',
-  'Helvetica Neue';
+$color-blue: #18243C;
+
+$color-black: #000;
+$color-black-light: #1B1C1C;
+$color-black-lighter: #2C2C2C;
+
+//fonts
+
+$font-main: 'SF Pro Display', 'Arial', sans-serif;
+$font-main-size: 14px;
+$font-main-line-height: 20px;
+
+//borders
+
+$button-border: 2px solid $color-second;
+$button-border-hover: 2px solid $color-second-light;
+$button-border-active: 2px solid $color-second-lighter;
+$fields-border: 1px solid $color-light-gray;
+$fields-border-hover: 1px solid $color-gray-lighter;
+
+//$color-main: #e3e6e8;
+//$color-main-light: #e5e5e5;
+//$color-main-lighter: #ffffff;
+//
+//$color-main-dark: #b3b3b3;
+//$color-main-darkness: #999999;
+//$color-main-darker: #495159;
+//
+//$color-second: #00a19c;
+//$color-second-light: #00bfb5;
+//$color-second-dark: #009a93;
+//$color-second-lighter: #e8f7f6;
+//
+//$color-tertiary: #111212;
+//$color-tertiary-dark: #072227;
+//$color-tertiary-light: #2a2a2a;
+//$color-tertiary-lighter: #717171;
+//
+//$color-danger: #cc0002;
+//$color-danger-light: #e06666;
+//
+//$background-main: #0c0b0f;
+//$background-main-light: #171a1c;
+//$background-main-lighter: #171a1c;
+//$background-main-lightest: #1d1d21;
+//$background-second: #f8f8f8;
+//
+//// fonts
+//$font-main:
+//  'Roboto',
+//  system-ui,
+//  -apple-system,
+//  BlinkMacSystemFont,
+//  'Segoe UI',
+//  Roboto,
+//  Oxygen,
+//  Ubuntu,
+//  Cantarell,
+//  'Open Sans',
+//  'Helvetica Neue';
 
 //transitions
 
@@ -47,10 +89,10 @@ $transition-1: all 0.3s ease-in-out;
 
 $menu: 10;
 
-$another-white: #e3e6e8;
-
-$grey-text: #b3b3b3;
-$background-main-light: #171a1c;
-
-//borders
-$border-1: 1px solid #43444d;
+//$another-white: #e3e6e8;
+//
+//$grey-text: #b3b3b3;
+//$background-main-light: #171a1c;
+//
+////borders
+//$border-1: 1px solid #43444d;
