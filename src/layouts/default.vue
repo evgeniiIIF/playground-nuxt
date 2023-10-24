@@ -1,7 +1,10 @@
 <script setup lang="ts"></script>
 
 <template>
-  <main>
-    <slot />
-  </main>
+  <div>
+    <AppHeader />
+    <main>
+      <slot />
+    </main>
+  </div>
 </template>

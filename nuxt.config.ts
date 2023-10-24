@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   srcDir: 'src',
   devtools: true,
-  modules: ['@pinia/nuxt', '@nuxtjs/google-fonts', '@vueuse/nuxt', 'nuxt-svgo', '@nuxt/image'],
+  modules: ['@pinia/nuxt', '@nuxtjs/google-fonts', '@vueuse/nuxt', 'nuxt-svgo', '@nuxt/image', 'nuxt-swiper'],
   googleFonts: {
     families: {
       Roboto: true,
@@ -28,6 +28,9 @@ export default defineNuxtConfig({
         },
       },
     },
+  },
+  swiper: {
+    styleLang: 'scss',
   },
   runtimeConfig: {
     public: {

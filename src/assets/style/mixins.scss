@@ -1,88 +1,145 @@
 @import './variables.scss';
 // typography
 
-@mixin title-main-big {
-  font-family: $font-main;
-  font-size: 56px;
-  font-weight: 300;
-  line-height: 66px;
-}
-
-@mixin title-main-medium {
-  font-family: $font-main;
-  font-size: 48px;
-  font-weight: 300;
-  line-height: 56px;
-}
-
-@mixin title-main-small {
-  font-family: $font-main;
+@mixin title-main-large-bold {
   font-size: 40px;
-  font-weight: 300;
-  line-height: 47px;
+  line-height: 50px;
+  font-weight: 600;
 }
 
-@mixin title-main-xsmall {
-  font-family: $font-main;
-  font-size: 32px;
-  font-weight: 400;
-  line-height: 42px;
+@mixin title-main-big-bold {
+  font-size: 40px;
+  line-height: 45px;
+  font-weight: 600;
 }
 
-@mixin text-main {
-  font-family: $font-main;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
+@mixin title-main-bold {
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: 600;
 }
 
-@mixin text-main-grow {
-  font-family: $font-main;
-  font-size: 16px;
+@mixin title-main-small-grow {
+  font-size: 24px;
+  line-height: 30px;
   font-weight: 500;
-  line-height: 24px;
+}
+
+@mixin title-main-xsmall-grow {
+  font-size: 24px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+@mixin title-main-xxsmall-grow {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 500;
+}
+
+@mixin title-main-xsmall-grow {
+  font-size: 17px;
+  line-height: 25px;
+  font-weight: 500;
+}
+
+@mixin text-counter {
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 500;
+}
+
+@mixin text-main-xlarge-bold {
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 600;
+}
+
+@mixin text-main-large-bold {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
 }
 
 @mixin text-main-big {
-  font-family: $font-main;
-  font-size: 24px;
+  font-size: 15px;
+  line-height: 20px;
   font-weight: 400;
-  line-height: 32px;
 }
 
-@mixin text-main-medium {
-  font-family: $font-main;
-  font-size: 18px;
+@mixin text-main {
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 400;
-  line-height: 26px;
 }
 
-@mixin text-main-medium-grow {
-  font-family: $font-main;
-  font-size: 18px;
+@mixin text-main-grow {
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 500;
-  line-height: 26px;
-}
-
-@mixin text-main-standard-small {
-  font-family: $font-main;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
 }
 
 @mixin text-main-small {
-  font-family: $font-main;
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 20px;
   font-weight: 400;
-  line-height: 16px;
 }
 
-@mixin text-main-small-grow {
-  font-family: $font-main;
+@mixin text-main-xsmall {
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+}
+
+@mixin text-main-xxsmall {
+  font-size: 10px;
+  line-height: 15px;
+  font-weight: 400;
+}
+
+@mixin button-text-big-grow {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+@mixin button-text-big {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+@mixin button-text {
   font-size: 14px;
-  font-weight: 600;
-  line-height: 16px;
+  line-height: 30px;
+  font-weight: 400;
+}
+
+@mixin button-text-grow {
+  font-size: 14px;
+  line-height: 30px;
+  font-weight: 500;
+}
+
+@mixin error-page-text {
+  font-size: 400px;
+  line-height: 350px;
+  font-weight: 400;
+}
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 100%;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-second;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $color-white-lighter;
+  }
 }
 
 // breakpoints
