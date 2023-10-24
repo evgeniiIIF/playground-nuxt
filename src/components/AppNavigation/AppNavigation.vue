@@ -1,27 +1,25 @@
-<script lang="ts" setup>
-import { RouterLink } from 'vue-router';
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <nav class="navigation">
     <ul class="navigation__list">
       <li class="navigation__item">
-        <RouterLink class="navigation__item-link" to="/offers">Акции</RouterLink>
+        <NuxtLink class="navigation__item-link" to="/offers">Акции</NuxtLink>
       </li>
       <li class="navigation__item">
-        <RouterLink class="navigation__item-link" to="/#">
+        <NuxtLink class="navigation__item-link" to="/#">
           <span class="navigation__item-link-text">Услуги</span>
           <span class="navigation__item-link-arrow"></span>
-        </RouterLink>
+        </NuxtLink>
       </li>
       <li class="navigation__item">
-        <RouterLink class="navigation__item-link" to="/bonus">Бонусная программа</RouterLink>
+        <NuxtLink class="navigation__item-link" to="/bonus">Бонусная программа</NuxtLink>
       </li>
       <li class="navigation__item">
-        <RouterLink class="navigation__item-link" to="/about">О компании</RouterLink>
+        <NuxtLink class="navigation__item-link" to="/about">О компании</NuxtLink>
       </li>
       <li class="navigation__item">
-        <RouterLink class="navigation__item-link" to="/contacts">Контакты</RouterLink>
+        <NuxtLink class="navigation__item-link" to="/contacts">Контакты</NuxtLink>
       </li>
     </ul>
   </nav>

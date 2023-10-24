@@ -18,7 +18,7 @@ const totalCost = computed(() =>
   }, 0),
 );
 
-const handleChecked = (event: InputEvent, text: string): void => {
+const handleChecked = (event: Event, text: string): void => {
   if (!(event.target instanceof HTMLInputElement)) return;
   changedItems.value.find((item) => item.name === text)!.checked = event.target.checked;
 };
@@ -40,8 +40,8 @@ const handleRemove = (text: string): void => {
               :price="price"
               :with-cross-button="true"
               :checked="true"
-              @checked="handleChecked"
-              @remove="handleRemove"
+              @on-checked="handleChecked"
+              @on-remove="handleRemove"
             />
           </li>
         </ul>

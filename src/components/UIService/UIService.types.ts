@@ -4,3 +4,8 @@ export type UIServiceTypes = {
   withCrossButton?: boolean;
   checked?: boolean;
 };
+
+export interface UIServiceEmits {
+  (event: 'onChecked', $event: Event, name: string): void;
+  (event: 'onRemove', name: string): void;
+}

@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import type { UIServiceTypes } from '~/components/UIService/UIService.types';
+import type {UIServiceEmits, UIServiceTypes} from '~/components/UIService/UIService.types';
 
 defineProps<UIServiceTypes>();
 
-const emit = defineEmits(['checked', 'remove']);
+const emit = defineEmits<UIServiceEmits>();
 </script>
 
 <template>
   <div class="service">
     <label class="service__label">
-      <input class="service__input" type="checkbox" :checked="checked" @input="emit('checked', $event, name)" />
+      <input class="service__input" type="checkbox" :checked="checked" @input="emit('onChecked', $event, name)" />
       <span class="service__name">{{ name }}</span>
     </label>
     <div class="service__controls">
       <span class="service__price">{{ price }} ₽</span>
-      <button v-if="withCrossButton" type="button" class="service__button" @click="emit('remove', name)">
+      <button v-if="withCrossButton" type="button" class="service__button" @click="emit('onRemove', name)">
         <IcCross filled />
       </button>
     </div>

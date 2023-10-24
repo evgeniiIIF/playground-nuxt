@@ -1,14 +1,12 @@
-<script lang="ts" setup>
-import { RouterLink } from 'vue-router';
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <header class="header">
     <AppContainer>
       <div class="header__wrapper">
-        <RouterLink class="header__logo" to="/">
+        <NuxtLink class="header__logo" to="/">
           <IcLogo filled />
-        </RouterLink>
+        </NuxtLink>
         <div class="header__navigation">
           <AppNavigation />
         </div>
@@ -56,7 +54,7 @@ import { RouterLink } from 'vue-router';
 
   &__contacts {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     align-self: flex-end;
     gap: 15px;
   }
@@ -64,7 +62,7 @@ import { RouterLink } from 'vue-router';
   &__calls {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
 
     &-phone {
       font-size: 16px;

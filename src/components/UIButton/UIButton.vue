@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { RouterLink } from 'vue-router';
 import type { UIButtonTypes } from '~/components/UIButton/UIButton.types';
 
 defineProps<UIButtonTypes>();
@@ -7,11 +6,11 @@ defineProps<UIButtonTypes>();
 
 <template>
   <template v-if="link">
-    <RouterLink
+    <NuxtLink
       :to="link"
       class="button button--without-underscore"
       :class="{ 'button--filled': isFilled, 'button--disabled': disabled }"
-      >{{ text }}</RouterLink
+      >{{ text }}</NuxtLink
     >
   </template>
   <template v-else>
