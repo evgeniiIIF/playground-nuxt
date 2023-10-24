@@ -9,6 +9,7 @@ import AutoBrands from '~/components/AutoBrands/AutoBrands.vue';
     <BonusProgram />
     <OurPartners />
     <AutoBrands />
+    <AboutCompany />
   </div>
 </template>
 
