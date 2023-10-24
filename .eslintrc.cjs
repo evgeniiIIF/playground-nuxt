@@ -36,5 +36,6 @@ module.exports = {
     'import/no-cycle': 'off',
     'no-prototype-builtins': 'off',
     'vuejs-accessibility/label-has-for': 'off',
+    'vuejs-accessibility/anchor-has-content': 'off',
   },
 };

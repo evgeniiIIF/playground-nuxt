@@ -1,0 +1,251 @@
+<script lang="ts" setup>
+import type { UIDropdownTypes } from '~/components/UIDropdown/UIDropdown.types';
+import { ref, computed } from 'vue';
+
+const props = defineProps<UIDropdownTypes>();
+
+const mockedAccordionData = [
+  { name: 'Кузовной ремонт', price: 1500 },
+  { name: 'Кузовной ремонт', price: 1500 },
+  { name: 'Кузовной ремонт', price: 1500 },
+  { name: 'Кузовной ремонт', price: 1500 },
+  { name: 'Кузовной ремонт', price: 1500 },
+  { name: 'Кузовной ремонт', price: 1500 },
+];
+
+const isOpen = ref(false);
+const dropdownValue = ref('');
+const searchValue = ref('');
+
+const open = () => {
+  if (props.items.length === 0) return;
+  isOpen.value = !isOpen.value;
+};
+const handleDropdownItemClick = (event: MouseEvent) => {
+  if (!(event.target instanceof HTMLElement)) return;
+  dropdownValue.value = event.target!.textContent as string;
+  isOpen.value = false;
+};
+
+const filteredItems = computed(() =>
+  props.items.filter((item) => item.toLowerCase().includes(searchValue.value.toLowerCase())),
+);
+</script>
+
+<template>
+  <div class="dropdown" :class="{ 'dropdown--opened': isOpen }">
+    <label class="dropdown__label">
+      <p class="dropdown__title">{{ title }}</p>
+      <div class="dropdown__dropdown" @click="open">
+        <input
+          v-model="dropdownValue"
+          class="dropdown__input"
+          type="text"
+          :placeholder="placeholder"
+          readOnly
+          :disabled="props.items.length === 0"
+        />
+        <button type="button" class="dropdown__button">
+          <span class="dropdown__button-arrow">
+            <IcArrowDown filled />
+          </span>
+        </button>
+      </div>
+    </label>
+    <div class="dropdown__drop" :class="{ 'dropdown__drop--with-accordion': withAccordion }">
+      <div class="dropdown__drop-search">
+        <input v-model="searchValue" class="dropdown__drop-search-input" type="text" placeholder="Поиск" />
+      </div>
+      <ul class="dropdown__drop-list">
+        <li v-if="withAccordion" class="dropdown__drop-accordion">
+          <UIAccordion :title="'Кузовной ремонт'" :items="mockedAccordionData" />
+        </li>
+        <template v-else>
+          <li v-for="item in filteredItems" :key="item" class="dropdown__drop-item" @click="handleDropdownItemClick">
+            {{ item }}
+          </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.dropdown {
+  max-width: 285px;
+  position: relative;
+
+  &__label {
+    cursor: pointer;
+  }
+
+  &__title {
+    margin-left: 10px;
+    font-size: 12px;
+    color: $color-gray-light;
+  }
+
+  &__dropdown {
+    display: flex;
+    align-items: center;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 1px solid #e3e5e5;
+    border-right: 0;
+    outline: none;
+
+    font-size: 14px;
+    color: $color-main;
+    cursor: pointer;
+
+    &::placeholder {
+      color: $color-gray-light;
+    }
+  }
+
+  &__button {
+    background: none;
+    border: 1px solid #e3e5e5;
+    padding: 11px 13px;
+    outline: none;
+    cursor: pointer;
+
+    &-arrow {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.2s ease;
+      color: $color-second;
+    }
+  }
+
+  &__drop {
+    display: none;
+    position: absolute;
+    top: 83px;
+    left: 0;
+    width: 100%;
+    max-height: 330px;
+    z-index: 1;
+    animation: open 0.2s ease-in-out;
+
+    @keyframes open {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    &--with-accordion {
+      width: 560px;
+    }
+
+    &-search {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        width: 24px;
+        height: 24px;
+        transform: translate(50%, -50%);
+        content: '';
+        background: url('~/assets/icons/search.svg');
+      }
+
+      &-input {
+        width: 100%;
+        padding: 15px 34px 15px 20px;
+        outline: none;
+        border: 1px solid #a7b0b0;
+      }
+    }
+
+    &-list {
+      max-height: 280px;
+      list-style-type: none;
+      border: 1px solid #a7b0b0;
+      border-top: 0;
+      overflow-y: auto;
+
+      @include scrollbar;
+    }
+
+    &-item {
+      padding: 14px 20px;
+
+      font-weight: 500;
+      cursor: pointer;
+      background-color: $color-white;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #f0f0f5;
+      }
+
+      &:hover {
+        background-color: rgba(240, 242, 242);
+      }
+    }
+  }
+
+  &--opened {
+    .dropdown {
+      &__title {
+        color: $color-main;
+      }
+
+      &__input {
+        border-color: #a7b0b0;
+        color: $color-main;
+
+        &::placeholder {
+          color: $color-main;
+        }
+      }
+
+      &__button {
+        border-color: #a7b0b0;
+
+        &-arrow {
+          transform: rotate(180deg);
+        }
+      }
+
+      &__drop {
+        display: block;
+      }
+    }
+  }
+
+  &:hover {
+    .dropdown {
+      &__title {
+        color: $color-gray;
+      }
+
+      &__input {
+        border-color: #a7b0b0;
+
+        &::placeholder {
+          color: $color-gray;
+        }
+      }
+
+      &__button {
+        border-color: #a7b0b0;
+      }
+    }
+  }
+}
+</style>
