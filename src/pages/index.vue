@@ -8,7 +8,6 @@
     <OurPartners />
     <AutoBrands />
   </div>
-  <AppFooter/>
 </template>
 
 <style lang="scss"></style>

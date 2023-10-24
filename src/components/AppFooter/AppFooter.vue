@@ -2,8 +2,8 @@
 import {
   mockedAboutCompanyFooter,
   mockedAdditionalServicesFooter,
-  mockedServicesFooter
-} from "~/components/AppFooter/AppFooter.constant";
+  mockedServicesFooter,
+} from '~/components/AppFooter/AppFooter.constant';
 </script>
 
 <template>
@@ -12,13 +12,13 @@ import {
       <div class="footer__wrapper">
         <div class="footer__body">
           <div class="footer__menu">
-            <FooterMenu :title="mockedServicesFooter.title" :items="mockedServicesFooter.items"/>
+            <FooterMenu :title="mockedServicesFooter.title" :items="mockedServicesFooter.items" />
           </div>
           <div class="footer__menu">
-            <FooterMenu :title="mockedAdditionalServicesFooter.title" :items="mockedAdditionalServicesFooter.items"/>
+            <FooterMenu :title="mockedAdditionalServicesFooter.title" :items="mockedAdditionalServicesFooter.items" />
           </div>
           <div class="footer__menu">
-            <FooterMenu :title="mockedAboutCompanyFooter.title" :items="mockedAboutCompanyFooter.items"/>
+            <FooterMenu :title="mockedAboutCompanyFooter.title" :items="mockedAboutCompanyFooter.items" />
           </div>
           <div class="footer__contacts">
             <FooterContacts />
@@ -31,13 +31,13 @@ import {
           </div>
           <ul class="footer__footer-payment-list">
             <li class="footer__footer-payment-item">
-              <IcVisa :font-controlled="false" :filled="true"/>
+              <IcVisa :font-controlled="false" :filled="true" />
             </li>
             <li class="footer__footer-payment-item">
-              <IcMasterCard :font-controlled="false" :filled="true"/>
+              <IcMasterCard :font-controlled="false" :filled="true" />
             </li>
             <li class="footer__footer-payment-item">
-              <IcMir :font-controlled="false" :filled="true"/>
+              <IcMir :font-controlled="false" :filled="true" />
             </li>
           </ul>
         </div>
@@ -47,103 +47,103 @@ import {
 </template>
 
 <style lang="scss" scoped>
-  .footer {
-    padding: 68px 0 20px 0;
-    background-color: $color-black-light;
+.footer {
+  padding: 68px 0 20px 0;
+  background-color: $color-black-light;
+
+  @include mobile {
+    padding: 38px 0 20px 0;
+  }
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 143px;
+
+    @include tablet {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
 
     @include mobile {
-      padding: 38px 0 20px 0;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__menu {
+    @include tablet {
+      flex-basis: 35%;
     }
 
-    &__body {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 143px;
+    @include mobile {
+      display: none;
+    }
+  }
 
-      @include tablet {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 30px;
-      }
+  &__contacts {
+    @include tablet {
+      flex-basis: 35%;
+    }
+  }
 
-      @include mobile {
-        margin-bottom: 40px;
-      }
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+
+    @include mobile {
+      flex-direction: column;
+      gap: 29px;
     }
 
-    &__menu {
-      @include tablet {
-        flex-basis: 35%;
-      }
-
-      @include mobile {
-        display: none;
-      }
-    }
-
-    &__contacts {
-      @include tablet {
-        flex-basis: 35%;
-      }
-    }
-
-    &__footer {
+    &-privacy {
+      max-width: 475px;
+      width: 100%;
       display: flex;
       justify-content: space-between;
 
       @include mobile {
-        flex-direction: column;
-        gap: 29px;
+        max-width: inherit;
+        order: 2;
       }
 
-      &-privacy {
-        max-width: 475px;
-        width: 100%;
+      &-name {
+        @include text-main-xsmall;
+        color: $color-gray-dark;
+      }
+
+      &-policy {
+        @include text-main-xsmall;
+        color: $color-gray-dark;
+        text-decoration: underline;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          color: $color-white;
+        }
+      }
+    }
+
+    &-payment {
+      &-list {
         display: flex;
-        justify-content: space-between;
+        list-style-type: none;
+        gap: 10px;
 
         @include mobile {
-          max-width: inherit;
-          order: 2;
-        }
-
-        &-name {
-          @include text-main-xsmall;
-          color: $color-gray-dark;
-        }
-
-        &-policy {
-          @include text-main-xsmall;
-          color: $color-gray-dark;
-          text-decoration: underline;
-          cursor: pointer;
-          transition: all 0.2s ease;
-
-          &:hover {
-            color: $color-white;
-          }
+          order: 1;
+          gap: 20px;
         }
       }
 
-      &-payment {
-        &-list {
-          display: flex;
-          list-style-type: none;
-          gap: 10px;
-
-          @include mobile {
-            order: 1;
-            gap: 20px;
-          }
-        }
-
-        &-item {
-          width: 30px;
-          height: 20px;
-          opacity: 0.5;
-          border-radius: 2px;
-        }
+      &-item {
+        width: 30px;
+        height: 20px;
+        opacity: 0.5;
+        border-radius: 2px;
       }
     }
   }
+}
 </style>
