@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { vMaska } from 'maska';
-import type {UIInputEmits} from "~/components/UIInput/UIInput.types";
+import type { UIInputEmits } from '~/components/UIInput/UIInput.types';
 
 type Props = {
   title: string;
@@ -10,11 +10,10 @@ type Props = {
 };
 
 defineProps<Props>();
-defineEmits<UIInputEmits>()
+defineEmits<UIInputEmits>();
 
-const onInputHandler = (event: Event): string | undefined => {
-  if (!(event.target instanceof HTMLInputElement)) return;
-  return event.target.value;
+const onInputHandler = (event: Event): string => {
+  return (event.target as HTMLInputElement).value;
 };
 </script>
 
