@@ -35,7 +35,7 @@ const companiesLogos = [
         <div class="our-partners__logos">
           <ul class="our-partners__companies-logos">
             <li v-for="logo in companiesLogos" :key="logo" class="our-partners__company-logo">
-              <component :is="logo" :filled="true" />
+              <component :is="logo" :font-controlled="false" :filled="true" />
             </li>
           </ul>
         </div>
@@ -75,8 +75,6 @@ const companiesLogos = [
   }
 
   &__company-logo {
-    max-width: 158px;
-    max-height: 50px;
     display: flex;
     align-items: center;
     filter: grayscale(100);

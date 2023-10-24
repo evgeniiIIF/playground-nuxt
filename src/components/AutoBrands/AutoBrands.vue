@@ -38,12 +38,12 @@ const marques = [
       <div class="auto-brands__content">
         <ul class="auto-brands__list">
           <li v-for="marque in marques" :key="marque" class="auto-brands__item">
-            <component :is="marque" :filled="true" />
+            <component :is="marque" :font-controlled="false" :filled="true" />
           </li>
         </ul>
         <ul class="auto-brands__list">
           <li v-for="marque in marques" :key="marque" class="auto-brands__item">
-            <component :is="marque" :filled="true" />
+            <component :is="marque" :font-controlled="false" :filled="true" />
           </li>
         </ul>
       </div>
@@ -97,13 +97,8 @@ const marques = [
     display: flex;
     align-items: center;
     gap: 70px;
-    height: 55px;
 
     list-style-type: none;
-  }
-
-  &__item {
-    height: 100%;
   }
 }
 </style>

@@ -47,7 +47,7 @@ const filteredItems = computed(() =>
         />
         <button type="button" class="dropdown__button">
           <span class="dropdown__button-arrow">
-            <IcArrowDown filled />
+            <IcArrowDown :font-controlled="false" :filled="true" />
           </span>
         </button>
       </div>

@@ -41,6 +41,7 @@
 
       text-decoration: none;
       color: $color-white;
+      transition: all 0.2s ease;
 
       &:hover {
         color: $color-second;
@@ -50,8 +51,12 @@
         }
       }
 
-      &:active {
+      &:focus-visible {
         color: $color-second;
+
+        .navigation__item-link-arrow {
+          background: url('~/assets/icons/navigation-arrow-down-green.svg') no-repeat center;
+        }
       }
 
       &-arrow {
