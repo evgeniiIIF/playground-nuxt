@@ -1,5 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+// import { useCategoriesStore } from '@/store/categories';
+// import { useServicesAllStore } from '@/store/servicesAll';
+import { useServicesTitleStore } from '@/store/servicesTitle';
+
+// const { categoriesEffects, categoriesState } = useCategoriesStore();
+// const { servicesAllEffects, servicesAllState } = useServicesAllStore();
+const { servicesTitleState, servicesTitleEffects } = useServicesTitleStore();
+
+// await categoriesEffects.fetchCategoriesItems(316);
+// await servicesAllEffects.fetchServicesAll();
+await servicesTitleEffects.fetchServicesTitle('авто');
+// await useAsyncData('mountains', () => servicesTitleEffects.fetchServicesTitle('авто'));
+</script>
 
 <template>
-  <div>Тгыче</div>
+  <!-- <div>{{ categoriesState.categoriesItems }}</div> -->
+  <!-- <div>{{ servicesAllState.servicesAllItems }}</div> -->
+  <div>{{ servicesTitleState.servicesTitleItems }}</div>
 </template>
