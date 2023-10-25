@@ -5,9 +5,6 @@ import AutoBrands from '~/components/AutoBrands/AutoBrands.vue';
 <template>
   <div>
     <WelcomeSlider />
-    <RepairCalculation />
-    <BonusProgram />
-    <OurPartners />
     <AutoBrands />
     <AboutCompany />
   </div>

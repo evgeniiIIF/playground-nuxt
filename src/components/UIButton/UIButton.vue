@@ -27,7 +27,9 @@ defineProps<UIButtonTypes>();
 
 <style lang="scss" scoped>
 .button {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 15px 33px;
   border: 2px solid $color-second;
   font-size: 14px;

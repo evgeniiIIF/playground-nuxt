@@ -23,9 +23,7 @@ import 'swiper/scss/pagination';
               Наша команда – это специалисты, являющиеся экспертами в своей области, способные выявить и оперативно
               устранить даже чрезвычайно сложные, скрытые, непредвиденные повреждения и неисправности.
             </p>
-            <div class="about-company__button">
-              <UIButton :text="'Подробнее'" :link="'#'" :is-filled="true" />
-            </div>
+            <UIButton :text="'Подробнее'" :link="'#'" :is-filled="true" />
           </div>
         </div>
         <div class="about-company__slider-container">
@@ -62,7 +60,24 @@ import 'swiper/scss/pagination';
 
 <style lang="scss">
 .about-company {
+  position: relative;
   padding: 59px 0 62px 0;
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    max-width: 1210px;
+    width: 100%;
+    height: 2px;
+    transform: translateX(-50%);
+    background-color: $color-light-gray-lighter;
+    content: '';
+  }
+
+  @include mobile {
+    padding: 38px 0 62px 0;
+  }
 
   &__wrapper {
     display: flex;
@@ -93,14 +108,28 @@ import 'swiper/scss/pagination';
   &__title {
     @include title-main-bold;
     color: $color-blue;
+
+    @include mobile {
+      @include title-main-xxsmall-bold;
+    }
   }
 
   &__content {
-    margin-top: 16px;
     max-width: 590px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 16px;
+    margin-bottom: 60px;
+
+    @include tablet {
+      align-items: inherit;
+    }
+
+    @include mobile {
+      align-items: inherit;
+      margin-bottom: 40px;
+    }
   }
 
   &__description {
@@ -108,10 +137,10 @@ import 'swiper/scss/pagination';
 
     @include text-main;
     color: $color-main;
-  }
 
-  &__button {
-    margin-bottom: 60px;
+    @include mobile {
+      margin-bottom: 30px;
+    }
   }
 
   &__slider-container {
@@ -133,9 +162,13 @@ import 'swiper/scss/pagination';
 
     .swiper {
       &-slide {
+        width: 100%!important;
+
         img {
+          max-width: 100%;
           width: 100%;
-          height: 100%;
+          height: auto;
+          object-fit: contain;
         }
       }
 
