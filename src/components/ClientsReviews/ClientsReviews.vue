@@ -3,9 +3,9 @@ import { Navigation } from 'swiper/modules';
 
 import 'swiper/scss';
 import 'swiper/scss/pagination';
-import {useMediaSizes} from "~/composables/useMediaSizes";
+import { useMediaSizes } from '~/composables/useMediaSizes';
 
-const { isMobile } = useMediaSizes()
+const { isMobile } = useMediaSizes();
 </script>
 
 <template>
@@ -15,30 +15,30 @@ const { isMobile } = useMediaSizes()
         <div class="clients-reviews__header">
           <h2 class="clients-reviews__title">Отзывы</h2>
           <div v-if="!isMobile" class="clients-reviews__slider-navigation">
-            <UIArrowButton :arrow-direction="'left'" :class-for-swiper="'clients-reviews__slider-button-prev'"  />
+            <UIArrowButton :arrow-direction="'left'" :class-for-swiper="'clients-reviews__slider-button-prev'" />
             <UIArrowButton :arrow-direction="'right'" :class-for-swiper="'clients-reviews__slider-button-next'" />
           </div>
         </div>
         <Swiper
-            class="clients-reviews__slider"
-            :modules="[Navigation]"
-            :slides-per-view="3"
-            :space-between="20"
-            :navigation="{
-              prevEl: '.clients-reviews__slider-button-prev',
-              nextEl: '.clients-reviews__slider-button-next',
-            }"
-            :breakpoints="{
-              1025: {
-                slidesPerView: 3,
-              },
-              769: {
-                slidesPerView: 2,
-              },
-              320: {
-                slidesPerView: 'auto',
-              }
-            }"
+          class="clients-reviews__slider"
+          :modules="[Navigation]"
+          :slides-per-view="3"
+          :space-between="20"
+          :navigation="{
+            prevEl: '.clients-reviews__slider-button-prev',
+            nextEl: '.clients-reviews__slider-button-next',
+          }"
+          :breakpoints="{
+            1025: {
+              slidesPerView: 3,
+            },
+            769: {
+              slidesPerView: 2,
+            },
+            320: {
+              slidesPerView: 'auto',
+            },
+          }"
         >
           <SwiperSlide class="clients-reviews__slider-review">
             <div class="clients-reviews__slider-review-wrapper">
@@ -47,9 +47,9 @@ const { isMobile } = useMediaSizes()
                   <h4 class="clients-reviews__slider-review-name">Роман Романов</h4>
                   <div class="clients-reviews__slider-review-icons">
                     <div class="clients-reviews__slider-review-rating">
-                      <StarRating v-if="!isMobile" :rating="5"/>
+                      <StarRating v-if="!isMobile" :rating="5" />
                     </div>
-                    <IcYandex :font-controlled="false" :filled="true"/>
+                    <IcYandex :font-controlled="false" :filled="true" />
                   </div>
                 </div>
                 <div class="clients-reviews__slider-review-subtitle">
@@ -59,8 +59,9 @@ const { isMobile } = useMediaSizes()
               </div>
               <div class="clients-reviews__slider-review-body">
                 <p class="clients-reviews__slider-review-text">
-                  Обслуживаю машину там почти постоянно. Вежливый персонал и все стараются объяснить,есть небольшие косяки но они не значительны. Цену чуть конечно выше чем в обычном сто но тут можно быть уверенным что не обманут (свято в это верю). Запчасти так же есть в наличии или под заказ.
-                  РЕКОМЕНДУЮ.
+                  Обслуживаю машину там почти постоянно. Вежливый персонал и все стараются объяснить,есть небольшие
+                  косяки но они не значительны. Цену чуть конечно выше чем в обычном сто но тут можно быть уверенным
+                  что&nbsp;не обманут (свято в это верю). Запчасти так же есть в наличии или под заказ. РЕКОМЕНДУЮ.
                 </p>
               </div>
             </div>
@@ -72,9 +73,9 @@ const { isMobile } = useMediaSizes()
                   <h4 class="clients-reviews__slider-review-name">Роман Романов</h4>
                   <div class="clients-reviews__slider-review-icons">
                     <div class="clients-reviews__slider-review-rating">
-                      <StarRating v-if="!isMobile" :rating="5"/>
+                      <StarRating v-if="!isMobile" :rating="5" />
                     </div>
-                    <IcGoogle :font-controlled="false" :filled="true"/>
+                    <IcGoogle :font-controlled="false" :filled="true" />
                   </div>
                 </div>
                 <div class="clients-reviews__slider-review-subtitle">
@@ -84,8 +85,8 @@ const { isMobile } = useMediaSizes()
               </div>
               <div class="clients-reviews__slider-review-body">
                 <p class="clients-reviews__slider-review-text">
-                  Обслуживаю машину там почти постоянно. Вежливый персонал и все стараются объяснить,есть небольшие косяки но они не значительны. Цену чуть конечно выше чем в обычном сто но тут можно быть уверенным что не обманут (свято в это верю). Запчасти так же есть в наличии или под заказ.
-                  РЕКОМЕНДУЮ.
+                  Работают быстро и на совесть, приятным бонусом можно считать кафе в котором можно пообедать, пока
+                  занимаются автомобилем.
                 </p>
               </div>
             </div>
@@ -97,9 +98,9 @@ const { isMobile } = useMediaSizes()
                   <h4 class="clients-reviews__slider-review-name">Роман Романов</h4>
                   <div class="clients-reviews__slider-review-icons">
                     <div class="clients-reviews__slider-review-rating">
-                      <StarRating v-if="!isMobile" :rating="5"/>
+                      <StarRating v-if="!isMobile" :rating="5" />
                     </div>
-                    <IcYandex :font-controlled="false" :filled="true"/>
+                    <IcYandex :font-controlled="false" :filled="true" />
                   </div>
                 </div>
                 <div class="clients-reviews__slider-review-subtitle">
@@ -109,8 +110,9 @@ const { isMobile } = useMediaSizes()
               </div>
               <div class="clients-reviews__slider-review-body">
                 <p class="clients-reviews__slider-review-text">
-                  Обслуживаю машину там почти постоянно. Вежливый персонал и все стараются объяснить,есть небольшие косяки но они не значительны. Цену чуть конечно выше чем в обычном сто но тут можно быть уверенным что не обманут (свято в это верю). Запчасти так же есть в наличии или под заказ.
-                  РЕКОМЕНДУЮ.
+                  Грамотные мастера, адекватные люди на приемке. К&nbsp;качеству работ никаких претензий. Наконец-то
+                  нашел нормальный сервис, где можно спокойно оставить авто и быть уверенным что все работы будут
+                  выполнены и выполнены качественно.
                 </p>
               </div>
             </div>
@@ -122,9 +124,9 @@ const { isMobile } = useMediaSizes()
                   <h4 class="clients-reviews__slider-review-name">Роман Романов</h4>
                   <div class="clients-reviews__slider-review-icons">
                     <div class="clients-reviews__slider-review-rating">
-                      <StarRating v-if="!isMobile" :rating="5"/>
+                      <StarRating v-if="!isMobile" :rating="5" />
                     </div>
-                    <IcYandex :font-controlled="false" :filled="true"/>
+                    <IcYandex :font-controlled="false" :filled="true" />
                   </div>
                 </div>
                 <div class="clients-reviews__slider-review-subtitle">
@@ -134,8 +136,9 @@ const { isMobile } = useMediaSizes()
               </div>
               <div class="clients-reviews__slider-review-body">
                 <p class="clients-reviews__slider-review-text">
-                  Обслуживаю машину там почти постоянно. Вежливый персонал и все стараются объяснить,есть небольшие косяки но они не значительны. Цену чуть конечно выше чем в обычном сто но тут можно быть уверенным что не обманут (свято в это верю). Запчасти так же есть в наличии или под заказ.
-                  РЕКОМЕНДУЮ.
+                  Обслуживаю машину там почти постоянно. Вежливый персонал и все стараются объяснить,есть небольшие
+                  косяки но они не значительны. Цену чуть конечно выше чем в обычном сто но тут можно быть уверенным
+                  что&nbsp;не обманут (свято в это верю). Запчасти так же есть в наличии или под заказ. РЕКОМЕНДУЮ.
                 </p>
               </div>
             </div>
@@ -147,9 +150,9 @@ const { isMobile } = useMediaSizes()
                   <h4 class="clients-reviews__slider-review-name">Роман Романов</h4>
                   <div class="clients-reviews__slider-review-icons">
                     <div class="clients-reviews__slider-review-rating">
-                      <StarRating v-if="!isMobile" :rating="5"/>
+                      <StarRating v-if="!isMobile" :rating="5" />
                     </div>
-                    <IcYandex :font-controlled="false" :filled="true"/>
+                    <IcYandex :font-controlled="false" :filled="true" />
                   </div>
                 </div>
                 <div class="clients-reviews__slider-review-subtitle">
@@ -159,8 +162,9 @@ const { isMobile } = useMediaSizes()
               </div>
               <div class="clients-reviews__slider-review-body">
                 <p class="clients-reviews__slider-review-text">
-                  Обслуживаю машину там почти постоянно. Вежливый персонал и все стараются объяснить,есть небольшие косяки но они не значительны. Цену чуть конечно выше чем в обычном сто но тут можно быть уверенным что не обманут (свято в это верю). Запчасти так же есть в наличии или под заказ.
-                  РЕКОМЕНДУЮ.
+                  Обслуживаю машину там почти постоянно. Вежливый персонал и все стараются объяснить,есть небольшие
+                  косяки но они не значительны. Цену чуть конечно выше чем в обычном сто но тут можно быть уверенным
+                  что&nbsp;не обманут (свято в это верю). Запчасти так же есть в наличии или под заказ. РЕКОМЕНДУЮ.
                 </p>
               </div>
             </div>
@@ -171,86 +175,84 @@ const { isMobile } = useMediaSizes()
   </section>
 </template>
 
-
 <style lang="scss" scoped>
-  .clients-reviews {
-    padding: 60px 0;
+.clients-reviews {
+  padding: 60px 0;
 
-    &__header {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+  }
+
+  &__title {
+    @include title-main-bold;
+    color: $color-blue;
+  }
+
+  &__slider {
+    &-navigation {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 36px;
+      gap: 20px;
     }
 
-    &__title {
-      @include title-main-bold;
-      color: $color-blue;
-    }
+    &-review {
+      padding: 30px 20px 50px 20px;
+      border: $review-border;
 
-    &__slider {
-      &-navigation {
-        display: flex;
-        gap: 20px;
+      @include mobile {
+        max-width: 80%;
       }
 
-      &-review {
-        padding: 30px 20px 50px 20px;
-        border: $review-border;
+      &-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 280px;
+      }
+
+      &-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 14px;
+      }
+
+      &-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      &-subtitle {
+        display: flex;
+        align-items: center;
+      }
+
+      &-name {
+        @include text-main-xlarge-bold;
+        color: $color-black-light;
+      }
+
+      &-date {
+        @include text-main;
+        color: $color-gray-light;
 
         @include mobile {
-          max-width: 80%;
+          margin-right: 10px;
         }
+      }
 
-        &-wrapper {
-          display: flex;
-          flex-direction: column;
-          height: 280px;
-        }
+      &-icons {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-        &-header {
-          display: flex;
-          flex-direction: column;
-          margin-bottom: 14px;
-        }
-
-        &-title {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        &-subtitle {
-          display: flex;
-          align-items: center;
-        }
-
-        &-name {
-          @include text-main-xlarge-bold;
-          color: $color-black-light;
-        }
-
-        &-date {
-          @include text-main;
-          color: $color-gray-light;
-
-          @include mobile {
-            margin-right: 10px;
-          }
-        }
-
-        &-icons {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-
-        &-text {
-          @include text-main;
-          color: $color-main;
-        }
+      &-text {
+        @include text-main;
+        color: $color-main;
       }
     }
   }
-
+}
 </style>
