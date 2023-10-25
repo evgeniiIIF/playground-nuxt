@@ -162,7 +162,7 @@ import 'swiper/scss/pagination';
 
     .swiper {
       &-slide {
-        width: 100%!important;
+        width: 100% !important;
 
         img {
           max-width: 100%;
