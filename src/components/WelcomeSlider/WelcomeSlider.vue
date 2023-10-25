@@ -26,7 +26,7 @@ import 'swiper/scss/pagination';
         </div>
       </AppContainer>
       <div class="welcome-slider__slide-img-container">
-        <NuxtImg src="/slide-1.png" :class="'welcome-slider__slide-img'" loading="lazy"/>
+        <NuxtImg src="/slide-1.png" :class="'welcome-slider__slide-img'" loading="lazy" />
       </div>
     </SwiperSlide>
     <SwiperSlide class="welcome-slider__slide">
@@ -40,7 +40,7 @@ import 'swiper/scss/pagination';
         </div>
       </AppContainer>
       <div class="welcome-slider__slide-img-container">
-        <NuxtImg src="/slide-1.png" :class="'welcome-slider__slide-img'" loading="lazy"/>
+        <NuxtImg src="/slide-1.png" :class="'welcome-slider__slide-img'" loading="lazy" />
       </div>
     </SwiperSlide>
   </Swiper>
