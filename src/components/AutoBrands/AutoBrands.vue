@@ -13,7 +13,7 @@ import kia from '~/assets/icons/kia.svg';
 import ford from '~/assets/icons/ford.svg';
 import hyundai from '~/assets/icons/hyundai.svg';
 import landRover from '~/assets/icons/land-rover.svg';
-import {useMediaSizes} from "~/composables/useMediaSizes";
+import { useMediaSizes } from '~/composables/useMediaSizes';
 
 const marques = [
   volvo,
@@ -32,39 +32,40 @@ const marques = [
   landRover,
 ];
 
-const { isMobile } = useMediaSizes()
+const { isMobile } = useMediaSizes();
 
-const listWidthRef = ref<HTMLUListElement | null>(null)
-const gap = ref<number>(isMobile ? 35 : 70)
-const AutoBrandsListWidth = ref(0)
+const listWidthRef = ref<HTMLUListElement | null>(null);
+const gap = ref<number>(isMobile ? 35 : 70);
+const AutoBrandsListWidth = ref(0);
 
 let timerInterval: NodeJS.Timeout | null = null;
 
 onMounted(() => {
   if (listWidthRef.value instanceof HTMLUListElement) {
-    const maxAutoBrandsListWidth = listWidthRef.value.clientWidth + gap.value
-    let counter = 0
+    const maxAutoBrandsListWidth = listWidthRef.value.clientWidth + gap.value;
+    let counter = 0;
 
     timerInterval = setInterval(() => {
       if (counter >= maxAutoBrandsListWidth) {
-        counter = 0
+        counter = 0;
       } else {
-        AutoBrandsListWidth.value = counter++
+        counter += 1;
+        AutoBrandsListWidth.value = counter;
       }
-    }, 30)
+    }, 30);
   }
-})
+});
 
 onUnmounted(() => {
-  clearInterval(timerInterval as NodeJS.Timeout)
-})
+  clearInterval(timerInterval as NodeJS.Timeout);
+});
 </script>
 
 <template>
   <section class="auto-brands">
     <div class="auto-brands__wrapper">
-      <div class="auto-brands__content" :style="{left: -AutoBrandsListWidth + 'px'}">
-        <ul class="auto-brands__list" ref="listWidthRef">
+      <div class="auto-brands__content" :style="{ left: -AutoBrandsListWidth + 'px' }">
+        <ul ref="listWidthRef" class="auto-brands__list">
           <li v-for="marque in marques" :key="marque" class="auto-brands__item">
             <component :is="marque" :font-controlled="false" :filled="true" />
           </li>

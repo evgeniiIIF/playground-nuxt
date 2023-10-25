@@ -3,6 +3,7 @@
 <template>
   <div>
     <WelcomeSlider />
+    <RepairCalculation />
     <BonusProgram />
     <OurPartners />
     <AutoBrands />
