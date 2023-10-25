@@ -49,9 +49,23 @@ const companiesLogos = [
   padding: 60px 0 65px 0;
   background-color: #f3f3f3;
 
+  @include mobile {
+    padding: 38px 0 30px 0;
+  }
+
   &__wrapper {
     display: flex;
     justify-content: space-between;
+
+    @include tablet {
+      flex-direction: column;
+      gap: 35px;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      gap: 35px;
+    }
   }
 
   &__title {
@@ -72,6 +86,26 @@ const companiesLogos = [
     row-gap: 46px;
 
     list-style-type: none;
+
+    @include media-range($desktop-form, $screen-medium-min) {
+      max-width: 640px;
+    }
+
+    @include tablet {
+      padding-bottom: 32px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+
+      @include scrollbar-x;
+    }
+
+    @include mobile {
+      padding-bottom: 32px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+
+      @include scrollbar-x;
+    }
   }
 
   &__company-logo {

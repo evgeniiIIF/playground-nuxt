@@ -48,6 +48,9 @@ import 'swiper/scss/pagination';
 
     &-info {
       max-width: 590px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
 
       &-title {
         margin-bottom: 18px;

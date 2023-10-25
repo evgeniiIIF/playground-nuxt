@@ -179,7 +179,7 @@ const filteredItems = computed(() =>
       border-top: 0;
       overflow-y: auto;
 
-      @include scrollbar;
+      @include scrollbar-y;
     }
 
     &-item {
