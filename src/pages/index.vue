@@ -7,6 +7,7 @@
     <BonusProgram />
     <OurPartners />
     <AutoBrands />
+    <ClientsReviews />
   </div>
 </template>
 
