@@ -1,6 +1,7 @@
 export const appRoutes = {
   main: () => ({ path: '/' }),
   categories: (id?: any) => ({ path: `/categories/${id}` }),
+  offers: (slug?: any) => ({ path: `/offers/${slug}` }),
   // about: () => ({ path: '/#about' }),
   // contacts: () => ({ path: '/#contacts' }),
   // benefits: () => ({ path: '/#benefits' }),
