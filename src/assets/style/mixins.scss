@@ -25,6 +25,12 @@
   font-weight: 500;
 }
 
+@mixin title-main-small-bold {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 600;
+}
+
 @mixin title-main-xsmall-grow {
   font-size: 24px;
   line-height: 20px;
