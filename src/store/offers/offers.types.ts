@@ -6,7 +6,7 @@ export interface OffersItem {
   subtitle: any;
   preview_text: string;
   image: string;
-  image_mobile?: string;
+  image_mobile?: string | null;
   created_at: string;
   updated_at: string;
 }
