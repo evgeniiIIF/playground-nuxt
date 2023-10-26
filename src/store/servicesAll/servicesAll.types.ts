@@ -40,6 +40,10 @@ export interface ServicesAllItemParent {
   children: ServicesAllItemChild[];
 }
 
+export interface ServicesAllItemsData {
+  data: ServicesAllItemParent[];
+}
+
 export interface ServicesAllState {
   servicesAllItems: ServicesAllItemParent[];
 }

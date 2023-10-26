@@ -22,7 +22,7 @@ import 'swiper/scss/pagination';
           <p class="welcome-slider__slide-info-description">
             При единовременной покупке масла и фильтра в нашем автотехцентре
           </p>
-          <UIButton :text="'Записаться на сервис'" :link="'#'" />
+          <UIButton variant="link" :text="'Записаться на сервис'" :link="'#'" />
         </div>
       </AppContainer>
       <div class="welcome-slider__slide-img-container">
@@ -36,7 +36,7 @@ import 'swiper/scss/pagination';
           <p class="welcome-slider__slide-info-description">
             При единовременной покупке масла и фильтра в нашем автотехцентре
           </p>
-          <UIButton :text="'Записаться на сервис'" :link="'#'" />
+          <UIButton variant="link" :text="'Записаться на сервис'" :link="'#'" />
         </div>
       </AppContainer>
       <div class="welcome-slider__slide-img-container">
