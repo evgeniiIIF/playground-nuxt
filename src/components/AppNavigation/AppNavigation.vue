@@ -4,7 +4,9 @@
   <nav class="navigation">
     <ul class="navigation__list">
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" to="/offers">Акции</NuxtLink>
+        <NuxtLink class="navigation__item-link" exact-active-class="navigation__item-link--active" to="/offers"
+          >Акции</NuxtLink
+        >
       </li>
       <li class="navigation__item">
         <NuxtLink class="navigation__item-link" to="/#">
@@ -25,7 +27,7 @@
   </nav>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .navigation {
   &__list {
     display: flex;
@@ -66,5 +68,9 @@
       }
     }
   }
+}
+
+.navigation .navigation__item-link.navigation__item-link--active {
+  color: $color-second;
 }
 </style>
