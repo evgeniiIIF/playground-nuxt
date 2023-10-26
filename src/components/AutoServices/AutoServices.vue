@@ -20,7 +20,7 @@ const isHidden = ref(true);
               class="auto-services__services-subcategory"
               :class="{ 'auto-services__services-subcategory--without-services': subcategory.children?.length === 0 }"
             >
-              <AutoServicesSubcategory :title="subcategory.title" :items="subcategory.children"  />
+              <AutoServicesSubcategory :title="subcategory.title" :items="subcategory.children" />
             </li>
           </ul>
         </div>

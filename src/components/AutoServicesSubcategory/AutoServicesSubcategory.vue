@@ -7,10 +7,10 @@ const countOfItemsIsVisible = 3;
 const slicedLength = ref(countOfItemsIsVisible);
 const slicedServices = computed(() => {
   if (props.items?.length) {
-    return props.items.slice(0, slicedLength.value)
+    return props.items.slice(0, slicedLength.value);
   }
 
-  return []
+  return [];
 });
 </script>
 
