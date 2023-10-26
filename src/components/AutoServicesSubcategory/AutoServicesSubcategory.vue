@@ -1,17 +1,23 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
-import type {AutoServicesSubcategoryTypes} from "~/components/AutoServicesSubcategory/AutoServicesSubcategory.types";
+import type { AutoServicesSubcategoryTypes } from '~/components/AutoServicesSubcategory/AutoServicesSubcategory.types';
 
 const props = defineProps<AutoServicesSubcategoryTypes>();
 const countOfItemsIsVisible = 3;
 const slicedLength = ref(countOfItemsIsVisible);
-const slicedServices = computed(() => props.items.slice(0, slicedLength.value));
+const slicedServices = computed(() => {
+  if (props.items?.length) {
+    return props.items.slice(0, slicedLength.value)
+  }
+
+  return []
+});
 </script>
 
 <template>
   <p
     class="auto-services-subcategory__title"
-    :class="{ 'auto-services-subcategory__title--without-services': items.length === 0 }"
+    :class="{ 'auto-services-subcategory__title--without-services': items?.length }"
   >
     {{ title }}
   </p>

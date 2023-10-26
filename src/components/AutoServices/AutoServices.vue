@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type {AutoServicesTypes} from "~/components/AutoServices/AutoServices.types";
+import type { AutoServicesTypes } from '~/components/AutoServices/AutoServices.types';
 
 defineProps<AutoServicesTypes>();
 
@@ -20,7 +20,7 @@ const isHidden = ref(true);
               class="auto-services__services-subcategory"
               :class="{ 'auto-services__services-subcategory--without-services': subcategory.children?.length === 0 }"
             >
-              <AutoServicesSubcategory :title="subcategory.title" :items="subcategory.children" />
+              <AutoServicesSubcategory :title="subcategory.title" :items="subcategory.children"  />
             </li>
           </ul>
         </div>
@@ -29,7 +29,12 @@ const isHidden = ref(true);
     <div class="auto-services__hidden-block" :class="{ 'auto-services__hidden-block--without-background': !isHidden }">
       <div class="auto-services__hidden-block-container">
         <div class="auto-services__hidden-block-buttons-desktop">
-          <button v-if="isHidden === true" class="auto-services__hidden-block-button" type="button" @click="isHidden = false">
+          <button
+            v-if="isHidden === true"
+            class="auto-services__hidden-block-button"
+            type="button"
+            @click="isHidden = false"
+          >
             <span class="auto-services__hidden-block-button-text">Показать еще</span>
             <span class="auto-services__hidden-block-button-arrow-down"
               ><IcArrowDown :font-controlled="false" :filled="true"
