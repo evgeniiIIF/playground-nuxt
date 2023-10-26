@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <div>
     <AppHeader />
@@ -9,3 +7,9 @@
     <AppFooter />
   </div>
 </template>
+
+<style lang="scss">
+main {
+  margin-top: 114px;
+}
+</style>

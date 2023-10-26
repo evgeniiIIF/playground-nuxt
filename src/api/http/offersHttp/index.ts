@@ -1,0 +1,1 @@
+export { offersHttp } from './offersHttp';
