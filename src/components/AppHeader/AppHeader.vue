@@ -5,7 +5,7 @@
     <AppContainer>
       <div class="header__wrapper">
         <NuxtLink class="header__logo" to="/">
-          <IcLogo filled />
+          <IcLogo :font-controlled="false" :filled="true" />
         </NuxtLink>
         <div class="header__navigation">
           <AppNavigation />
@@ -21,9 +21,7 @@
             target="_blank"
             rel="noopener"
           >
-            <span class="header__whatsapp-icon">
-              <IcWhatsapp filled />
-            </span>
+            <IcWhatsapp :font-controlled="false" :filled="true" />
           </a>
         </div>
       </div>
@@ -34,6 +32,8 @@
 <style lang="scss" scoped>
 .header {
   position: fixed;
+  left: 0;
+  top: 0;
   width: 100%;
   z-index: 10;
   background: #000;
@@ -46,10 +46,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-
-  &__logo {
-    max-width: 266px;
   }
 
   &__contacts {
@@ -90,11 +86,6 @@
     border: 2px solid #868789;
     border-radius: 50%;
     text-decoration: none;
-
-    &-icon {
-      max-width: 24px;
-      max-height: 24px;
-    }
   }
 }
 </style>

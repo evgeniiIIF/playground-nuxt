@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { UIDropdownTypes } from '~/components/UIDropdown/UIDropdown.types';
 import { ref, computed } from 'vue';
+import { useClickOutside } from '~/composables/useClickOutside';
 
 const props = defineProps<UIDropdownTypes>();
 
@@ -13,18 +14,24 @@ const mockedAccordionData = [
   { name: 'Кузовной ремонт', price: 1500 },
 ];
 
-const isOpen = ref(false);
+const [isOpenDropdown, , closeDropdown, toggleDropdown] = useBooleanState(false);
+
 const dropdownValue = ref('');
 const searchValue = ref('');
 
 const open = () => {
   if (props.items.length === 0) return;
-  isOpen.value = !isOpen.value;
+  toggleDropdown();
 };
+
+const DropdownNodeRef = ref<HTMLDivElement | null>(null);
+
+useClickOutside(DropdownNodeRef, closeDropdown);
+
 const handleDropdownItemClick = (event: MouseEvent) => {
   if (!(event.target instanceof HTMLElement)) return;
   dropdownValue.value = event.target!.textContent as string;
-  isOpen.value = false;
+  closeDropdown();
 };
 
 const filteredItems = computed(() =>
@@ -33,7 +40,7 @@ const filteredItems = computed(() =>
 </script>
 
 <template>
-  <div class="dropdown" :class="{ 'dropdown--opened': isOpen }">
+  <div ref="DropdownNodeRef" class="dropdown" :class="{ 'dropdown--opened': isOpenDropdown }">
     <label class="dropdown__label">
       <p class="dropdown__title">{{ title }}</p>
       <div class="dropdown__dropdown" @click="open">
@@ -47,7 +54,7 @@ const filteredItems = computed(() =>
         />
         <button type="button" class="dropdown__button">
           <span class="dropdown__button-arrow">
-            <IcArrowDown filled />
+            <IcArrowDown :font-controlled="false" :filled="true" />
           </span>
         </button>
       </div>
@@ -179,7 +186,7 @@ const filteredItems = computed(() =>
       border-top: 0;
       overflow-y: auto;
 
-      @include scrollbar;
+      @include scrollbar-y;
     }
 
     &-item {

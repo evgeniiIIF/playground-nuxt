@@ -35,7 +35,7 @@ const companiesLogos = [
         <div class="our-partners__logos">
           <ul class="our-partners__companies-logos">
             <li v-for="logo in companiesLogos" :key="logo" class="our-partners__company-logo">
-              <component :is="logo" :filled="true" />
+              <component :is="logo" :font-controlled="false" :filled="true" />
             </li>
           </ul>
         </div>
@@ -49,9 +49,23 @@ const companiesLogos = [
   padding: 60px 0 65px 0;
   background-color: #f3f3f3;
 
+  @include mobile {
+    padding: 38px 0 30px 0;
+  }
+
   &__wrapper {
     display: flex;
     justify-content: space-between;
+
+    @include tablet {
+      flex-direction: column;
+      gap: 35px;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      gap: 35px;
+    }
   }
 
   &__title {
@@ -72,11 +86,29 @@ const companiesLogos = [
     row-gap: 46px;
 
     list-style-type: none;
+
+    @include media-range($desktop-form, $screen-medium-min) {
+      max-width: 640px;
+    }
+
+    @include tablet {
+      padding-bottom: 32px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+
+      @include scrollbar-x;
+    }
+
+    @include mobile {
+      padding-bottom: 32px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+
+      @include scrollbar-x;
+    }
   }
 
   &__company-logo {
-    max-width: 158px;
-    max-height: 50px;
     display: flex;
     align-items: center;
     filter: grayscale(100);

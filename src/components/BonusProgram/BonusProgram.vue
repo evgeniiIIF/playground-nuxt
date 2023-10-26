@@ -31,7 +31,15 @@
   }
 
   &__info {
-    margin-top: 59px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 60px 0;
+
+    @include mobile {
+      padding: 38px 0 50px 0;
+      align-items: inherit;
+    }
   }
 
   &__title {
@@ -39,11 +47,18 @@
 
     @include title-main-bold;
     color: $color-white;
+
+    @include mobile {
+      margin-bottom: 2px;
+
+      @include title-main-xxsmall-bold;
+    }
   }
 
   &__tagline {
     margin-bottom: 20px;
 
+    @include text-main;
     color: $color-white;
   }
 
@@ -51,16 +66,31 @@
     max-width: 488px;
     margin-bottom: 35px;
 
+    @include text-main;
     color: $color-white;
+
+    @include mobile {
+      max-width: inherit;
+      margin-bottom: 30px;
+    }
   }
 
   &__cards {
     display: flex;
     margin-right: 45px;
 
+    @include media-range($desktop-form, $screen-medium-min) {
+      margin-right: 0;
+    }
+
+    @include mobile {
+      display: none;
+    }
+
     &-img {
       width: 100%;
       height: 100%;
+      object-fit: contain;
     }
   }
 }

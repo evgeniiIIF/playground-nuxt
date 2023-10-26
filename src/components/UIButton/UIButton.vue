@@ -37,6 +37,7 @@ defineProps<UIButtonTypes>();
   color: $color-white;
   cursor: pointer;
   background-color: transparent;
+  text-align: center;
 
   &--without-underscore {
     text-decoration: none;
