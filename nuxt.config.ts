@@ -2,7 +2,15 @@
 export default defineNuxtConfig({
   srcDir: 'src',
   devtools: true,
-  modules: ['@pinia/nuxt', '@nuxtjs/google-fonts', '@vueuse/nuxt', 'nuxt-svgo', '@nuxt/image', 'nuxt-swiper'],
+  modules: [
+    '@pinia/nuxt',
+    '@nuxtjs/google-fonts',
+    '@vueuse/nuxt',
+    'nuxt-svgo',
+    '@nuxt/image',
+    'nuxt-swiper',
+    '@nuxt/image',
+  ],
   googleFonts: {
     families: {
       Roboto: true,
@@ -46,6 +54,10 @@ export default defineNuxtConfig({
   },
   swiper: {
     styleLang: 'scss',
+  },
+  image: {
+    format: ['webp', 'jpg'],
+    dir: './assets/img',
   },
   runtimeConfig: {
     public: {

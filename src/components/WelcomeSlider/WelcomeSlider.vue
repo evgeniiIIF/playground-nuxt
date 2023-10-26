@@ -22,9 +22,12 @@ import 'swiper/scss/pagination';
           <p class="welcome-slider__slide-info-description">
             При единовременной покупке масла и фильтра в нашем автотехцентре
           </p>
-          <UIButton :tag="'a'" :text="'Записаться на сервис'" :link="'#'" />
+          <UIButton :text="'Записаться на сервис'" :link="'#'" />
         </div>
       </AppContainer>
+      <div class="welcome-slider__slide-img-container">
+        <NuxtImg src="/slide-1.png" :class="'welcome-slider__slide-img'" loading="lazy" />
+      </div>
     </SwiperSlide>
     <SwiperSlide class="welcome-slider__slide">
       <AppContainer :class="'container--items-centered'">
@@ -36,6 +39,9 @@ import 'swiper/scss/pagination';
           <UIButton :text="'Записаться на сервис'" :link="'#'" />
         </div>
       </AppContainer>
+      <div class="welcome-slider__slide-img-container">
+        <NuxtImg src="/slide-1.png" :class="'welcome-slider__slide-img'" loading="lazy" />
+      </div>
     </SwiperSlide>
   </Swiper>
 </template>
@@ -43,7 +49,6 @@ import 'swiper/scss/pagination';
 <style lang="scss">
 .welcome-slider {
   &__slide {
-    background: url('~/assets/img/slide-1.png') no-repeat center;
     height: 700px;
 
     &-info {
@@ -52,12 +57,19 @@ import 'swiper/scss/pagination';
       flex-direction: column;
       align-items: flex-start;
 
+      @include mobile {
+        max-width: inherit;
+      }
+
       &-title {
         margin-bottom: 18px;
-        font-size: 40px;
-        font-weight: 600;
-        line-height: 45px;
+
+        @include title-main-big-bold;
         color: $color-white;
+
+        @include mobile {
+          @include title-main-small-bold;
+        }
       }
 
       &-description {
@@ -65,6 +77,8 @@ import 'swiper/scss/pagination';
         font-size: 18px;
         line-height: 25px;
         color: $color-gray;
+
+        @include text-main;
       }
 
       &-button {
@@ -74,6 +88,21 @@ import 'swiper/scss/pagination';
         text-decoration: none;
         line-height: 30px;
         color: $color-white;
+      }
+    }
+
+    &-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      &-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
       }
     }
   }
