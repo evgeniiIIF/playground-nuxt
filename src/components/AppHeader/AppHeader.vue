@@ -1,11 +1,21 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const headerColorIsDark = computed(() => {
+  const isDark = useRoute().path === '/';
+  return isDark;
+});
+
+const headerClass = computed(() => {
+  return headerColorIsDark.value ? '' : 'header--light';
+});
+</script>
 
 <template>
-  <header class="header">
+  <header class="header" :class="headerClass">
     <AppContainer>
       <div class="header__wrapper">
         <NuxtLink class="header__logo" to="/">
-          <IcLogo :font-controlled="false" :filled="true" />
+          <IcLogo v-if="headerColorIsDark" :font-controlled="false" :filled="true" />
+          <IcLogoDark v-else :font-controlled="false" :filled="true" />
         </NuxtLink>
         <div class="header__navigation">
           <AppNavigation />
@@ -29,7 +39,7 @@
   </header>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .header {
   position: fixed;
   left: 0;
@@ -86,6 +96,15 @@
     border: 2px solid #868789;
     border-radius: 50%;
     text-decoration: none;
+  }
+}
+
+.header--light {
+  background: #fff;
+  color: #18243c;
+
+  .navigation__item-link {
+    color: #18243c;
   }
 }
 </style>
