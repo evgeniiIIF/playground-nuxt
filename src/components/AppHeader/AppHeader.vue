@@ -34,6 +34,8 @@
 <style lang="scss" scoped>
 .header {
   position: fixed;
+  left: 0;
+  top: 0;
   width: 100%;
   z-index: 10;
   background: #000;
