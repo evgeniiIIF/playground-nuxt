@@ -72,11 +72,22 @@
   line-height: 20px;
   font-weight: 600;
 }
+@mixin text-main-large-medium {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+}
 
 @mixin text-main-big {
   font-size: 15px;
   line-height: 20px;
   font-weight: 400;
+}
+
+@mixin text-main-medium {
+  font-size: 14px;
+  line-height: 30px;
+  font-weight: 500;
 }
 
 @mixin text-main {

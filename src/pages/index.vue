@@ -3,12 +3,12 @@
 <template>
   <div>
     <WelcomeSlider />
-    <RepairCalculation />
     <BonusProgram />
     <OurPartners />
     <AutoBrands />
     <AboutCompany />
     <ClientsReviews />
+    <ServiceForm />
   </div>
 </template>
 

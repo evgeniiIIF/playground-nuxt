@@ -58,11 +58,13 @@ const onInputHandler = (event: Event): string => {
   &__input {
     display: block;
     width: 100%;
-    padding: 15px 20px;
+    padding: 14px 20px;
     border: $fields-border;
+
     @include text-main-grow;
     color: $color-main;
     outline: none;
+    background-color: transparent;
 
     &::placeholder {
       color: $color-gray-light;
