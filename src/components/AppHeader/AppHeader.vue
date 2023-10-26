@@ -100,11 +100,20 @@ const headerClass = computed(() => {
 }
 
 .header--light {
-  background: #fff;
-  color: #18243c;
+  background: $color-white;
+  color: $color-blue;
 
   .navigation__item-link {
-    color: #18243c;
+    color: $color-blue;
+  }
+  .header__calls-phone {
+    color: $color-blue;
+  }
+
+  .header__whatsapp {
+    svg {
+      @include fill-svg-and-path(green);
+    }
   }
 }
 </style>
