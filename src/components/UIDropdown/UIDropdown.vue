@@ -40,7 +40,7 @@ const filteredItems = computed(() =>
 </script>
 
 <template>
-  <div class="dropdown" ref="DropdownNodeRef" :class="{ 'dropdown--opened': isOpenDropdown }">
+  <div ref="DropdownNodeRef" class="dropdown" :class="{ 'dropdown--opened': isOpenDropdown }">
     <label class="dropdown__label">
       <p class="dropdown__title">{{ title }}</p>
       <div class="dropdown__dropdown" @click="open">

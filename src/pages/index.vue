@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import AutoBrands from '~/components/AutoBrands/AutoBrands.vue';
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
