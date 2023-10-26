@@ -54,7 +54,7 @@ const filteredItems = computed(() =>
         />
         <button type="button" class="dropdown__button">
           <span class="dropdown__button-arrow">
-            <IcArrowDown filled />
+            <IcArrowDown :font-controlled="false" :filled="true" />
           </span>
         </button>
       </div>
@@ -186,7 +186,7 @@ const filteredItems = computed(() =>
       border-top: 0;
       overflow-y: auto;
 
-      @include scrollbar;
+      @include scrollbar-y;
     }
 
     &-item {

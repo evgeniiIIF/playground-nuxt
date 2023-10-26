@@ -12,6 +12,21 @@ export default defineNuxtConfig({
   svgo: {
     autoImportPath: './assets/icons/',
     componentPrefix: 'Ic',
+    svgoConfig: {
+      multipass: true,
+      plugins: [
+        {
+          name: 'preset-default',
+          params: {
+            overrides: {
+              // or disable plugins
+              removeDoctype: false,
+              removeViewBox: false,
+            },
+          },
+        },
+      ],
+    },
   },
   pinia: {
     storesDirs: ['./stores/**'],
