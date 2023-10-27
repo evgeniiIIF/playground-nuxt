@@ -13,7 +13,9 @@ const emit = defineEmits<UIServiceEmits>();
       <span class="service__name">{{ name }}</span>
     </label>
     <div class="service__controls">
-      <span class="service__price" :class="{ 'service__price--hidden-on-mobile': priceIsHiddenOnMobile }">{{ price }} ₽</span>
+      <span class="service__price" :class="{ 'service__price--hidden-on-mobile': priceIsHiddenOnMobile }"
+        >{{ price }} ₽</span
+      >
       <button v-if="withCrossButton" type="button" class="service__button" @click="emit('onRemove', name)">
         <IcCross :font-controlled="false" :filled="true" />
       </button>

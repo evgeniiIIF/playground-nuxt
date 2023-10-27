@@ -167,7 +167,6 @@ const filteredItems = computed(() =>
       @include mobile {
         width: 100%;
       }
-
     }
 
     &-search {
