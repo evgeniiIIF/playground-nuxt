@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import AbselLogo from '~/assets/icons/absel-logo.svg';
-import BoschLogo from '~/assets/icons/bosch-logo.svg';
-import PetronasLogo from '~/assets/icons/petronas-logo.svg';
-import TotalLogo from '~/assets/icons/total-logo.svg';
-import YokohamaLogo from '~/assets/icons/yokohama-logo.svg';
-import ELFLogo from '~/assets/icons/elf-logo.svg';
-import HellaLogo from '~/assets/icons/hella-logo.svg';
-import MobilLogo from '~/assets/icons/mobil-logo.svg';
-import BremboLogo from '~/assets/icons/brembo-logo.svg';
-import VartaLogo from '~/assets/icons/varta-logo.svg';
+import AbselLogo from '@/assets/icons/absel-logo.svg';
+import BoschLogo from '@/assets/icons/bosch-logo.svg';
+import PetronasLogo from '@/assets/icons/petronas-logo.svg';
+import TotalLogo from '@/assets/icons/total-logo.svg';
+import YokohamaLogo from '@/assets/icons/yokohama-logo.svg';
+import ELFLogo from '@/assets/icons/elf-logo.svg';
+import HellaLogo from '@/assets/icons/hella-logo.svg';
+import MobilLogo from '@/assets/icons/mobil-logo.svg';
+import BremboLogo from '@/assets/icons/brembo-logo.svg';
+import VartaLogo from '@/assets/icons/varta-logo.svg';
 
 const companiesLogos = [
   AbselLogo,

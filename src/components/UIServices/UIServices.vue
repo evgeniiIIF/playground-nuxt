@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import type { UIServicesTypes } from '~/components/UIServices/UIServices.types';
+import type { UIServicesTypes } from '@/components/UIServices/UIServices.types';
 
 const props = defineProps<UIServicesTypes>();
 

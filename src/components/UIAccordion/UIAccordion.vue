@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { UIAccordionTypes } from '~/components/UIAccordion/UIAccordion.types';
+import type { UIAccordionTypes } from '@/components/UIAccordion/UIAccordion.types';
 
 defineProps<UIAccordionTypes>();
 

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { vMaska } from 'maska';
-import type { UIInputEmits } from '~/components/UIInput/UIInput.types';
+import type { UIInputEmits } from '@/components/UIInput/UIInput.types';
 
 type Props = {
   title: string;

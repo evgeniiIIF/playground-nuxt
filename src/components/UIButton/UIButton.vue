@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { UIButtonTypes } from '~/components/UIButton/UIButton.types';
+import type { UIButtonTypes } from '@/components/UIButton/UIButton.types';
 
 defineProps<UIButtonTypes>();
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { AutoServicesTypes } from '~/components/AutoServices/AutoServices.types';
+import type { AutoServicesTypes } from '@/components/AutoServices/AutoServices.types';
 
 defineProps<AutoServicesTypes>();
 

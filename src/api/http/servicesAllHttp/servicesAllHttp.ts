@@ -1,5 +1,5 @@
 import { useAppFetch } from '@/composables/useAppFetch';
-import type { ServicesAllItemsData } from '~/store/servicesAll/servicesAll.types';
+import type { ServicesAllItemsData } from '@/store/servicesAll/servicesAll.types';
 
 const BASE_PATH = '/services_all';
 
