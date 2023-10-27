@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { UIButtonTypes } from '~/components/UIButton/UIButton.types';
+import type { UIButtonTypes } from '@/components/UIButton/UIButton.types';
 
 defineProps<UIButtonTypes>();
 </script>
@@ -17,8 +17,9 @@ defineProps<UIButtonTypes>();
     <button
       type="button"
       class="button"
-      :class="{ 'button--filled': isFilled, 'button-disabled': disabled }"
+      :class="{ 'button--filled': isFilled, 'button-disabled': disabled, 'button--full-width': hasFullWidth }"
       :disabled="disabled"
+      @click="onClick"
     >
       {{ text }}
     </button>
@@ -38,6 +39,10 @@ defineProps<UIButtonTypes>();
   cursor: pointer;
   background-color: transparent;
   text-align: center;
+
+  &--full-width {
+    width: 100%;
+  }
 
   &--without-underscore {
     text-decoration: none;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { UIServiceEmits, UIServiceTypes } from '~/components/UIService/UIService.types';
+import type { UIServiceEmits, UIServiceTypes } from '@/components/UIService/UIService.types';
 
 defineProps<UIServiceTypes>();
 

@@ -1,19 +1,19 @@
 <script lang="ts" setup>
-import bmw from '~/assets/icons/bmw.svg';
-import volvo from '~/assets/icons/volvo.svg';
-import nissan from '~/assets/icons/nissan.svg';
-import renault from '~/assets/icons/renault.svg';
-import audi from '~/assets/icons/audi.svg';
-import toyota from '~/assets/icons/toyota.svg';
-import citroen from '~/assets/icons/citroen.svg';
-import opel from '~/assets/icons/opel.svg';
-import lada from '~/assets/icons/lada.svg';
-import mercedesBenz from '~/assets/icons/mercedes-benz.svg';
-import kia from '~/assets/icons/kia.svg';
-import ford from '~/assets/icons/ford.svg';
-import hyundai from '~/assets/icons/hyundai.svg';
-import landRover from '~/assets/icons/land-rover.svg';
-import { useMediaSizes } from '~/composables/useMediaSizes';
+import bmw from '@/assets/icons/bmw.svg';
+import volvo from '@/assets/icons/volvo.svg';
+import nissan from '@/assets/icons/nissan.svg';
+import renault from '@/assets/icons/renault.svg';
+import audi from '@/assets/icons/audi.svg';
+import toyota from '@/assets/icons/toyota.svg';
+import citroen from '@/assets/icons/citroen.svg';
+import opel from '@/assets/icons/opel.svg';
+import lada from '@/assets/icons/lada.svg';
+import mercedesBenz from '@/assets/icons/mercedes-benz.svg';
+import kia from '@/assets/icons/kia.svg';
+import ford from '@/assets/icons/ford.svg';
+import hyundai from '@/assets/icons/hyundai.svg';
+import landRover from '@/assets/icons/land-rover.svg';
+import { useMediaSizes } from '@/composables/useMediaSizes';
 
 const marques = [
   volvo,

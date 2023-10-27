@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { UIArrowButtonTypes } from '~/components/UIArrowButton/UIArrowButton.types';
+import type { UIArrowButtonTypes } from '@/components/UIArrowButton/UIArrowButton.types';
 
 defineProps<UIArrowButtonTypes>();
 </script>

@@ -18,9 +18,8 @@ export const servicesAllStore = defineStore('servicesAllStore', () => {
   const fetchServicesAll = async () => {
     try {
       const { data } = await servicesAllHttp.fetchServicesAll();
-      console.log(data.value);
 
-      setServicesAllItems(data.value as ServicesAllItemParent[]);
+      setServicesAllItems(data.value?.data ?? []);
     } catch (error) {
       console.log(error);
     }

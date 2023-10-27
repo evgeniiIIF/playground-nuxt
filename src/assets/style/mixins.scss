@@ -55,9 +55,21 @@
   font-weight: 500;
 }
 
+@mixin title-main-xxxsmall {
+  font-size: 17px;
+  line-height: 25px;
+  font-weight: 400;
+}
+
 @mixin text-counter {
   font-size: 30px;
   line-height: 30px;
+  font-weight: 500;
+}
+
+@mixin text-main-xxlarge-medium {
+  font-size: 18px;
+  line-height: 20px;
   font-weight: 500;
 }
 
@@ -71,6 +83,12 @@
   font-size: 16px;
   line-height: 20px;
   font-weight: 600;
+}
+
+@mixin text-main-large-medium {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
 }
 
 @mixin text-main-big {
