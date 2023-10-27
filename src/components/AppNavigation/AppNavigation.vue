@@ -4,7 +4,7 @@
   <nav class="navigation">
     <ul class="navigation__list">
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" to="/offers">Акции</NuxtLink>
+        <NuxtLink class="navigation__item-link" to="/#">Акции</NuxtLink>
       </li>
       <li class="navigation__item">
         <NuxtLink class="navigation__item-link" to="/#">
@@ -13,13 +13,13 @@
         </NuxtLink>
       </li>
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" to="/bonus">Бонусная программа</NuxtLink>
+        <NuxtLink class="navigation__item-link" to="/#">Бонусная программа</NuxtLink>
       </li>
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" to="/about">О компании</NuxtLink>
+        <NuxtLink class="navigation__item-link" to="/#">О компании</NuxtLink>
       </li>
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" to="/contacts">Контакты</NuxtLink>
+        <NuxtLink class="navigation__item-link" to="/#">Контакты</NuxtLink>
       </li>
     </ul>
   </nav>

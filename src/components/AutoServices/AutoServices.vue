@@ -62,7 +62,7 @@ const isHidden = ref(true);
   </section>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .auto-services {
   position: relative;
   padding: 60px 0 30px 0;
@@ -234,7 +234,9 @@ const isHidden = ref(true);
         justify-content: center;
         align-items: center;
 
-        @include fill-svg-and-path($color-second);
+        svg {
+          @include fill-svg-and-path($color-second);
+        }
       }
 
       &-arrow-up {
