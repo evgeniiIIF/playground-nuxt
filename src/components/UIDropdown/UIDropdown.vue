@@ -79,7 +79,6 @@ const filteredItems = computed(() =>
 
 <style lang="scss" scoped>
 .dropdown {
-  max-width: 285px;
   position: relative;
 
   &__label {
@@ -88,8 +87,13 @@ const filteredItems = computed(() =>
 
   &__title {
     margin-left: 10px;
+    margin-bottom: 4px;
     font-size: 12px;
     color: $color-gray-light;
+
+    @include mobile {
+      margin-left: 0;
+    }
   }
 
   &__dropdown {
@@ -104,7 +108,7 @@ const filteredItems = computed(() =>
     border-right: 0;
     outline: none;
 
-    font-size: 14px;
+    @include text-main-grow;
     color: $color-main;
     cursor: pointer;
 
@@ -116,7 +120,7 @@ const filteredItems = computed(() =>
   &__button {
     background: none;
     border: 1px solid #e3e5e5;
-    padding: 11px 13px;
+    padding: 13px 15px;
     outline: none;
     cursor: pointer;
 
@@ -155,6 +159,15 @@ const filteredItems = computed(() =>
 
     &--with-accordion {
       width: 560px;
+
+      @include tablet {
+        width: 100%;
+      }
+
+      @include mobile {
+        width: 100%;
+      }
+
     }
 
     &-search {

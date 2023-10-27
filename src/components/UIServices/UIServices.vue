@@ -40,6 +40,7 @@ const handleRemove = (text: string): void => {
               :price="price"
               :with-cross-button="true"
               :checked="true"
+              :price-is-hidden-on-mobile="true"
               @on-checked="handleChecked"
               @on-remove="handleRemove"
             />
@@ -59,6 +60,9 @@ const handleRemove = (text: string): void => {
     <p class="services__footnote">
       * Указана примерная стоимость. Финальный расчет стоимости запчастей и работ рассчитывается индивидуально
     </p>
+    <div class="services__button--mobile">
+      <UIButton text="Записаться на сервис" :is-filled="true" :has-full-width="true" />
+    </div>
   </div>
 </template>
 
@@ -114,22 +118,41 @@ const handleRemove = (text: string): void => {
 
   &__cost {
     &-text {
-      font-size: 12px;
+      @include text-main-small;
       color: $color-gray-light;
     }
 
     &-sum {
-      font-size: 30px;
-      line-height: 30px;
-      font-weight: 500;
+      @include text-counter;
+      color: $color-main;
+    }
+  }
+
+  &__button {
+    @include mobile {
+      display: none;
+    }
+
+    &--mobile {
+      display: none;
+
+      @include mobile {
+        display: block;
+      }
     }
   }
 
   &__footnote {
     max-width: 590px;
-    font-size: 12px;
-    line-height: 15px;
+
+    @include text-main-small;
     color: $color-gray-light;
+
+    @include mobile {
+      margin-bottom: 30px;
+
+      @include text-main-xxsmall;
+    }
   }
 }
 </style>

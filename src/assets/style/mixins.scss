@@ -109,6 +109,12 @@
   font-weight: 500;
 }
 
+@mixin text-main-small-grow {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
 @mixin text-main-small {
   font-size: 12px;
   line-height: 20px;

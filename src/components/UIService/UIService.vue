@@ -13,7 +13,7 @@ const emit = defineEmits<UIServiceEmits>();
       <span class="service__name">{{ name }}</span>
     </label>
     <div class="service__controls">
-      <span class="service__price">{{ price }} ₽</span>
+      <span class="service__price" :class="{ 'service__price--hidden-on-mobile': priceIsHiddenOnMobile }">{{ price }} ₽</span>
       <button v-if="withCrossButton" type="button" class="service__button" @click="emit('onRemove', name)">
         <IcCross :font-controlled="false" :filled="true" />
       </button>
@@ -51,8 +51,12 @@ const emit = defineEmits<UIServiceEmits>();
     display: inline-block;
     margin-left: 34px;
 
-    font-weight: 500;
-    line-height: 20px;
+    @include text-main-grow;
+    color: $color-main;
+
+    @include mobile {
+      @include text-main-small-grow;
+    }
 
     &::before {
       position: absolute;
@@ -72,8 +76,14 @@ const emit = defineEmits<UIServiceEmits>();
   }
 
   &__price {
-    font-weight: 500;
+    @include text-main-grow;
     color: $color-gray;
+
+    &--hidden-on-mobile {
+      @include mobile {
+        display: none;
+      }
+    }
   }
 
   &__button {
