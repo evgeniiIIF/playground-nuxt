@@ -19,7 +19,7 @@ export const offersStore = defineStore('offersStore', () => {
     try {
       const { data } = await offersHttp.fetchOffers(slug);
 
-      setOffersItems(data.value.data as OffersItem[]);
+      setOffersItems(data.value?.data ?? []);
     } catch (error) {
       console.log(error);
     }
