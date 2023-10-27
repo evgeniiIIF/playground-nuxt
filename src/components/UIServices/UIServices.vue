@@ -52,7 +52,7 @@ const handleRemove = (text: string): void => {
           <p class="services__cost-sum">{{ totalCost }} ₽</p>
         </div>
         <div class="services__button">
-          <UIButton variant="button" text="Записаться на сервис" :is-filled="true" />
+          <UIButton text="Записаться на сервис" :is-filled="true" />
         </div>
       </div>
     </div>

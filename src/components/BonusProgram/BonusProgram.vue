@@ -11,7 +11,7 @@
             Оплачивайте бонусами 30% от общей суммы чека или заказ-наряда. При&nbsp;покупке автозапчастей или заказе
             услуг в нашем автотехцентре Вам возвращается 10% на&nbsp;бонусную карту.
           </p>
-          <UIButton variant="link" text="Получить карту" :link="'#'" />
+          <UIButton text="Получить карту" :link="'#'" />
         </div>
         <div class="bonus-program__cards">
           <img class="bonus-program__cards-img" src="~/assets/img/bonus-cards.png" alt="bonus-card" />

@@ -23,7 +23,7 @@ import 'swiper/scss/pagination';
               Наша команда – это специалисты, являющиеся экспертами в своей области, способные выявить и оперативно
               устранить даже чрезвычайно сложные, скрытые, непредвиденные повреждения и неисправности.
             </p>
-            <UIButton :variant="'link'" :text="'Подробнее'" :link="'#'" :is-filled="true" />
+            <UIButton :text="'Подробнее'" :link="'#'" :is-filled="true" />
           </div>
         </div>
         <div class="about-company__slider-container">
