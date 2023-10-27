@@ -9,15 +9,15 @@ defineProps<{
 </script>
 
 <template>
-  <div class="offers-card-item">
-    <div class="offers-card-item__image ibg">
+  <div class="offers-item-card">
+    <div class="offers-item-card__image ibg">
       <img :src="image" :alt="title" />
     </div>
-    <div class="offers-card-item__title">{{ title }}</div>
-    <div class="offers-card-item__popup popup-offers-card-item">
-      <div class="popup-offers-card-item__title">{{ title }}</div>
-      <div class="popup-offers-card-item__text">{{ text }}</div>
-      <div class="popup-offers-card-item__button">
+    <div class="offers-item-card__title">{{ title }}</div>
+    <div class="offers-item-card__popup popup-offers-item-card">
+      <div class="popup-offers-item-card__title">{{ title }}</div>
+      <div class="popup-offers-item-card__text">{{ text }}</div>
+      <div class="popup-offers-item-card__button">
         <UIButton text="Подробнее" />
       </div>
     </div>
@@ -25,12 +25,12 @@ defineProps<{
 </template>
 
 <style lang="scss">
-.offers-card-item {
+.offers-item-card {
   position: relative;
   overflow: hidden;
 
   &:hover {
-    .offers-card-item__popup {
+    .offers-item-card__popup {
       opacity: 1;
       transform: translateY(0%);
     }
@@ -61,7 +61,7 @@ defineProps<{
   }
 }
 
-.popup-offers-card-item {
+.popup-offers-item-card {
   padding: 26px 30px;
   background: $color-white;
   border: 1px solid #c4cccc;

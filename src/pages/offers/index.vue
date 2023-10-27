@@ -17,7 +17,7 @@ const offersItems = computed(() => offersState.value.offersItems.slice(0, countI
         <h1 class="offers__title">Акции</h1>
         <div class="offers__cards">
           <div v-for="item in offersItems" :key="item.id" class="offers__card">
-            <OffersCardItem
+            <OffersItemCard
               :title="item.title"
               :text="item.preview_text"
               :image="item.image"
