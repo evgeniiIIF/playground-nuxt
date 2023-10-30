@@ -21,7 +21,7 @@ const navigationClass = computed(() => {
         <p class="navigation__item-link" to="/#" tabindex="0">
           <span class="navigation__item-link-text">Услуги</span>
           <span class="navigation__item-link-arrow">
-            <IcArrowDown :font-controlled="false" :filled="true" />
+            <IcArrowDownNavigation :font-controlled="false" :filled="true" />
           </span>
         </p>
       </li>
@@ -66,6 +66,7 @@ const navigationClass = computed(() => {
 
       cursor: pointer;
       text-decoration: none;
+      @include text-main-big;
       color: $color-white;
       transition: all 0.3s ease;
 

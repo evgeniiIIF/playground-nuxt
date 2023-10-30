@@ -199,7 +199,7 @@ const { isMobile } = useMediaSizes();
 
     &-review {
       padding: 30px 20px 50px 20px;
-      border: $review-border;
+      border: $card-border;
 
       @include mobile {
         max-width: 80%;
