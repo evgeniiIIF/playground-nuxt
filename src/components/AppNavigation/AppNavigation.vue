@@ -13,7 +13,9 @@ const navigationClass = computed(() => {
   <nav class="navigation" :class="navigationClass">
     <ul class="navigation__list">
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" to="/offers">Акции</NuxtLink>
+        <NuxtLink class="navigation__item-link" active-class="navigation__item-link--active" to="/offers"
+          >Акции</NuxtLink
+        >
       </li>
       <li class="navigation__item">
         <p class="navigation__item-link" to="/#" tabindex="0">

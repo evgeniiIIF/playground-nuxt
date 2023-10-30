@@ -11,13 +11,14 @@ const services = servicesAllState.value.servicesAllItems;
 <template>
   <div>
     <WelcomeSlider />
-    <repair-calculation />
+    <RepairCalculation />
     <BonusProgram />
     <AutoServices :services="services" />
     <OurPartners />
     <AutoBrands />
     <AboutCompany />
     <ClientsReviews />
+    <ServiceForm />
   </div>
 </template>
 

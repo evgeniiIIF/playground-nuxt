@@ -88,7 +88,8 @@ const filteredItems = computed(() =>
   &__title {
     margin-left: 10px;
     margin-bottom: 4px;
-    font-size: 12px;
+
+    @include text-main-small;
     color: $color-gray-light;
 
     @include mobile {
@@ -107,6 +108,7 @@ const filteredItems = computed(() =>
     border: 1px solid #e3e5e5;
     border-right: 0;
     outline: none;
+    background-color: transparent;
 
     @include text-main-grow;
     color: $color-main;
