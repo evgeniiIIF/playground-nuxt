@@ -1,20 +1,23 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { BonusProgram } from '@/components/BonusProgram/BonusProgram.types';
+
+defineProps<BonusProgram>();
+</script>
 
 <template>
   <section class="bonus-program">
     <AppContainer>
       <div class="bonus-program__wrapper">
         <div class="bonus-program__info">
-          <h2 class="bonus-program__title">Бонусная программа</h2>
-          <p class="bonus-program__tagline">выгода с ABS-autoservice – это просто</p>
+          <h2 class="bonus-program__title">{{ bonus.title || '' }}</h2>
+          <p class="bonus-program__tagline">{{ bonus.subtitle || '' }}</p>
           <p class="bonus-program__description">
-            Оплачивайте бонусами 30% от общей суммы чека или заказ-наряда. При&nbsp;покупке автозапчастей или заказе
-            услуг в нашем автотехцентре Вам возвращается 10% на&nbsp;бонусную карту.
+            {{ bonus.description || '' }}
           </p>
-          <UIButton text="Получить карту" :link="'#'" />
+          <UIButton v-if="bonus.showBtn" :text="bonus.titleLink || 'Получить карту'" :link="bonus.urlLink || ''" />
         </div>
         <div class="bonus-program__cards">
-          <img class="bonus-program__cards-img" src="~/assets/img/bonus-cards.png" alt="bonus-card" />
+          <img class="bonus-program__cards-img" src="@/assets/img/bonus-cards.png" alt="bonus-card" />
         </div>
       </div>
     </AppContainer>

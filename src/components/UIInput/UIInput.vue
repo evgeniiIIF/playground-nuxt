@@ -4,9 +4,9 @@ import type { UIInputEmits } from '@/components/UIInput/UIInput.types';
 
 type Props = {
   title: string;
-  modelValue: string;
-  disabled: boolean;
   type: 'phone' | 'text';
+  modelValue: string;
+  disabled?: boolean;
 };
 
 defineProps<Props>();

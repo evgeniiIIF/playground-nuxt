@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+import type { AboutCompany } from '~/components/AboutCompany/AboutCompany.types';
 import { Pagination } from 'swiper/modules';
-
 import 'swiper/scss';
 import 'swiper/scss/pagination';
+
+defineProps<AboutCompany>();
 </script>
 
 <template>
@@ -10,20 +12,12 @@ import 'swiper/scss/pagination';
     <AppContainer>
       <div class="about-company__wrapper">
         <div class="about-company__info">
-          <h2 class="about-company__title">О&nbsp;компании</h2>
+          <h2 class="about-company__title">{{ aboutCompany.title || '' }}</h2>
           <div class="about-company__content">
-            <p class="about-company__description">
-              ABS-autoservice – это сеть автосервисов федерального масштаба.
-              <br /><br />
-              Мы осуществляем профессиональный ремонт и обслуживание иномарок по&nbsp;выгодным ценам.
-              <br /><br />
-              Сеть автосервисов ABS-autoservice нацелена на премиальное обслуживание клиентов, отношения с которыми
-              перерастают в долгосрочное сотрудничество.
-              <br /><br />
-              Наша команда – это специалисты, являющиеся экспертами в своей области, способные выявить и оперативно
-              устранить даже чрезвычайно сложные, скрытые, непредвиденные повреждения и неисправности.
-            </p>
-            <UIButton :text="'Подробнее'" :link="'#'" :is-filled="true" />
+            <div class="about-company__description">
+              {{ aboutCompany.description || '' }}
+            </div>
+            <UIButton :text="aboutCompany.titleLink || ''" :link="aboutCompany.urlLink || ''" :is-filled="true" />
           </div>
         </div>
         <div class="about-company__slider-container">
