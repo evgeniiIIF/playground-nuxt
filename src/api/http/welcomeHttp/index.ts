@@ -1,0 +1,1 @@
+export { welcomeHttp } from './welcomHttp';

@@ -1,6 +1,6 @@
 import { useAppFetch } from '@/composables/useAppFetch';
-import type { partnersResponse } from '~/api/http/partnersHttp/partnersHttp.types';
-import type { PartnersItems } from '~/store/partners/partners.types';
+import type { partnersResponse } from '@/api/http/partnersHttp/partnersHttp.types';
+import type { PartnersItems } from '@/store/partners/partners.types';
 
 const BASE_PATH = '/partners';
 

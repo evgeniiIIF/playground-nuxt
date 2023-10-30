@@ -43,7 +43,7 @@ const emit = defineEmits<UIServiceEmits>();
     &:checked + .service {
       &__name {
         &::before {
-          background: url('~/assets/icons/checkbox-checked.svg') no-repeat center;
+          background: url('@/assets/icons/checkbox-checked.svg') no-repeat center;
         }
       }
     }
@@ -67,7 +67,7 @@ const emit = defineEmits<UIServiceEmits>();
       width: 24px;
       height: 24px;
       content: '';
-      background: url('~/assets/icons/checkbox.svg');
+      background: url('@/assets/icons/checkbox.svg');
     }
   }
 

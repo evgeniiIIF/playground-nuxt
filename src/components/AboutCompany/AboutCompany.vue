@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { AboutCompany } from '~/components/AboutCompany/AboutCompany.types';
+import type { AboutCompany } from '@/components/AboutCompany/AboutCompany.types';
 import { Pagination } from 'swiper/modules';
 import 'swiper/scss';
 import 'swiper/scss/pagination';

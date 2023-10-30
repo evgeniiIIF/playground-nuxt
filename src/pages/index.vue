@@ -1,18 +1,23 @@
 <script setup lang="ts">
 import { useServicesAllStore } from '@/store/servicesAll';
-import { useHomeStore } from '~/store/home';
-import { usePartnersStore } from '~/store/partners';
+import { useHomeStore } from '@/store/home';
+import { usePartnersStore } from '@/store/partners';
+import { useWelcomeStore } from '@/store/welcome';
 
 const { servicesAllEffects, servicesAllState } = useServicesAllStore();
 const { homeState, homeEffects } = useHomeStore();
 const { partnersState, partnersEffects } = usePartnersStore();
+const { welcomeState, welcomeEffects } = useWelcomeStore();
 
-await servicesAllEffects.fetchServicesAll();
 await homeEffects.fetchHome();
+await welcomeEffects.fetchWelcome();
+await servicesAllEffects.fetchServicesAll();
 await partnersEffects.fetchPartners();
+await partnersEffects.fetchPartnersItems();
 
-const services = servicesAllState.value.servicesAllItems;
 const home = homeState.value;
+const welcomeSlides = welcomeState.value;
+const services = servicesAllState.value.servicesAllItems;
 const partners = partnersState.value;
 
 const bonusProgramData = {
@@ -40,15 +45,15 @@ const partnersData = {
 
 <template>
   <div>
-    <WelcomeSlider />
-    <RepairCalculation />
-    <BonusProgram v-if="home.content?.is_active_bonus_program" :bonus="bonusProgramData" />
-    <AutoServices :services="services" />
-    <OurPartners v-if="partners.content?.is_active" :partners="partnersData" />
-    <AboutCompany v-if="home.content?.is_active_about_company" :company="aboutCompanyData" />
-    <ClientsReviews />
-    <ServiceForm />
-    <AutoBrands />
+    <WelcomeSlider v-if="Number(home.content?.is_active_welcome) === 1" :slides="welcomeSlides" />
+    <RepairCalculation v-if="Number(home.content?.is_active_calculator) === 1" />
+    <BonusProgram v-if="Number(home.content?.is_active_bonus_program) === 1" :bonus="bonusProgramData" />
+    <AutoServices v-if="Number(home.content?.is_active_services) === 1" :services="services" />
+    <OurPartners v-if="Number(partners.content?.is_active) === 1" :partners="partnersData" />
+    <AboutCompany v-if="Number(home.content?.is_active_about_company) === 1" :company="aboutCompanyData" />
+    <ClientsReviews v-if="Number(home.content?.is_active_reviews) === 1" />
+    <ServiceForm v-if="Number(home.content?.is_active_open_leadform) === 1" />
+    <AutoBrands v-if="Number(home.content?.is_active_marquee_brands) === 1" />
   </div>
 </template>
 

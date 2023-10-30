@@ -55,7 +55,7 @@ const isOpen = ref(false);
       height: 24px;
       content: '';
       transform: translateY(-50%);
-      background: url('~/assets/icons/arrow-down.svg') no-repeat center;
+      background: url('@/assets/icons/arrow-down.svg') no-repeat center;
       transition: transform 0.2s ease;
     }
 

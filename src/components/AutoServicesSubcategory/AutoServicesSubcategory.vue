@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
-import type { AutoServicesSubcategoryTypes } from '~/components/AutoServicesSubcategory/AutoServicesSubcategory.types';
+import type { AutoServicesSubcategoryTypes } from '@/components/AutoServicesSubcategory/AutoServicesSubcategory.types';
 
 const props = defineProps<AutoServicesSubcategoryTypes>();
 const countOfItemsIsVisible = 3;

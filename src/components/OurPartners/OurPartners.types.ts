@@ -1,4 +1,4 @@
-import type { PartnersItems } from '~/store/partners/partners.types';
+import type { PartnersItems } from '@/store/partners/partners.types';
 
 export type OurPartners = {
   partners: {

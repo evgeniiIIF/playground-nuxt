@@ -104,7 +104,7 @@ const filteredItems = computed(() =>
 
   &__input {
     width: 100%;
-    padding: 15px 20px;
+    padding: 14px 20px;
     border: 1px solid #e3e5e5;
     border-right: 0;
     outline: none;
@@ -122,7 +122,7 @@ const filteredItems = computed(() =>
   &__button {
     background: none;
     border: 1px solid #e3e5e5;
-    padding: 13px 15px;
+    padding: 12px 15px;
     outline: none;
     cursor: pointer;
 
@@ -182,7 +182,7 @@ const filteredItems = computed(() =>
         height: 24px;
         transform: translate(50%, -50%);
         content: '';
-        background: url('~/assets/icons/search.svg');
+        background: url('@/assets/icons/search.svg');
       }
 
       &-input {

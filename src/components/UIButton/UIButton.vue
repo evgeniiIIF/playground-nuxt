@@ -9,7 +9,7 @@ defineProps<UIButtonTypes>();
     <NuxtLink
       :to="link"
       class="button button--without-underscore"
-      :class="{ 'button--filled': isFilled, 'button--disabled': disabled }"
+      :class="{ 'button--filled': isFilled, 'button--disabled': disabled, 'button--size-large': sizeLarge }"
       >{{ text }}</NuxtLink
     >
   </template>
@@ -36,7 +36,7 @@ defineProps<UIButtonTypes>();
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px 33px;
+  padding: 8px 33px;
   border: 2px solid $color-second;
 
   @include text-main-medium;
@@ -54,6 +54,7 @@ defineProps<UIButtonTypes>();
   }
 
   &--filled {
+    padding: 10px 33px;
     border: none;
     background-color: $color-second;
   }
@@ -64,6 +65,7 @@ defineProps<UIButtonTypes>();
 
   &--size-large {
     width: 100%;
+    padding: 15px 33px;
 
     @include text-main-large-medium;
 
