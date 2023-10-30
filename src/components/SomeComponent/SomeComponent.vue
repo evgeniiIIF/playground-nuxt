@@ -4,7 +4,7 @@
 // import { useServicesTitleStore } from '@/store/servicesTitle';
 // import { useHomeStore } from '../../store/home';
 // import { usePartnersStore } from '~/store/partners';
-import {useWelcomeStore} from "~/store/welcome";
+import { useWelcomeStore } from '~/store/welcome';
 
 // const { categoriesEffects, categoriesState } = useCategoriesStore();
 // const { servicesAllEffects, servicesAllState } = useServicesAllStore();
@@ -12,7 +12,7 @@ import {useWelcomeStore} from "~/store/welcome";
 // const { homeState, homeEffects } = useHomeStore();
 // const { partnersState, partnersEffects } = usePartnersStore();
 
-const { welcomeState, welcomeEffects } = useWelcomeStore()
+const { welcomeState, welcomeEffects } = useWelcomeStore();
 
 // await categoriesEffects.fetchCategoriesItems(316);
 // await servicesAllEffects.fetchServicesAll();
@@ -30,5 +30,5 @@ await welcomeEffects.fetchWelcome();
   <!--  <div>{{ servicesTitleState.servicesTitleItems }}</div>-->
   <!--  <div>{{ homeState }}</div>-->
   <!--  <div>{{ partnersState }}</div>-->
-    <div>{{ welcomeState }}</div>
+  <div>{{ welcomeState }}</div>
 </template>
