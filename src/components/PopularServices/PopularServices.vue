@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <section class="popular-services">
     <AppContainer>
@@ -9,7 +11,7 @@
             <div class="popular-services__service-card-body">
               <span class="popular-services__service-card-price">от 2 300 ₽</span>
               <span class="popular-services__service-card-arrow-button">
-                <IcCircleArrowButton :font-controlled="false" :filled="true"/>
+                <IcCircleArrowButton :font-controlled="false" :filled="true" />
               </span>
             </div>
           </NuxtLink>
@@ -20,7 +22,7 @@
             <div class="popular-services__service-card-body">
               <span class="popular-services__service-card-price">от 2 300 ₽</span>
               <span class="popular-services__service-card-arrow-button">
-                <IcCircleArrowButton :font-controlled="false" :filled="true"/>
+                <IcCircleArrowButton :font-controlled="false" :filled="true" />
               </span>
             </div>
           </NuxtLink>
@@ -31,7 +33,7 @@
             <div class="popular-services__service-card-body">
               <span class="popular-services__service-card-price">от 2 300 ₽</span>
               <span class="popular-services__service-card-arrow-button">
-                <IcCircleArrowButton :font-controlled="false" :filled="true"/>
+                <IcCircleArrowButton :font-controlled="false" :filled="true" />
               </span>
             </div>
           </NuxtLink>
@@ -42,7 +44,7 @@
             <div class="popular-services__service-card-body">
               <span class="popular-services__service-card-price">от 2 300 ₽</span>
               <span class="popular-services__service-card-arrow-button">
-                <IcCircleArrowButton :font-controlled="false" :filled="true"/>
+                <IcCircleArrowButton :font-controlled="false" :filled="true" />
               </span>
             </div>
           </NuxtLink>
@@ -51,7 +53,6 @@
     </AppContainer>
   </section>
 </template>
-
 <style lang="scss">
 .popular-services {
   padding: 60px 0;
@@ -154,5 +155,3 @@
   }
 }
 </style>
-<script setup lang="ts">
-</script>
