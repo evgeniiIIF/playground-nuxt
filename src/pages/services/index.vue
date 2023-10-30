@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ServiceComponent />
+    <ServiceSection />
     <ServiceExamples />
     <PopularServices />
   </div>

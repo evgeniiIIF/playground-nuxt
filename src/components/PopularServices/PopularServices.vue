@@ -58,7 +58,7 @@
   padding: 60px 0;
 
   @include mobile {
-    padding: 30px 0 60px 0;
+    padding: 19px 0 60px 0;
   }
 
   &__title {

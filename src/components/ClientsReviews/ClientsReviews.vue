@@ -14,7 +14,7 @@ const { isMobile } = useMediaSizes();
       <div class-="clients-reviews__wrapper">
         <div class="clients-reviews__header">
           <h2 class="clients-reviews__title">Отзывы</h2>
-          <div v-if="!isMobile" class="clients-reviews__slider-navigation">
+          <div class="clients-reviews__slider-navigation">
             <UIArrowButton :arrow-direction="'left'" :class-for-swiper="'clients-reviews__slider-button-prev'" />
             <UIArrowButton :arrow-direction="'right'" :class-for-swiper="'clients-reviews__slider-button-next'" />
           </div>
@@ -195,6 +195,10 @@ const { isMobile } = useMediaSizes();
     &-navigation {
       display: flex;
       gap: 20px;
+
+      @include mobile {
+        display: none;
+      }
     }
 
     &-review {

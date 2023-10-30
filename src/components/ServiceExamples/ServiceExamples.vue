@@ -25,6 +25,17 @@ import 'swiper/scss/pagination';
             prevEl: '.service-examples__slider-button-prev',
             nextEl: '.service-examples__slider-button-next',
           }"
+          :breakpoints="{
+            1025: {
+              slidesPerView: 3,
+            },
+            769: {
+              slidesPerView: 2,
+            },
+            320: {
+              slidesPerView: 'auto',
+            },
+          }"
         >
           <SwiperSlide class="service-examples__slider-slide">
             <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
@@ -51,6 +62,10 @@ import 'swiper/scss/pagination';
 .service-examples {
   padding: 60px 0;
 
+  @include mobile {
+    padding: 29px 0 19px 0;
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -61,20 +76,26 @@ import 'swiper/scss/pagination';
   &__title {
     @include title-main-bold;
     color: $color-blue;
-  }
 
-  &__body {
-    height: 350px;
+    @include mobile {
+      @include title-main-xxsmall-bold;
+    }
   }
 
   &__slider {
     &-navigation {
       display: flex;
       gap: 20px;
+
+      @include mobile {
+        display: none;
+      }
     }
 
     &-slide {
-      transition: all 0.4s ease;
+      @include mobile {
+        max-width: 80%;
+      }
 
       img {
         width: 100%;
