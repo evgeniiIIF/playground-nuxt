@@ -1,27 +1,7 @@
 <script setup lang="ts">
-import AbselLogo from '@/assets/icons/absel-logo.svg';
-import BoschLogo from '@/assets/icons/bosch-logo.svg';
-import PetronasLogo from '@/assets/icons/petronas-logo.svg';
-import TotalLogo from '@/assets/icons/total-logo.svg';
-import YokohamaLogo from '@/assets/icons/yokohama-logo.svg';
-import ELFLogo from '@/assets/icons/elf-logo.svg';
-import HellaLogo from '@/assets/icons/hella-logo.svg';
-import MobilLogo from '@/assets/icons/mobil-logo.svg';
-import BremboLogo from '@/assets/icons/brembo-logo.svg';
-import VartaLogo from '@/assets/icons/varta-logo.svg';
+import type { OurPartners } from '@/components/OurPartners/OurPartners.types';
 
-const companiesLogos = [
-  AbselLogo,
-  BoschLogo,
-  PetronasLogo,
-  TotalLogo,
-  YokohamaLogo,
-  ELFLogo,
-  HellaLogo,
-  MobilLogo,
-  BremboLogo,
-  VartaLogo,
-];
+defineProps<OurPartners>();
 </script>
 
 <template>
@@ -29,13 +9,13 @@ const companiesLogos = [
     <AppContainer>
       <div class="our-partners__wrapper">
         <div class="our-partners__text">
-          <h2 class="our-partners__title">Наши партнеры</h2>
-          <p class="our-partners__description">Сотрудничаем с мировыми брендами</p>
+          <h2 class="our-partners__title">{{ partners.title }}</h2>
+          <p class="our-partners__description">{{ partners.subtitle }}</p>
         </div>
         <div class="our-partners__logos">
           <ul class="our-partners__companies-logos">
-            <li v-for="logo in companiesLogos" :key="logo" class="our-partners__company-logo">
-              <component :is="logo" :font-controlled="false" :filled="true" />
+            <li v-for="item in partners.items" :key="item.id" class="our-partners__company-logo">
+              <NuxtImg :src="item.logo" />
             </li>
           </ul>
         </div>
@@ -73,9 +53,15 @@ const companiesLogos = [
 
     @include title-main-bold;
     color: $color-blue;
+
+    @include mobile {
+      margin-bottom: 2px;
+      @include title-main-xxsmall-bold;
+    }
   }
 
   &__description {
+    @include text-main;
     color: $color-gray-dark;
   }
 
@@ -92,6 +78,7 @@ const companiesLogos = [
     }
 
     @include tablet {
+      max-width: inherit;
       padding-bottom: 32px;
       flex-wrap: nowrap;
       overflow-x: auto;
@@ -100,8 +87,10 @@ const companiesLogos = [
     }
 
     @include mobile {
+      max-width: inherit;
       padding-bottom: 32px;
       flex-wrap: nowrap;
+      gap: 10px;
       overflow-x: auto;
 
       @include scrollbar-x;
@@ -117,6 +106,15 @@ const companiesLogos = [
     &:hover {
       filter: grayscale(0);
       opacity: 1;
+    }
+
+    img {
+      width: 158px;
+      height: 48px;
+
+      @include mobile {
+        width: 105px;
+      }
     }
   }
 }

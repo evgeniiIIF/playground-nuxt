@@ -1,5 +1,5 @@
 export type AboutCompany = {
-  aboutCompany: {
+  company: {
     title: string | undefined;
     description: string | undefined;
     titleLink: string | undefined;

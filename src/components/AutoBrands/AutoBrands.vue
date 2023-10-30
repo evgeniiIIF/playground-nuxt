@@ -92,34 +92,9 @@ onUnmounted(() => {
 
   &__content {
     position: relative;
-    //width: 200%;
     display: flex;
     align-items: center;
     gap: 70px;
-
-    //animation: move 30s infinite linear;
-    //
-    //@keyframes move {
-    //  0% {
-    //    left: 0;
-    //  }
-    //
-    //  25% {
-    //    left: -25%;
-    //  }
-    //
-    //  50% {
-    //    left: -50%;
-    //  }
-    //
-    //  75% {
-    //    left: -75%;
-    //  }
-    //
-    //  100% {
-    //    left: -99.5%;
-    //  }
-    //}
   }
 
   &__list {

@@ -1,5 +1,5 @@
 import { storeToRefs } from 'pinia';
-import { homeStore } from '~/store/home/home';
+import { homeStore } from '@/store/home/home';
 
 export const useHomeStore = () => {
   const { actions, effects } = homeStore();

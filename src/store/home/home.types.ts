@@ -61,7 +61,3 @@ export interface Home {
   bg_open_leadform: string;
   is_active_marquee_brands: string;
 }
-
-// export interface homeState {
-//   data: Home;
-// }

@@ -12,12 +12,10 @@ defineProps<AboutCompany>();
     <AppContainer>
       <div class="about-company__wrapper">
         <div class="about-company__info">
-          <h2 class="about-company__title">{{ aboutCompany.title || '' }}</h2>
+          <h2 class="about-company__title">{{ company.title || '' }}</h2>
           <div class="about-company__content">
-            <div class="about-company__description">
-              {{ aboutCompany.description || '' }}
-            </div>
-            <UIButton :text="aboutCompany.titleLink || ''" :link="aboutCompany.urlLink || ''" :is-filled="true" />
+            <div class="about-company__description" v-html="company.description"></div>
+            <UIButton :text="company.titleLink || ''" :link="company.urlLink || ''" :is-filled="true" />
           </div>
         </div>
         <div class="about-company__slider-container">
@@ -134,6 +132,12 @@ defineProps<AboutCompany>();
 
     @include mobile {
       margin-bottom: 30px;
+    }
+
+    p {
+      &:not(:last-child) {
+        margin-bottom: 16px;
+      }
     }
   }
 
