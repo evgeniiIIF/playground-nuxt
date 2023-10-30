@@ -17,29 +17,29 @@ import 'swiper/scss/pagination';
       </div>
       <div class="service-examples__body">
         <Swiper
-            class="service-examples__slider"
-            :modules="[Navigation]"
-            :slides-per-view="3"
-            :space-between="20"
-            :navigation="{
+          class="service-examples__slider"
+          :modules="[Navigation]"
+          :slides-per-view="3"
+          :space-between="20"
+          :navigation="{
             prevEl: '.service-examples__slider-button-prev',
             nextEl: '.service-examples__slider-button-next',
           }"
         >
           <SwiperSlide class="service-examples__slider-slide">
-            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy"/>
+            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
           </SwiperSlide>
           <SwiperSlide class="service-examples__slider-slide">
-            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy"/>
+            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
           </SwiperSlide>
           <SwiperSlide class="service-examples__slider-slide">
-            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy"/>
+            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
           </SwiperSlide>
           <SwiperSlide class="service-examples__slider-slide">
-            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy"/>
+            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
           </SwiperSlide>
           <SwiperSlide class="service-examples__slider-slide">
-            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy"/>
+            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
           </SwiperSlide>
         </Swiper>
       </div>

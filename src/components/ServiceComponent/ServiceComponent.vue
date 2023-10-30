@@ -1,5 +1,4 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <section class="service-component">
@@ -7,7 +6,7 @@
       <div class="service-component__service-path">
         <NuxtLink class="service-component__service-path-home" to="/">Главная</NuxtLink>
         <span class="service-component__service-path-arrow">
-          <IcArrowRight :font-controlled="false" :filled="true"/>
+          <IcArrowRight :font-controlled="false" :filled="true" />
         </span>
         <span class="service-component__service-path-text">Диагностика системы кондиционирования</span>
       </div>
@@ -16,21 +15,24 @@
           <h1 class="service-component__service-title">Диагностика системы кондиционирования</h1>
           <div class="service-component__service-price">
             <span class="service-component__service-price-icon">
-              <IcPriceTag :font-controlled="false" :filled="true"/>
+              <IcPriceTag :font-controlled="false" :filled="true" />
             </span>
             <span class="service-component__service-price-text">от 1400 ₽</span>
           </div>
-          <p class="service-component__service-description">Кондиционер служит для регулирования температуры, циркуляции и очищения воздуха в салоне автомобиля. Вместе с воздухом в салон автомобиля проникают бактерии, неприятный газ, угарный газ и другие негативные добавки.</p>
+          <p class="service-component__service-description">
+            Кондиционер служит для регулирования температуры, циркуляции и очищения воздуха в салоне автомобиля. Вместе
+            с воздухом в салон автомобиля проникают бактерии, неприятный газ, угарный газ и другие негативные добавки.
+          </p>
           <div class="service-component__service-bonus-program">
             <span class="service-component__service-bonus-program-icon">
-              <IcCard :font-controlled="false" :filled="true"/>
+              <IcCard :font-controlled="false" :filled="true" />
             </span>
             <span class="service-component__service-bonus-program-text">Услуга участвует в бонусной программе</span>
           </div>
-          <UIButton text="Записаться" :is-filled="true"/>
+          <UIButton text="Записаться" :is-filled="true" />
         </div>
         <div class="service-component__service-image">
-          <NuxtImg src="/service-1.jpg" fit="contain" loading="lazy"/>
+          <NuxtImg src="/service-1.jpg" fit="contain" loading="lazy" />
         </div>
       </div>
     </AppContainer>
@@ -51,7 +53,7 @@
     height: 1px;
     transform: translateX(-50%);
     background-color: #f0f0f5;
-    content: "";
+    content: '';
   }
 
   &__service {
@@ -143,4 +145,3 @@
   }
 }
 </style>
-
