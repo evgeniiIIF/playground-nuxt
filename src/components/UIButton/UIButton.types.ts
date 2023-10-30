@@ -4,5 +4,7 @@ export type UIButtonTypes = {
   isFilled?: boolean;
   link?: string;
   disabled?: boolean;
+  onClick?: () => void;
+  hasFullWidth?: boolean;
   sizeLarge?: boolean;
 };

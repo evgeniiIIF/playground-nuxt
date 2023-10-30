@@ -18,9 +18,8 @@ export const offersStore = defineStore('offersStore', () => {
   const fetchOffersItems = async (slug?: string) => {
     try {
       const { data } = await offersHttp.fetchOffers(slug);
-      console.log(data);
 
-      setOffersItems(data.value as OffersItem[]);
+      setOffersItems(data.value?.data ?? []);
     } catch (error) {
       console.log(error);
     }

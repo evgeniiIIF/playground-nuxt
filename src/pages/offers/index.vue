@@ -2,16 +2,63 @@
 import { useOffersStore } from '@/store/offers';
 
 const { offersEffects, offersState } = useOffersStore();
+
 await offersEffects.fetchOffersItems();
-console.log(offersState.value.offersItems);
-// onMounted( () => {
-// });
+
+const countItems: Ref<number> = ref(8);
+const incrementCountItems = () => (countItems.value += 8);
+const offersItems = computed(() => offersState.value.offersItems.slice(0, countItems.value));
 </script>
 
 <template>
   <section class="offers">
     <div class="container">
-      <h1>offers</h1>
+      <div class="offers__wrapper">
+        <h1 class="offers__title">Акции</h1>
+        <div class="offers__cards">
+          <div v-for="item in offersItems" :key="item.id" class="offers__card">
+            <OffersItemCard
+              :title="item.title"
+              :text="item.preview_text"
+              :image="item.image"
+              :image-mobile="item.image_mobile"
+              :slug="item.slug"
+            />
+          </div>
+        </div>
+        <div class="offers__button">
+          <UIButton text="Загрузить еще" @click="incrementCountItems" />
+        </div>
+      </div>
     </div>
   </section>
 </template>
+
+<style lang="scss">
+.offers {
+  &__wrapper {
+    padding: 79px 0 60px 0;
+  }
+  &__title {
+    margin-bottom: 31px;
+    @include title-main-bold();
+    color: $color-blue;
+  }
+  &__cards {
+    @include row-flex();
+    margin-bottom: 40px;
+  }
+  &__button {
+    display: flex;
+    justify-content: center;
+    .button {
+      @include button-text-big-grow();
+      background: $color-second;
+    }
+  }
+  &__card {
+    @include col();
+    @include size(6);
+  }
+}
+</style>

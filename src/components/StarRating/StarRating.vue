@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { StarRatingTypes } from '~/components/StarRating/StarRating.types';
+import type { StarRatingTypes } from '@/components/StarRating/StarRating.types';
 
 defineProps<StarRatingTypes>();
 </script>

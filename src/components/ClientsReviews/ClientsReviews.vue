@@ -3,7 +3,7 @@ import { Navigation } from 'swiper/modules';
 
 import 'swiper/scss';
 import 'swiper/scss/pagination';
-import { useMediaSizes } from '~/composables/useMediaSizes';
+import { useMediaSizes } from '@/composables/useMediaSizes';
 
 const { isMobile } = useMediaSizes();
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { UIDropdownTypes } from '~/components/UIDropdown/UIDropdown.types';
+import type { UIDropdownTypes } from '@/components/UIDropdown/UIDropdown.types';
 import { ref, computed } from 'vue';
-import { useClickOutside } from '~/composables/useClickOutside';
+import { useClickOutside } from '@/composables/useClickOutside';
 
 const props = defineProps<UIDropdownTypes>();
 
