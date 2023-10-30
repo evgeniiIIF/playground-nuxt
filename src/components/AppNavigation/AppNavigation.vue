@@ -4,7 +4,7 @@
   <nav class="navigation">
     <ul class="navigation__list">
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" activeClass="navigation__item-link--active" to="/offers"
+        <NuxtLink class="navigation__item-link" active-class="navigation__item-link--active" to="/offers"
           >Акции</NuxtLink
         >
       </li>

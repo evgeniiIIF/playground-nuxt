@@ -15,9 +15,14 @@ defineProps<UIButtonTypes>();
   </template>
   <template v-else>
     <button
-      type="button"
+      :type="type || 'button'"
       class="button"
-      :class="{ 'button--filled': isFilled, 'button-disabled': disabled, 'button--full-width': hasFullWidth }"
+      :class="{
+        'button--filled': isFilled,
+        'button-disabled': disabled,
+        'button--full-width': hasFullWidth,
+        'button--size-large': sizeLarge,
+      }"
       :disabled="disabled"
       @click="onClick"
     >
@@ -33,8 +38,8 @@ defineProps<UIButtonTypes>();
   align-items: center;
   padding: 15px 33px;
   border: 2px solid $color-second;
-  font-size: 14px;
-  line-height: 30px;
+
+  @include text-main-medium;
   color: $color-white;
   cursor: pointer;
   background-color: transparent;
@@ -55,6 +60,16 @@ defineProps<UIButtonTypes>();
 
   &--disabled {
     opacity: 0.5;
+  }
+
+  &--size-large {
+    width: 100%;
+
+    @include text-main-large-medium;
+
+    @include mobile {
+      @include text-main-medium;
+    }
   }
 
   &:hover {

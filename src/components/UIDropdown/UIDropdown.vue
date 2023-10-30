@@ -79,7 +79,6 @@ const filteredItems = computed(() =>
 
 <style lang="scss" scoped>
 .dropdown {
-  max-width: 285px;
   position: relative;
 
   &__label {
@@ -88,7 +87,9 @@ const filteredItems = computed(() =>
 
   &__title {
     margin-left: 10px;
-    font-size: 12px;
+    margin-bottom: 4px;
+
+    @include text-main-small;
     color: $color-gray-light;
   }
 
@@ -99,12 +100,13 @@ const filteredItems = computed(() =>
 
   &__input {
     width: 100%;
-    padding: 15px 20px;
+    padding: 14px 20px;
     border: 1px solid #e3e5e5;
     border-right: 0;
     outline: none;
+    background-color: transparent;
 
-    font-size: 14px;
+    @include text-main-grow;
     color: $color-main;
     cursor: pointer;
 
@@ -116,7 +118,7 @@ const filteredItems = computed(() =>
   &__button {
     background: none;
     border: 1px solid #e3e5e5;
-    padding: 11px 13px;
+    padding: 12px 15px;
     outline: none;
     cursor: pointer;
 
@@ -127,7 +129,6 @@ const filteredItems = computed(() =>
       justify-content: center;
       align-items: center;
       transition: transform 0.2s ease;
-      color: $color-second;
     }
   }
 
