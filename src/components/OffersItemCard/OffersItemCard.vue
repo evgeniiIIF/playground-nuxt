@@ -1,11 +1,22 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   title?: string;
   text?: string;
   image?: string;
   imageMobile?: string | null;
   slug?: string;
 }>();
+
+const currentSlug = computed(() => `/offers/${props.slug}`);
+
+// const goToSlug = async (slug?: string) => {
+//   await navigateTo(`${slug}`, {
+//     // open: {
+//     //   target: '_blank',
+//     // },
+//     replace: true,
+//   });
+// };
 </script>
 
 <template>
@@ -18,7 +29,10 @@ defineProps<{
       <div class="popup-offers-item-card__title">{{ title }}</div>
       <div class="popup-offers-item-card__text">{{ text }}</div>
       <div class="popup-offers-item-card__button">
-        <UIButton text="Подробнее" />
+        <NuxtLink :to="`${currentSlug}`" :replace="true">
+          <UIButton text="Подробнее" />
+        </NuxtLink>
+        <!-- <UIButton text="Подробнее" @click="goToSlug(slug)" /> -->
       </div>
     </div>
   </div>
