@@ -32,7 +32,7 @@ const navigationClass = computed(() => {
         <NuxtLink class="navigation__item-link" to="/#">О компании</NuxtLink>
       </li>
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" to="/#">Контакты</NuxtLink>
+        <NuxtLink class="navigation__item-link" to="/contacts">Контакты</NuxtLink>
       </li>
     </ul>
   </nav>
