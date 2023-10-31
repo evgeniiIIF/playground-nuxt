@@ -1,47 +1,39 @@
 <script lang="ts" setup>
-import type { UIDropdownTypes } from '@/components/UIDropdown/UIDropdown.types';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useClickOutside } from '@/composables/useClickOutside';
+import type { UIDropdownWithAccordion } from '@/components/UIDropdownWithAccordion/UIDropdownWithAccordion.types';
 
-const props = defineProps<UIDropdownTypes>();
+const props = defineProps<UIDropdownWithAccordion>();
 
 const [isOpenDropdown, , closeDropdown, toggleDropdown] = useBooleanState(false);
 const DropdownNodeRef = ref<HTMLDivElement | null>(null);
+const dropdownValue = ref(props.value || '');
 const searchValue = ref('');
 
-const filteredItems = computed(() =>
-  props.items.filter((item) => item.toLowerCase().includes(searchValue.value.toLowerCase())),
-);
-
-const toggleHandler = () => {
+const open = () => {
   if (props.items.length === 0) return;
   toggleDropdown();
 };
 
 useClickOutside(DropdownNodeRef, closeDropdown);
 
-const handleDropdownItemClick = (event: MouseEvent) => {
-  if (!(event.target instanceof HTMLElement)) return;
-  searchValue.value = '';
-  closeDropdown();
-
-  // eslint-disable-next-line
-  return event.target!.textContent as string;
-};
+// const filteredItems = computed(() =>
+//     props.items.filter((item) => item.toLowerCase().includes(searchValue.value.toLowerCase())),
+// );
 </script>
 
 <template>
   <div ref="DropdownNodeRef" class="dropdown" :class="{ 'dropdown--opened': isOpenDropdown }">
     <label class="dropdown__label">
       <p class="dropdown__title">{{ title }}</p>
-      <div class="dropdown__dropdown" @click="toggleHandler">
+      <div class="dropdown__dropdown" @click="open">
         <input
+          v-model="dropdownValue"
           class="dropdown__input"
           type="text"
           :placeholder="placeholder"
-          :value="value"
-          :disabled="props.items.length === 0"
           readOnly
+          :disabled="props.items.length === 0"
         />
         <button type="button" class="dropdown__button">
           <span class="dropdown__button-arrow">
@@ -50,25 +42,24 @@ const handleDropdownItemClick = (event: MouseEvent) => {
         </button>
       </div>
     </label>
-    <div class="dropdown__drop">
+    <div class="dropdown__drop dropdown__drop--with-accordion">
       <div class="dropdown__drop-search">
         <input v-model="searchValue" class="dropdown__drop-search-input" type="text" placeholder="Поиск" />
       </div>
       <ul class="dropdown__drop-list">
-        <li
-          v-for="item in filteredItems"
-          :key="item"
-          class="dropdown__drop-item"
-          @click="$emit('onSelectItem', handleDropdownItemClick($event))"
-        >
-          {{ item }}
+        <li v-for="item in items" :key="item.id" class="dropdown__drop-accordion">
+          <UIAccordion
+            :title="item.title"
+            :services-category="item"
+            @on-change-service="(event, changeService) => $emit('onChangeService', event, changeService)"
+          />
         </li>
       </ul>
     </div>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .dropdown {
   position: relative;
 
@@ -96,7 +87,7 @@ const handleDropdownItemClick = (event: MouseEvent) => {
   &__input {
     width: 100%;
     padding: 14px 20px;
-    border: $fields-border;
+    border: 1px solid #e3e5e5;
     border-right: 0;
     outline: none;
     background-color: transparent;
@@ -112,7 +103,7 @@ const handleDropdownItemClick = (event: MouseEvent) => {
 
   &__button {
     background: none;
-    border: $fields-border;
+    border: 1px solid #e3e5e5;
     padding: 12px 15px;
     outline: none;
     cursor: pointer;
@@ -125,10 +116,6 @@ const handleDropdownItemClick = (event: MouseEvent) => {
       align-items: center;
       transition: transform 0.2s ease;
       color: $color-second;
-
-      svg {
-        @include fill-svg-and-path($color-second);
-      }
     }
   }
 
@@ -184,14 +171,14 @@ const handleDropdownItemClick = (event: MouseEvent) => {
         width: 100%;
         padding: 15px 34px 15px 20px;
         outline: none;
-        border: $fields-border-hover;
+        border: 1px solid #a7b0b0;
       }
     }
 
     &-list {
       max-height: 280px;
       list-style-type: none;
-      border: $fields-border-hover;
+      border: 1px solid #a7b0b0;
       border-top: 0;
       overflow-y: auto;
 
@@ -206,7 +193,7 @@ const handleDropdownItemClick = (event: MouseEvent) => {
       background-color: $color-white;
 
       &:not(:last-child) {
-        border-bottom: 1px solid $color-light-gray-lighter;
+        border-bottom: 1px solid #f0f0f5;
       }
 
       &:hover {
@@ -222,7 +209,7 @@ const handleDropdownItemClick = (event: MouseEvent) => {
       }
 
       &__input {
-        border: $fields-border-hover;
+        border-color: #a7b0b0;
         color: $color-main;
 
         &::placeholder {
@@ -231,7 +218,7 @@ const handleDropdownItemClick = (event: MouseEvent) => {
       }
 
       &__button {
-        border: $fields-border-hover;
+        border-color: #a7b0b0;
 
         &-arrow {
           transform: rotate(180deg);
@@ -251,7 +238,7 @@ const handleDropdownItemClick = (event: MouseEvent) => {
       }
 
       &__input {
-        border-color: $fields-border-hover;
+        border-color: #a7b0b0;
 
         &::placeholder {
           color: $color-gray;
@@ -259,7 +246,7 @@ const handleDropdownItemClick = (event: MouseEvent) => {
       }
 
       &__button {
-        border: $fields-border-hover;
+        border-color: #a7b0b0;
       }
     }
   }

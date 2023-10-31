@@ -1,6 +1,6 @@
-import type { UIServiceTypes } from '@/components/UIService/UIService.types';
+import type { ServicesAllItemParent } from '@/store/servicesAll/servicesAll.types';
 
-export type UIAccordionTypes = {
+export type UIAccordion = {
   title: string;
-  items: UIServiceTypes[];
+  servicesCategory: ServicesAllItemParent;
 };

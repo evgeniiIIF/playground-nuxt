@@ -1,10 +1,21 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { UIAccordionTypes } from '@/components/UIAccordion/UIAccordion.types';
+import type { UIAccordion } from '@/components/UIAccordion/UIAccordion.types';
 
-defineProps<UIAccordionTypes>();
+const props = defineProps<UIAccordion>();
 
 const isOpen = ref(false);
+const { children } = props.servicesCategory;
+
+const allChildren = children
+  .map((child) => {
+    if (child.children?.length) {
+      return [child, ...child.children];
+    }
+
+    return child;
+  })
+  .flat();
 </script>
 
 <template>
@@ -14,20 +25,12 @@ const isOpen = ref(false);
     </div>
     <div class="accordion__drop">
       <ul class="accordion__list">
-        <li class="accordion__item">
-          <UIService :price="1500" name="Защита кузова" />
-        </li>
-        <li class="accordion__item">
-          <UIService :price="1500" name="Защита кузова" />
-        </li>
-        <li class="accordion__item">
-          <UIService :price="1500" name="Защита кузова" />
-        </li>
-        <li class="accordion__item">
-          <UIService :price="1500" name="Защита кузова" />
-        </li>
-        <li class="accordion__item">
-          <UIService :price="1500" name="Защита кузова" />
+        <li v-for="service in allChildren" :key="service.id" class="accordion__item">
+          <UIService
+            :service="service"
+            :with-checkbox="true"
+            @on-change="(event, changeService) => $emit('onChangeService', event, changeService)"
+          />
         </li>
       </ul>
     </div>

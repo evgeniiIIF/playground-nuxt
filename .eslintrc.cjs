@@ -38,5 +38,7 @@ module.exports = {
     'vuejs-accessibility/label-has-for': 'off',
     'vuejs-accessibility/anchor-has-content': 'off',
     'vue/no-v-html': 'off',
+    'no-param-reassign': 'off',
+    'prefer-destructuring': 'off',
   },
 };

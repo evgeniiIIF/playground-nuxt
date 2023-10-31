@@ -1,31 +1,10 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import type { UIServicesTypes } from '@/components/UIServices/UIServices.types';
+import { computed } from 'vue';
+import type { UIServices } from '@/components/UIServices/UIServices.types';
 
-const props = defineProps<UIServicesTypes>();
+const props = defineProps<UIServices>();
 
-const changedItems = ref(
-  props.items.map((item) => {
-    return { ...item, checked: true };
-  }),
-);
-
-const totalCost = computed(() =>
-  changedItems.value.reduce((acc, item) => {
-    if (!item.checked) return acc;
-
-    return acc + item.price;
-  }, 0),
-);
-
-const handleChecked = (event: Event, text: string): void => {
-  if (!(event.target instanceof HTMLInputElement)) return;
-  changedItems.value.find((item) => item.name === text)!.checked = event.target.checked;
-};
-
-const handleRemove = (text: string): void => {
-  changedItems.value = changedItems.value.filter((item) => item.name !== text);
-};
+const totalCost = computed(() => props.services.reduce((acc, service) => acc + service.price, 0));
 </script>
 
 <template>
@@ -34,15 +13,12 @@ const handleRemove = (text: string): void => {
     <div class="services__content">
       <div class="services__body">
         <ul class="services__list">
-          <li v-for="{ name, price } in changedItems" :key="name" class="services__item">
+          <li v-for="service in services" :key="service.id" class="services__item">
             <UIService
-              :name="name"
-              :price="price"
+              :service="service"
               :with-cross-button="true"
-              :checked="true"
               :price-is-hidden-on-mobile="true"
-              @on-checked="handleChecked"
-              @on-remove="handleRemove"
+              @on-remove="(removedService) => $emit('onRemoveService', removedService)"
             />
           </li>
         </ul>

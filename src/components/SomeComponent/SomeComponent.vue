@@ -4,7 +4,8 @@
 // import { useServicesTitleStore } from '@/store/servicesTitle';
 // import { useHomeStore } from '../../store/home';
 // import { usePartnersStore } from '~/store/partners';
-import { useWelcomeStore } from '~/store/welcome';
+// import { useWelcomeStore } from '~/store/welcome';
+import { useCarsStore } from '~/store/cars';
 
 // const { categoriesEffects, categoriesState } = useCategoriesStore();
 // const { servicesAllEffects, servicesAllState } = useServicesAllStore();
@@ -12,7 +13,8 @@ import { useWelcomeStore } from '~/store/welcome';
 // const { homeState, homeEffects } = useHomeStore();
 // const { partnersState, partnersEffects } = usePartnersStore();
 
-const { welcomeState, welcomeEffects } = useWelcomeStore();
+// const { welcomeState, welcomeEffects } = useWelcomeStore();
+const { carsState, carsEffects } = useCarsStore();
 
 // await categoriesEffects.fetchCategoriesItems(316);
 // await servicesAllEffects.fetchServicesAll();
@@ -20,7 +22,8 @@ const { welcomeState, welcomeEffects } = useWelcomeStore();
 // await homeEffects.fetchHome();
 // await partnersEffects.fetchPartners();
 // await partnersEffects.fetchPartnersItems();
-await welcomeEffects.fetchWelcome();
+// await welcomeEffects.fetchWelcome();
+await carsEffects.fetchCars();
 // await useAsyncData('mountains', () => servicesTitleEffects.fetchServicesTitle('авто'));
 </script>
 
@@ -30,5 +33,6 @@ await welcomeEffects.fetchWelcome();
   <!--  <div>{{ servicesTitleState.servicesTitleItems }}</div>-->
   <!--  <div>{{ homeState }}</div>-->
   <!--  <div>{{ partnersState }}</div>-->
-  <div>{{ welcomeState }}</div>
+  <!--  <div>{{ welcomeState }}</div>-->
+  <div>{{ carsState }}</div>
 </template>

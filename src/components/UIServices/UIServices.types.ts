@@ -1,5 +1,5 @@
-import type { UIServiceTypes } from '@/components/UIService/UIService.types';
+import type { ServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
 
-export type UIServicesTypes = {
-  items: UIServiceTypes[];
+export type UIServices = {
+  services: ServicesAllItemChild[];
 };
