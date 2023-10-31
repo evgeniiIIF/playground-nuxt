@@ -1,0 +1,1 @@
+export { partnersHttp } from './partnersHttp';

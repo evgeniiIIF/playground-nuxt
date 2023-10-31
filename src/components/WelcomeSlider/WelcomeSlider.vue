@@ -3,6 +3,13 @@ import { Pagination, Autoplay } from 'swiper/modules';
 
 import 'swiper/scss';
 import 'swiper/scss/pagination';
+
+import type { WelcomeSlider } from '@/components/WelcomeSlider/WelcomeSlider.types';
+import { useMediaSizes } from '@/composables/useMediaSizes';
+
+defineProps<WelcomeSlider>();
+
+const { isMobile } = useMediaSizes();
 </script>
 
 <template>
@@ -15,32 +22,19 @@ import 'swiper/scss/pagination';
     :autoplay="{ delay: 3000 }"
     loop
   >
-    <SwiperSlide class="welcome-slider__slide">
-      <AppContainer :class="'container--items-centered'">
+    <SwiperSlide v-for="slide in slides" :key="slide.id" class="welcome-slider__slide">
+      <AppContainer :class="{ 'container--items-centered': !isMobile }">
         <div class="welcome-slider__slide-info">
           <h2 class="welcome-slider__slide-info-title">Бесплатная замена трансмиссионного масла</h2>
           <p class="welcome-slider__slide-info-description">
             При единовременной покупке масла и фильтра в нашем автотехцентре
           </p>
-          <UIButton :text="'Записаться на сервис'" :link="'#'" />
+          <UIButton :text="slide.title_link || ''" :link="slide.url_link || ''" />
         </div>
       </AppContainer>
       <div class="welcome-slider__slide-img-container">
-        <NuxtImg src="/slide-1.png" :class="'welcome-slider__slide-img'" loading="lazy" />
-      </div>
-    </SwiperSlide>
-    <SwiperSlide class="welcome-slider__slide">
-      <AppContainer :class="'container--items-centered'">
-        <div class="welcome-slider__slide-info">
-          <h2 class="welcome-slider__slide-info-title">Бесплатная замена трансмиссионного масла</h2>
-          <p class="welcome-slider__slide-info-description">
-            При единовременной покупке масла и фильтра в нашем автотехцентре
-          </p>
-          <UIButton variant="link" :text="'Записаться на сервис'" :link="'#'" />
-        </div>
-      </AppContainer>
-      <div class="welcome-slider__slide-img-container">
-        <NuxtImg src="/slide-1.png" :class="'welcome-slider__slide-img'" loading="lazy" />
+        <NuxtImg v-if="!isMobile" :src="slide.image" :class="'welcome-slider__slide-img'" loading="lazy" />
+        <NuxtImg v-else :src="slide.image_mobile" :class="'welcome-slider__slide-img'" loading="lazy" />
       </div>
     </SwiperSlide>
   </Swiper>
@@ -51,6 +45,10 @@ import 'swiper/scss/pagination';
   &__slide {
     height: 700px;
 
+    @include mobile {
+      height: 445px;
+    }
+
     &-info {
       max-width: 590px;
       display: flex;
@@ -59,6 +57,7 @@ import 'swiper/scss/pagination';
 
       @include mobile {
         max-width: inherit;
+        padding-top: 36px;
       }
 
       &-title {
@@ -68,6 +67,7 @@ import 'swiper/scss/pagination';
         color: $color-white;
 
         @include mobile {
+          margin-bottom: 9px;
           @include title-main-small-bold;
         }
       }
@@ -79,15 +79,10 @@ import 'swiper/scss/pagination';
         color: $color-gray;
 
         @include text-main;
-      }
 
-      &-button {
-        padding: 15px 33px;
-
-        border: 2px solid $color-second;
-        text-decoration: none;
-        line-height: 30px;
-        color: $color-white;
+        @include mobile {
+          margin-bottom: 20px;
+        }
       }
     }
 
@@ -95,6 +90,7 @@ import 'swiper/scss/pagination';
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: bottom;
 
       &-container {
         position: absolute;
@@ -110,6 +106,10 @@ import 'swiper/scss/pagination';
   .swiper {
     &-pagination {
       &-bullets {
+        display: flex;
+        justify-content: center;
+        padding: 0 10px;
+
         .swiper-pagination-bullet {
           margin: 0;
         }

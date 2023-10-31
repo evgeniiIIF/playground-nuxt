@@ -47,14 +47,25 @@ const mockedServicesData = [
 .repair-calculation {
   padding: 59px 0 78px 0;
 
+  @include mobile {
+    padding: 38px 0 50px 0;
+  }
+
   &__title {
     margin-bottom: 6px;
 
     @include title-main-bold;
     color: $color-blue;
+
+    @include mobile {
+      margin-bottom: 2px;
+
+      @include title-main-xxsmall-bold;
+    }
   }
 
   &__description {
+    @include text-main;
     color: $color-gray-dark;
   }
 
@@ -62,17 +73,53 @@ const mockedServicesData = [
     display: flex;
     justify-content: space-between;
     margin-top: 26px;
+
+    @include tablet {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      align-items: center;
+      margin-top: 16px;
+    }
   }
 
   &__selects {
+    width: 100%;
+    max-width: 285px;
     display: flex;
     flex-direction: column;
     gap: 21px;
+    margin-bottom: 10px;
+
+    @include tablet {
+      max-width: inherit;
+      gap: 11px;
+    }
+
+    @include mobile {
+      max-width: inherit;
+      gap: 11px;
+    }
   }
 
   &__services-result {
     width: 100%;
     max-width: 793px;
+
+    @include media-range($desktop-form, $screen-medium-min) {
+      max-width: 650px;
+    }
+
+    @include tablet {
+      max-width: inherit;
+    }
+
+    @include mobile {
+      max-width: inherit;
+    }
   }
 }
 </style>

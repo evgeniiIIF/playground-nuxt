@@ -1,5 +1,8 @@
+<script lang="ts" setup></script>
+
 <template>
   <div class="wrapper">
+    <AppHeaderMobile />
     <AppHeader />
     <main>
       <slot />
@@ -17,5 +20,13 @@
 main {
   margin-top: 114px;
   flex: 1 1 auto;
+
+  @include tablet {
+    margin-top: 100px;
+  }
+
+  @include mobile {
+    margin-top: 100px;
+  }
 }
 </style>

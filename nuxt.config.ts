@@ -57,7 +57,7 @@ export default defineNuxtConfig({
     styleLang: 'scss',
   },
   image: {
-    format: ['webp', 'jpg'],
+    format: ['webp', 'jpg', 'png'],
     dir: './assets/img',
   },
   runtimeConfig: {

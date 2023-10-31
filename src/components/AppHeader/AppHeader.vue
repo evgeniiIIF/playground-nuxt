@@ -52,6 +52,14 @@ const headerClass = computed(() => {
 
   @include text-main-big;
 
+  @include tablet {
+    display: none;
+  }
+
+  @include mobile {
+    display: none;
+  }
+
   &__wrapper {
     display: flex;
     align-items: center;
@@ -97,22 +105,21 @@ const headerClass = computed(() => {
     border-radius: 50%;
     text-decoration: none;
   }
-}
 
-.header--light {
-  background: $color-white;
-  color: $color-blue;
-
-  .navigation__item-link {
+  &--light {
+    background: $color-white;
     color: $color-blue;
-  }
-  .header__calls-phone {
-    color: $color-blue;
-  }
 
-  .header__whatsapp {
-    svg {
-      @include fill-svg-and-path(green);
+    .header {
+      &__calls-phone {
+        color: $color-blue;
+      }
+
+      &__whatsapp {
+        svg {
+          @include fill-svg-and-path(green);
+        }
+      }
     }
   }
 }

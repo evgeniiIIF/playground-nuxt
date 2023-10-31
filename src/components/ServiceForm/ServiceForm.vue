@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 const mockedAccordionData = ['Bmw', 'Audi'];
+
+const name = ref('');
+const phone = ref('');
 </script>
 
 <template>
@@ -8,16 +11,16 @@ const mockedAccordionData = ['Bmw', 'Audi'];
       <h2 class="service-form__title">Записаться на сервис</h2>
       <form class="service-form__form" @click="$event.preventDefault()">
         <div class="service-form__form-name">
-          <UIInput type="text" title="Ваше имя" placeholder="Ваше имя" />
+          <UIInput type="text" title="Ваше имя" placeholder="Ваше имя" :model-value="name" />
         </div>
         <div class="service-form__form-phone">
-          <UIInput type="phone" title="Ваш номер телефона" />
+          <UIInput type="phone" title="Ваш номер телефона" :model-value="phone" />
         </div>
         <div class="service-form__form-service">
           <UIDropdown title="Услуга" placeholder="Выберите услугу" :items="mockedAccordionData" />
         </div>
         <div class="service-form__form-button">
-          <UIButton type="submit" text="Записаться" is-filled="true" :size-large="true" />
+          <UIButton type="submit" text="Записаться" :is-filled="true" :size-large="true" />
         </div>
       </form>
     </AppContainer>

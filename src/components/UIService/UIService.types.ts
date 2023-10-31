@@ -3,6 +3,7 @@ export type UIServiceTypes = {
   price: number;
   withCrossButton?: boolean;
   checked?: boolean;
+  priceIsHiddenOnMobile?: boolean;
 };
 
 export interface UIServiceEmits {

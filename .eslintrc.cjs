@@ -37,5 +37,6 @@ module.exports = {
     'no-prototype-builtins': 'off',
     'vuejs-accessibility/label-has-for': 'off',
     'vuejs-accessibility/anchor-has-content': 'off',
+    'vue/no-v-html': 'off',
   },
 };

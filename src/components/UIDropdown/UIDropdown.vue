@@ -91,6 +91,10 @@ const filteredItems = computed(() =>
 
     @include text-main-small;
     color: $color-gray-light;
+
+    @include mobile {
+      margin-left: 0;
+    }
   }
 
   &__dropdown {
@@ -129,6 +133,7 @@ const filteredItems = computed(() =>
       justify-content: center;
       align-items: center;
       transition: transform 0.2s ease;
+      color: $color-second;
     }
   }
 
@@ -156,6 +161,14 @@ const filteredItems = computed(() =>
 
     &--with-accordion {
       width: 560px;
+
+      @include tablet {
+        width: 100%;
+      }
+
+      @include mobile {
+        width: 100%;
+      }
     }
 
     &-search {
@@ -169,7 +182,7 @@ const filteredItems = computed(() =>
         height: 24px;
         transform: translate(50%, -50%);
         content: '';
-        background: url('~/assets/icons/search.svg');
+        background: url('@/assets/icons/search.svg');
       }
 
       &-input {
