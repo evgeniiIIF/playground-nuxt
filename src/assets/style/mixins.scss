@@ -371,3 +371,22 @@ $screen-large-min: 1600px;
     }
   }
 }
+
+
+@mixin mr($margin) {
+  & > * {
+    margin-right: $margin;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+@mixin mb($margin) {
+  & > * {
+    margin-bottom: $margin;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

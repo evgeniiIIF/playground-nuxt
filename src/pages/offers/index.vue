@@ -8,6 +8,7 @@ await offersEffects.fetchOffersItems();
 const countItems: Ref<number> = ref(8);
 const incrementCountItems = () => (countItems.value += 8);
 const offersItems = computed(() => offersState.value.offersItems.slice(0, countItems.value));
+const showButton = computed(() => countItems.value < offersState.value.offersItems.length);
 </script>
 
 <template>
@@ -26,10 +27,13 @@ const offersItems = computed(() => offersState.value.offersItems.slice(0, countI
             />
           </div>
         </div>
-        <div class="offers__button">
+        <div v-if="showButton" class="offers__button">
           <UIButton text="Загрузить еще" @click="incrementCountItems" />
         </div>
       </div>
+    </div>
+    <div class="offers__form">
+      <ServiceForm />
     </div>
   </section>
 </template>
@@ -59,6 +63,9 @@ const offersItems = computed(() => offersState.value.offersItems.slice(0, countI
   &__card {
     @include col();
     @include size(6);
+    @include mobile() {
+      @include size(12);
+    }
   }
 }
 </style>

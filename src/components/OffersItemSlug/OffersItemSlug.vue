@@ -8,14 +8,18 @@ const { slug } = useRoute().params;
 
 await offersEffects.fetchOffersItems(slug as string);
 
+const [isOpenModal, openModal, closeModal] = useBooleanState(false);
+
 const currentOffersItemSlug = computed(() => offersState.value.offersItemSlug);
 const datePubic = computed(() => formatDate(currentOffersItemSlug.value.created_at));
-const offersItems = computed(() => offersState.value.offersItems.slice(0, 3));
+const anotherOffersItems = computed(() =>
+  offersState.value.offersItems.filter((item) => item.slug !== currentOffersItemSlug.value.slug).slice(0, 3),
+);
 
 console.log(offersState.value.offersItems);
 </script>
 <template>
-  <div class="offers-item-slug">
+  <section class="offers-item-slug">
     <div class="container">
       <div class="offers-item-slug__wrapper">
         <div class="offers-item-slug__description">
@@ -30,7 +34,7 @@ console.log(offersState.value.offersItems);
             <div class="offers-item-slug__content content-offers-item-slug">
               <div class="content-offers-item-slug__text">{{ currentOffersItemSlug.preview_text }}</div>
               <div class="content-offers-item-slug__button">
-                <UIButton text="Записаться на сервис" />
+                <UIButton text="Записаться на сервис" @click="openModal" />
               </div>
               <div class="content-offers-item-slug__notice">
                 <p>*считывание кодов ошибок производится бесплатно для клиента.</p>
@@ -42,7 +46,7 @@ console.log(offersState.value.offersItems);
         <div class="offers-item-slug__another another-offers">
           <h2 class="another-offers__title">Другие акции</h2>
           <div class="another-offers__row">
-            <div v-for="item in offersItems" :key="item.id" class="another-offers__card">
+            <div v-for="item in anotherOffersItems" :key="item.id" class="another-offers__card">
               <OffersItemCard
                 :title="item.title"
                 :text="item.preview_text"
@@ -53,10 +57,17 @@ console.log(offersState.value.offersItems);
             </div>
           </div>
         </div>
-        <div class="offers-item-slug__form"></div>
       </div>
     </div>
-  </div>
+    <div class="offers-item-slug__form">
+      <ServiceForm />
+    </div>
+    <div class="offers-item-slug__modal">
+      <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
+        <AppCallbackForm />
+      </UIModal>
+    </div>
+  </section>
 </template>
 
 <style lang="scss">
@@ -171,12 +182,16 @@ console.log(offersState.value.offersItems);
       @include size(12);
     }
     .popup-offers-item-card {
+      display: flex;
+      flex-direction: column;
       padding: 15px 20px;
       &__title {
+        flex: 1 1 auto;
         font-size: 20px;
         margin-bottom: 4px;
       }
       &__text {
+        display: none;
         font-size: 10px;
         max-width: 100%;
         margin-bottom: 12px;
