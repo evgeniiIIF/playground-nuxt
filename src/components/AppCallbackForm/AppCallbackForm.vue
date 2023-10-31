@@ -2,6 +2,7 @@
 const name = ref('');
 const phone = ref('');
 </script>
+
 <template>
   <form class="callback-form">
     <h6 class="callback-form__title">Обратный звонок</h6>
@@ -19,6 +20,7 @@ const phone = ref('');
     <div class="callback-form__policy">* Отправляя форму, Вы соглашаетесь с политикой конфиденциальности</div>
   </form>
 </template>
+
 <style lang="scss">
 .callback-form {
   padding: 50px 100px 50px 100px;
