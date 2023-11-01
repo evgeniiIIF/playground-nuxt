@@ -109,7 +109,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .dropdown {
   position: relative;
 
@@ -137,7 +137,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
   &__input {
     width: 100%;
     padding: 14px 20px;
-    border: 1px solid #e3e5e5;
+    border: $fields-border;
     border-right: 0;
     outline: none;
     background-color: transparent;
@@ -153,7 +153,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
 
   &__button {
     background: none;
-    border: 1px solid #e3e5e5;
+    border: $fields-border;
     padding: 12px 15px;
     outline: none;
     cursor: pointer;
@@ -221,14 +221,14 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
         width: 100%;
         padding: 15px 34px 15px 20px;
         outline: none;
-        border: 1px solid #a7b0b0;
+        border: $fields-border-hover;
       }
     }
 
     &-list {
       max-height: 280px;
       list-style-type: none;
-      border: 1px solid #a7b0b0;
+      border: $fields-border-hover;
       border-top: 0;
       overflow-y: auto;
 
@@ -240,7 +240,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
       background-color: $color-white;
 
       &:not(:last-child) {
-        border-bottom: 2px solid #f0f0f5;
+        border-bottom: 2px solid $color-light-gray-lighter;
       }
     }
   }
@@ -252,7 +252,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
       }
 
       &__input {
-        border-color: #a7b0b0;
+        border-color: $color-gray-lighter;
         color: $color-main;
 
         &::placeholder {
@@ -261,7 +261,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
       }
 
       &__button {
-        border-color: #a7b0b0;
+        border-color: $color-gray-lighter;
 
         &-arrow {
           transform: rotate(180deg);
@@ -281,7 +281,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
       }
 
       &__input {
-        border-color: #a7b0b0;
+        border-color: $color-gray-lighter;
 
         &::placeholder {
           color: $color-gray;
@@ -289,7 +289,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
       }
 
       &__button {
-        border-color: #a7b0b0;
+        border-color: $color-gray-lighter;
       }
     }
   }

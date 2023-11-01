@@ -153,18 +153,6 @@ const handleDropdownItemClick = (item: string) => {
       }
     }
 
-    &--with-accordion {
-      width: 560px;
-
-      @include tablet {
-        width: 100%;
-      }
-
-      @include mobile {
-        width: 100%;
-      }
-    }
-
     &-search {
       position: relative;
 
