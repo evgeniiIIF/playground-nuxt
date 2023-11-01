@@ -8,15 +8,6 @@ const props = defineProps<{
 }>();
 
 const currentSlug = computed(() => `/offers/${props.slug}`);
-
-// const goToSlug = async (slug?: string) => {
-//   await navigateTo(`${slug}`, {
-//     // open: {
-//     //   target: '_blank',
-//     // },
-//     replace: true,
-//   });
-// };
 </script>
 
 <template>
@@ -29,10 +20,9 @@ const currentSlug = computed(() => `/offers/${props.slug}`);
       <div class="popup-offers-item-card__title">{{ title }}</div>
       <div class="popup-offers-item-card__text">{{ text }}</div>
       <div class="popup-offers-item-card__button">
-        <NuxtLink :to="`${currentSlug}`" :replace="true">
+        <NuxtLink :to="`${currentSlug}`">
           <UIButton text="Подробнее" />
         </NuxtLink>
-        <!-- <UIButton text="Подробнее" @click="goToSlug(slug)" /> -->
       </div>
     </div>
   </div>

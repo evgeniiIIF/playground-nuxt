@@ -64,7 +64,7 @@ console.log(offersState.value.offersItems);
     </div>
     <div class="offers-item-slug__modal">
       <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
-        <AppCallbackForm />
+        <AppCallbackForm title="Обратный звонок" />
       </UIModal>
     </div>
   </section>

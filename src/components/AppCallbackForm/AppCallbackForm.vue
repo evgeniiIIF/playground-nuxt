@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 const name = ref('');
 const phone = ref('');
+defineProps<{ title: string }>();
 </script>
 
 <template>
   <form class="callback-form">
-    <h6 class="callback-form__title">Обратный звонок</h6>
+    <h6 class="callback-form__title">{{ title }}</h6>
     <div class="callback-form__inputs">
       <div class="callback-form__input">
         <UIInput type="text" title="Ваше имя" placeholder="Ваше имя" :model-value="name" />
