@@ -23,6 +23,11 @@ const welcomeSlides = welcomeState.value;
 const cars = carsState.value;
 const services = servicesAllState.value.servicesAllItems;
 const partners = partnersState.value;
+const chooseServices = ref(servicesAllState.value.chooseServices)
+
+watchEffect(() => {
+  chooseServices.value = servicesAllState.value.chooseServices
+})
 
 const bonusProgramData = {
   title: home.content?.bonus_title,
@@ -50,13 +55,13 @@ const partnersData = {
 <template>
   <div>
     <WelcomeSlider v-if="Number(home.content?.is_active_welcome) === 1" :slides="welcomeSlides" />
-    <RepairCalculation v-if="Number(home.content?.is_active_calculator) === 1" :cars="cars" :services="services" />
+    <RepairCalculation v-if="Number(home.content?.is_active_calculator) === 1" :cars="cars" :services="services" :choose-services="chooseServices"/>
     <BonusProgram v-if="Number(home.content?.is_active_bonus_program) === 1" :bonus="bonusProgramData" />
     <AutoServices v-if="Number(home.content?.is_active_services) === 1" :services="services" />
     <OurPartners v-if="Number(partners.content?.is_active) === 1" :partners="partnersData" />
     <AboutCompany v-if="Number(home.content?.is_active_about_company) === 1" :company="aboutCompanyData" />
     <ClientsReviews v-if="Number(home.content?.is_active_reviews) === 1" />
-    <!--    <ServiceForm v-if="Number(home.content?.is_active_open_leadform) === 1" />-->
+    <ServiceForm v-if="Number(home.content?.is_active_open_leadform) === 1" :services="services" :choose-services="chooseServices" />
     <AutoBrands v-if="Number(home.content?.is_active_marquee_brands) === 1" />
   </div>
 </template>

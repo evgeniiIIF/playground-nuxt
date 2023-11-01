@@ -6,6 +6,7 @@ import type {
   UIDropdownWithAccordionEmits,
 } from '@/components/UIDropdownWithAccordion/UIDropdownWithAccordion.types';
 import type { ServicesAllItemChild, ServicesAllItemParent } from '~/store/servicesAll/servicesAll.types';
+import {setChecked} from "@/utils/setChecked/setChecked";
 
 const props = defineProps<UIDropdownWithAccordion>();
 const emit = defineEmits<UIDropdownWithAccordionEmits>();
@@ -21,9 +22,18 @@ const toggleHandler = () => {
 
 useClickOutside(DropdownNodeRef, closeDropdown);
 
+
+/* TODO */
+/* По-хорошему надо написать рекурсию и фильтровать по id, а не по path  */
 const checkedServicesCategory = (category: ServicesAllItemParent, checkedServices?: ServicesAllItemChild[]) => {
   return checkedServices?.filter((service) => service.full_path.split('>')[0] === category.full_path);
 };
+
+/* TODO */
+/* Привязываться к двум уровням вложенности не очень хорошо */
+/* т.к. могут добавить третий. Лучше написать рекурсию */
+/* которая будет вытаскивать все сервисы в один массив */
+/* сколько бы уровней не было */
 
 const allServices = props.items
   .map((item) => {
@@ -40,12 +50,6 @@ const allServices = props.items
       .flat();
   })
   .flat();
-
-const setChecked = (service: ServicesAllItemChild, checkedServices?: ServicesAllItemChild[]) => {
-  const currentService = checkedServices?.find((s) => s.id === service.id);
-
-  return !!currentService;
-};
 
 const filteredServices = computed(() => {
   return allServices.filter((service) => service.title.toLowerCase().includes(searchValue.value.toLowerCase()));

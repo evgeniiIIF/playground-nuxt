@@ -1,30 +1,26 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { UIAccordion, UIAccordionEmits } from '@/components/UIAccordion/UIAccordion.types';
-import type { ServicesAllItemChild } from '~/store/servicesAll/servicesAll.types';
+import {setChecked} from "@/utils/setChecked/setChecked";
 
 const props = defineProps<UIAccordion>();
 const emit = defineEmits<UIAccordionEmits>();
 
 const isOpen = ref(false);
-const { children } = props.servicesCategory;
 
-const allChildren = children
+/* TODO */
+/* Привязываться к двум уровням вложенности не очень хорошо */
+/* т.к. могут добавить третий. Лучше написать рекурсию */
+/* которая будет вытаскивать все сервисы в один массив */
+/* сколько бы уровней не было */
+const allServicesCategory = props.servicesCategory.children
   .map((child) => {
     if (child.children?.length) {
       return [child, ...child.children];
     }
 
     return child;
-  })
-  .flat();
-
-console.log(allChildren);
-const setChecked = (service: ServicesAllItemChild, checkedServices?: ServicesAllItemChild[]) => {
-  const currentService = checkedServices?.find((s) => s.id === service.id);
-
-  return !!currentService;
-};
+  }).flat();
 </script>
 
 <template>
@@ -34,7 +30,7 @@ const setChecked = (service: ServicesAllItemChild, checkedServices?: ServicesAll
     </div>
     <div class="accordion__drop">
       <ul class="accordion__list">
-        <li v-for="service in allChildren" :key="service.id" class="accordion__item">
+        <li v-for="service in allServicesCategory" :key="service.id" class="accordion__item">
           <UIService
             :service="service"
             :with-checkbox="true"

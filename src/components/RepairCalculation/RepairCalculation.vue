@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { RepairCalculation } from '@/components/RepairCalculation/RepairCalculation.types';
 import { useServicesAllStore } from '@/store/servicesAll';
-import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type {changedServicesAllItemChild} from '@/store/servicesAll/servicesAll.types';
 
 const props = defineProps<RepairCalculation>();
 
-const { servicesAllState, servicesAllActions } = useServicesAllStore();
+const { servicesAllActions } = useServicesAllStore();
 
 const carsBrands = Object.keys(props.cars);
 const carsBrandsInput = ref(carsBrands[0]);
@@ -61,13 +61,13 @@ const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
               :title="'Услуга'"
               :placeholder="'Выберите услуги'"
               :items="services"
-              :checked-services="servicesAllState.chooseServices"
+              :checked-services="chooseServices"
               @on-change-service="onChangeServiceHandler"
             />
           </div>
         </div>
         <div class="repair-calculation__services-result">
-          <UIServices :services="servicesAllState.chooseServices" @on-remove-service="onRemoveServiceHandler" />
+          <UIServices :services="chooseServices" @on-remove-service="onRemoveServiceHandler" />
         </div>
       </div>
     </AppContainer>
