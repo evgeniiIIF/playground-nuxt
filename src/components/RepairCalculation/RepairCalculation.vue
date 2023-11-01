@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import type { RepairCalculation } from '@/components/RepairCalculation/RepairCalculation.types';
-import type { ServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
 import { useServicesAllStore } from '@/store/servicesAll';
+import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
 
 const props = defineProps<RepairCalculation>();
+
 const { servicesAllState, servicesAllActions } = useServicesAllStore();
 
 const carsBrands = Object.keys(props.cars);
@@ -21,22 +22,12 @@ const carsModelsOnSelectItemHandler = (value: string) => {
   carsModelsInput.value = value;
 };
 
-const onChangeServiceHandler = (event: Event, service: ServicesAllItemChild) => {
-  if (!(event.target instanceof HTMLInputElement)) return;
-
-  if (event.target.checked) {
-    service.checked = true;
-    servicesAllActions.addChooseService(service);
-  } else {
-    service.checked = false;
-    servicesAllActions.removeChooseService(service);
-  }
+const onChangeServiceHandler = (service: changedServicesAllItemChild) => {
+  servicesAllActions.changeChooseService(service);
 };
 
-const onRemoveServiceHandler = (service: ServicesAllItemChild) => {
-  console.log(service);
-  servicesAllActions.removeChooseService(service);
-  servicesAllActions.changeService(service);
+const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
+  servicesAllActions.changeChooseService(service);
 };
 </script>
 
@@ -70,6 +61,7 @@ const onRemoveServiceHandler = (service: ServicesAllItemChild) => {
               :title="'Услуга'"
               :placeholder="'Выберите услуги'"
               :items="services"
+              :checked-services="servicesAllState.chooseServices"
               @on-change-service="onChangeServiceHandler"
             />
           </div>

@@ -11,17 +11,22 @@ const emit = defineEmits<UIServiceEmits>();
       <input
         class="service__input"
         type="checkbox"
-        :checked="service.checked"
-        @input="emit('onChange', $event, service)"
+        :checked="checked"
+        @input="emit('onChange', { ...service, checked: !checked })"
       />
       <span class="service__name">{{ service.title }}</span>
     </label>
     <p v-else class="service__name">{{ service.title }}</p>
     <div class="service__controls">
       <span class="service__price" :class="{ 'service__price--hidden-on-mobile': priceIsHiddenOnMobile }"
-        >{{ service.price }} ₽</span
+        >{{ service.price }}&nbsp;₽</span
       >
-      <button v-if="withCrossButton" type="button" class="service__button" @click="emit('onRemove', service)">
+      <button
+        v-if="withCrossButton"
+        type="button"
+        class="service__button"
+        @click="emit('onRemove', { ...service, checked: false })"
+      >
         <IcCross :font-controlled="false" :filled="true" />
       </button>
     </div>
@@ -61,8 +66,9 @@ const emit = defineEmits<UIServiceEmits>();
 
         &::before {
           position: absolute;
-          top: -2px;
+          top: 50%;
           left: 0;
+          transform: translateY(-50%);
           width: 24px;
           height: 24px;
           content: '';

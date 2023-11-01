@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import type { UIDropdownTypes } from '@/components/UIDropdown/UIDropdown.types';
+import type { UIDropdownEmits, UIDropdownTypes } from '@/components/UIDropdown/UIDropdown.types';
 import { ref, computed } from 'vue';
 import { useClickOutside } from '@/composables/useClickOutside';
 
 const props = defineProps<UIDropdownTypes>();
+const emit = defineEmits<UIDropdownEmits>();
 
 const [isOpenDropdown, , closeDropdown, toggleDropdown] = useBooleanState(false);
 const DropdownNodeRef = ref<HTMLDivElement | null>(null);
@@ -20,13 +21,11 @@ const toggleHandler = () => {
 
 useClickOutside(DropdownNodeRef, closeDropdown);
 
-const handleDropdownItemClick = (event: MouseEvent) => {
-  if (!(event.target instanceof HTMLElement)) return;
+const handleDropdownItemClick = (item: string) => {
   searchValue.value = '';
   closeDropdown();
 
-  // eslint-disable-next-line
-  return event.target!.textContent as string;
+  return item;
 };
 </script>
 
@@ -59,7 +58,7 @@ const handleDropdownItemClick = (event: MouseEvent) => {
           v-for="item in filteredItems"
           :key="item"
           class="dropdown__drop-item"
-          @click="$emit('onSelectItem', handleDropdownItemClick($event))"
+          @click="emit('onSelectItem', handleDropdownItemClick(item))"
         >
           {{ item }}
         </li>
@@ -222,7 +221,7 @@ const handleDropdownItemClick = (event: MouseEvent) => {
       }
 
       &__input {
-        border: $fields-border-hover;
+        border-color: $color-gray-lighter;
         color: $color-main;
 
         &::placeholder {
@@ -231,7 +230,7 @@ const handleDropdownItemClick = (event: MouseEvent) => {
       }
 
       &__button {
-        border: $fields-border-hover;
+        border-color: $color-gray-lighter;
 
         &-arrow {
           transform: rotate(180deg);
@@ -251,7 +250,7 @@ const handleDropdownItemClick = (event: MouseEvent) => {
       }
 
       &__input {
-        border-color: $fields-border-hover;
+        border-color: $color-gray-lighter;
 
         &::placeholder {
           color: $color-gray;
@@ -259,7 +258,7 @@ const handleDropdownItemClick = (event: MouseEvent) => {
       }
 
       &__button {
-        border: $fields-border-hover;
+        border-color: $color-gray-lighter;
       }
     }
   }

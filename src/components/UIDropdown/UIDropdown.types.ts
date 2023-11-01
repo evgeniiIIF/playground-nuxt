@@ -4,3 +4,7 @@ export type UIDropdownTypes = {
   value?: string;
   placeholder?: string;
 };
+
+export interface UIDropdownEmits {
+  (event: 'onSelectItem', name: string): void;
+}

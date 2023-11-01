@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { UIAccordion } from '@/components/UIAccordion/UIAccordion.types';
+import type { UIAccordion, UIAccordionEmits } from '@/components/UIAccordion/UIAccordion.types';
+import type { ServicesAllItemChild } from '~/store/servicesAll/servicesAll.types';
 
 const props = defineProps<UIAccordion>();
+const emit = defineEmits<UIAccordionEmits>();
 
 const isOpen = ref(false);
 const { children } = props.servicesCategory;
@@ -16,6 +18,13 @@ const allChildren = children
     return child;
   })
   .flat();
+
+console.log(allChildren);
+const setChecked = (service: ServicesAllItemChild, checkedServices?: ServicesAllItemChild[]) => {
+  const currentService = checkedServices?.find((s) => s.id === service.id);
+
+  return !!currentService;
+};
 </script>
 
 <template>
@@ -29,7 +38,8 @@ const allChildren = children
           <UIService
             :service="service"
             :with-checkbox="true"
-            @on-change="(event, changeService) => $emit('onChangeService', event, changeService)"
+            :checked="setChecked(service, checkedServicesCategory)"
+            @on-change="(changeService) => emit('onChangeService', changeService)"
           />
         </li>
       </ul>
@@ -74,7 +84,6 @@ const allChildren = children
   }
 
   &__list {
-    height: 100%;
     list-style-type: none;
   }
 
@@ -84,6 +93,10 @@ const allChildren = children
 
     &:not(:last-child) {
       border-bottom: 2px solid #f0f0f5;
+    }
+
+    @include mobile {
+      padding: 0 13px 0 10px;
     }
   }
 
@@ -96,7 +109,7 @@ const allChildren = children
       }
 
       &__drop {
-        max-height: 550px;
+        max-height: inherit;
       }
     }
   }

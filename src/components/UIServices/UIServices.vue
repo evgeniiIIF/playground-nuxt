@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { UIServices } from '@/components/UIServices/UIServices.types';
+import type { UIServices, UIServicesEmits } from '@/components/UIServices/UIServices.types';
 
 const props = defineProps<UIServices>();
+const emit = defineEmits<UIServicesEmits>();
 
 const totalCost = computed(() => props.services.reduce((acc, service) => acc + service.price, 0));
 </script>
@@ -12,16 +13,20 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
     <p class="services__title">Услуга</p>
     <div class="services__content">
       <div class="services__body">
-        <ul class="services__list">
+        <ul v-if="services.length" class="services__list">
           <li v-for="service in services" :key="service.id" class="services__item">
             <UIService
               :service="service"
               :with-cross-button="true"
               :price-is-hidden-on-mobile="true"
-              @on-remove="(removedService) => $emit('onRemoveService', removedService)"
+              @on-remove="(removedService) => emit('onRemoveService', removedService)"
             />
           </li>
         </ul>
+        <div v-else class="services__body-empty">
+          <span class="services__body-empty-text">Для расчета стоимости выберите</span>
+          <span class="services__body-empty-text-highlighted">авто, модель и услуги</span>
+        </div>
       </div>
       <div class="services__footer">
         <div class="services__cost">
@@ -56,7 +61,7 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
   }
 
   &__body {
-    max-height: 250px;
+    height: 250px;
     padding: 0 14px 0 20px;
     overflow-y: auto;
 
@@ -71,6 +76,23 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
 
     &::-webkit-scrollbar-track {
       background-color: #f0f2f2;
+    }
+
+    &-empty {
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &-text {
+        @include title-main-bold;
+        color: $color-gray-dark;
+
+        &-highlighted {
+          @include title-main-bold;
+          color: $color-second;
+        }
+      }
     }
   }
 
