@@ -101,6 +101,8 @@ import {
       width: 100%;
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
 
       @include mobile {
         max-width: inherit;

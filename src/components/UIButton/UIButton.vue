@@ -70,6 +70,7 @@ defineProps<UIButtonTypes>();
     @include text-main-large-medium;
 
     @include mobile {
+      padding: 10px 33px;
       @include text-main-medium;
     }
   }
