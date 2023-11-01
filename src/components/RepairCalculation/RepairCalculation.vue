@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { RepairCalculation } from '@/components/RepairCalculation/RepairCalculation.types';
 import { useServicesAllStore } from '@/store/servicesAll';
-import type {changedServicesAllItemChild} from '@/store/servicesAll/servicesAll.types';
+import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
 
 const props = defineProps<RepairCalculation>();
 

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import {useServicesAllStore} from "@/store/servicesAll";
-import type {changedServicesAllItemChild} from "@/store/servicesAll/servicesAll.types";
-import type {ServiceForm} from "@/components/ServiceForm/ServiceForm.types";
+import { useServicesAllStore } from '@/store/servicesAll';
+import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { ServiceForm } from '@/components/ServiceForm/ServiceForm.types';
 
-defineProps<ServiceForm>()
+defineProps<ServiceForm>();
 
 const { servicesAllActions } = useServicesAllStore();
 
@@ -13,7 +13,6 @@ const onChangeServiceHandler = (service: changedServicesAllItemChild) => {
 
 const name = ref('');
 const phone = ref('');
-
 </script>
 
 <template>
@@ -28,7 +27,13 @@ const phone = ref('');
           <UIInput type="phone" title="Ваш номер телефона" :model-value="phone" />
         </div>
         <div class="service-form__form-service">
-          <UIDropdownWithAccordion title="Услуга" placeholder="Выберите услугу" :items="services" :checked-services="chooseServices" @on-change-service="onChangeServiceHandler"/>
+          <UIDropdownWithAccordion
+            title="Услуга"
+            placeholder="Выберите услугу"
+            :items="services"
+            :checked-services="chooseServices"
+            @on-change-service="onChangeServiceHandler"
+          />
         </div>
         <div class="service-form__form-button">
           <UIButton type="submit" text="Записаться" :is-filled="true" :size-large="true" />

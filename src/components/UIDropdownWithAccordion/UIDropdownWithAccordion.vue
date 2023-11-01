@@ -6,7 +6,7 @@ import type {
   UIDropdownWithAccordionEmits,
 } from '@/components/UIDropdownWithAccordion/UIDropdownWithAccordion.types';
 import type { ServicesAllItemChild, ServicesAllItemParent } from '~/store/servicesAll/servicesAll.types';
-import {setChecked} from "@/utils/setChecked/setChecked";
+import { setChecked } from '@/utils/setChecked/setChecked';
 
 const props = defineProps<UIDropdownWithAccordion>();
 const emit = defineEmits<UIDropdownWithAccordionEmits>();
@@ -21,7 +21,6 @@ const toggleHandler = () => {
 };
 
 useClickOutside(DropdownNodeRef, closeDropdown);
-
 
 /* TODO */
 /* По-хорошему надо написать рекурсию и фильтровать по id, а не по path  */

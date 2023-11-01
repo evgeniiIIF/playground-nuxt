@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { UIAccordion, UIAccordionEmits } from '@/components/UIAccordion/UIAccordion.types';
-import {setChecked} from "@/utils/setChecked/setChecked";
+import { setChecked } from '@/utils/setChecked/setChecked';
 
 const props = defineProps<UIAccordion>();
 const emit = defineEmits<UIAccordionEmits>();
@@ -20,7 +20,8 @@ const allServicesCategory = props.servicesCategory.children
     }
 
     return child;
-  }).flat();
+  })
+  .flat();
 </script>
 
 <template>
