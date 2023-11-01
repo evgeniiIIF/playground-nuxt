@@ -5,4 +5,4 @@ export type UILink = {
   color?: 'black' | 'white' | 'blue';
   fontSizeSmall?: boolean;
   fontGrow?: boolean;
-}
+};

@@ -1,20 +1,20 @@
 <script lang="ts" setup>
-  import { usePartnersStore } from "@/store/partners";
+import { usePartnersStore } from '@/store/partners';
 
-  const { partnersState, partnersEffects } = usePartnersStore();
+const { partnersState, partnersEffects } = usePartnersStore();
 
-  if (partnersState.value) {
-    await partnersEffects.fetchPartners();
-    await partnersEffects.fetchPartnersItems();
-  }
+if (partnersState.value) {
+  await partnersEffects.fetchPartners();
+  await partnersEffects.fetchPartnersItems();
+}
 
-  const partners = partnersState.value;
+const partners = partnersState.value;
 
-  const partnersData = {
-    title: partners.content?.title,
-    subtitle: partners.content?.subtitle,
-    items: partners.items,
-  };
+const partnersData = {
+  title: partners.content?.title,
+  subtitle: partners.content?.subtitle,
+  items: partners.items,
+};
 </script>
 
 <template>

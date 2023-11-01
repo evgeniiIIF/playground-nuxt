@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import {Autoplay, Pagination} from "swiper/modules";
+import { Autoplay, Pagination } from 'swiper/modules';
 
-  import 'swiper/scss';
-  import 'swiper/scss/pagination';
+import 'swiper/scss';
+import 'swiper/scss/pagination';
 </script>
 
 <template>
@@ -28,79 +28,79 @@
 </template>
 
 <style lang="scss">
-  .about-welcome {
-    padding: 79px 0 60px 0;
+.about-welcome {
+  padding: 79px 0 60px 0;
+
+  @include mobile {
+    padding: 58px 0 60px 0;
+  }
+
+  &__title {
+    margin-bottom: 6px;
+    @include title-main-bold;
+    color: $color-blue;
 
     @include mobile {
-      padding: 58px 0 60px 0;
+      @include title-main-xxsmall-bold;
+      margin-bottom: 2px;
     }
+  }
 
-    &__title {
-      margin-bottom: 6px;
-      @include title-main-bold;
-      color: $color-blue;
+  &__subtitle {
+    margin-bottom: 25px;
+    @include text-main;
+    color: $color-gray-dark;
 
-      @include mobile {
-        @include title-main-xxsmall-bold;
-        margin-bottom: 2px;
+    @include mobile {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__slider {
+    &-slide {
+      display: flex;
+
+      &-img {
+        width: 100%;
+        height: 100%;
+        max-height: 520px;
+        object-fit: cover;
+        object-position: bottom;
       }
     }
 
-    &__subtitle {
-      margin-bottom: 25px;
-      @include text-main;
-      color: $color-gray-dark;
+    .swiper {
+      &-pagination {
+        &-bullets {
+          display: flex;
+          justify-content: center;
+          padding: 0 10px;
+          margin-bottom: 23px;
 
-      @include mobile {
-        margin-bottom: 20px;
-      }
-    }
-
-    &__slider {
-      &-slide {
-        display: flex;
-
-        &-img {
-          width: 100%;
-          height: 100%;
-          max-height: 520px;
-          object-fit: cover;
-          object-position: bottom;
-        }
-      }
-
-      .swiper {
-        &-pagination {
-          &-bullets {
-            display: flex;
-            justify-content: center;
-            padding: 0 10px;
-            margin-bottom: 23px;
-
-            .swiper-pagination-bullet {
-              margin: 0;
-            }
-
-            @include mobile {
-              margin-bottom: 0;
-            }
+          .swiper-pagination-bullet {
+            margin: 0;
           }
 
-          &-bullet {
-            width: 40px;
-            height: 2px;
-            border-radius: 0;
+          @include mobile {
+            margin-bottom: 0;
+          }
+        }
 
-            &-active {
-              background-color: $color-second;
-            }
+        &-bullet {
+          width: 40px;
+          height: 2px;
+          border-radius: 0;
 
-            &:not(:last-child) {
-              margin-right: 20px;
-            }
+          &-active {
+            background-color: $color-second;
+          }
+
+          &:not(:last-child) {
+            margin-right: 20px;
           }
         }
       }
     }
   }
+}
 </style>
