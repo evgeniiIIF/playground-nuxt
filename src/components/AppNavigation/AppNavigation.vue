@@ -26,13 +26,19 @@ const navigationClass = computed(() => {
         </p>
       </li>
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" to="/bonus">Бонусная программа</NuxtLink>
+        <NuxtLink class="navigation__item-link" active-class="navigation__item-link--active" to="/bonus"
+          >Бонусная программа</NuxtLink
+        >
       </li>
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" to="/about">О компании</NuxtLink>
+        <NuxtLink class="navigation__item-link" active-class="navigation__item-link--active" to="/about"
+          >О компании</NuxtLink
+        >
       </li>
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" to="/contacts">Контакты</NuxtLink>
+        <NuxtLink class="navigation__item-link" active-class="navigation__item-link--active" to="/contacts"
+          >Контакты</NuxtLink
+        >
       </li>
     </ul>
   </nav>

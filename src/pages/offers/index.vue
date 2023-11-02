@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useOffersStore } from '@/store/offers';
-import { useServicesAllStore } from '~/store/servicesAll';
+import { useServicesAllStore } from '@/store/servicesAll';
 
 const { offersEffects, offersState } = useOffersStore();
 const { servicesAllState, servicesAllEffects } = useServicesAllStore();

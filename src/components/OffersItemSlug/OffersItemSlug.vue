@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useOffersStore } from '@/store/offers';
-import { useServicesAllStore } from '~/store/servicesAll';
+import { useServicesAllStore } from '@/store/servicesAll';
 import { formatDate } from './OffersItemSlug.utils';
 
 const { offersEffects, offersState } = useOffersStore();
