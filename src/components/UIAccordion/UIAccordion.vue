@@ -1,10 +1,27 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { UIAccordionTypes } from '@/components/UIAccordion/UIAccordion.types';
+import type { UIAccordion, UIAccordionEmits } from '@/components/UIAccordion/UIAccordion.types';
+import { setChecked } from '@/utils/setChecked/setChecked';
 
-defineProps<UIAccordionTypes>();
+const props = defineProps<UIAccordion>();
+const emit = defineEmits<UIAccordionEmits>();
 
 const isOpen = ref(false);
+
+/* TODO */
+/* Привязываться к двум уровням вложенности не очень хорошо */
+/* т.к. могут добавить третий. Лучше написать рекурсию */
+/* которая будет вытаскивать все сервисы в один массив */
+/* сколько бы уровней не было */
+const allServicesCategory = props.servicesCategory.children
+  .map((child) => {
+    if (child.children?.length) {
+      return [child, ...child.children];
+    }
+
+    return child;
+  })
+  .flat();
 </script>
 
 <template>
@@ -14,20 +31,13 @@ const isOpen = ref(false);
     </div>
     <div class="accordion__drop">
       <ul class="accordion__list">
-        <li class="accordion__item">
-          <UIService :price="1500" name="Защита кузова" />
-        </li>
-        <li class="accordion__item">
-          <UIService :price="1500" name="Защита кузова" />
-        </li>
-        <li class="accordion__item">
-          <UIService :price="1500" name="Защита кузова" />
-        </li>
-        <li class="accordion__item">
-          <UIService :price="1500" name="Защита кузова" />
-        </li>
-        <li class="accordion__item">
-          <UIService :price="1500" name="Защита кузова" />
+        <li v-for="service in allServicesCategory" :key="service.id" class="accordion__item">
+          <UIService
+            :service="service"
+            :with-checkbox="true"
+            :checked="setChecked(service, checkedServicesCategory)"
+            @on-change="(changeService) => emit('onChangeService', changeService)"
+          />
         </li>
       </ul>
     </div>
@@ -71,7 +81,6 @@ const isOpen = ref(false);
   }
 
   &__list {
-    height: 100%;
     list-style-type: none;
   }
 
@@ -81,6 +90,10 @@ const isOpen = ref(false);
 
     &:not(:last-child) {
       border-bottom: 2px solid #f0f0f5;
+    }
+
+    @include mobile {
+      padding: 0 13px 0 10px;
     }
   }
 
@@ -93,7 +106,7 @@ const isOpen = ref(false);
       }
 
       &__drop {
-        max-height: 550px;
+        max-height: inherit;
       }
     }
   }

@@ -2,21 +2,31 @@
 import type { UIServiceEmits, UIServiceTypes } from '@/components/UIService/UIService.types';
 
 defineProps<UIServiceTypes>();
-
 const emit = defineEmits<UIServiceEmits>();
 </script>
 
 <template>
-  <div class="service">
-    <label class="service__label">
-      <input class="service__input" type="checkbox" :checked="checked" @input="emit('onChecked', $event, name)" />
-      <span class="service__name">{{ name }}</span>
+  <div class="service" :class="{ 'service--with-checkbox': withCheckbox }">
+    <label v-if="withCheckbox" class="service__label">
+      <input
+        class="service__input"
+        type="checkbox"
+        :checked="checked"
+        @input="emit('onChange', { ...service, checked: !checked })"
+      />
+      <span class="service__name">{{ service.title }}</span>
     </label>
+    <p v-else class="service__name">{{ service.title }}</p>
     <div class="service__controls">
       <span class="service__price" :class="{ 'service__price--hidden-on-mobile': priceIsHiddenOnMobile }"
-        >{{ price }} ₽</span
+        >{{ service.price }}&nbsp;₽</span
       >
-      <button v-if="withCrossButton" type="button" class="service__button" @click="emit('onRemove', name)">
+      <button
+        v-if="withCrossButton"
+        type="button"
+        class="service__button"
+        @click="emit('onRemove', { ...service, checked: false })"
+      >
         <IcCross :font-controlled="false" :filled="true" />
       </button>
     </div>
@@ -35,15 +45,34 @@ const emit = defineEmits<UIServiceEmits>();
     cursor: pointer;
   }
 
-  &__input {
-    position: absolute;
-    outline: none;
-    appearance: none;
+  &--with-checkbox {
+    .service {
+      &__input {
+        position: absolute;
+        outline: none;
+        appearance: none;
 
-    &:checked + .service {
+        &:checked + .service {
+          &__name {
+            &::before {
+              background: url('@/assets/icons/checkbox-checked.svg') no-repeat center;
+            }
+          }
+        }
+      }
+
       &__name {
+        margin-left: 34px;
+
         &::before {
-          background: url('@/assets/icons/checkbox-checked.svg') no-repeat center;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          width: 24px;
+          height: 24px;
+          content: '';
+          background: url('@/assets/icons/checkbox.svg');
         }
       }
     }
@@ -51,23 +80,12 @@ const emit = defineEmits<UIServiceEmits>();
 
   &__name {
     display: inline-block;
-    margin-left: 34px;
 
     @include text-main-grow;
     color: $color-main;
 
     @include mobile {
       @include text-main-small-grow;
-    }
-
-    &::before {
-      position: absolute;
-      top: -2px;
-      left: 0;
-      width: 24px;
-      height: 24px;
-      content: '';
-      background: url('@/assets/icons/checkbox.svg');
     }
   }
 

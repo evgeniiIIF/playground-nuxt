@@ -1,16 +1,34 @@
 <script lang="ts" setup>
-const mockedCarsData = ['BMW', 'Audi', 'Acura', 'Nissan', 'Tyouta', 'Opel'];
-const mockedCardModelsData = ['100', '200', '300', 'rs7', 'rs8', 'x6', 'm8', 'skyline'];
-const mockedServicesData = [
-  { name: 'Замена свечей зажигания', price: 14000 },
-  { name: 'Замена масляного фильтра', price: 2400 },
-  { name: 'Замена масла в двигателе', price: 400 },
-  { name: 'Диагностика подвески', price: 900 },
-  { name: 'Диагностика двигателя', price: 1200 },
-  { name: 'Диагностика топливной', price: 2100 },
-  { name: 'Диагностика ходовой', price: 3500 },
-  { name: 'Компьютерная диагностика', price: 2200 },
-];
+import type { RepairCalculation } from '@/components/RepairCalculation/RepairCalculation.types';
+import { useServicesAllStore } from '@/store/servicesAll';
+import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+
+const props = defineProps<RepairCalculation>();
+
+const { servicesAllActions } = useServicesAllStore();
+
+const carsBrands = Object.keys(props.cars);
+const carsBrandsInput = ref(carsBrands[0]);
+const carsModels = ref(props.cars[carsBrandsInput.value]);
+const carsModelsInput = ref(carsModels.value[0]);
+
+const carsBrandsOnSelectItemHandler = (value: string) => {
+  carsBrandsInput.value = value;
+  carsModels.value = props.cars[value];
+  carsModelsInput.value = carsModels.value[0];
+};
+
+const carsModelsOnSelectItemHandler = (value: string) => {
+  carsModelsInput.value = value;
+};
+
+const onChangeServiceHandler = (service: changedServicesAllItemChild) => {
+  servicesAllActions.changeChooseService(service);
+};
+
+const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
+  servicesAllActions.changeChooseService(service);
+};
 </script>
 
 <template>
@@ -21,22 +39,35 @@ const mockedServicesData = [
       <div class="repair-calculation__content">
         <div class="repair-calculation__selects">
           <div class="repair-calculation__car-brand">
-            <UIDropdown :title="'Марка'" :placeholder="'Выберите марку'" :items="mockedCarsData" />
+            <UIDropdown
+              :title="'Марка'"
+              :placeholder="'Выберите марку'"
+              :items="carsBrands"
+              :value="carsBrandsInput"
+              @on-select-item="carsBrandsOnSelectItemHandler($event)"
+            />
           </div>
           <div class="repair-calculation__car-model">
-            <UIDropdown :title="'Модель'" :placeholder="'Выберите модель'" :items="mockedCardModelsData" />
+            <UIDropdown
+              :title="'Модель'"
+              :placeholder="'Выберите модель'"
+              :items="carsModels"
+              :value="carsModelsInput"
+              @on-select-item="carsModelsOnSelectItemHandler($event)"
+            />
           </div>
           <div class="repair-calculation__services">
-            <UIDropdown
+            <UIDropdownWithAccordion
               :title="'Услуга'"
               :placeholder="'Выберите услуги'"
-              :with-accordion="true"
-              :items="mockedServicesData"
+              :items="services"
+              :checked-services="chooseServices"
+              @on-change-service="onChangeServiceHandler"
             />
           </div>
         </div>
         <div class="repair-calculation__services-result">
-          <UIServices :items="mockedServicesData" />
+          <UIServices :services="chooseServices" @on-remove-service="onRemoveServiceHandler" />
         </div>
       </div>
     </AppContainer>

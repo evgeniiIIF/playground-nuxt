@@ -4,12 +4,14 @@ import type {
   changedServicesAllItemChild,
 } from '@/store/servicesAll/servicesAll.types';
 
-export type UIAccordion = {
+export type UIDropdownWithAccordion = {
   title: string;
-  servicesCategory: ServicesAllItemParent;
-  checkedServicesCategory?: ServicesAllItemChild[];
+  items: ServicesAllItemParent[];
+  checkedServices?: ServicesAllItemChild[];
+  value?: string;
+  placeholder?: string;
 };
 
-export interface UIAccordionEmits {
+export interface UIDropdownWithAccordionEmits {
   (event: 'onChangeService', service: changedServicesAllItemChild): void;
 }

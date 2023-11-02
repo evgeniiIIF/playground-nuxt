@@ -2,10 +2,11 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
 import { servicesAllHttp } from '@/api/http';
-import type { ServicesAllItemParent, ServicesAllState } from './servicesAll.types';
+import type { ServicesAllItemParent, ServicesAllState, changedServicesAllItemChild } from './servicesAll.types';
 
 const DEFAULT_STATE: ServicesAllState = {
   servicesAllItems: [],
+  chooseServices: [],
 };
 
 export const servicesAllStore = defineStore('servicesAllStore', () => {
@@ -25,9 +26,19 @@ export const servicesAllStore = defineStore('servicesAllStore', () => {
     }
   };
 
+  const changeChooseService = (service: changedServicesAllItemChild) => {
+    if (service.checked) {
+      state.value.chooseServices.push(service);
+    } else {
+      state.value.chooseServices = state.value.chooseServices.filter((currService) => currService.id !== service.id);
+    }
+  };
+
   return {
     state,
-    actions: {},
+    actions: {
+      changeChooseService,
+    },
     effects: {
       fetchServicesAll,
     },

@@ -1,5 +1,9 @@
-import type { UIServiceTypes } from '@/components/UIService/UIService.types';
+import type { ServicesAllItemChild, changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
 
-export type UIServicesTypes = {
-  items: UIServiceTypes[];
+export type UIServices = {
+  services: ServicesAllItemChild[];
 };
+
+export interface UIServicesEmits {
+  (event: 'onRemoveService', service: changedServicesAllItemChild): void;
+}

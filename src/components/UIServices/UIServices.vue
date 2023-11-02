@@ -1,31 +1,11 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import type { UIServicesTypes } from '@/components/UIServices/UIServices.types';
+import { computed } from 'vue';
+import type { UIServices, UIServicesEmits } from '@/components/UIServices/UIServices.types';
 
-const props = defineProps<UIServicesTypes>();
+const props = defineProps<UIServices>();
+const emit = defineEmits<UIServicesEmits>();
 
-const changedItems = ref(
-  props.items.map((item) => {
-    return { ...item, checked: true };
-  }),
-);
-
-const totalCost = computed(() =>
-  changedItems.value.reduce((acc, item) => {
-    if (!item.checked) return acc;
-
-    return acc + item.price;
-  }, 0),
-);
-
-const handleChecked = (event: Event, text: string): void => {
-  if (!(event.target instanceof HTMLInputElement)) return;
-  changedItems.value.find((item) => item.name === text)!.checked = event.target.checked;
-};
-
-const handleRemove = (text: string): void => {
-  changedItems.value = changedItems.value.filter((item) => item.name !== text);
-};
+const totalCost = computed(() => props.services.reduce((acc, service) => acc + service.price, 0));
 </script>
 
 <template>
@@ -33,19 +13,20 @@ const handleRemove = (text: string): void => {
     <p class="services__title">Услуга</p>
     <div class="services__content">
       <div class="services__body">
-        <ul class="services__list">
-          <li v-for="{ name, price } in changedItems" :key="name" class="services__item">
+        <ul v-if="services.length" class="services__list">
+          <li v-for="service in services" :key="service.id" class="services__item">
             <UIService
-              :name="name"
-              :price="price"
+              :service="service"
               :with-cross-button="true"
-              :checked="true"
               :price-is-hidden-on-mobile="true"
-              @on-checked="handleChecked"
-              @on-remove="handleRemove"
+              @on-remove="(removedService) => emit('onRemoveService', removedService)"
             />
           </li>
         </ul>
+        <div v-else class="services__body-empty">
+          <span class="services__body-empty-text">Для расчета стоимости выберите</span>
+          <span class="services__body-empty-text-highlighted">авто, модель и услуги</span>
+        </div>
       </div>
       <div class="services__footer">
         <div class="services__cost">
@@ -80,7 +61,7 @@ const handleRemove = (text: string): void => {
   }
 
   &__body {
-    max-height: 250px;
+    height: 250px;
     padding: 0 14px 0 20px;
     overflow-y: auto;
 
@@ -95,6 +76,23 @@ const handleRemove = (text: string): void => {
 
     &::-webkit-scrollbar-track {
       background-color: #f0f2f2;
+    }
+
+    &-empty {
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &-text {
+        @include title-main-bold;
+        color: $color-gray-dark;
+
+        &-highlighted {
+          @include title-main-bold;
+          color: $color-second;
+        }
+      }
     }
   }
 

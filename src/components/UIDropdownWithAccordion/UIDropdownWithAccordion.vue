@@ -1,18 +1,19 @@
 <script lang="ts" setup>
-import type { UIDropdownEmits, UIDropdownTypes } from '@/components/UIDropdown/UIDropdown.types';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useClickOutside } from '@/composables/useClickOutside';
+import type {
+  UIDropdownWithAccordion,
+  UIDropdownWithAccordionEmits,
+} from '@/components/UIDropdownWithAccordion/UIDropdownWithAccordion.types';
+import type { ServicesAllItemChild, ServicesAllItemParent } from '~/store/servicesAll/servicesAll.types';
+import { setChecked } from '@/utils/setChecked/setChecked';
 
-const props = defineProps<UIDropdownTypes>();
-const emit = defineEmits<UIDropdownEmits>();
+const props = defineProps<UIDropdownWithAccordion>();
+const emit = defineEmits<UIDropdownWithAccordionEmits>();
 
 const [isOpenDropdown, , closeDropdown, toggleDropdown] = useBooleanState(false);
 const DropdownNodeRef = ref<HTMLDivElement | null>(null);
 const searchValue = ref('');
-
-const filteredItems = computed(() =>
-  props.items.filter((item) => item.toLowerCase().includes(searchValue.value.toLowerCase())),
-);
 
 const toggleHandler = () => {
   if (props.items.length === 0) return;
@@ -21,11 +22,40 @@ const toggleHandler = () => {
 
 useClickOutside(DropdownNodeRef, closeDropdown);
 
-const handleDropdownItemClick = (item: string) => {
-  searchValue.value = '';
-  closeDropdown();
+/* TODO */
+/* По-хорошему надо написать рекурсию и фильтровать по id, а не по path  */
+const checkedServicesCategory = (category: ServicesAllItemParent, checkedServices?: ServicesAllItemChild[]) => {
+  return checkedServices?.filter((service) => service.full_path.split('>')[0] === category.full_path);
+};
 
-  return item;
+/* TODO */
+/* Привязываться к двум уровням вложенности не очень хорошо */
+/* т.к. могут добавить третий. Лучше написать рекурсию */
+/* которая будет вытаскивать все сервисы в один массив */
+/* сколько бы уровней не было */
+
+const allServices = props.items
+  .map((item) => {
+    const parentChildren = item.children;
+
+    return parentChildren
+      .map((child) => {
+        if (child.children?.length) {
+          return [child, ...child.children];
+        }
+
+        return child;
+      })
+      .flat();
+  })
+  .flat();
+
+const filteredServices = computed(() => {
+  return allServices.filter((service) => service.title.toLowerCase().includes(searchValue.value.toLowerCase()));
+});
+
+const setValue = (checkedServices?: ServicesAllItemChild[]) => {
+  return checkedServices?.length ? `Выбрано ${checkedServices.length} услуг` : '';
 };
 </script>
 
@@ -38,9 +68,9 @@ const handleDropdownItemClick = (item: string) => {
           class="dropdown__input"
           type="text"
           :placeholder="placeholder"
-          :value="value"
-          :disabled="props.items.length === 0"
+          :value="setValue(checkedServices)"
           readOnly
+          :disabled="props.items.length === 0"
         />
         <button type="button" class="dropdown__button">
           <span class="dropdown__button-arrow">
@@ -49,19 +79,31 @@ const handleDropdownItemClick = (item: string) => {
         </button>
       </div>
     </label>
-    <div class="dropdown__drop">
+    <div class="dropdown__drop dropdown__drop--with-accordion">
       <div class="dropdown__drop-search">
         <input v-model="searchValue" class="dropdown__drop-search-input" type="text" placeholder="Поиск" />
       </div>
       <ul class="dropdown__drop-list">
-        <li
-          v-for="item in filteredItems"
-          :key="item"
-          class="dropdown__drop-item"
-          @click="emit('onSelectItem', handleDropdownItemClick(item))"
-        >
-          {{ item }}
-        </li>
+        <template v-if="searchValue">
+          <li v-for="service in filteredServices" :key="service.id" class="dropdown__drop-service">
+            <UIService
+              :service="service"
+              :with-checkbox="true"
+              :checked="setChecked(service, checkedServices)"
+              @on-change="(changeService) => emit('onChangeService', changeService)"
+            />
+          </li>
+        </template>
+        <template v-else>
+          <li v-for="item in items" :key="item.id" class="dropdown__drop-accordion">
+            <UIAccordion
+              :title="item.title"
+              :services-category="item"
+              :checked-services-category="checkedServicesCategory(item, checkedServices)"
+              @on-change-service="(changeService) => emit('onChangeService', changeService)"
+            />
+          </li>
+        </template>
       </ul>
     </div>
   </div>
@@ -124,10 +166,6 @@ const handleDropdownItemClick = (item: string) => {
       align-items: center;
       transition: transform 0.2s ease;
       color: $color-second;
-
-      svg {
-        @include fill-svg-and-path($color-second);
-      }
     }
   }
 
@@ -150,6 +188,18 @@ const handleDropdownItemClick = (item: string) => {
       100% {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    &--with-accordion {
+      width: 560px;
+
+      @include tablet {
+        width: 100%;
+      }
+
+      @include mobile {
+        width: 100%;
       }
     }
 
@@ -185,19 +235,12 @@ const handleDropdownItemClick = (item: string) => {
       @include scrollbar-y;
     }
 
-    &-item {
-      padding: 14px 20px;
-
-      font-weight: 500;
-      cursor: pointer;
+    &-service {
+      padding: 0 14px 0 20px;
       background-color: $color-white;
 
       &:not(:last-child) {
-        border-bottom: 1px solid $color-light-gray-lighter;
-      }
-
-      &:hover {
-        background-color: rgba(240, 242, 242);
+        border-bottom: 2px solid $color-light-gray-lighter;
       }
     }
   }

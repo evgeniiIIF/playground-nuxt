@@ -1,12 +1,14 @@
+import type { changedServicesAllItemChild, ServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+
 export type UIServiceTypes = {
-  name: string;
-  price: number;
-  withCrossButton?: boolean;
+  service: ServicesAllItemChild;
   checked?: boolean;
+  withCheckbox?: boolean;
+  withCrossButton?: boolean;
   priceIsHiddenOnMobile?: boolean;
 };
 
 export interface UIServiceEmits {
-  (event: 'onChecked', $event: Event, name: string): void;
-  (event: 'onRemove', name: string): void;
+  (event: 'onChange', service: changedServicesAllItemChild): void;
+  (event: 'onRemove', service: changedServicesAllItemChild): void;
 }

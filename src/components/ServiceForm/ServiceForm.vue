@@ -1,5 +1,15 @@
 <script lang="ts" setup>
-const mockedAccordionData = ['Bmw', 'Audi'];
+import { useServicesAllStore } from '@/store/servicesAll';
+import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { ServiceForm } from '@/components/ServiceForm/ServiceForm.types';
+
+defineProps<ServiceForm>();
+
+const { servicesAllActions } = useServicesAllStore();
+
+const onChangeServiceHandler = (service: changedServicesAllItemChild) => {
+  servicesAllActions.changeChooseService(service);
+};
 
 const name = ref('');
 const phone = ref('');
@@ -9,7 +19,7 @@ const phone = ref('');
   <section class="service-form">
     <AppContainer>
       <h2 class="service-form__title">Записаться на сервис</h2>
-      <form class="service-form__form" @click="$event.preventDefault()">
+      <form class="service-form__form">
         <div class="service-form__form-name">
           <UIInput type="text" title="Ваше имя" placeholder="Ваше имя" :model-value="name" />
         </div>
@@ -17,7 +27,13 @@ const phone = ref('');
           <UIInput type="phone" title="Ваш номер телефона" :model-value="phone" />
         </div>
         <div class="service-form__form-service">
-          <UIDropdown title="Услуга" placeholder="Выберите услугу" :items="mockedAccordionData" />
+          <UIDropdownWithAccordion
+            title="Услуга"
+            placeholder="Выберите услугу"
+            :items="services"
+            :checked-services="chooseServices"
+            @on-change-service="onChangeServiceHandler"
+          />
         </div>
         <div class="service-form__form-button">
           <UIButton type="submit" text="Записаться" :is-filled="true" :size-large="true" />

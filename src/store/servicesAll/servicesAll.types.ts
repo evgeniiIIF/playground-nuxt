@@ -40,10 +40,15 @@ export interface ServicesAllItemParent {
   children: ServicesAllItemChild[];
 }
 
+export interface changedServicesAllItemChild extends ServicesAllItemChild {
+  checked: boolean;
+}
+
 export interface ServicesAllItemsData {
   data: ServicesAllItemParent[];
 }
 
 export interface ServicesAllState {
   servicesAllItems: ServicesAllItemParent[];
+  chooseServices: ServicesAllItemChild[];
 }
