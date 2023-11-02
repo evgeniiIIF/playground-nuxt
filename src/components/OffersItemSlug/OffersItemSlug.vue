@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { useOffersStore } from '@/store/offers';
+import { useServicesAllStore } from '@/store/servicesAll';
 import { formatDate } from './OffersItemSlug.utils';
 
 const { offersEffects, offersState } = useOffersStore();
+const { servicesAllEffects, servicesAllState } = useServicesAllStore();
 
+await servicesAllEffects.fetchServicesAll();
+
+const services = servicesAllState.value.servicesAllItems;
+const chooseServices = ref(servicesAllState.value.chooseServices);
 const { slug } = useRoute().params;
 
 await offersEffects.fetchOffersItems(slug as string);
@@ -60,7 +66,7 @@ console.log(offersState.value.offersItems);
       </div>
     </div>
     <div class="offers-item-slug__form">
-      <ServiceForm />
+      <ServiceForm :services="services" :choose-services="chooseServices" />
     </div>
     <div class="offers-item-slug__modal">
       <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
