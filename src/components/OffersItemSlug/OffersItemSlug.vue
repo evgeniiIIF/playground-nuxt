@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useOffersStore } from '@/store/offers';
+import { useServicesAllStore } from '~/store/servicesAll';
 import { formatDate } from './OffersItemSlug.utils';
-import {useServicesAllStore} from "~/store/servicesAll";
 
 const { offersEffects, offersState } = useOffersStore();
 const { servicesAllState, servicesAllEffects } = useServicesAllStore();
@@ -22,12 +22,12 @@ const anotherOffersItems = computed(() =>
   offersState.value.offersItems.filter((item) => item.slug !== currentOffersItemSlug.value.slug).slice(0, 3),
 );
 
-const services = servicesAllState.value.servicesAllItems
-const chooseServices = ref(servicesAllState.value.chooseServices)
+const services = servicesAllState.value.servicesAllItems;
+const chooseServices = ref(servicesAllState.value.chooseServices);
 
 watchEffect(() => {
-  chooseServices.value = servicesAllState.value.chooseServices
-})
+  chooseServices.value = servicesAllState.value.chooseServices;
+});
 
 console.log(offersState.value.offersItems);
 </script>
