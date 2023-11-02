@@ -1,10 +1,22 @@
 <script setup lang="ts">
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import Slider from '@vueform/slider';
+import { useServicesAllStore } from '@/store/servicesAll';
 import { BONUS_CARDS } from './bonus.constants';
+
+const { servicesAllEffects, servicesAllState } = useServicesAllStore();
+
+await servicesAllEffects.fetchServicesAll();
 
 const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 const { isMobile } = useMediaSizes();
+
+const services = servicesAllState.value.servicesAllItems;
+const chooseServices = ref(servicesAllState.value.chooseServices);
+
+watchEffect(() => {
+  chooseServices.value = servicesAllState.value.chooseServices;
+});
 
 const bonusSliderPercent = ref(0);
 const howMachSpendCount = computed(() => bonusSliderPercent.value * 1000);
@@ -79,7 +91,7 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
       </div>
     </div>
     <div class="bonus__form">
-      <ServiceForm />
+      <ServiceForm :services="services" :choose-services="chooseServices" />
     </div>
     <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
       <AppCallbackForm title="Получить бонусную карту" />
