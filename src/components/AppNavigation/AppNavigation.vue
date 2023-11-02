@@ -29,7 +29,7 @@ const navigationClass = computed(() => {
         <NuxtLink class="navigation__item-link" to="/#">Бонусная программа</NuxtLink>
       </li>
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" to="/#">О компании</NuxtLink>
+        <NuxtLink class="navigation__item-link" to="/about">О компании</NuxtLink>
       </li>
       <li class="navigation__item">
         <NuxtLink class="navigation__item-link" to="/contacts">Контакты</NuxtLink>
