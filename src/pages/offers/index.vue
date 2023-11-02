@@ -1,14 +1,27 @@
 <script setup lang="ts">
 import { useOffersStore } from '@/store/offers';
+import {useServicesAllStore} from "~/store/servicesAll";
 
 const { offersEffects, offersState } = useOffersStore();
+const { servicesAllState, servicesAllEffects } = useServicesAllStore();
 
 await offersEffects.fetchOffersItems();
+
+if (!servicesAllState.value.servicesAllItems) {
+  await servicesAllEffects.fetchServicesAll();
+}
 
 const countItems: Ref<number> = ref(8);
 const incrementCountItems = () => (countItems.value += 8);
 const offersItems = computed(() => offersState.value.offersItems.slice(0, countItems.value));
 const showButton = computed(() => countItems.value < offersState.value.offersItems.length);
+
+const services = servicesAllState.value.servicesAllItems
+const chooseServices = ref(servicesAllState.value.chooseServices)
+
+watchEffect(() => {
+  chooseServices.value = servicesAllState.value.chooseServices
+})
 </script>
 
 <template>
@@ -33,7 +46,7 @@ const showButton = computed(() => countItems.value < offersState.value.offersIte
       </div>
     </div>
     <div class="offers__form">
-      <ServiceForm />
+      <ServiceForm :services="services" :choose-services="chooseServices" />
     </div>
   </section>
 </template>

@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import { useOffersStore } from '@/store/offers';
 import { formatDate } from './OffersItemSlug.utils';
+import {useServicesAllStore} from "~/store/servicesAll";
 
 const { offersEffects, offersState } = useOffersStore();
+const { servicesAllState, servicesAllEffects } = useServicesAllStore();
 
 const { slug } = useRoute().params;
 
 await offersEffects.fetchOffersItems(slug as string);
+
+if (!servicesAllState.value.servicesAllItems) {
+  await servicesAllEffects.fetchServicesAll();
+}
 
 const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 
@@ -15,6 +21,13 @@ const datePubic = computed(() => formatDate(currentOffersItemSlug.value.created_
 const anotherOffersItems = computed(() =>
   offersState.value.offersItems.filter((item) => item.slug !== currentOffersItemSlug.value.slug).slice(0, 3),
 );
+
+const services = servicesAllState.value.servicesAllItems
+const chooseServices = ref(servicesAllState.value.chooseServices)
+
+watchEffect(() => {
+  chooseServices.value = servicesAllState.value.chooseServices
+})
 
 console.log(offersState.value.offersItems);
 </script>
@@ -60,7 +73,7 @@ console.log(offersState.value.offersItems);
       </div>
     </div>
     <div class="offers-item-slug__form">
-      <ServiceForm />
+      <ServiceForm :services="services" :choose-services="chooseServices" />
     </div>
     <div class="offers-item-slug__modal">
       <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
