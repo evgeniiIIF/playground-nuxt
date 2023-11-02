@@ -14,19 +14,6 @@ watchEffect(() => {
 });
 
 const { isMobile } = useMediaSizes();
-
-const { servicesAllState, servicesAllEffects } = useServicesAllStore();
-
-if (!servicesAllState.value.servicesAllItems) {
-  await servicesAllEffects.fetchServicesAll();
-}
-
-const services = servicesAllState.value.servicesAllItems;
-const chooseServices = ref(servicesAllState.value.chooseServices);
-
-watchEffect(() => {
-  chooseServices.value = servicesAllState.value.chooseServices;
-});
 </script>
 <template>
   <section class="contacts">

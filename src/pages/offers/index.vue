@@ -7,8 +7,6 @@ const { servicesAllState, servicesAllEffects } = useServicesAllStore();
 
 await offersEffects.fetchOffersItems();
 
-const { servicesAllEffects, servicesAllState } = useServicesAllStore();
-
 await servicesAllEffects.fetchServicesAll();
 
 const services = servicesAllState.value.servicesAllItems;
@@ -23,14 +21,6 @@ const countItems: Ref<number> = ref(8);
 const incrementCountItems = () => (countItems.value += 8);
 const offersItems = computed(() => offersState.value.offersItems.slice(0, countItems.value));
 const showButton = computed(() => countItems.value < offersState.value.offersItems.length);
-
-const services = servicesAllState.value.servicesAllItems;
-
-const chooseServices = ref(servicesAllState.value.chooseServices);
-
-watchEffect(() => {
-  chooseServices.value = servicesAllState.value.chooseServices;
-});
 </script>
 
 <template>
