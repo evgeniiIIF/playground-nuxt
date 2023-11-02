@@ -17,6 +17,7 @@ const offersItems = computed(() => offersState.value.offersItems.slice(0, countI
 const showButton = computed(() => countItems.value < offersState.value.offersItems.length);
 
 const services = servicesAllState.value.servicesAllItems;
+
 const chooseServices = ref(servicesAllState.value.chooseServices);
 
 watchEffect(() => {

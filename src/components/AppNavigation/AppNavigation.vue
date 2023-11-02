@@ -18,12 +18,12 @@ const navigationClass = computed(() => {
         >
       </li>
       <li class="navigation__item">
-        <p class="navigation__item-link" to="/#" tabindex="0">
+        <NuxtLink class="navigation__item-link" active-class="navigation__item-link--active" to="/services">
           <span class="navigation__item-link-text">Услуги</span>
           <span class="navigation__item-link-arrow">
             <IcArrowDownNavigation :font-controlled="false" :filled="true" />
           </span>
-        </p>
+        </NuxtLink>
       </li>
       <li class="navigation__item">
         <NuxtLink class="navigation__item-link" active-class="navigation__item-link--active" to="/bonus"
