@@ -1,7 +1,13 @@
+<script setup lang="ts">
+import { useServicesAllStore } from '@/store/servicesAll';
+
+const { servicesAllEffects, servicesAllState } = useServicesAllStore();
+
+await servicesAllEffects.fetchServicesAll();
+
+const services = servicesAllState.value.servicesAllItems;
+console.log(services);
+</script>
 <template>
-  <div>
-    <ServiceSection />
-    <ServiceExamples />
-    <PopularServices />
-  </div>
+  <h1>Services</h1>
 </template>
