@@ -3,12 +3,18 @@ import { useOffersStore } from '@/store/offers';
 import { useServicesAllStore } from '@/store/servicesAll';
 
 const { offersEffects, offersState } = useOffersStore();
+const { servicesAllState, servicesAllEffects } = useServicesAllStore();
 
 await offersEffects.fetchOffersItems();
 
-const { servicesAllEffects, servicesAllState } = useServicesAllStore();
+if (!servicesAllState.value.servicesAllItems) {
+  await servicesAllEffects.fetchServicesAll();
+}
 
-await servicesAllEffects.fetchServicesAll();
+const countItems: Ref<number> = ref(8);
+const incrementCountItems = () => (countItems.value += 8);
+const offersItems = computed(() => offersState.value.offersItems.slice(0, countItems.value));
+const showButton = computed(() => countItems.value < offersState.value.offersItems.length);
 
 const services = servicesAllState.value.servicesAllItems;
 const chooseServices = ref(servicesAllState.value.chooseServices);
@@ -16,11 +22,6 @@ const chooseServices = ref(servicesAllState.value.chooseServices);
 watchEffect(() => {
   chooseServices.value = servicesAllState.value.chooseServices;
 });
-
-const countItems: Ref<number> = ref(8);
-const incrementCountItems = () => (countItems.value += 8);
-const offersItems = computed(() => offersState.value.offersItems.slice(0, countItems.value));
-const showButton = computed(() => countItems.value < offersState.value.offersItems.length);
 </script>
 
 <template>

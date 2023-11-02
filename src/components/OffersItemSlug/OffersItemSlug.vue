@@ -4,15 +4,15 @@ import { useServicesAllStore } from '@/store/servicesAll';
 import { formatDate } from './OffersItemSlug.utils';
 
 const { offersEffects, offersState } = useOffersStore();
-const { servicesAllEffects, servicesAllState } = useServicesAllStore();
+const { servicesAllState, servicesAllEffects } = useServicesAllStore();
 
-await servicesAllEffects.fetchServicesAll();
-
-const services = servicesAllState.value.servicesAllItems;
-const chooseServices = ref(servicesAllState.value.chooseServices);
 const { slug } = useRoute().params;
 
 await offersEffects.fetchOffersItems(slug as string);
+
+if (!servicesAllState.value.servicesAllItems) {
+  await servicesAllEffects.fetchServicesAll();
+}
 
 const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 
@@ -21,6 +21,13 @@ const datePubic = computed(() => formatDate(currentOffersItemSlug.value.created_
 const anotherOffersItems = computed(() =>
   offersState.value.offersItems.filter((item) => item.slug !== currentOffersItemSlug.value.slug).slice(0, 3),
 );
+
+const services = servicesAllState.value.servicesAllItems;
+const chooseServices = ref(servicesAllState.value.chooseServices);
+
+watchEffect(() => {
+  chooseServices.value = servicesAllState.value.chooseServices;
+});
 
 console.log(offersState.value.offersItems);
 </script>
