@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { useServicesAllStore } from '~/store/servicesAll';
 import { useMediaSizes } from '../../composables/useMediaSizes';
-import {useServicesAllStore} from "~/store/servicesAll";
 
 const { isMobile } = useMediaSizes();
 
@@ -55,7 +55,7 @@ watchEffect(() => {
       </div>
     </div>
     <div class="contacts__form">
-      <ServiceForm :services="services" :choose-services="chooseServices"/>
+      <ServiceForm :services="services" :choose-services="chooseServices" />
     </div>
   </section>
 </template>
