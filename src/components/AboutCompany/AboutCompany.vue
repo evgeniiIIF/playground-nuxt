@@ -9,7 +9,7 @@ defineProps<AboutCompany>();
 
 <template>
   <section class="about-company">
-    <AppContainer>
+    <div class="container">
       <div class="about-company__wrapper">
         <div class="about-company__info">
           <h2 class="about-company__title">{{ company.title || '' }}</h2>
@@ -46,7 +46,7 @@ defineProps<AboutCompany>();
           </Swiper>
         </div>
       </div>
-    </AppContainer>
+    </div>
   </section>
 </template>
 

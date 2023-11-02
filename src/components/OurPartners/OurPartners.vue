@@ -5,8 +5,8 @@ defineProps<OurPartners>();
 </script>
 
 <template>
-  <div class="our-partners">
-    <AppContainer>
+  <section class="our-partners">
+    <div class="container">
       <div class="our-partners__wrapper">
         <div class="our-partners__text">
           <h2 class="our-partners__title">{{ partners.title }}</h2>
@@ -20,8 +20,8 @@ defineProps<OurPartners>();
           </ul>
         </div>
       </div>
-    </AppContainer>
-  </div>
+    </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

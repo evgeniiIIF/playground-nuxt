@@ -17,7 +17,7 @@ const phone = ref('');
 
 <template>
   <section class="service-form">
-    <AppContainer>
+    <div class="container">
       <h2 class="service-form__title">Записаться на сервис</h2>
       <form class="service-form__form">
         <div class="service-form__form-name">
@@ -39,7 +39,7 @@ const phone = ref('');
           <UIButton type="submit" text="Записаться" :is-filled="true" :size-large="true" />
         </div>
       </form>
-    </AppContainer>
+    </div>
   </section>
 </template>
 

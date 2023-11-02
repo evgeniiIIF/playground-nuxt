@@ -8,7 +8,7 @@ import {
 
 <template>
   <footer class="footer">
-    <AppContainer>
+    <div class="container">
       <div class="footer__wrapper">
         <div class="footer__body">
           <div class="footer__menu">
@@ -42,7 +42,7 @@ import {
           </ul>
         </div>
       </div>
-    </AppContainer>
+    </div>
   </footer>
 </template>
 
@@ -101,6 +101,8 @@ import {
       width: 100%;
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
 
       @include mobile {
         max-width: inherit;

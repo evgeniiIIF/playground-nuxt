@@ -7,7 +7,7 @@ import 'swiper/scss/pagination';
 
 <template>
   <section class="service-examples">
-    <AppContainer>
+    <div class="container">
       <div class="service-examples__header">
         <h2 class="service-examples__title">Примеры работ</h2>
         <div class="service-examples__slider-navigation">
@@ -54,7 +54,7 @@ import 'swiper/scss/pagination';
           </SwiperSlide>
         </Swiper>
       </div>
-    </AppContainer>
+    </div>
   </section>
 </template>
 

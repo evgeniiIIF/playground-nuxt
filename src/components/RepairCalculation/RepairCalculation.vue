@@ -33,7 +33,7 @@ const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
 
 <template>
   <section class="repair-calculation">
-    <AppContainer>
+    <div class="container">
       <h2 class="repair-calculation__title">Рассчитайте стоимость ремонта</h2>
       <p class="repair-calculation__description">выберите марку, модель и станцию обслуживания</p>
       <div class="repair-calculation__content">
@@ -70,7 +70,7 @@ const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
           <UIServices :services="chooseServices" @on-remove-service="onRemoveServiceHandler" />
         </div>
       </div>
-    </AppContainer>
+    </div>
   </section>
 </template>
 

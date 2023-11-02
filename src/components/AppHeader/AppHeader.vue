@@ -11,7 +11,7 @@ const headerClass = computed(() => {
 
 <template>
   <header class="header" :class="headerClass">
-    <AppContainer>
+    <div class="container">
       <div class="header__wrapper">
         <NuxtLink class="header__logo" to="/">
           <IcLogo v-if="headerColorIsDark" :font-controlled="false" :filled="true" />
@@ -35,7 +35,7 @@ const headerClass = computed(() => {
           </a>
         </div>
       </div>
-    </AppContainer>
+    </div>
   </header>
 </template>
 

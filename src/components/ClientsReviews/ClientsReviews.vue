@@ -10,7 +10,7 @@ const { isMobile } = useMediaSizes();
 
 <template>
   <section class="clients-reviews">
-    <AppContainer>
+    <div class="container">
       <div class-="clients-reviews__wrapper">
         <div class="clients-reviews__header">
           <h2 class="clients-reviews__title">Отзывы</h2>
@@ -171,7 +171,7 @@ const { isMobile } = useMediaSizes();
           </SwiperSlide>
         </Swiper>
       </div>
-    </AppContainer>
+    </div>
   </section>
 </template>
 

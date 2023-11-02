@@ -2,7 +2,7 @@
 
 <template>
   <section class="service-section">
-    <AppContainer>
+    <div class="container">
       <div class="service-section__service-path">
         <NuxtLink class="service-section__service-path-home" to="/">Главная</NuxtLink>
         <span class="service-section__service-path-arrow">
@@ -42,7 +42,7 @@
           <NuxtImg src="/service-1.jpg" fit="contain" loading="lazy" />
         </div>
       </div>
-    </AppContainer>
+    </div>
   </section>
 </template>
 
