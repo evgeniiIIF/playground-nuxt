@@ -19,7 +19,7 @@ defineProps<UIButtonTypes>();
       class="button"
       :class="{
         'button--filled': isFilled,
-        'button-disabled': disabled,
+        'button--disabled': disabled,
         'button--full-width': hasFullWidth,
         'button--size-large': sizeLarge,
       }"

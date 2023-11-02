@@ -47,7 +47,7 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .services {
   &__title {
     margin-left: 10px;

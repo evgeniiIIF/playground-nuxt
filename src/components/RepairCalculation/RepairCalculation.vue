@@ -29,6 +29,8 @@ const onChangeServiceHandler = (service: changedServicesAllItemChild) => {
 const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
   servicesAllActions.changeChooseService(service);
 };
+
+const [isOpenModal, , closeModal] = useBooleanState(true);
 </script>
 
 <template>
@@ -70,6 +72,11 @@ const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
           <UIServices :services="chooseServices" @on-remove-service="onRemoveServiceHandler" />
         </div>
       </div>
+    </div>
+    <div class="repair-calculation__modal">
+      <UIModal position="center" :is-open="isOpenModal" @on-close="closeModal">
+        <AppRequestForm />
+      </UIModal>
     </div>
   </section>
 </template>

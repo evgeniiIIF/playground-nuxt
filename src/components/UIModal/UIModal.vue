@@ -40,8 +40,13 @@ $during: 0.3s;
   width: 100%;
   height: 100%;
   z-index: 10000;
+  padding: 0 16px;
 
   display: flex;
+
+  @include mobile {
+    padding: 0;
+  }
 
   &.fade-in {
     justify-content: center;
@@ -68,9 +73,20 @@ $during: 0.3s;
 
   &__container {
     position: relative;
+    max-width: 1000px;
+    width: 100%;
     height: 100%;
+
     .fade-in & {
       height: auto;
+
+      @include mobile {
+        height: 100%;
+      }
+    }
+
+    @include mobile {
+      max-width: inherit;
     }
   }
 
