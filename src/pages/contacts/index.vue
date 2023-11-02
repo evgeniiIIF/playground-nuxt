@@ -1,6 +1,17 @@
 <script setup lang="ts">
-import { useServicesAllStore } from '~/store/servicesAll';
+import { useServicesAllStore } from '@/store/servicesAll';
 import { useMediaSizes } from '../../composables/useMediaSizes';
+
+const { servicesAllEffects, servicesAllState } = useServicesAllStore();
+
+await servicesAllEffects.fetchServicesAll();
+
+const services = servicesAllState.value.servicesAllItems;
+const chooseServices = ref(servicesAllState.value.chooseServices);
+
+watchEffect(() => {
+  chooseServices.value = servicesAllState.value.chooseServices;
+});
 
 const { isMobile } = useMediaSizes();
 

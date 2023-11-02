@@ -7,9 +7,17 @@ const { servicesAllState, servicesAllEffects } = useServicesAllStore();
 
 await offersEffects.fetchOffersItems();
 
-if (!servicesAllState.value.servicesAllItems) {
-  await servicesAllEffects.fetchServicesAll();
-}
+const { servicesAllEffects, servicesAllState } = useServicesAllStore();
+
+await servicesAllEffects.fetchServicesAll();
+
+const services = servicesAllState.value.servicesAllItems;
+
+const chooseServices = ref(servicesAllState.value.chooseServices);
+
+watchEffect(() => {
+  chooseServices.value = servicesAllState.value.chooseServices;
+});
 
 const countItems: Ref<number> = ref(8);
 const incrementCountItems = () => (countItems.value += 8);
