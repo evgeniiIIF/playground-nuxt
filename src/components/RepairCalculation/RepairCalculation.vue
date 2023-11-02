@@ -15,7 +15,7 @@ const mockedServicesData = [
 
 <template>
   <section class="repair-calculation">
-    <AppContainer>
+    <div class="container">
       <h2 class="repair-calculation__title">Рассчитайте стоимость ремонта</h2>
       <p class="repair-calculation__description">выберите марку, модель и станцию обслуживания</p>
       <div class="repair-calculation__content">
@@ -39,7 +39,7 @@ const mockedServicesData = [
           <UIServices :items="mockedServicesData" />
         </div>
       </div>
-    </AppContainer>
+    </div>
   </section>
 </template>
 

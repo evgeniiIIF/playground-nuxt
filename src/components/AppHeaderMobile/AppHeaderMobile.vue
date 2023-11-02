@@ -11,7 +11,7 @@ const headerClass = computed(() => {
 
 <template>
   <header class="header-mobile" :class="headerClass">
-    <AppContainer>
+    <div class="container">
       <div class="header-mobile__wrapper">
         <div class="header-mobile__col">
           <a
@@ -41,7 +41,7 @@ const headerClass = computed(() => {
           </div>
         </div>
       </div>
-    </AppContainer>
+    </div>
   </header>
 </template>
 

@@ -8,7 +8,7 @@ const isHidden = ref(true);
 
 <template>
   <section class="auto-services" :class="{ 'auto-services--full-height': !isHidden }">
-    <AppContainer>
+    <div class="container">
       <h2 class="auto-services__title">Услуги</h2>
       <div class="auto-services__services">
         <div v-for="service in services" :key="service.id" class="auto-services__services-category">
@@ -25,7 +25,7 @@ const isHidden = ref(true);
           </ul>
         </div>
       </div>
-    </AppContainer>
+    </div>
     <div class="auto-services__hidden-block" :class="{ 'auto-services__hidden-block--without-background': !isHidden }">
       <div class="auto-services__hidden-block-container">
         <div class="auto-services__hidden-block-buttons-desktop">

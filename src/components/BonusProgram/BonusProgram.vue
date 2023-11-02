@@ -6,7 +6,7 @@ defineProps<BonusProgram>();
 
 <template>
   <section class="bonus-program">
-    <AppContainer>
+    <div class="container">
       <div class="bonus-program__wrapper">
         <div class="bonus-program__info">
           <h2 class="bonus-program__title">{{ bonus.title || '' }}</h2>
@@ -20,7 +20,7 @@ defineProps<BonusProgram>();
           <img class="bonus-program__cards-img" src="@/assets/img/bonus-cards.png" alt="bonus-card" />
         </div>
       </div>
-    </AppContainer>
+    </div>
   </section>
 </template>
 

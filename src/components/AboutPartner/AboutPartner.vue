@@ -6,7 +6,7 @@ const { isMobile } = useMediaSizes();
 
 <template>
   <section class="about-partner">
-    <AppContainer>
+    <div class="container">
       <h2 class="about-partner__title">Стать партнером</h2>
       <div class="about-partner__row">
         <p class="about-partner__description">
@@ -23,7 +23,7 @@ const { isMobile } = useMediaSizes();
       <div v-if="isMobile" class="about-partner__button">
         <UIButton text="Стать партнером" :is-filled="true" :size-large="true" />
       </div>
-    </AppContainer>
+    </div>
   </section>
 </template>
 

@@ -7,7 +7,7 @@ import 'swiper/scss/pagination';
 
 <template>
   <section class="about-welcome">
-    <AppContainer>
+    <div class="container">
       <h1 class="about-welcome__title">О компании</h1>
       <p class="about-welcome__subtitle">Сеть автосервисов ABS-autoservice</p>
       <Swiper
@@ -23,7 +23,7 @@ import 'swiper/scss/pagination';
           <NuxtImg src="/about-slide-1.jpeg" :class="'about-welcome__slider-slide-img'" loading="lazy" />
         </SwiperSlide>
       </Swiper>
-    </AppContainer>
+    </div>
   </section>
 </template>
 

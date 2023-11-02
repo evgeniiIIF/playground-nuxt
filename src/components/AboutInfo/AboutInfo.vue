@@ -2,7 +2,7 @@
 
 <template>
   <section class="about-info">
-    <AppContainer>
+    <div class="container">
       <div class="about-info__wrapper">
         <h2 class="about-info__title">ABS-autoservice</h2>
         <p class="about-info__description">
@@ -16,7 +16,7 @@
           <UILink type="NuxtLink" text="перейти в контакты" link="/contacts" />
         </div>
       </div>
-    </AppContainer>
+    </div>
   </section>
 </template>
 <style lang="scss">

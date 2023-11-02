@@ -1,6 +1,8 @@
+<script setup lang="ts"></script>
+
 <template>
   <section class="about-guarantee">
-    <AppContainer>
+    <div class="container">
       <div class="about-guarantee__wrapper">
         <h2 class="about-guarantee__title">Гарантия качества</h2>
         <p class="about-guarantee__description">
@@ -9,10 +11,9 @@
           по&nbsp;обслуживанию или запчастям
         </p>
       </div>
-    </AppContainer>
+    </div>
   </section>
 </template>
-
 <style lang="scss">
 .about-guarantee {
   padding: 40px 0 60px 0;

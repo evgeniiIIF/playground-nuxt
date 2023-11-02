@@ -2,7 +2,7 @@
 
 <template>
   <section class="popular-services">
-    <AppContainer>
+    <div class="container">
       <h2 class="popular-services__title">Популярные услуги</h2>
       <ul class="popular-services__list">
         <li class="popular-services__item">
@@ -50,7 +50,7 @@
           </NuxtLink>
         </li>
       </ul>
-    </AppContainer>
+    </div>
   </section>
 </template>
 <style lang="scss">

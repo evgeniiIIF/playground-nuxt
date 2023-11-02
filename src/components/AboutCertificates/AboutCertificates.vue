@@ -1,6 +1,8 @@
+<script setup lang="ts"></script>
+
 <template>
   <section class="about-certificates">
-    <AppContainer>
+    <div class="container">
       <div class="about-certificates__wrapper">
         <h2 class="about-certificates__title">Сертификаты</h2>
         <p class="about-certificates__subtitle">Аккредитация от мировых производителей</p>
@@ -10,10 +12,9 @@
           </li>
         </ul>
       </div>
-    </AppContainer>
+    </div>
   </section>
 </template>
-
 <style lang="scss">
 .about-certificates {
   position: relative;
