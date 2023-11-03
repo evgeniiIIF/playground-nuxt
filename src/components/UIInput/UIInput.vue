@@ -1,15 +1,8 @@
 <script lang="ts" setup>
 import { vMaska } from 'maska';
-import type { UIInputEmits } from '@/components/UIInput/UIInput.types';
+import type { UIInputEmits, UIInputTypes } from '@/components/UIInput/UIInput.types';
 
-type Props = {
-  title: string;
-  type: 'phone' | 'text';
-  modelValue: string;
-  disabled?: boolean;
-};
-
-defineProps<Props>();
+defineProps<UIInputTypes>();
 defineEmits<UIInputEmits>();
 
 const onInputHandler = (event: Event): string => {
@@ -18,7 +11,7 @@ const onInputHandler = (event: Event): string => {
 </script>
 
 <template>
-  <div class="input" :class="{ 'input--disabled': disabled }">
+  <div class="input" :class="{ 'input--disabled': disabled, 'input--error': errorMessage }">
     <label class="input__label">
       <p class="input__title">{{ title }}</p>
       <input
@@ -42,12 +35,15 @@ const onInputHandler = (event: Event): string => {
         :disabled="disabled"
         @input="$emit('update:modelValue', onInputHandler($event))"
       />
+      <p v-if="errorMessage" class="input__error">{{ errorMessage }}</p>
     </label>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .input {
+  position: relative;
+
   &__title {
     margin-bottom: 4px;
 
@@ -79,6 +75,25 @@ const onInputHandler = (event: Event): string => {
     }
   }
 
+  &__error {
+    position: absolute;
+    bottom: -16px;
+    left: 2px;
+
+    @include text-main-xxsmall;
+    color: red;
+
+    @include tablet {
+      left: inherit;
+      right: 0;
+    }
+
+    @include mobile {
+      left: inherit;
+      right: 0;
+    }
+  }
+
   &:hover {
     .input {
       &__title {
@@ -98,6 +113,18 @@ const onInputHandler = (event: Event): string => {
 
     &__input {
       border: $fields-border;
+    }
+  }
+
+  &--error {
+    .input {
+      &__title {
+        color: red;
+      }
+
+      &__input {
+        border-color: red;
+      }
     }
   }
 }

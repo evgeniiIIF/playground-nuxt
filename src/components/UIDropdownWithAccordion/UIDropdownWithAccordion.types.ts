@@ -10,6 +10,7 @@ export type UIDropdownWithAccordion = {
   checkedServices?: ServicesAllItemChild[];
   value?: string;
   placeholder?: string;
+  errorMessage?: string;
 };
 
 export interface UIDropdownWithAccordionEmits {

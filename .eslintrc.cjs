@@ -39,5 +39,6 @@ module.exports = {
     'vuejs-accessibility/anchor-has-content': 'off',
     'vue/no-v-html': 'off',
     'prefer-destructuring': 'off',
+    'no-useless-return': 'off',
   },
 };

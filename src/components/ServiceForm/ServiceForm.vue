@@ -3,7 +3,7 @@ import { useServicesAllStore } from '@/store/servicesAll';
 import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
 import type { ServiceForm } from '@/components/ServiceForm/ServiceForm.types';
 
-defineProps<ServiceForm>();
+const props = defineProps<ServiceForm>();
 
 const { servicesAllActions } = useServicesAllStore();
 
@@ -13,18 +13,51 @@ const onChangeServiceHandler = (service: changedServicesAllItemChild) => {
 
 const name = ref('');
 const phone = ref('');
+const hasError = ref(false);
+
+const errorNameInput = ref('');
+const errorPhoneInput = ref('');
+const errorDropdown = ref('');
+const sendRequest = () => {
+  errorNameInput.value = '';
+  errorPhoneInput.value = '';
+  errorDropdown.value = '';
+  hasError.value = false;
+
+  if (name.value.trim().length < 2) {
+    errorNameInput.value = 'Имя должно состоять из 2 или больше символов';
+    hasError.value = true;
+  }
+
+  if (name.value.match(/[0-9]/)) {
+    errorNameInput.value = 'Имя не должно содержать цифры';
+    hasError.value = true;
+  }
+
+  if (phone.value.trim().length < 18) {
+    errorPhoneInput.value = 'Заполните поле полностью';
+    hasError.value = true;
+  }
+
+  if (props.chooseServices.length < 1) {
+    errorDropdown.value = 'Выберите 1 или больше услуг';
+    hasError.value = true;
+  }
+
+  if (hasError.value) return;
+};
 </script>
 
 <template>
   <section class="service-form">
     <div class="container">
       <h2 class="service-form__title">Записаться на сервис</h2>
-      <form class="service-form__form">
+      <form class="service-form__form" @submit.prevent="sendRequest">
         <div class="service-form__form-name">
-          <UIInput type="text" title="Ваше имя" placeholder="Ваше имя" :model-value="name" />
+          <UIInput v-model="name" type="text" title="Ваше имя" placeholder="Ваше имя" :error-message="errorNameInput" />
         </div>
         <div class="service-form__form-phone">
-          <UIInput type="phone" title="Ваш номер телефона" :model-value="phone" />
+          <UIInput v-model="phone" type="phone" title="Ваш номер телефона" :error-message="errorPhoneInput" />
         </div>
         <div class="service-form__form-service">
           <UIDropdownWithAccordion
@@ -32,6 +65,7 @@ const phone = ref('');
             placeholder="Выберите услугу"
             :items="services"
             :checked-services="chooseServices"
+            :error-message="errorDropdown"
             @on-change-service="onChangeServiceHandler"
           />
         </div>
@@ -43,7 +77,7 @@ const phone = ref('');
   </section>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .service-form {
   padding: 60px 0 80px 0;
   background-color: $color-light-gray-light;
@@ -87,12 +121,12 @@ const phone = ref('');
 
       @include tablet {
         max-width: inherit;
-        margin-bottom: 6px;
+        margin-bottom: 16px;
       }
 
       @include mobile {
         max-width: inherit;
-        margin-bottom: 6px;
+        margin-bottom: 16px;
       }
     }
 
@@ -102,12 +136,12 @@ const phone = ref('');
 
       @include tablet {
         max-width: inherit;
-        margin-bottom: 6px;
+        margin-bottom: 16px;
       }
 
       @include mobile {
         max-width: inherit;
-        margin-bottom: 6px;
+        margin-bottom: 16px;
       }
     }
 

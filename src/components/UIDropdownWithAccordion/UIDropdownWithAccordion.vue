@@ -60,32 +60,36 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
 </script>
 
 <template>
-  <div ref="DropdownNodeRef" class="dropdown" :class="{ 'dropdown--opened': isOpenDropdown }">
-    <label class="dropdown__label">
-      <p class="dropdown__title">{{ title }}</p>
-      <div class="dropdown__dropdown" @click="toggleHandler">
+  <div
+    ref="DropdownNodeRef"
+    class="dropdown-accordion"
+    :class="{ 'dropdown-accordion--opened': isOpenDropdown, 'dropdown-accordion--error': errorMessage }"
+  >
+    <label class="dropdown-accordion__label">
+      <p class="dropdown-accordion__title">{{ title }}</p>
+      <div class="dropdown-accordion__dropdown" @click="toggleHandler">
         <input
-          class="dropdown__input"
+          class="dropdown-accordion__input"
           type="text"
           :placeholder="placeholder"
           :value="setValue(checkedServices)"
           readOnly
           :disabled="props.items.length === 0"
         />
-        <button type="button" class="dropdown__button">
-          <span class="dropdown__button-arrow">
+        <button type="button" class="dropdown-accordion__button">
+          <span class="dropdown-accordion__button-arrow">
             <IcArrowDown :font-controlled="false" :filled="true" />
           </span>
         </button>
       </div>
     </label>
-    <div class="dropdown__drop dropdown__drop--with-accordion">
-      <div class="dropdown__drop-search">
-        <input v-model="searchValue" class="dropdown__drop-search-input" type="text" placeholder="Поиск" />
+    <div class="dropdown-accordion__drop">
+      <div class="dropdown-accordion__drop-search">
+        <input v-model="searchValue" class="dropdown-accordion__drop-search-input" type="text" placeholder="Поиск" />
       </div>
-      <ul class="dropdown__drop-list">
+      <ul class="dropdown-accordion__drop-list">
         <template v-if="searchValue">
-          <li v-for="service in filteredServices" :key="service.id" class="dropdown__drop-service">
+          <li v-for="service in filteredServices" :key="service.id" class="dropdown-accordion__drop-service">
             <UIService
               :service="service"
               :with-checkbox="true"
@@ -95,7 +99,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
           </li>
         </template>
         <template v-else>
-          <li v-for="item in items" :key="item.id" class="dropdown__drop-accordion">
+          <li v-for="item in items" :key="item.id" class="dropdown-accordion__drop-accordion">
             <UIAccordion
               :title="item.title"
               :services-category="item"
@@ -106,11 +110,12 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
         </template>
       </ul>
     </div>
+    <p v-if="errorMessage" class="dropdown-accordion__error">{{ errorMessage }}</p>
   </div>
 </template>
 
 <style lang="scss">
-.dropdown {
+.dropdown-accordion {
   position: relative;
 
   &__label {
@@ -166,6 +171,10 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
       align-items: center;
       transition: transform 0.2s ease;
       color: $color-second;
+
+      svg {
+        @include fill-svg-and-path($color-second);
+      }
     }
   }
 
@@ -174,7 +183,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
     position: absolute;
     top: 83px;
     left: 0;
-    width: 100%;
+    width: 560px;
     max-height: 330px;
     z-index: 1;
     animation: open 0.2s ease-in-out;
@@ -191,16 +200,12 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
       }
     }
 
-    &--with-accordion {
-      width: 560px;
+    @include tablet {
+      width: 100%;
+    }
 
-      @include tablet {
-        width: 100%;
-      }
-
-      @include mobile {
-        width: 100%;
-      }
+    @include mobile {
+      width: 100%;
     }
 
     &-search {
@@ -245,8 +250,27 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
     }
   }
 
+  &__error {
+    position: absolute;
+    bottom: -16px;
+    left: 2px;
+
+    @include text-main-xxsmall;
+    color: red;
+
+    @include tablet {
+      left: inherit;
+      right: 0;
+    }
+
+    @include mobile {
+      left: inherit;
+      right: 0;
+    }
+  }
+
   &--opened {
-    .dropdown {
+    .dropdown-accordion {
       &__title {
         color: $color-main;
       }
@@ -275,7 +299,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
   }
 
   &:hover {
-    .dropdown {
+    .dropdown-accordion {
       &__title {
         color: $color-gray;
       }
@@ -290,6 +314,22 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
 
       &__button {
         border-color: $color-gray-lighter;
+      }
+    }
+  }
+
+  &--error {
+    .dropdown-accordion {
+      &__title {
+        color: red;
+      }
+
+      &__input {
+        border-color: red;
+      }
+
+      &__button {
+        border-color: red;
       }
     }
   }

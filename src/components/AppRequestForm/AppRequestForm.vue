@@ -7,9 +7,6 @@ import type { AppRequestForm } from '@/components/AppRequestForm/AppRequestForm.
 
 const props = defineProps<AppRequestForm>();
 
-const name = ref('');
-const phone = ref('');
-
 const { smallerThanDesktop } = useMediaSizes();
 const { servicesAllActions } = useServicesAllStore();
 
@@ -18,10 +15,46 @@ const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
 };
 
 const totalCost = computed(() => props.services.reduce((acc, service) => acc + service.price, 0));
+
+const name = ref('');
+const phone = ref('');
+const hasError = ref(false);
+
+const errorNameInput = ref('');
+const errorPhoneInput = ref('');
+const errorServices = ref('');
+const sendRequest = () => {
+  errorNameInput.value = '';
+  errorPhoneInput.value = '';
+  errorServices.value = '';
+  hasError.value = false;
+
+  if (name.value.trim().length < 2) {
+    errorNameInput.value = 'Имя должно состоять из 2 или больше символов';
+    hasError.value = true;
+  }
+
+  if (name.value.match(/[0-9]/)) {
+    errorNameInput.value = 'Имя не должно содержать цифры';
+    hasError.value = true;
+  }
+
+  if (phone.value.trim().length < 18) {
+    errorPhoneInput.value = 'Заполните поле полностью';
+    hasError.value = true;
+  }
+
+  if (props.services.length < 1) {
+    errorServices.value = 'Необходимо выбрать одну или несколько услуг';
+    hasError.value = true;
+  }
+
+  if (hasError.value) return;
+};
 </script>
 
 <template>
-  <form class="request-form">
+  <form class="request-form" @submit.prevent="sendRequest">
     <div class="request-form__header">
       <h4 class="request-form__title">Оставьте заявку</h4>
       <p class="request-form__description">введите ваше имя и номер телефона, а также проверьте ваш заказ</p>
@@ -29,16 +62,16 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
     <div class="request-form__body">
       <div class="request-form__user-info">
         <div class="request-form__user-name">
-          <UIInput type="text" title="Имя" placeholder="Ваше имя" :model-value="name" />
+          <UIInput v-model="name" type="text" title="Имя" placeholder="Ваше имя" :error-message="errorNameInput" />
         </div>
         <div class="request-form__user-phone">
-          <UIInput type="phone" title="Телефон" :model-value="phone" />
+          <UIInput v-model="phone" type="phone" title="Телефон" :error-message="errorPhoneInput" />
         </div>
         <div v-if="!smallerThanDesktop" class="request-form__button">
           <UIButton type="submit" text="Записаться на сервис" :is-filled="true" />
         </div>
       </div>
-      <div class="request-form__services">
+      <div class="request-form__services" :class="{ 'request-form__services--error': errorServices }">
         <div class="request-form__services-header">
           <p class="request-form__services-auto">Автомобиль</p>
           <p class="request-form__services-auto-model">{{ carBrand }} {{ carModel }}</p>
@@ -56,7 +89,9 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
             </li>
           </ul>
           <div v-else class="request-form__services-body-empty">
-            <span class="request-form__services-body-empty-text">Для расчета стоимости выберите услуги</span>
+            <span class="request-form__services-body-empty-text">{{
+              errorServices || 'Для расчета стоимости выберите услуги'
+            }}</span>
           </div>
         </div>
         <div class="request-form__services-footer">
@@ -106,7 +141,7 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
   &__body {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
+    gap: 26px;
 
     @include tablet {
       flex-direction: column;
@@ -132,7 +167,7 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
     }
 
     &-name {
-      margin-bottom: 10px;
+      margin-bottom: 16px;
     }
   }
 
@@ -228,6 +263,26 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
 
       @include mobile {
         @include text-main-xxsmall;
+      }
+    }
+
+    &--error {
+      border-color: red;
+
+      .request-form {
+        &__services {
+          &-text {
+            color: red;
+          }
+
+          &-body {
+            border-color: red;
+
+            &-empty-text {
+              color: red;
+            }
+          }
+        }
       }
     }
   }
