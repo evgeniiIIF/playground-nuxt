@@ -2,10 +2,10 @@
 import { useServicesAllStore } from '@/store/servicesAll';
 import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
 import { useMediaSizes } from '@/composables/useMediaSizes';
-import {computed} from "vue";
-import type {AppRequestForm} from "@/components/AppRequestForm/AppRequestForm.types";
+import { computed } from 'vue';
+import type { AppRequestForm } from '@/components/AppRequestForm/AppRequestForm.types';
 
-const props = defineProps<AppRequestForm>()
+const props = defineProps<AppRequestForm>();
 
 const name = ref('');
 const phone = ref('');
@@ -47,7 +47,12 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
         <div class="request-form__services-body">
           <ul v-if="services.length" class="request-form__services-list">
             <li v-for="service in services" :key="service.id" class="request-form__services-item">
-              <UIService :service="service" :with-cross-button="true" :with-small-padding="true" @on-remove="onRemoveServiceHandler" />
+              <UIService
+                :service="service"
+                :with-cross-button="true"
+                :with-small-padding="true"
+                @on-remove="onRemoveServiceHandler"
+              />
             </li>
           </ul>
           <div v-else class="request-form__services-body-empty">
