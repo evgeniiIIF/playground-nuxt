@@ -27,7 +27,7 @@ const children = computed(() => {
         <ServicesAllNavItemL3 :item="servicesItemL3" />
       </li>
       <div v-if="hasButton" class="services-all-item-l2__button show-button">
-        <button @click="toggleList" class="show-button__button" type="button">
+        <button class="show-button__button" type="button" @click="toggleList">
           <div class="show-button__text">{{ isOpenList ? 'Свернуть' : 'Ещё' }}</div>
           <div class="show-button__arrow">
             <IcArrowDown
