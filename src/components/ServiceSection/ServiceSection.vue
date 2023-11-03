@@ -2,6 +2,8 @@
 import type { ServiceSection } from '@/components/ServiceSection/ServiceSection.types';
 
 defineProps<ServiceSection>();
+
+const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 </script>
 
 <template>
@@ -40,7 +42,7 @@ defineProps<ServiceSection>();
             <span class="service-section__service-bonus-program-text">Услуга участвует в бонусной программе</span>
           </div>
           <div class="service-section__service-button">
-            <UIButton text="Записаться" :is-filled="true" :size-large="true" />
+            <UIButton text="Записаться" :is-filled="true" :size-large="true" :on-click="openModal" />
           </div>
         </div>
         <div class="service-section__service-image">
@@ -48,6 +50,9 @@ defineProps<ServiceSection>();
         </div>
       </div>
     </div>
+    <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
+      <AppCallbackForm title="Обратный звонок" />
+    </UIModal>
   </section>
 </template>
 

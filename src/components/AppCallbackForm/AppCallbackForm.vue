@@ -1,22 +1,49 @@
 <script lang="ts" setup>
+defineProps<{ title: string }>();
+
 const name = ref('');
 const phone = ref('');
-defineProps<{ title: string }>();
+const hasError = ref(false);
+
+const errorNameInput = ref('');
+const errorPhoneInput = ref('');
+const sendRequest = () => {
+  errorNameInput.value = '';
+  errorPhoneInput.value = '';
+  hasError.value = false;
+
+  if (name.value.trim().length < 2) {
+    errorNameInput.value = 'Имя должно состоять из 2 или больше символов';
+    hasError.value = true;
+  }
+
+  if (/^[0-9]+$/.test(name.value)) {
+    errorNameInput.value = 'Имя не должно содержать цифры';
+    hasError.value = true;
+  }
+
+  if (phone.value.trim().length < 18) {
+    errorPhoneInput.value = 'Заполните поле полностью';
+    hasError.value = true;
+  }
+
+  if (hasError.value) return;
+};
 </script>
 
 <template>
-  <form class="callback-form">
+  <form class="callback-form" @submit.prevent="sendRequest">
     <h6 class="callback-form__title">{{ title }}</h6>
     <div class="callback-form__inputs">
       <div class="callback-form__input">
-        <UIInput type="text" title="Ваше имя" placeholder="Ваше имя" :model-value="name" />
+        <UIInput v-model="name" type="text" title="Ваше имя" placeholder="Ваше имя" :error-message="errorNameInput" />
       </div>
       <div class="callback-form__input">
-        <UIInput type="phone" title="Ваш номер телефона" :model-value="phone" />
+        <UIInput v-model="phone" type="phone" title="Ваш номер телефона" :error-message="errorPhoneInput" />
       </div>
     </div>
     <div class="callback-form__button">
-      <UIButton text="Отправить" :is-filled="true" :has-full-width="true" />
+      <UIButton type="submit" text="Отправить" :is-filled="true" :has-full-width="true" />
     </div>
     <div class="callback-form__policy">* Отправляя форму, Вы соглашаетесь с политикой конфиденциальности</div>
   </form>
@@ -43,6 +70,7 @@ defineProps<{ title: string }>();
   }
   &__inputs {
     display: flex;
+    gap: 20px;
     margin-bottom: 24px;
     @include mr(24px);
 

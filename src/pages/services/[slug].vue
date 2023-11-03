@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { useServiceStore } from '~/store/service';
-import { useServicesAllStore } from '~/store/servicesAll';
+import { useServiceStore } from '@/store/service';
+import { useServicesAllStore } from '@/store/servicesAll';
 
 const { slug } = useRoute().params;
 
@@ -24,8 +24,6 @@ const chooseServices = ref(servicesAllState.value.chooseServices);
 watchEffect(() => {
   chooseServices.value = servicesAllState.value.chooseServices;
 });
-
-console.log(serviceState.value);
 </script>
 
 <template>

@@ -1,8 +1,9 @@
 export type UIInputTypes = {
   title: string;
-  modelValue: string;
-  disabled: boolean;
   type: 'phone' | 'text';
+  modelValue: string;
+  errorMessage?: string;
+  disabled?: boolean;
 };
 
 export type UIInputEmits = (event: 'update:modelValue', value: string) => string;
