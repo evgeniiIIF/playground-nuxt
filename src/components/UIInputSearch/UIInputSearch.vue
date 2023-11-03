@@ -11,7 +11,7 @@
   position: relative;
 
   &__input {
-    padding: 15px 50px 20px 20px;
+    padding: 15px 50px 15px 20px;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
