@@ -29,7 +29,7 @@ const sendRequest = () => {
     hasError.value = true;
   }
 
-  if (/^[0-9]+$/.test(name.value)) {
+  if (name.value.match(/[0-9]/)) {
     errorNameInput.value = 'Имя не должно содержать цифры';
     hasError.value = true;
   }
