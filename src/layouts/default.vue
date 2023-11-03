@@ -7,7 +7,7 @@
     <main>
       <slot />
     </main>
-    <AppFooter />
+    <AppFooter v-if="!$route.path.startsWith('/services')" />
   </div>
 </template>
 
