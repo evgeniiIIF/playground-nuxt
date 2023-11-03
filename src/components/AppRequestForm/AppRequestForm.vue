@@ -2,23 +2,22 @@
 import { useServicesAllStore } from '@/store/servicesAll';
 import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
 import { useMediaSizes } from '@/composables/useMediaSizes';
+import {computed} from "vue";
+import type {AppRequestForm} from "@/components/AppRequestForm/AppRequestForm.types";
+
+const props = defineProps<AppRequestForm>()
 
 const name = ref('');
 const phone = ref('');
 
 const { smallerThanDesktop } = useMediaSizes();
-
-const { servicesAllState, servicesAllActions } = useServicesAllStore();
-
-const chooseServices = ref(servicesAllState.value.chooseServices);
-
-watchEffect(() => {
-  chooseServices.value = servicesAllState.value.chooseServices;
-});
+const { servicesAllActions } = useServicesAllStore();
 
 const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
   servicesAllActions.changeChooseService(service);
 };
+
+const totalCost = computed(() => props.services.reduce((acc, service) => acc + service.price, 0));
 </script>
 
 <template>
@@ -42,19 +41,22 @@ const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
       <div class="request-form__services">
         <div class="request-form__services-header">
           <p class="request-form__services-auto">Автомобиль</p>
-          <p class="request-form__services-auto-model">Acura CL</p>
+          <p class="request-form__services-auto-model">{{ carBrand }} {{ carModel }}</p>
           <p class="request-form__services-text">Выбранные услуги</p>
         </div>
         <div class="request-form__services-body">
-          <ul class="request-form__services-list">
-            <li v-for="service in chooseServices" :key="service.id" class="request-form__services-item">
-              <UIService :service="service" :with-cross-button="true" @on-remove="onRemoveServiceHandler" />
+          <ul v-if="services.length" class="request-form__services-list">
+            <li v-for="service in services" :key="service.id" class="request-form__services-item">
+              <UIService :service="service" :with-cross-button="true" :with-small-padding="true" @on-remove="onRemoveServiceHandler" />
             </li>
           </ul>
+          <div v-else class="request-form__services-body-empty">
+            <span class="request-form__services-body-empty-text">Для расчета стоимости выберите услуги</span>
+          </div>
         </div>
         <div class="request-form__services-footer">
           <p class="request-form__services-cost-text">Итого:</p>
-          <p class="request-form__services-cost-total">38 500 Р</p>
+          <p class="request-form__services-cost-total">{{ totalCost }} ₽</p>
           <p class="request-form__services-footnote">
             * Указана примерная стоимость. Финальный расчет стоимости запчастей и работ рассчитывается индивидуально
           </p>
@@ -167,13 +169,34 @@ const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
     }
 
     &-body {
+      height: 200px;
       padding: 0 20px;
       border-top: $fields-border;
       border-bottom: $fields-border;
+      overflow-y: auto;
+
+      @include scrollbar-y;
+
+      &-empty {
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        &-text {
+          @include title-main-xxsmall-bold;
+          color: $color-gray-dark;
+        }
+      }
     }
 
     &-list {
       list-style-type: none;
+    }
+
+    &-item {
+      &:not(:last-child) {
+        border-bottom: 2px solid $color-light-gray-lighter;
+      }
     }
 
     &-footer {

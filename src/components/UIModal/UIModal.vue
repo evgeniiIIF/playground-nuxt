@@ -44,6 +44,10 @@ $during: 0.3s;
 
   display: flex;
 
+  @include tablet {
+    padding: 0;
+  }
+
   @include mobile {
     padding: 0;
   }
@@ -80,9 +84,17 @@ $during: 0.3s;
     .fade-in & {
       height: auto;
 
+      @include tablet {
+        height: 100%;
+      }
+
       @include mobile {
         height: 100%;
       }
+    }
+
+    @include tablet {
+      max-width: inherit;
     }
 
     @include mobile {
@@ -103,9 +115,6 @@ $during: 0.3s;
     border: none;
     background: transparent;
     cursor: pointer;
-
-    .fade-in & {
-    }
 
     svg {
       @include fill-svg-and-path(#000);

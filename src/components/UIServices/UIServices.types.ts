@@ -2,6 +2,7 @@ import type { ServicesAllItemChild, changedServicesAllItemChild } from '@/store/
 
 export type UIServices = {
   services: ServicesAllItemChild[];
+  onClickButton: () => void;
 };
 
 export interface UIServicesEmits {

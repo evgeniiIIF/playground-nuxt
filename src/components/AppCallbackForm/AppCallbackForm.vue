@@ -27,6 +27,10 @@ defineProps<{ title: string }>();
   padding: 50px 100px 50px 100px;
   background: #fff;
 
+  @include tablet {
+    height: 100%;
+  }
+
   @include mobile {
     padding: 20px 16px;
     height: 100%;

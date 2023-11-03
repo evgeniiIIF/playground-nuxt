@@ -44,6 +44,7 @@ defineProps<UIButtonTypes>();
   cursor: pointer;
   background-color: transparent;
   text-align: center;
+  transition: all 0.3s ease;
 
   &--full-width {
     width: 100%;
