@@ -1,9 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { ServiceSection } from '@/components/ServiceSection/ServiceSection.types';
+
+defineProps<ServiceSection>();
+</script>
 
 <template>
   <section class="service-section">
     <div class="container">
-      <div class="service-section__service-path">
+      <div v-if="false" class="service-section__service-path">
         <NuxtLink class="service-section__service-path-home" to="/">Главная</NuxtLink>
         <span class="service-section__service-path-arrow">
           <IcArrowRight :font-controlled="false" :filled="true" />
@@ -13,22 +17,23 @@
       <div class="service-section__service">
         <div class="service-section__service-info">
           <div class="service-section__service-header">
-            <h1 class="service-section__service-title">Диагностика системы кондиционирования</h1>
+            <h1 class="service-section__service-title">{{ service.title }}</h1>
             <div class="service-section__service-price">
               <span class="service-section__service-price-icon">
                 <IcPriceTag :font-controlled="false" :filled="true" />
               </span>
-              <span class="service-section__service-price-text">от 1400 ₽</span>
+              <span class="service-section__service-price-text">от {{ service.price }} ₽</span>
             </div>
           </div>
           <div class="service-section__service-info-image">
-            <NuxtImg src="/service-1.jpg" fit="contain" loading="lazy" />
+            <NuxtImg
+              :src="service.image_webp ? service.image_webp : service.image_origin"
+              fit="contain"
+              loading="lazy"
+            />
           </div>
-          <p class="service-section__service-description">
-            Кондиционер служит для регулирования температуры, циркуляции и очищения воздуха в салоне автомобиля. Вместе
-            с воздухом в салон автомобиля проникают бактерии, неприятный газ, угарный газ и другие негативные добавки.
-          </p>
-          <div class="service-section__service-bonus-program">
+          <div class="service-section__service-description" v-html="service.full_text || ''"></div>
+          <div v-if="service.is_in_bonus_program" class="service-section__service-bonus-program">
             <span class="service-section__service-bonus-program-icon">
               <IcCard :font-controlled="false" :filled="true" />
             </span>
@@ -39,7 +44,7 @@
           </div>
         </div>
         <div class="service-section__service-image">
-          <NuxtImg src="/service-1.jpg" fit="contain" loading="lazy" />
+          <NuxtImg :src="service.image_webp ? service.image_webp : service.image_origin" fit="contain" loading="lazy" />
         </div>
       </div>
     </div>
@@ -121,7 +126,6 @@
 
       &-image {
         display: none;
-        //width: 100%;
 
         @include tablet {
           display: flex;
@@ -207,19 +211,39 @@
     }
 
     &-description {
-      margin-bottom: 20px;
-
-      @include text-main;
-      color: $color-main;
-
       @include tablet {
         margin-top: 17px;
-        color: $color-blue;
       }
 
       @include mobile {
         margin-top: 17px;
-        color: $color-blue;
+      }
+
+      p {
+        @include text-main;
+        color: $color-main;
+
+        &:not(:last-child) {
+          margin-bottom: 16px;
+        }
+
+        @include tablet {
+          color: $color-blue;
+        }
+
+        @include mobile {
+          color: $color-blue;
+        }
+      }
+
+      ul {
+        margin: 16px 0;
+        padding-left: 30px;
+      }
+
+      li {
+        @include text-main;
+        color: $color-main;
       }
     }
 
@@ -227,7 +251,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      margin-bottom: 30px;
+      margin-top: 20px;
 
       &-icon {
         display: flex;
@@ -243,6 +267,7 @@
 
     &-button {
       max-width: 183px;
+      margin-top: 30px;
 
       @include tablet {
         max-width: inherit;
@@ -255,6 +280,7 @@
 
     &-image {
       display: flex;
+      align-items: flex-start;
       width: 100%;
       max-width: 590px;
 
@@ -268,6 +294,9 @@
 
       img {
         width: 100%;
+        position: sticky;
+        top: 125px;
+        left: 0;
       }
     }
   }

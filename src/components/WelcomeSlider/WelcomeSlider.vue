@@ -26,16 +26,24 @@ const { isMobile } = useMediaSizes();
       <SwiperSlide v-for="slide in slides" :key="slide.id" class="welcome__slider-slide">
         <div class="container" :class="{ 'container--items-centered': !isMobile }">
           <div class="welcome__slider-slide-info">
-            <h2 class="welcome__slider-slide-info-title">Бесплатная замена трансмиссионного масла</h2>
-            <p class="welcome__slider-slide-info-description">
-              При единовременной покупке масла и фильтра в нашем автотехцентре
-            </p>
-            <UIButton :text="slide.title_link || ''" :link="slide.url_link || ''" />
+            <h2 class="welcome__slider-slide-info-title">{{ slide.title }}</h2>
+            <p class="welcome__slider-slide-info-description">{{ slide.description }}</p>
+            <UIButton v-if="slide.show_btn" :text="slide.title_link || ''" :link="slide.url_link || ''" />
           </div>
         </div>
         <div class="welcome__slider-slide-img-container">
-          <NuxtImg v-if="!isMobile" :src="slide.image" :class="'welcome__slider-slide-img'" loading="lazy" />
-          <NuxtImg v-else :src="slide.image_mobile" :class="'welcome__slider-slide-img'" loading="lazy" />
+          <NuxtImg
+            v-if="!isMobile"
+            :src="slide.image || slide.image_origin"
+            :class="'welcome__slider-slide-img'"
+            loading="lazy"
+          />
+          <NuxtImg
+            v-else
+            :src="slide.image_mobile || slide.image_mobile_origin"
+            :class="'welcome__slider-slide-img'"
+            loading="lazy"
+          />
         </div>
       </SwiperSlide>
     </Swiper>

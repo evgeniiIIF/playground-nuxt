@@ -15,15 +15,18 @@ const slicedServices = computed(() => {
 </script>
 
 <template>
-  <p
+  <NuxtLink
     class="auto-services-subcategory__title"
     :class="{ 'auto-services-subcategory__title--without-services': items?.length }"
+    :to="`services/${slug}`"
   >
     {{ title }}
-  </p>
+  </NuxtLink>
   <ul v-if="items && items.length > 0" class="auto-services-subcategory__list">
     <li v-for="service in slicedServices" :key="service.id" class="auto-services-subcategory__item">
-      {{ service.title }}
+      <NuxtLink class="auto-services-subcategory__item-link" :to="`services/${service.slug}`">{{
+        service.title
+      }}</NuxtLink>
     </li>
     <button
       v-if="items.length > countOfItemsIsVisible && slicedServices.length <= countOfItemsIsVisible"
@@ -82,13 +85,6 @@ const slicedServices = computed(() => {
     position: relative;
     padding-left: 15px;
 
-    @include text-main-big;
-    color: $color-gray;
-
-    @include mobile {
-      @include text-main;
-    }
-
     &::before {
       position: absolute;
       top: 2px;
@@ -97,6 +93,15 @@ const slicedServices = computed(() => {
       height: 15px;
       content: '';
       background: url('~/assets/icons/arrow-right.svg') no-repeat center;
+    }
+
+    &-link {
+      @include text-main-big;
+      color: $color-gray;
+
+      @include mobile {
+        @include text-main;
+      }
     }
   }
 
