@@ -3,6 +3,10 @@ import { Navigation } from 'swiper/modules';
 
 import 'swiper/scss';
 import 'swiper/scss/pagination';
+
+import type { ServiceExamples } from '@/components/ServiceExamples/ServiceExamples.types';
+
+defineProps<ServiceExamples>();
 </script>
 
 <template>
@@ -37,19 +41,7 @@ import 'swiper/scss/pagination';
             },
           }"
         >
-          <SwiperSlide class="service-examples__slider-slide">
-            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
-          </SwiperSlide>
-          <SwiperSlide class="service-examples__slider-slide">
-            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
-          </SwiperSlide>
-          <SwiperSlide class="service-examples__slider-slide">
-            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
-          </SwiperSlide>
-          <SwiperSlide class="service-examples__slider-slide">
-            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
-          </SwiperSlide>
-          <SwiperSlide class="service-examples__slider-slide">
+          <SwiperSlide v-for="image in 5" :key="image" class="service-examples__slider-slide">
             <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
           </SwiperSlide>
         </Swiper>
@@ -93,6 +85,8 @@ import 'swiper/scss/pagination';
     }
 
     &-slide {
+      filter: grayscale(100);
+
       @include mobile {
         max-width: 80%;
       }
@@ -101,6 +95,10 @@ import 'swiper/scss/pagination';
         width: 100%;
       }
     }
+  }
+
+  .swiper-slide-active {
+    filter: grayscale(0);
   }
 }
 </style>

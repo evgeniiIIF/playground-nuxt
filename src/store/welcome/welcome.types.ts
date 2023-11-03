@@ -7,5 +7,7 @@ export interface Welcome {
   title_link: string;
   url_link: string;
   image: string;
+  image_origin: string;
   image_mobile: string;
+  image_mobile_origin: string;
 }
