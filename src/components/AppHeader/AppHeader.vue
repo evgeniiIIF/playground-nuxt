@@ -117,7 +117,7 @@ const headerClass = computed(() => {
 
       &__whatsapp {
         svg {
-          @include fill-svg-and-path(green);
+          @include fill-svg-and-path($color-second);
         }
       }
     }

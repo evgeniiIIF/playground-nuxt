@@ -40,8 +40,17 @@ $during: 0.3s;
   width: 100%;
   height: 100%;
   z-index: 10000;
+  padding: 0 16px;
 
   display: flex;
+
+  @include tablet {
+    padding: 0;
+  }
+
+  @include mobile {
+    padding: 0;
+  }
 
   &.fade-in {
     justify-content: center;
@@ -68,9 +77,28 @@ $during: 0.3s;
 
   &__container {
     position: relative;
+    max-width: 1000px;
+    width: 100%;
     height: 100%;
+
     .fade-in & {
       height: auto;
+
+      @include tablet {
+        height: 100%;
+      }
+
+      @include mobile {
+        height: 100%;
+      }
+    }
+
+    @include tablet {
+      max-width: inherit;
+    }
+
+    @include mobile {
+      max-width: inherit;
     }
   }
 
@@ -87,9 +115,6 @@ $during: 0.3s;
     border: none;
     background: transparent;
     cursor: pointer;
-
-    .fade-in & {
-    }
 
     svg {
       @include fill-svg-and-path(#000);

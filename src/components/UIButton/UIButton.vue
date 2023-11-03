@@ -19,7 +19,7 @@ defineProps<UIButtonTypes>();
       class="button"
       :class="{
         'button--filled': isFilled,
-        'button-disabled': disabled,
+        'button--disabled': disabled,
         'button--full-width': hasFullWidth,
         'button--size-large': sizeLarge,
       }"
@@ -44,6 +44,7 @@ defineProps<UIButtonTypes>();
   cursor: pointer;
   background-color: transparent;
   text-align: center;
+  transition: all 0.3s ease;
 
   &--full-width {
     width: 100%;

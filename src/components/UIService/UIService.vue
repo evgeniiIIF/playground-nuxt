@@ -6,7 +6,10 @@ const emit = defineEmits<UIServiceEmits>();
 </script>
 
 <template>
-  <div class="service" :class="{ 'service--with-checkbox': withCheckbox }">
+  <div
+    class="service"
+    :class="{ 'service--with-checkbox': withCheckbox, 'service--with-small-padding': withSmallPadding }"
+  >
     <label v-if="withCheckbox" class="service__label">
       <input
         class="service__input"
@@ -43,6 +46,10 @@ const emit = defineEmits<UIServiceEmits>();
   &__label {
     position: relative;
     cursor: pointer;
+  }
+
+  &--with-small-padding {
+    padding: 2px 0;
   }
 
   &--with-checkbox {

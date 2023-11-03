@@ -28,8 +28,6 @@ const chooseServices = ref(servicesAllState.value.chooseServices);
 watchEffect(() => {
   chooseServices.value = servicesAllState.value.chooseServices;
 });
-
-console.log(offersState.value.offersItems);
 </script>
 <template>
   <section class="offers-item-slug">

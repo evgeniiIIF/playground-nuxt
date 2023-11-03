@@ -6,6 +6,7 @@ export type UIServiceTypes = {
   withCheckbox?: boolean;
   withCrossButton?: boolean;
   priceIsHiddenOnMobile?: boolean;
+  withSmallPadding?: boolean;
 };
 
 export interface UIServiceEmits {

@@ -34,7 +34,7 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
           <p class="services__cost-sum">{{ totalCost }} ₽</p>
         </div>
         <div class="services__button">
-          <UIButton text="Записаться на сервис" :is-filled="true" />
+          <UIButton text="Записаться на сервис" :is-filled="true" :on-click="() => onClickButton()" />
         </div>
       </div>
     </div>
@@ -42,12 +42,17 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
       * Указана примерная стоимость. Финальный расчет стоимости запчастей и работ рассчитывается индивидуально
     </p>
     <div class="services__button--mobile">
-      <UIButton text="Записаться на сервис" :is-filled="true" :has-full-width="true" />
+      <UIButton
+        text="Записаться на сервис"
+        :is-filled="true"
+        :has-full-width="true"
+        :on-click="() => onClickButton()"
+      />
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .services {
   &__title {
     margin-left: 10px;
