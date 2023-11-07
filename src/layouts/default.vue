@@ -1,4 +1,6 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+  import AppWidget from "@/components/AppWidget/AppWidget.vue";
+</script>
 
 <template>
   <div class="wrapper">
@@ -7,6 +9,7 @@
     <main>
       <slot />
     </main>
+    <AppWidget />
     <AppFooter v-if="!$route.path.startsWith('/services')" />
   </div>
 </template>
