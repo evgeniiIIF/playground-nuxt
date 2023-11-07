@@ -66,7 +66,11 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
     :class="{ 'dropdown-accordion--opened': isOpenDropdown, 'dropdown-accordion--error': errorMessage }"
   >
     <label class="dropdown-accordion__label">
-      <span class="dropdown-accordion__title" :class="{ 'dropdown-accordion__title--without-margin': withoutTitleMargin }">{{ title }}</span>
+      <span
+        class="dropdown-accordion__title"
+        :class="{ 'dropdown-accordion__title--without-margin': withoutTitleMargin }"
+        >{{ title }}</span
+      >
       <div class="dropdown-accordion__dropdown" @click="toggleHandler">
         <input
           class="dropdown-accordion__input"
