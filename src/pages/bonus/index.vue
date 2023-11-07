@@ -24,8 +24,6 @@ watchEffect(() => {
   chooseServices.value = servicesAllState.value.chooseServices;
 });
 
-console.log(bonusState.value);
-
 const bonusSliderPercent = ref(0);
 const howMachSpendCount = computed(() => bonusSliderPercent.value * 1000);
 const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1155));
