@@ -1,24 +1,35 @@
 <script setup lang="ts">
 import { useServicesAllStore } from '@/store/servicesAll';
 
+import { useMediaSizes } from '@/composables/useMediaSizes';
+
 const { servicesAllEffects, servicesAllState } = useServicesAllStore();
 
 await servicesAllEffects.fetchServicesAll();
 
 const services = servicesAllState.value.servicesAllItems;
+
+const { isMobile } = useMediaSizes();
 </script>
 <template>
   <section class="services-all">
     <div class="container">
       <div class="services-all__top">
-        <h1 class="services-all__title">Поиск по услугам автосервиса</h1>
+        <div class="services-all__buttons-mobile mobile-buttons-service-all">
+          <button type="button" class="mobile-buttons-service-all__go-back">
+            <div class="mobile-buttons-service-all__go-back-arrow"></div>
+            <div class="mobile-buttons-service-all__go-back-text"></div>
+          </button>
+        </div>
+        <h1 class="services-all__title">{{ isMobile ? 'Услуги' : 'Поиск по услугам автосервиса' }}</h1>
         <!-- <button @click="$router.go(-1)">go back</button> -->
         <div class="services-all__input">
           <UIInputSearch />
         </div>
       </div>
       <div class="services-all__nav">
-        <ServicesAllNav :services="services" />
+        <ServicesAllNavMobile :services="services" v-if="isMobile" />
+        <ServicesAllNav :services="services" v-if="!isMobile" />
       </div>
     </div>
   </section>
