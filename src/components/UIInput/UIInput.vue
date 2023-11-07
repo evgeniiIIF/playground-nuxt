@@ -6,14 +6,14 @@ defineProps<UIInputTypes>();
 defineEmits<UIInputEmits>();
 
 const onInputHandler = (event: Event): string => {
-  return (event.target as HTMLInputElement).value;
+  return (event.target as HTMLInputElement).value.replace(/\s+/g, ' ').trim();
 };
 </script>
 
 <template>
   <div class="input" :class="{ 'input--disabled': disabled, 'input--error': errorMessage }">
     <label class="input__label">
-      <p class="input__title">{{ title }}</p>
+      <span class="input__title">{{ title }}</span>
       <input
         v-if="type === 'phone'"
         v-maska
@@ -35,7 +35,7 @@ const onInputHandler = (event: Event): string => {
         :disabled="disabled"
         @input="$emit('update:modelValue', onInputHandler($event))"
       />
-      <p v-if="errorMessage" class="input__error">{{ errorMessage }}</p>
+      <span v-if="errorMessage" class="input__error">{{ errorMessage }}</span>
     </label>
   </div>
 </template>

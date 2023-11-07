@@ -1,6 +1,6 @@
 import type { ServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
 
-export type AppRequestForm = {
+export type AppCalculationForm = {
   services: ServicesAllItemChild[];
   carBrand: string;
   carModel: string;
