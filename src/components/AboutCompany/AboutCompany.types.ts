@@ -1,4 +1,4 @@
-import type {HomeAboutSlide} from "~/store/homeAboutSlider/homeAboutSlider.types";
+import type { HomeAboutSlide } from '~/store/homeAboutSlider/homeAboutSlider.types';
 
 export type AboutCompany = {
   company: {

@@ -1,5 +1,5 @@
 import { useAppFetch } from '@/composables/useAppFetch';
-import type {HomeAboutSlide} from "@/store/homeAboutSlider/homeAboutSlider.types";
+import type { HomeAboutSlide } from '@/store/homeAboutSlider/homeAboutSlider.types';
 
 const BASE_PATH = '/index_about_slider';
 

@@ -4,7 +4,7 @@ import { useHomeStore } from '@/store/home';
 import { usePartnersStore } from '@/store/partners';
 import { useWelcomeStore } from '@/store/welcome';
 import { useCarsStore } from '@/store/cars';
-import {useHomeAboutSliderStore} from "~/store/homeAboutSlider";
+import { useHomeAboutSliderStore } from '~/store/homeAboutSlider';
 
 const { homeState, homeEffects } = useHomeStore();
 const { carsState, carsEffects } = useCarsStore();
@@ -19,7 +19,7 @@ await carsEffects.fetchCars();
 await servicesAllEffects.fetchServicesAll();
 await partnersEffects.fetchPartners();
 await partnersEffects.fetchPartnersItems();
-await homeAboutSliderEffects.fetchHomeAboutSlider()
+await homeAboutSliderEffects.fetchHomeAboutSlider();
 
 const home = homeState.value;
 const welcomeSlides = welcomeState.value;
@@ -68,7 +68,11 @@ const partnersData = {
     <BonusProgram v-if="Number(home.content?.is_active_bonus_program) === 1" :bonus="bonusProgramData" />
     <AutoServices v-if="Number(home.content?.is_active_services) === 1" :services="services" />
     <OurPartners v-if="Number(partners.content?.is_active) === 1" :partners="partnersData" />
-    <AboutCompany v-if="Number(home.content?.is_active_about_company) === 1" :company="aboutCompanyData" :company-slider="companySlider" />
+    <AboutCompany
+      v-if="Number(home.content?.is_active_about_company) === 1"
+      :company="aboutCompanyData"
+      :company-slider="companySlider"
+    />
     <ClientsReviews v-if="Number(home.content?.is_active_reviews) === 1" />
     <ServiceForm
       v-if="Number(home.content?.is_active_open_leadform) === 1"

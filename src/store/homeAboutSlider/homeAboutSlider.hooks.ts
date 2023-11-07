@@ -1,5 +1,5 @@
 import { storeToRefs } from 'pinia';
-import {homeAboutSliderStore} from "~/store/homeAboutSlider/homeAboutSlider";
+import { homeAboutSliderStore } from '~/store/homeAboutSlider/homeAboutSlider';
 
 export const useHomeAboutSliderStore = () => {
   const { actions, effects } = homeAboutSliderStore();

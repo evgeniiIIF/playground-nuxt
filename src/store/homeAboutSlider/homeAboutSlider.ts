@@ -1,8 +1,8 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
-import type {HomeAboutSlide} from "@/store/homeAboutSlider/homeAboutSlider.types";
-import {homeAboutSliderHttp} from "@/api/http/homeAboutSliderHttp/homeAboutSliderHttp";
+import type { HomeAboutSlide } from '@/store/homeAboutSlider/homeAboutSlider.types';
+import { homeAboutSliderHttp } from '@/api/http/homeAboutSliderHttp/homeAboutSliderHttp';
 
 const DEFAULT_STATE: HomeAboutSlide[] = [];
 
