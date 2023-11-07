@@ -7,8 +7,6 @@ const hasButton = computed(() => item?.children?.length && item?.children?.lengt
 const [isOpenList, , , toggleList] = useBooleanState(false);
 
 const children = computed(() => {
-  console.log(hasButton.value, isOpenList.value);
-
   if (hasButton.value && !isOpenList.value) {
     return item?.children?.slice(0, 2);
   }
@@ -19,9 +17,11 @@ const children = computed(() => {
 
 <template>
   <div class="services-all-item-l2">
-    <h3 class="services-all-item-l2__title">
-      {{ item?.title }}
-    </h3>
+    <NuxtLink :to="`services/${item?.slug}`">
+      <h3 class="services-all-item-l2__title">
+        {{ item?.title }}
+      </h3>
+    </NuxtLink>
     <ul v-if="item?.children" class="services-all-item-l2__list">
       <li v-for="servicesItemL3 in children" :key="servicesItemL3.id" class="services-all-item-l2__item">
         <ServicesAllNavItemL3 :item="servicesItemL3" />
@@ -69,8 +69,8 @@ const children = computed(() => {
     cursor: pointer;
   }
   &__text {
-    font-size: 20px;
-    line-height: 30px;
+    font-size: 16px;
+    line-height: 16px;
     color: #00a19c;
   }
   &__arrow {

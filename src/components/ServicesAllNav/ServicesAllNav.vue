@@ -8,6 +8,25 @@ const currentServicesItemL1 = ref<ServicesAllItemParent | undefined>();
 const setCurrentServicesItemL1 = (item: ServicesAllItemParent) => {
   currentServicesItemL1.value = item;
 };
+
+// const chunkSize = computed(() =>
+//   // eslint-disable-next-line no-unsafe-optional-chaining
+//   currentServicesItemL1.value?.children.length ? currentServicesItemL1.value?.children.length / 3 : 0,
+// );
+
+const packagedColumnsItems = computed(() => {
+  const arrayOfObjects = currentServicesItemL1.value?.children;
+  const countItems = arrayOfObjects?.length ?? 0;
+  const chunkSize = arrayOfObjects && arrayOfObjects.length ? Math.ceil(arrayOfObjects.length / 2) : 0;
+  const arrayOfArrays = [];
+
+  for (let i = 0; i < countItems; i += chunkSize) {
+    const chunk = arrayOfObjects?.slice(i, i + chunkSize);
+    arrayOfArrays.push(chunk);
+  }
+
+  return arrayOfArrays;
+});
 </script>
 <template>
   <nav class="services-all-nav">
@@ -25,12 +44,12 @@ const setCurrentServicesItemL1 = (item: ServicesAllItemParent) => {
       </li>
     </ul>
     <ul class="services-all-nav__l2 services-all-nav-l2">
-      <li
-        v-for="currentServiceItemL2 in currentServicesItemL1?.children"
-        :key="currentServiceItemL2.id"
-        class="services-all-nav-l2__item"
-      >
-        <ServicesAllNavItemL2 :item="currentServiceItemL2" />
+      <li v-for="(packagedColumnsItem, index) in packagedColumnsItems" :key="index" class="services-all-nav-l2__column">
+        <ul class="services-all-nav-l2__column-list">
+          <li v-for="item in packagedColumnsItem" :key="item.id" class="services-all-nav-l2__column-item">
+            <ServicesAllNavItemL2 :item="item" />
+          </li>
+        </ul>
       </li>
     </ul>
   </nav>
@@ -63,12 +82,19 @@ const setCurrentServicesItemL1 = (item: ServicesAllItemParent) => {
 }
 .services-all-nav-l2 {
   display: flex;
-  flex-wrap: wrap;
   overflow-y: auto;
   list-style: none;
+  @include mr(35px);
 
-  &__item {
-    flex: 1 1 auto;
+  &__column {
+  }
+
+  &__column-list {
+    @include mb(30px);
+    padding-bottom: 80px;
+  }
+
+  &__column-item {
   }
 }
 </style>
