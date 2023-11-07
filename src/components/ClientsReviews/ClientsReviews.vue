@@ -177,18 +177,43 @@ const { isMobile } = useMediaSizes();
 
 <style lang="scss" scoped>
 .clients-reviews {
-  padding: 60px 0;
+  position: relative;
+  padding: 52px 0 60px 0;
+
+  @include mobile {
+    padding: 28px 0 60px 0;
+  }
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    max-width: 1210px;
+    width: 100%;
+    height: 2px;
+    transform: translateX(-50%);
+    background-color: $color-light-gray-lighter;
+    content: '';
+  }
 
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 36px;
+
+    @include mobile {
+      margin-bottom: 22px;
+    }
   }
 
   &__title {
     @include title-main-bold;
     color: $color-blue;
+
+    @include mobile {
+      @include title-main-xxsmall-bold;
+    }
   }
 
   &__slider {
