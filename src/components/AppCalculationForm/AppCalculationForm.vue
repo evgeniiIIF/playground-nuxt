@@ -3,9 +3,9 @@ import { useServicesAllStore } from '@/store/servicesAll';
 import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import { computed } from 'vue';
-import type { AppRequestForm } from '@/components/AppRequestForm/AppRequestForm.types';
+import type { AppCalculationForm } from '@/components/AppCalculationForm/AppCalculationForm.types';
 
-const props = defineProps<AppRequestForm>();
+const props = defineProps<AppCalculationForm>();
 
 const { smallerThanDesktop } = useMediaSizes();
 const { servicesAllActions } = useServicesAllStore();
