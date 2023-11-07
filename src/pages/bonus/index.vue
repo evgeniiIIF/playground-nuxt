@@ -2,21 +2,29 @@
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import Slider from '@vueform/slider';
 import { useServicesAllStore } from '@/store/servicesAll';
-import { BONUS_CARDS } from './bonus.constants';
+import {useBonusStore} from "@/store/bonus";
+import type {Bonus} from "@/store/bonus/bonus.types";
 
 const { servicesAllEffects, servicesAllState } = useServicesAllStore();
+const { bonusState, bonusEffects } = useBonusStore();
 
+await bonusEffects.fetchBonus();
+await bonusEffects.fetchBonusBenefits();
 await servicesAllEffects.fetchServicesAll();
 
 const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 const { isMobile } = useMediaSizes();
 
 const services = servicesAllState.value.servicesAllItems;
+const bonus = bonusState.value.bonus as Bonus;
+const benefits = bonusState.value.benefits;
 const chooseServices = ref(servicesAllState.value.chooseServices);
 
 watchEffect(() => {
   chooseServices.value = servicesAllState.value.chooseServices;
 });
+
+console.log(bonusState.value)
 
 const bonusSliderPercent = ref(0);
 const howMachSpendCount = computed(() => bonusSliderPercent.value * 1000);
@@ -27,15 +35,15 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
     <div class="container">
       <div class="bonus__wrapper">
         <div class="bonus__top">
-          <h2 class="bonus__title">Бонусная программа</h2>
-          <p class="bonus__subtitle">Выгода с ABS-autoservice – это просто!</p>
+          <h2 class="bonus__title">{{ bonus.title }}</h2>
+          <p class="bonus__subtitle">{{ bonus.subtitle }}</p>
         </div>
         <div class="bonus__cards">
           <div class="bonus__cards-row">
             <div class="bonus__cards--small">
-              <div v-for="item in BONUS_CARDS" :key="item.title" class="bonus__card-small card-bonus-small">
-                <div class="card-bonus-small__title">{{ item.title }}</div>
-                <div class="card-bonus-small__subtitle">{{ item.subtitle }}</div>
+              <div v-for="item in benefits" :key="item.id" class="bonus__card-small card-bonus-small">
+                <div class="card-bonus-small__title">{{ item.headline }}</div>
+                <div class="card-bonus-small__subtitle">{{ item.dsc }}</div>
               </div>
             </div>
             <div class="bonus__cards--big">
@@ -55,8 +63,8 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
               </div>
             </div>
           </div>
-          <div v-if="Boolean(!isMobile)" class="bonus__cards-button">
-            <UIButton text="Узнать подробнее" @click="openModal" />
+          <div v-if="bonus.is_active_btn_bonus || Boolean(!isMobile)" class="bonus__cards-button">
+            <UIButton :text="bonus.btn_bonus_title" @click="openModal" />
           </div>
         </div>
         <div class="bonus__calculate bonus-calculate">
