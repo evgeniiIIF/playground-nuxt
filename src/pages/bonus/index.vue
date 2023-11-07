@@ -2,8 +2,8 @@
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import Slider from '@vueform/slider';
 import { useServicesAllStore } from '@/store/servicesAll';
-import {useBonusStore} from "@/store/bonus";
-import type {Bonus} from "@/store/bonus/bonus.types";
+import { useBonusStore } from '@/store/bonus';
+import type { Bonus } from '@/store/bonus/bonus.types';
 
 const { servicesAllEffects, servicesAllState } = useServicesAllStore();
 const { bonusState, bonusEffects } = useBonusStore();
@@ -24,7 +24,7 @@ watchEffect(() => {
   chooseServices.value = servicesAllState.value.chooseServices;
 });
 
-console.log(bonusState.value)
+console.log(bonusState.value);
 
 const bonusSliderPercent = ref(0);
 const howMachSpendCount = computed(() => bonusSliderPercent.value * 1000);

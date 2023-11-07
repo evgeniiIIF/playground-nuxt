@@ -1,5 +1,5 @@
-import type {Bonus} from "@/store/bonus/bonus.types";
+import type { Bonus } from '@/store/bonus/bonus.types';
 
 export interface BonusRespone {
-  data: Bonus
+  data: Bonus;
 }

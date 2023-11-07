@@ -1,8 +1,8 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
-import type {Bonus, BonusBenefit, BonusStore} from "@/store/bonus/bonus.types";
-import {bonusHttp} from "@/api/http";
+import type { Bonus, BonusBenefit, BonusStore } from '@/store/bonus/bonus.types';
+import { bonusHttp } from '@/api/http';
 
 const DEFAULT_STATE: BonusStore = {
   bonus: {},
@@ -45,7 +45,7 @@ export const bonusStore = defineStore('bonusStore', () => {
     actions: {},
     effects: {
       fetchBonus,
-      fetchBonusBenefits
+      fetchBonusBenefits,
     },
   };
 });

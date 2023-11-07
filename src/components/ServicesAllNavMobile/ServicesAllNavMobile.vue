@@ -12,7 +12,7 @@ const setCurrentServicesItemL1 = (item: ServicesAllItemParent) => {
 
 <template>
   <nav class="services-all-nav-mobile">
-    <ul class="services-all-nav-mobile-l1" v-if="!currentServicesItemL1">
+    <ul v-if="!currentServicesItemL1" class="services-all-nav-mobile-l1">
       <li v-for="itemL1 in props.services" :key="itemL1.id" class="services-all-nav-mobile-l1__item">
         <div class="item-services-all-l1" @click="setCurrentServicesItemL1(itemL1)">
           <div class="item-services-all-l1__icon"><img :src="itemL1.icon" alt="." /></div>
@@ -21,7 +21,7 @@ const setCurrentServicesItemL1 = (item: ServicesAllItemParent) => {
         </div>
       </li>
     </ul>
-    <ul class="services-all-nav-mobile-l1" v-if="currentServicesItemL1">
+    <ul v-if="currentServicesItemL1" class="services-all-nav-mobile-l1">
       <li v-for="itemL2 in currentServicesItemL1.children" :key="itemL2.id" class="services-all-nav-mobile-l1__item">
         <div class="item-services-all-l1">
           <div class="item-services-all-l1__title">{{ itemL2.title }}</div>

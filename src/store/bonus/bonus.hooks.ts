@@ -1,5 +1,5 @@
 import { storeToRefs } from 'pinia';
-import {bonusStore} from "@/store/bonus/bonus";
+import { bonusStore } from '@/store/bonus/bonus';
 
 export const useBonusStore = () => {
   const { actions, effects } = bonusStore();

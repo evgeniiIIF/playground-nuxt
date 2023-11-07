@@ -28,8 +28,8 @@ const { isMobile } = useMediaSizes();
         </div>
       </div>
       <div class="services-all__nav">
-        <ServicesAllNavMobile :services="services" v-if="isMobile" />
-        <ServicesAllNav :services="services" v-if="!isMobile" />
+        <ServicesAllNavMobile v-if="isMobile" :services="services" />
+        <ServicesAllNav v-if="!isMobile" :services="services" />
       </div>
     </div>
   </section>
