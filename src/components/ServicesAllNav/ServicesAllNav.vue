@@ -9,11 +9,6 @@ const setCurrentServicesItemL1 = (item: ServicesAllItemParent) => {
   currentServicesItemL1.value = item;
 };
 
-// const chunkSize = computed(() =>
-//   // eslint-disable-next-line no-unsafe-optional-chaining
-//   currentServicesItemL1.value?.children.length ? currentServicesItemL1.value?.children.length / 3 : 0,
-// );
-
 const packagedColumnsItems = computed(() => {
   const arrayOfObjects = currentServicesItemL1.value?.children;
   const countItems = arrayOfObjects?.length ?? 0;
@@ -27,6 +22,8 @@ const packagedColumnsItems = computed(() => {
 
   return arrayOfArrays;
 });
+
+onMounted(() => setCurrentServicesItemL1(props.services[0]));
 </script>
 <template>
   <nav class="services-all-nav">
