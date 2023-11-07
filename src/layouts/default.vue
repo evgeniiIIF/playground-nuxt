@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import AppWidget from "@/components/AppWidget/AppWidget.vue";
+import AppWidget from '@/components/AppWidget/AppWidget.vue';
 </script>
 
 <template>
