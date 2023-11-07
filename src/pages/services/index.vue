@@ -6,7 +6,6 @@ const { servicesAllEffects, servicesAllState } = useServicesAllStore();
 await servicesAllEffects.fetchServicesAll();
 
 const services = servicesAllState.value.servicesAllItems;
-console.log(services);
 </script>
 <template>
   <section class="services-all">
