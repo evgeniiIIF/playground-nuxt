@@ -66,7 +66,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
     :class="{ 'dropdown-accordion--opened': isOpenDropdown, 'dropdown-accordion--error': errorMessage }"
   >
     <label class="dropdown-accordion__label">
-      <p class="dropdown-accordion__title">{{ title }}</p>
+      <span class="dropdown-accordion__title" :class="{ 'dropdown-accordion__title--without-margin': withoutTitleMargin }">{{ title }}</span>
       <div class="dropdown-accordion__dropdown" @click="toggleHandler">
         <input
           class="dropdown-accordion__input"
@@ -123,6 +123,7 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
   }
 
   &__title {
+    display: inline-block;
     margin-left: 10px;
     margin-bottom: 4px;
 
@@ -130,6 +131,10 @@ const setValue = (checkedServices?: ServicesAllItemChild[]) => {
     color: $color-gray-light;
 
     @include mobile {
+      margin-left: 0;
+    }
+
+    &--without-margin {
       margin-left: 0;
     }
   }

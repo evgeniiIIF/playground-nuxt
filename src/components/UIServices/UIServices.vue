@@ -10,7 +10,7 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
 
 <template>
   <div class="services">
-    <p class="services__title">Услуга</p>
+    <span class="services__title">Услуга</span>
     <div class="services__content">
       <div class="services__body">
         <ul v-if="services.length" class="services__list">
@@ -55,9 +55,19 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
 <style lang="scss">
 .services {
   &__title {
+    display: inline-block;
     margin-left: 10px;
+    margin-bottom: 4px;
     font-size: 12px;
     color: $color-gray-light;
+
+    @include tablet {
+      display: none;
+    }
+
+    @include mobile {
+      display: none;
+    }
   }
 
   &__content {

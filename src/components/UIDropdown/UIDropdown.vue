@@ -32,7 +32,7 @@ const handleDropdownItemClick = (item: string) => {
 <template>
   <div ref="DropdownNodeRef" class="dropdown" :class="{ 'dropdown--opened': isOpenDropdown }">
     <label class="dropdown__label">
-      <p class="dropdown__title">{{ title }}</p>
+      <span class="dropdown__title">{{ title }}</span>
       <div class="dropdown__dropdown" @click="toggleHandler">
         <input
           class="dropdown__input"
@@ -76,6 +76,7 @@ const handleDropdownItemClick = (item: string) => {
   }
 
   &__title {
+    display: inline-block;
     margin-left: 10px;
     margin-bottom: 4px;
 
