@@ -1,17 +1,5 @@
 <script setup lang="ts">
-import { useServicesAllStore } from '@/store/servicesAll';
 import { useMediaSizes } from '../../composables/useMediaSizes';
-
-const { servicesAllEffects, servicesAllState } = useServicesAllStore();
-
-await servicesAllEffects.fetchServicesAll();
-
-const services = servicesAllState.value.servicesAllItems;
-const chooseServices = ref(servicesAllState.value.chooseServices);
-
-watchEffect(() => {
-  chooseServices.value = servicesAllState.value.chooseServices;
-});
 
 const { isMobile } = useMediaSizes();
 </script>
@@ -53,7 +41,7 @@ const { isMobile } = useMediaSizes();
       </div>
     </div>
     <div class="contacts__form">
-      <ServiceForm :services="services" :choose-services="chooseServices" />
+      <ServiceForm />
     </div>
   </section>
 </template>

@@ -4,7 +4,8 @@ import { useHomeStore } from '@/store/home';
 import { usePartnersStore } from '@/store/partners';
 import { useWelcomeStore } from '@/store/welcome';
 import { useCarsStore } from '@/store/cars';
-import { useHomeAboutSliderStore } from '~/store/homeAboutSlider';
+import { useHomeAboutSliderStore } from '@/store/homeAboutSlider';
+import type {Partners} from "@/store/partners/partners.types";
 
 const { homeState, homeEffects } = useHomeStore();
 const { carsState, carsEffects } = useCarsStore();
@@ -13,19 +14,24 @@ const { partnersState, partnersEffects } = usePartnersStore();
 const { welcomeState, welcomeEffects } = useWelcomeStore();
 const { homeAboutSliderState, homeAboutSliderEffects } = useHomeAboutSliderStore();
 
-await homeEffects.fetchHome();
-await welcomeEffects.fetchWelcome();
-await carsEffects.fetchCars();
-await servicesAllEffects.fetchServicesAll();
-await partnersEffects.fetchPartners();
-await partnersEffects.fetchPartnersItems();
-await homeAboutSliderEffects.fetchHomeAboutSlider();
+await useAsyncData('home', async () => {
+  await Promise.all([
+    Object.keys(homeState.value).length === 0 && homeEffects.fetchHome(),
+    welcomeState.value.length === 0 && welcomeEffects.fetchWelcome(),
+    Object.keys(carsState.value).length === 0 && carsEffects.fetchCars(),
+    servicesAllState.value.servicesAllItems.length === 0 && servicesAllEffects.fetchServicesAll(),
+    Object.keys(partnersState.value.partners).length === 0 && partnersEffects.fetchPartners(),
+    partnersState.value.items.length === 0 && partnersEffects.fetchPartnersItems(),
+    homeAboutSliderState.value.length === 0 && homeAboutSliderEffects.fetchHomeAboutSlider(),
+  ])
+})
 
 const home = homeState.value;
 const welcomeSlides = welcomeState.value;
 const cars = carsState.value;
 const services = servicesAllState.value.servicesAllItems;
-const partners = partnersState.value;
+const partners = partnersState.value.partners as Partners;
+const partnersItems = partnersState.value.items;
 const companySlider = homeAboutSliderState.value;
 const chooseServices = ref(servicesAllState.value.chooseServices);
 
@@ -52,7 +58,7 @@ const aboutCompanyData = {
 const partnersData = {
   title: partners.content?.title,
   subtitle: partners.content?.subtitle,
-  items: partners.items,
+  items: partnersItems,
 };
 </script>
 
@@ -74,11 +80,7 @@ const partnersData = {
       :company-slider="companySlider"
     />
     <ClientsReviews v-if="Number(home.content?.is_active_reviews) === 1" />
-    <ServiceForm
-      v-if="Number(home.content?.is_active_open_leadform) === 1"
-      :services="services"
-      :choose-services="chooseServices"
-    />
+    <ServiceForm v-if="Number(home.content?.is_active_open_leadform) === 1"/>
     <AutoBrands v-if="Number(home.content?.is_active_marquee_brands) === 1" />
   </div>
 </template>

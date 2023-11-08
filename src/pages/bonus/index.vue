@@ -1,28 +1,23 @@
 <script setup lang="ts">
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import Slider from '@vueform/slider';
-import { useServicesAllStore } from '@/store/servicesAll';
 import { useBonusStore } from '@/store/bonus';
 import type { Bonus, BonusBenefit } from '@/store/bonus/bonus.types';
 
-const { servicesAllEffects, servicesAllState } = useServicesAllStore();
 const { bonusState, bonusEffects } = useBonusStore();
 
-await bonusEffects.fetchBonus();
-await bonusEffects.fetchBonusBenefits();
-await servicesAllEffects.fetchServicesAll();
+await useAsyncData('bonus', async () => {
+  await Promise.all([
+    Object.keys(bonusState.value.bonus).length === 0 && bonusEffects.fetchBonus(),
+    bonusState.value.benefits.length === 0 && bonusEffects.fetchBonusBenefits(),
+  ])
+})
 
 const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 const { isMobile } = useMediaSizes();
 
-const services = servicesAllState.value.servicesAllItems;
 const bonus = bonusState.value.bonus as Bonus;
 const benefits = bonusState.value.benefits as BonusBenefit[];
-const chooseServices = ref(servicesAllState.value.chooseServices);
-
-watchEffect(() => {
-  chooseServices.value = servicesAllState.value.chooseServices;
-});
 
 const bonusSliderPercent = ref(0);
 const howMachSpendCount = computed(() => bonusSliderPercent.value * 1000);
@@ -97,7 +92,7 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
       </div>
     </div>
     <div class="bonus__form">
-      <ServiceForm :services="services" :choose-services="chooseServices" />
+      <ServiceForm />
     </div>
     <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
       <AppCallbackForm title="Получить бонусную карту" />

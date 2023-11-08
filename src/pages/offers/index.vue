@@ -1,21 +1,13 @@
 <script setup lang="ts">
 import { useOffersStore } from '@/store/offers';
-import { useServicesAllStore } from '@/store/servicesAll';
 
 const { offersEffects, offersState } = useOffersStore();
-const { servicesAllState, servicesAllEffects } = useServicesAllStore();
 
-await offersEffects.fetchOffersItems();
-
-await servicesAllEffects.fetchServicesAll();
-
-const services = servicesAllState.value.servicesAllItems;
-
-const chooseServices = ref(servicesAllState.value.chooseServices);
-
-watchEffect(() => {
-  chooseServices.value = servicesAllState.value.chooseServices;
-});
+await useAsyncData('offers', async () => {
+  await Promise.all([
+    offersState.value.offersItems.length === 0 && offersEffects.fetchOffersItems(),
+  ])
+})
 
 const countItems: Ref<number> = ref(8);
 const incrementCountItems = () => (countItems.value += 8);
@@ -45,7 +37,7 @@ const showButton = computed(() => countItems.value < offersState.value.offersIte
       </div>
     </div>
     <div class="offers__form">
-      <ServiceForm :services="services" :choose-services="chooseServices" />
+      <ServiceForm />
     </div>
   </section>
 </template>

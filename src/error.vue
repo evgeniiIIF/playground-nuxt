@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useServicesAllStore } from '@/store/servicesAll';
-import { ref, watchEffect } from 'vue';
-
 type ErrorType = {
   message: string;
   stack: string;
@@ -15,19 +12,6 @@ type ErrorPage = {
 };
 
 defineProps<ErrorPage>();
-
-const { servicesAllState, servicesAllEffects } = useServicesAllStore();
-
-if (!servicesAllState.value.servicesAllItems) {
-  await servicesAllEffects.fetchServicesAll();
-}
-
-const services = servicesAllState.value.servicesAllItems;
-const chooseServices = ref(servicesAllState.value.chooseServices);
-
-watchEffect(() => {
-  chooseServices.value = servicesAllState.value.chooseServices;
-});
 </script>
 
 <template>
@@ -60,7 +44,7 @@ watchEffect(() => {
           </div>
         </div>
       </section>
-      <ServiceForm :services="services" :choose-services="chooseServices" />
+      <ServiceForm />
     </main>
     <AppFooter />
   </div>
