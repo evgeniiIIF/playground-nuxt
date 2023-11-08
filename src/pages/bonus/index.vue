@@ -3,7 +3,7 @@ import { useMediaSizes } from '@/composables/useMediaSizes';
 import Slider from '@vueform/slider';
 import { useServicesAllStore } from '@/store/servicesAll';
 import { useBonusStore } from '@/store/bonus';
-import type { Bonus } from '@/store/bonus/bonus.types';
+import type {Bonus, BonusBenefit} from '@/store/bonus/bonus.types';
 
 const { servicesAllEffects, servicesAllState } = useServicesAllStore();
 const { bonusState, bonusEffects } = useBonusStore();
@@ -17,7 +17,7 @@ const { isMobile } = useMediaSizes();
 
 const services = servicesAllState.value.servicesAllItems;
 const bonus = bonusState.value.bonus as Bonus;
-const benefits = bonusState.value.benefits;
+const benefits = bonusState.value.benefits as BonusBenefit[];
 const chooseServices = ref(servicesAllState.value.chooseServices);
 
 watchEffect(() => {
