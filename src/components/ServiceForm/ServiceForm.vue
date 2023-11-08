@@ -2,13 +2,11 @@
 import { useServicesAllStore } from '@/store/servicesAll';
 import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
 
-const {  servicesAllState, servicesAllEffects, servicesAllActions } = useServicesAllStore();
+const { servicesAllState, servicesAllEffects, servicesAllActions } = useServicesAllStore();
 
 await useAsyncData('serviceForm', async () => {
-  await Promise.all([
-    servicesAllState.value.servicesAllItems.length === 0 && servicesAllEffects.fetchServicesAll(),
-  ])
-})
+  await Promise.all([servicesAllState.value.servicesAllItems.length === 0 && servicesAllEffects.fetchServicesAll()]);
+});
 
 const services = servicesAllState.value.servicesAllItems;
 const chooseServices = ref(servicesAllState.value.chooseServices);

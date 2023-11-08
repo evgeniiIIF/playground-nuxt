@@ -7,10 +7,8 @@ const { offersEffects, offersState } = useOffersStore();
 const { slug } = useRoute().params;
 
 await useAsyncData('offer', async () => {
-  await Promise.all([
-     offersState.value.offersItemSlug.slug !== slug && offersEffects.fetchOffersItems(slug as string),
-  ])
-})
+  await Promise.all([offersState.value.offersItemSlug.slug !== slug && offersEffects.fetchOffersItems(slug as string)]);
+});
 
 const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 
@@ -19,7 +17,6 @@ const datePubic = computed(() => formatDate(currentOffersItemSlug.value.created_
 const anotherOffersItems = computed(() =>
   offersState.value.offersItems.filter((item) => item.slug !== currentOffersItemSlug.value.slug).slice(0, 3),
 );
-
 </script>
 <template>
   <section class="offers-item-slug">

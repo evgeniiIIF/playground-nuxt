@@ -10,7 +10,9 @@ import AppWidget from '@/components/AppWidget/AppWidget.vue';
       <slot />
     </main>
     <AppWidget />
-    <AppFooter v-if="$route.path.split('/').findIndex(item => item === 'services') !== ($route.path.split('/').length - 1)" />
+    <AppFooter
+      v-if="$route.path.split('/').findIndex((item) => item === 'services') !== $route.path.split('/').length - 1"
+    />
   </div>
 </template>
 

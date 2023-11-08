@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { usePartnersStore } from '@/store/partners';
-import type { Partners } from "@/store/partners/partners.types";
+import type { Partners } from '@/store/partners/partners.types';
 
 const { partnersState, partnersEffects } = usePartnersStore();
 

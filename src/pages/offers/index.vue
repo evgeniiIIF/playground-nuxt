@@ -4,10 +4,8 @@ import { useOffersStore } from '@/store/offers';
 const { offersEffects, offersState } = useOffersStore();
 
 await useAsyncData('offers', async () => {
-  await Promise.all([
-    offersState.value.offersItems.length === 0 && offersEffects.fetchOffersItems(),
-  ])
-})
+  await Promise.all([offersState.value.offersItems.length === 0 && offersEffects.fetchOffersItems()]);
+});
 
 const countItems: Ref<number> = ref(8);
 const incrementCountItems = () => (countItems.value += 8);

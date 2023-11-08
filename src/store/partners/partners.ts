@@ -2,7 +2,7 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
 import { partnersHttp } from '@/api/http';
-import type {Partners, PartnersItem, PartnersStore} from './partners.types';
+import type { Partners, PartnersItem, PartnersStore } from './partners.types';
 
 const DEFAULT_STATE: PartnersStore = {
   partners: {},

@@ -5,7 +5,7 @@ import { usePartnersStore } from '@/store/partners';
 import { useWelcomeStore } from '@/store/welcome';
 import { useCarsStore } from '@/store/cars';
 import { useHomeAboutSliderStore } from '@/store/homeAboutSlider';
-import type {Partners} from "@/store/partners/partners.types";
+import type { Partners } from '@/store/partners/partners.types';
 
 const { homeState, homeEffects } = useHomeStore();
 const { carsState, carsEffects } = useCarsStore();
@@ -23,8 +23,8 @@ await useAsyncData('home', async () => {
     Object.keys(partnersState.value.partners).length === 0 && partnersEffects.fetchPartners(),
     partnersState.value.items.length === 0 && partnersEffects.fetchPartnersItems(),
     homeAboutSliderState.value.length === 0 && homeAboutSliderEffects.fetchHomeAboutSlider(),
-  ])
-})
+  ]);
+});
 
 const home = homeState.value;
 const welcomeSlides = welcomeState.value;
@@ -80,7 +80,7 @@ const partnersData = {
       :company-slider="companySlider"
     />
     <ClientsReviews v-if="Number(home.content?.is_active_reviews) === 1" />
-    <ServiceForm v-if="Number(home.content?.is_active_open_leadform) === 1"/>
+    <ServiceForm v-if="Number(home.content?.is_active_open_leadform) === 1" />
     <AutoBrands v-if="Number(home.content?.is_active_marquee_brands) === 1" />
   </div>
 </template>

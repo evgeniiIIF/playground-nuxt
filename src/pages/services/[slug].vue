@@ -6,10 +6,8 @@ const { slug } = useRoute().params;
 const { serviceState, serviceEffects } = useServiceStore();
 
 await useAsyncData('service', async () => {
-  await Promise.all([
-    serviceState.value.slug !== slug && serviceEffects.fetchService(slug as string),
-  ])
-})
+  await Promise.all([serviceState.value.slug !== slug && serviceEffects.fetchService(slug as string)]);
+});
 
 const service = serviceState.value;
 const examplesGallery = serviceState.value.gallery_webp || serviceState.value.gallery_origin;

@@ -10,8 +10,8 @@ await useAsyncData('bonus', async () => {
   await Promise.all([
     Object.keys(bonusState.value.bonus).length === 0 && bonusEffects.fetchBonus(),
     bonusState.value.benefits.length === 0 && bonusEffects.fetchBonusBenefits(),
-  ])
-})
+  ]);
+});
 
 const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 const { isMobile } = useMediaSizes();

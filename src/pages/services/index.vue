@@ -5,10 +5,8 @@ import { useMediaSizes } from '@/composables/useMediaSizes';
 const { servicesAllEffects, servicesAllState } = useServicesAllStore();
 
 await useAsyncData('services', async () => {
-  await Promise.all([
-    servicesAllState.value.servicesAllItems.length === 0 && servicesAllEffects.fetchServicesAll(),
-  ])
-})
+  await Promise.all([servicesAllState.value.servicesAllItems.length === 0 && servicesAllEffects.fetchServicesAll()]);
+});
 
 const services = servicesAllState.value.servicesAllItems;
 
