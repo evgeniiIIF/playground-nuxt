@@ -45,6 +45,7 @@ const onInputHandler = (event: Event): string => {
   position: relative;
 
   &__title {
+    display: inline-block;
     margin-bottom: 4px;
 
     @include text-main-small;

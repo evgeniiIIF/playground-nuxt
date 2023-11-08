@@ -11,6 +11,7 @@ export type UIDropdownWithAccordion = {
   value?: string;
   placeholder?: string;
   errorMessage?: string;
+  withoutTitleMargin?: boolean;
 };
 
 export interface UIDropdownWithAccordionEmits {

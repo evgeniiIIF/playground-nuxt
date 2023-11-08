@@ -79,7 +79,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
     </div>
     <div class="repair-calculation__modal">
       <UIModal position="center" :is-open="isOpenModal" @on-close="closeModal">
-        <AppRequestForm :services="chooseServices" :car-brand="carsBrandsInput" :car-model="carsModelsInput" />
+        <AppCalculationForm :services="chooseServices" :car-brand="carsBrandsInput" :car-model="carsModelsInput" />
       </UIModal>
     </div>
   </section>

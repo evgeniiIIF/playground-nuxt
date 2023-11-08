@@ -63,6 +63,7 @@ const sendRequest = () => {
           <UIDropdownWithAccordion
             title="Услуга"
             placeholder="Выберите услугу"
+            :without-title-margin="true"
             :items="services"
             :checked-services="chooseServices"
             :error-message="errorDropdown"
