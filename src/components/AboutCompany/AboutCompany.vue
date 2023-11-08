@@ -28,20 +28,8 @@ defineProps<AboutCompany>();
             }"
             loop
           >
-            <SwiperSlide>
-              <NuxtImg src="/about-company-1.jpg" fit="contain" loading="lazy" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <NuxtImg src="/about-company-1.jpg" fit="contain" loading="lazy" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <NuxtImg src="/about-company-1.jpg" fit="contain" loading="lazy" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <NuxtImg src="/about-company-1.jpg" fit="contain" loading="lazy" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <NuxtImg src="/about-company-1.jpg" fit="contain" loading="lazy" />
+            <SwiperSlide v-for="slide in companySlider" :key="slide.id">
+              <NuxtImg :src="slide.images_webp || slide.images" :alt="slide.title" fit="contain" loading="lazy" />
             </SwiperSlide>
           </Swiper>
         </div>
@@ -54,18 +42,6 @@ defineProps<AboutCompany>();
 .about-company {
   position: relative;
   padding: 59px 0 62px 0;
-
-  &::after {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    max-width: 1210px;
-    width: 100%;
-    height: 2px;
-    transform: translateX(-50%);
-    background-color: $color-light-gray-lighter;
-    content: '';
-  }
 
   @include mobile {
     padding: 38px 0 62px 0;
@@ -186,6 +162,7 @@ defineProps<AboutCompany>();
           margin: 0;
           border-radius: 50%;
           background-color: $color-light-gray-lighter;
+          opacity: 1;
 
           &:not(:last-child) {
             margin-right: 4px;

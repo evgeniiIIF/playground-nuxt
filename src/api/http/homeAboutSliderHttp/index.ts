@@ -1,0 +1,1 @@
+export { homeAboutSliderHttp } from './homeAboutSliderHttp';

@@ -1,3 +1,5 @@
+import type { HomeAboutSlide } from '~/store/homeAboutSlider/homeAboutSlider.types';
+
 export type AboutCompany = {
   company: {
     title: string | undefined;
@@ -5,4 +7,6 @@ export type AboutCompany = {
     titleLink: string | undefined;
     urlLink: string | undefined;
   };
+
+  companySlider: HomeAboutSlide[];
 };
