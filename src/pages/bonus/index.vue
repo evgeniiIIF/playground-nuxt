@@ -3,7 +3,7 @@ import { useMediaSizes } from '@/composables/useMediaSizes';
 import Slider from '@vueform/slider';
 import { useServicesAllStore } from '@/store/servicesAll';
 import { useBonusStore } from '@/store/bonus';
-import type {Bonus, BonusBenefit} from '@/store/bonus/bonus.types';
+import type { Bonus, BonusBenefit } from '@/store/bonus/bonus.types';
 
 const { servicesAllEffects, servicesAllState } = useServicesAllStore();
 const { bonusState, bonusEffects } = useBonusStore();
