@@ -5,7 +5,7 @@ const { item } = defineProps<{ item: ServicesAllItemParent }>();
 </script>
 
 <template>
-  <NuxtLink :to="`services/${item.slug}`" class="services-all-item-l1">
+  <div class="services-all-item-l1">
     <div class="services-all-item-l1__icon">
       <img :src="item.icon" alt="." />
     </div>
@@ -13,7 +13,7 @@ const { item } = defineProps<{ item: ServicesAllItemParent }>();
     <div class="services-all-item-l1__arrow">
       <IcArrowRight :font-controlled="false" :filled="true" />
     </div>
-  </NuxtLink>
+  </div>
 </template>
 
 <style lang="scss">

@@ -13,14 +13,14 @@ const { isMobile } = useMediaSizes();
           Желаете открыть свой автосервис под брендом ABS-autoservice Заполните заявку на сайте и мы свяжемся с Вами для
           уточнения деталей
         </p>
-        <div v-if="!isMobile" class="about-partner__button">
+        <div v-show="!isMobile" class="about-partner__button">
           <UIButton text="Стать партнером" :is-filled="true" :size-large="true" />
         </div>
       </div>
       <div class="about-partner__link">
         <UILink type="a" text="перейти на сайт франшизы" link="/#" />
       </div>
-      <div v-if="isMobile" class="about-partner__button">
+      <div v-show="isMobile" class="about-partner__button">
         <UIButton text="Стать партнером" :is-filled="true" :size-large="true" />
       </div>
     </div>

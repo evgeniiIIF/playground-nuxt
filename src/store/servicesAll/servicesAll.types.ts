@@ -52,3 +52,8 @@ export interface ServicesAllState {
   servicesAllItems: ServicesAllItemParent[];
   chooseServices: ServicesAllItemChild[];
 }
+
+// emits
+export interface ServicesAllItemChildEmits {
+  (event: 'goTo', item: ServicesAllItemChild | ServicesAllItemParent | undefined): void;
+}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ServicesAllItemParent } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItemParent, ServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
 
 const props = defineProps<{ services: ServicesAllItemParent[] }>();
 
@@ -7,6 +7,10 @@ const currentServicesItemL1 = ref<ServicesAllItemParent | undefined>();
 
 const setCurrentServicesItemL1 = (item: ServicesAllItemParent) => {
   currentServicesItemL1.value = item;
+};
+
+const goTo = (item: ServicesAllItemChild | ServicesAllItemParent | undefined) => {
+  navigateTo({ path: `/services/${item?.slug}` });
 };
 
 const packagedColumnsItems = computed(() => {
@@ -37,14 +41,22 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
         ]"
       >
         <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
-        <ServicesAllNavItemL1 :item="servicesItemL1" @mouseenter="setCurrentServicesItemL1(servicesItemL1)" />
+        <ServicesAllNavItemL1
+          :item="servicesItemL1"
+          @click="goTo(servicesItemL1)"
+          @mouseenter="setCurrentServicesItemL1(servicesItemL1)"
+        />
       </li>
     </ul>
     <ul class="services-all-nav__l2 services-all-nav-l2">
       <li v-for="(packagedColumnsItem, index) in packagedColumnsItems" :key="index" class="services-all-nav-l2__column">
         <ul class="services-all-nav-l2__column-list">
-          <li v-for="item in packagedColumnsItem" :key="item.id" class="services-all-nav-l2__column-item">
-            <ServicesAllNavItemL2 :item="item" />
+          <li
+            v-for="servicesItemL2 in packagedColumnsItem"
+            :key="servicesItemL2.id"
+            class="services-all-nav-l2__column-item"
+          >
+            <ServicesAllNavItemL2 :item="servicesItemL2" @go-to="goTo($event)" />
           </li>
         </ul>
       </li>
