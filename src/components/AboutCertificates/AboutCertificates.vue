@@ -1,14 +1,27 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { AboutCertificates } from '@/components/AboutCertificates/AboutCertificates.types';
+
+defineProps<AboutCertificates>();
+</script>
 
 <template>
   <section class="about-certificates">
     <div class="container">
       <div class="about-certificates__wrapper">
-        <h2 class="about-certificates__title">Сертификаты</h2>
-        <p class="about-certificates__subtitle">Аккредитация от мировых производителей</p>
+        <h2 class="about-certificates__title">{{ aboutCertificates.title }}</h2>
+        <p class="about-certificates__subtitle">{{ aboutCertificates.subtitle }}</p>
         <ul class="about-certificates__certificates">
-          <li v-for="certificate in 4" :key="certificate" class="about-certificates__certificate">
-            <NuxtImg class="about-certificates__certificate-image" src="/gray-background.png" alt="certificate" />
+          <li
+            v-for="certificate in aboutCertificates.certificates"
+            :key="certificate.id"
+            class="about-certificates__certificate"
+          >
+            <NuxtImg
+              class="about-certificates__certificate-image"
+              :src="certificate.image_webp || certificate.image"
+              :alt="certificate.image_title || 'certificate'"
+              loading="lazy"
+            />
           </li>
         </ul>
       </div>
@@ -75,12 +88,11 @@
   }
 
   &__certificate {
+    display: flex;
     width: 100%;
     height: 100%;
     max-width: 285px;
-    max-height: 340px;
     min-width: 135px;
-    min-height: 140px;
 
     &-image {
       width: 100%;

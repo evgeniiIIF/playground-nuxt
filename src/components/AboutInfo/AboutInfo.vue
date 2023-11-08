@@ -1,19 +1,17 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { AboutInfo } from '@/components/AboutInfo/AboutInfo.types';
+
+defineProps<AboutInfo>();
+</script>
 
 <template>
   <section class="about-info">
     <div class="container">
       <div class="about-info__wrapper">
-        <h2 class="about-info__title">ABS-autoservice</h2>
-        <p class="about-info__description">
-          Это федеральная сеть автосервисов полного цикла, осуществляющая ремонт и обслуживание иномарок любой сложности
-          по&nbsp;выгодным ценам. Мы нацелены на премиальное обслуживание наших клиентов, отношения с которыми в
-          дальнейшем перерастет в&nbsp;долгосрочное сотрудничество. Наша команда – это специалисты, являющиеся
-          экспертами в&nbsp;своей области, способные выявить и оперативно устранить даже чрезвычайно сложные, скрытые,
-          непредвиденные повреждения и неисправности.
-        </p>
+        <h2 class="about-info__title">{{ aboutInfo.title }}</h2>
+        <div class="about-info__description" v-html="aboutInfo.description"></div>
         <div class="about-info__link">
-          <UILink type="NuxtLink" text="перейти в контакты" link="/contacts" />
+          <UILink type="NuxtLink" :text="aboutInfo.linkText" :link="aboutInfo.linkUrl" />
         </div>
       </div>
     </div>
@@ -40,6 +38,7 @@
     @include mobile {
       margin-bottom: 12px;
       @include title-main-xxsmall-bold;
+      text-transform: uppercase;
     }
   }
 
@@ -51,9 +50,16 @@
     @include mobile {
       @include text-main-grow;
     }
+
+    p {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
   }
 
   &__link {
+    display: flex;
     @include text-main;
     color: $color-gray;
     text-decoration: underline;
