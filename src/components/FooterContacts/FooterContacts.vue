@@ -30,7 +30,7 @@
               target="_blank"
               rel="noopener"
             >
-              <IcVk :font-controlled="false" :filled="true" />
+              <IcVkBlock :font-controlled="false" :filled="true" />
             </a>
           </li>
           <li class="footer-contacts__socials-item">

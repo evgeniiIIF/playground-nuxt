@@ -15,7 +15,7 @@ defineProps<OurPartners>();
         <div class="our-partners__logos">
           <ul class="our-partners__companies-logos">
             <li v-for="item in partners.items" :key="item.id" class="our-partners__company-logo">
-              <NuxtImg :src="item.logo" />
+              <NuxtImg :src="item.logo" loading="lazy" />
             </li>
           </ul>
         </div>
