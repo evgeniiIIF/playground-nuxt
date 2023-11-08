@@ -31,7 +31,7 @@ defineProps<UIButtonTypes>();
   </template>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .button {
   display: flex;
   justify-content: center;

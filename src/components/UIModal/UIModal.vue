@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import type { UIModalEmits, UIModalProps } from './UIModal.types';
+import { bodyLock, bodyUnlock } from './UIModal.utils';
 
-defineProps<UIModalProps>();
+const props = withDefaults(defineProps<UIModalProps>(), {
+  closeButton: true,
+});
 defineEmits<UIModalEmits>();
 
 const UI_MODAL_POSITIONS = {
@@ -9,6 +12,13 @@ const UI_MODAL_POSITIONS = {
   left: 'fade-left',
   right: 'fade-right',
 };
+
+watch(
+  () => props.isOpen,
+  (isOpen) => {
+    isOpen ? bodyLock() : bodyUnlock();
+  },
+);
 </script>
 
 <template>
@@ -18,7 +28,7 @@ const UI_MODAL_POSITIONS = {
         <div class="ui-modal__mask" @click="$emit('onClose')"></div>
 
         <div class="ui-modal__container">
-          <button type="button" class="ui-modal__close" @click="$emit('onClose')">
+          <button v-if="closeButton" type="button" class="ui-modal__close" @click="$emit('onClose')">
             <IcClose :font-controlled="false" :filled="true" />
           </button>
 
