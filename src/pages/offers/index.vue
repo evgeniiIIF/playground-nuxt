@@ -22,11 +22,11 @@ const showButton = computed(() => countItems.value < offersState.value.offersIte
           <div class="offers__cards">
             <div v-for="item in offersItems" :key="item.id" class="offers__card">
               <OffersItemCard
-                  :title="item.title"
-                  :text="item.preview_text"
-                  :image="item.image"
-                  :image-mobile="item.image_mobile"
-                  :slug="item.slug"
+                :title="item.title"
+                :text="item.preview_text"
+                :image="item.image"
+                :image-mobile="item.image_mobile"
+                :slug="item.slug"
               />
             </div>
           </div>

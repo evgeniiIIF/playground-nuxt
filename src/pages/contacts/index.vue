@@ -19,10 +19,10 @@ const { isMobile } = useMediaSizes();
             <div class="contacts__map map">
               <div v-show="isMobile" class="map__button">
                 <a
-                    class="map__button-link"
-                    href="https://yandex.ru/maps/?rtext=~45.01151530529911%2C41.929150298237595"
-                    target="_blank"
-                    rel="noopener"
+                  class="map__button-link"
+                  href="https://yandex.ru/maps/?rtext=~45.01151530529911%2C41.929150298237595"
+                  target="_blank"
+                  rel="noopener"
                 >
                   <UIButton text="Построить маршрут в навигаторе" />
                 </a>
@@ -31,10 +31,10 @@ const { isMobile } = useMediaSizes();
               <div class="map__wrapper ibg">
                 <!--  eslint-disable-next-line vuejs-accessibility/iframe-has-title -->
                 <iframe
-                    src="https://yandex.ru/map-widget/v1/?um=constructor%3Abf07745ef68e3a312fd40eec7814dc636979444f524d6b267d3c90c4c6cd9b01&source=constructor"
-                    width="1039"
-                    height="492"
-                    frameborder="0"
+                  src="https://yandex.ru/map-widget/v1/?um=constructor%3Abf07745ef68e3a312fd40eec7814dc636979444f524d6b267d3c90c4c6cd9b01&source=constructor"
+                  width="1039"
+                  height="492"
+                  frameborder="0"
                 ></iframe>
               </div>
             </div>

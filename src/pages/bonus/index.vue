@@ -67,7 +67,9 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
             <div class="bonus-calculate__card card-bonus-calculate">
               <div class="card-bonus-calculate__top">
                 <div class="card-bonus-calculate__top-title">Сумма которую вы тратите на обслуживание в год</div>
-                <div class="card-bonus-calculate__top-amount">{{ `${howMachSpendCount.toLocaleString('ru-RU')}₽` }}</div>
+                <div class="card-bonus-calculate__top-amount">
+                  {{ `${howMachSpendCount.toLocaleString('ru-RU')}₽` }}
+                </div>
               </div>
               <div class="card-bonus-calculate__slider">
                 <Slider v-model="bonusSliderPercent" :lazy="false" :tooltips="false" orientation="horizontal" />
@@ -85,9 +87,9 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
 
             <p class="bonus-calculate__text">
               *бонусные баллы становятся доступны доступны через 14 дней после покупки и сохраняются втечение 6 месяцев.
-              Бонусная программа не распространяется на приобретение шин и аккумуляторов, услуги тонирования, бронирования
-              автомобиля и на малярно-кузовные работы. Условия бонусной программы могут меняться. Активация карты
-              начинается с первой покупки.
+              Бонусная программа не распространяется на приобретение шин и аккумуляторов, услуги тонирования,
+              бронирования автомобиля и на малярно-кузовные работы. Условия бонусной программы могут меняться. Активация
+              карты начинается с первой покупки.
             </p>
           </div>
         </div>
