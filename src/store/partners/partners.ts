@@ -2,18 +2,21 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
 import { partnersHttp } from '@/api/http';
-import type { Partners, PartnersItems } from './partners.types';
+import type { Partners, PartnersItem, PartnersStore } from './partners.types';
 
-const DEFAULT_STATE: Partial<Partners> = {};
+const DEFAULT_STATE: PartnersStore = {
+  partners: {},
+  items: [],
+};
 
 export const partnersStore = defineStore('partnersStore', () => {
   const state = ref(DEFAULT_STATE);
 
   const setPartners = (data: Partners | {}) => {
-    state.value = data;
+    state.value.partners = data;
   };
 
-  const setPartnersItems = (data: PartnersItems[]) => {
+  const setPartnersItems = (data: PartnersItem[]) => {
     state.value.items = data;
   };
 

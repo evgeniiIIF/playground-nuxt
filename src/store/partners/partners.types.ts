@@ -1,4 +1,4 @@
-export interface PartnersItems {
+export interface PartnersItem {
   id: number;
   title: string;
   logo: string;
@@ -20,5 +20,9 @@ export interface Partners {
   is_active: string;
   title: string;
   subtitle: string;
-  items: PartnersItems[];
+}
+
+export interface PartnersStore {
+  partners: Partners | {};
+  items: PartnersItem[];
 }

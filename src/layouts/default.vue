@@ -14,7 +14,9 @@ const { isMobile } = useMediaSizes();
       <slot />
     </main>
     <AppWidget />
-    <AppFooter v-if="!$route.path.startsWith('/services')" />
+    <AppFooter
+      v-if="$route.path.split('/').findIndex((item) => item === 'services') !== $route.path.split('/').length - 1"
+    />
   </div>
 </template>
 

@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useServicesAllStore } from '@/store/servicesAll';
-
 import { useMediaSizes } from '@/composables/useMediaSizes';
 
 const { servicesAllEffects, servicesAllState } = useServicesAllStore();
 
-await servicesAllEffects.fetchServicesAll();
+await useAsyncData('services', async () => {
+  await Promise.all([servicesAllState.value.servicesAllItems.length === 0 && servicesAllEffects.fetchServicesAll()]);
+});
 
 const services = servicesAllState.value.servicesAllItems;
 

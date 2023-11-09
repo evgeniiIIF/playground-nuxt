@@ -1,11 +1,19 @@
 <script lang="ts" setup>
 import { useServicesAllStore } from '@/store/servicesAll';
 import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
-import type { ServiceForm } from '@/components/ServiceForm/ServiceForm.types';
 
-const props = defineProps<ServiceForm>();
+const { servicesAllState, servicesAllEffects, servicesAllActions } = useServicesAllStore();
 
-const { servicesAllActions } = useServicesAllStore();
+await useAsyncData('serviceForm', async () => {
+  await Promise.all([servicesAllState.value.servicesAllItems.length === 0 && servicesAllEffects.fetchServicesAll()]);
+});
+
+const services = servicesAllState.value.servicesAllItems;
+const chooseServices = ref(servicesAllState.value.chooseServices);
+
+watchEffect(() => {
+  chooseServices.value = servicesAllState.value.chooseServices;
+});
 
 const onChangeServiceHandler = (service: changedServicesAllItemChild) => {
   servicesAllActions.changeChooseService(service);
@@ -39,7 +47,7 @@ const sendRequest = () => {
     hasError.value = true;
   }
 
-  if (props.chooseServices.length < 1) {
+  if (chooseServices.value.length < 1) {
     errorDropdown.value = 'Выберите 1 или больше услуг';
     hasError.value = true;
   }

@@ -1,21 +1,23 @@
 <script lang="ts" setup>
 import { usePartnersStore } from '@/store/partners';
 import { useAboutStore } from '@/store/about';
+import type { Partners } from '@/store/partners/partners.types';
 import type { About } from '@/store/about/about.types';
 
 const { aboutState, aboutEffects } = useAboutStore();
 const { partnersState, partnersEffects } = usePartnersStore();
 
-await aboutEffects.fetchAbout();
-await aboutEffects.fetchAboutSlider();
-await aboutEffects.fetchAboutCertificates();
+await useAsyncData('about', async () => {
+  await Promise.all([
+    Object.keys(aboutState.value.about).length === 0 && aboutEffects.fetchAbout(),
+    aboutState.value.aboutSlider.length === 0 && aboutEffects.fetchAboutSlider(),
+    aboutState.value.aboutCertificates.length === 0 && aboutEffects.fetchAboutCertificates(),
+    Object.keys(partnersState.value.partners).length === 0 && partnersEffects.fetchPartners(),
+    partnersState.value.items.length === 0 && partnersEffects.fetchPartnersItems(),
+  ]);
+});
 
-if (Object.keys(partnersState.value).length === 0) {
-  await partnersEffects.fetchPartners();
-  await partnersEffects.fetchPartnersItems();
-}
-
-const partners = partnersState.value;
+const partners = partnersState.value.partners as Partners;
 const about = aboutState.value.about as About;
 
 const aboutWelcomeData = {
@@ -34,7 +36,7 @@ const aboutInfoData = {
 const partnersData = {
   title: partners.content?.title,
   subtitle: partners.content?.subtitle,
-  items: partners.items,
+  items: partnersState.value.items,
 };
 
 const aboutCertificatesData = {

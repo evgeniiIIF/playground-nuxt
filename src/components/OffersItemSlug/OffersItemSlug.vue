@@ -1,18 +1,14 @@
 <script setup lang="ts">
 import { useOffersStore } from '@/store/offers';
-import { useServicesAllStore } from '@/store/servicesAll';
 import { formatDate } from './OffersItemSlug.utils';
 
 const { offersEffects, offersState } = useOffersStore();
-const { servicesAllState, servicesAllEffects } = useServicesAllStore();
 
 const { slug } = useRoute().params;
 
-await offersEffects.fetchOffersItems(slug as string);
-
-if (!servicesAllState.value.servicesAllItems) {
-  await servicesAllEffects.fetchServicesAll();
-}
+await useAsyncData('offer', async () => {
+  await Promise.all([offersState.value.offersItemSlug.slug !== slug && offersEffects.fetchOffersItems(slug as string)]);
+});
 
 const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 
@@ -21,13 +17,6 @@ const datePubic = computed(() => formatDate(currentOffersItemSlug.value.created_
 const anotherOffersItems = computed(() =>
   offersState.value.offersItems.filter((item) => item.slug !== currentOffersItemSlug.value.slug).slice(0, 3),
 );
-
-const services = servicesAllState.value.servicesAllItems;
-const chooseServices = ref(servicesAllState.value.chooseServices);
-
-watchEffect(() => {
-  chooseServices.value = servicesAllState.value.chooseServices;
-});
 </script>
 <template>
   <section class="offers-item-slug">
@@ -71,7 +60,7 @@ watchEffect(() => {
       </div>
     </div>
     <div class="offers-item-slug__form">
-      <ServiceForm :services="services" :choose-services="chooseServices" />
+      <ServiceForm />
     </div>
     <div class="offers-item-slug__modal">
       <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
