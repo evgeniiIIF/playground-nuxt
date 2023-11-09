@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { mobileMode } from './AppHeaderMobile.utils';
+
 const headerColorIsDark = computed(() => {
   const isDark = useRoute().path === '/';
   return isDark;
@@ -7,6 +9,10 @@ const headerColorIsDark = computed(() => {
 const headerClass = computed(() => {
   return headerColorIsDark.value ? '' : 'header-mobile--light';
 });
+
+const [isOpenMobileMenu, , , toggleMobileMenu] = useBooleanState(false);
+
+onMounted(() => mobileMode());
 </script>
 
 <template>
@@ -23,9 +29,9 @@ const headerClass = computed(() => {
             <IcNavigationArrow :font-controlled="false" :filled="true" />
             <p class="header-mobile__address-text">ул. Доваторцев, 47 Б</p>
           </a>
-          <div class="header-mobile__calls">
+          <!-- <div class="header-mobile__calls">
             <a class="header-mobile__calls-phone" href="tel:88652500520" rel="noopener">+7 (8652) 500-520</a>
-          </div>
+          </div> -->
         </div>
         <div class="header-mobile__col">
           <div class="header-mobile__logo">
@@ -35,19 +41,22 @@ const headerClass = computed(() => {
             </NuxtLink>
           </div>
           <div class="header-mobile__burger-menu">
-            <button class="header-mobile__burger-menu-button" type="button">
-              <IcBurgerMenu :font-controlled="false" :filled="true" />
+            <button class="header-mobile__burger-menu-button" type="button" @click="toggleMobileMenu">
+              <IcBurgerMenuClose v-if="isOpenMobileMenu" :font-controlled="false" :filled="true" />
+              <IcBurgerMenu v-if="!isOpenMobileMenu" :font-controlled="false" :filled="true" />
             </button>
           </div>
         </div>
       </div>
+    </div>
+    <div class="header-mobile__menu">
+      <AppMobileMenu :is-open="isOpenMobileMenu" position="left" />
     </div>
   </header>
 </template>
 
 <style lang="scss">
 .header-mobile {
-  display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -56,14 +65,6 @@ const headerClass = computed(() => {
   background: #000;
   padding: 10px 0;
   color: #fff;
-
-  @include tablet {
-    display: block;
-  }
-
-  @include mobile {
-    display: block;
-  }
 
   &__wrapper {
     display: flex;
@@ -109,6 +110,9 @@ const headerClass = computed(() => {
       background: none;
       border-radius: 50%;
       cursor: pointer;
+      svg {
+        @include fill-svg-and-path(#fff);
+      }
     }
   }
 

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { ServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItemChild, ServicesAllItemChildEmits } from '@/store/servicesAll/servicesAll.types';
 
 const { item } = defineProps<{ item: ServicesAllItemChild | undefined }>();
+const emits = defineEmits<ServicesAllItemChildEmits>();
 
 const hasButton = computed(() => item?.children?.length && item?.children?.length > 2);
 const [isOpenList, , , toggleList] = useBooleanState(false);
@@ -17,14 +18,12 @@ const children = computed(() => {
 
 <template>
   <div class="services-all-item-l2">
-    <NuxtLink :to="`services/${item?.slug}`">
-      <h3 class="services-all-item-l2__title">
-        {{ item?.title }}
-      </h3>
-    </NuxtLink>
+    <h3 class="services-all-item-l2__title" @click="emits('goTo', item)">
+      {{ item?.title }}
+    </h3>
     <ul v-if="item?.children" class="services-all-item-l2__list">
       <li v-for="servicesItemL3 in children" :key="servicesItemL3.id" class="services-all-item-l2__item">
-        <ServicesAllNavItemL3 :item="servicesItemL3" />
+        <ServicesAllNavItemL3 :item="servicesItemL3" @go-to="emits('goTo', $event)" />
       </li>
       <div v-if="hasButton" class="services-all-item-l2__button show-button">
         <button class="show-button__button" type="button" @click="toggleList">

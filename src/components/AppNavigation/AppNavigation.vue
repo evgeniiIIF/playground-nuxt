@@ -46,14 +46,6 @@ const navigationClass = computed(() => {
 
 <style lang="scss">
 .navigation {
-  @include tablet {
-    display: none;
-  }
-
-  @include mobile {
-    display: none;
-  }
-
   &__list {
     display: flex;
     gap: 30px;

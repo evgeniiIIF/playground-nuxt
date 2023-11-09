@@ -9,4 +9,5 @@ export * from './carsHttp';
 export * from './serviceHttp';
 export * from './homeAboutSliderHttp';
 export * from './bonusHttp';
+export * from './aboutHttp';
 export * from './contactsHttp';

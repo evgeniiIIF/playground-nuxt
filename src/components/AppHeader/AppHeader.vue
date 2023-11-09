@@ -52,14 +52,6 @@ const headerClass = computed(() => {
 
   @include text-main-big;
 
-  @include tablet {
-    display: none;
-  }
-
-  @include mobile {
-    display: none;
-  }
-
   &__wrapper {
     display: flex;
     align-items: center;
