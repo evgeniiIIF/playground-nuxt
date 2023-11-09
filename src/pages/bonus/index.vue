@@ -24,80 +24,80 @@ const howMachSpendCount = computed(() => bonusSliderPercent.value * 1000);
 const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1155));
 </script>
 <template>
-  <section class="bonus">
-    <div class="container">
-      <div class="bonus__wrapper">
-        <div class="bonus__top">
-          <h2 class="bonus__title">{{ bonus.title }}</h2>
-          <p class="bonus__subtitle">{{ bonus.subtitle }}</p>
-        </div>
-        <div class="bonus__cards">
-          <div class="bonus__cards-row">
-            <div class="bonus__cards--small">
-              <div v-for="item in benefits" :key="item.id" class="bonus__card-small card-bonus-small">
-                <div class="card-bonus-small__title">{{ item.headline }}</div>
-                <div class="card-bonus-small__subtitle">{{ item.dsc }}</div>
-              </div>
-            </div>
-            <div class="bonus__cards--big">
-              <div class="card-bonus-big">
-                <div class="card-bonus-big__image">
-                  <div class="card-bonus-big__image--mobile">
-                    <IcLogoWhiteMobile :font-controlled="false" :filled="true" />
-                  </div>
-                  <div class="card-bonus-big__image--desktop">
-                    <IcLogoWhite :font-controlled="false" :filled="true" />
-                  </div>
-                </div>
-                <div class="card-bonus-big__bottom">
-                  <div class="card-bonus-big__title">Бонусная карта</div>
-                  <div class="card-bonus-big__card-number">**** 1234</div>
+  <div>
+    <section class="bonus">
+      <div class="container">
+        <div class="bonus__wrapper">
+          <div class="bonus__top">
+            <h2 class="bonus__title">{{ bonus.title }}</h2>
+            <p class="bonus__subtitle">{{ bonus.subtitle }}</p>
+          </div>
+          <div class="bonus__cards">
+            <div class="bonus__cards-row">
+              <div class="bonus__cards--small">
+                <div v-for="item in benefits" :key="item.id" class="bonus__card-small card-bonus-small">
+                  <div class="card-bonus-small__title">{{ item.headline }}</div>
+                  <div class="card-bonus-small__subtitle">{{ item.dsc }}</div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div v-show="bonus.is_active_btn_bonus || Boolean(!isMobile)" class="bonus__cards-button">
-            <UIButton :text="bonus.btn_bonus_title" @click="openModal" />
-          </div>
-        </div>
-        <div class="bonus__calculate bonus-calculate">
-          <h6 class="bonus-calculate__title">Рассчитайте свою выгоду</h6>
-
-          <div class="bonus-calculate__card card-bonus-calculate">
-            <div class="card-bonus-calculate__top">
-              <div class="card-bonus-calculate__top-title">Сумма которую вы тратите на обслуживание в год</div>
-              <div class="card-bonus-calculate__top-amount">{{ `${howMachSpendCount.toLocaleString('ru-RU')}₽` }}</div>
-            </div>
-            <div class="card-bonus-calculate__slider">
-              <Slider v-model="bonusSliderPercent" :lazy="false" :tooltips="false" orientation="horizontal" />
-            </div>
-            <div class="card-bonus-calculate__bottom">
-              <div class="card-bonus-calculate__bottom-title">Ваша выгода</div>
-              <div class="card-bonus-calculate__bottom-amount">
-                {{ `${bonusAmountCount.toLocaleString('ru-RU')}₽` }}
-              </div>
-              <div class="card-bonus-calculate__bottom-text">
-                Сумма, которую бы Вы сэкономили благодаря бонусной программе
+              <div class="bonus__cards--big">
+                <div class="card-bonus-big">
+                  <div class="card-bonus-big__image">
+                    <div class="card-bonus-big__image--mobile">
+                      <IcLogoWhiteMobile :font-controlled="false" :filled="true" />
+                    </div>
+                    <div class="card-bonus-big__image--desktop">
+                      <IcLogoWhite :font-controlled="false" :filled="true" />
+                    </div>
+                  </div>
+                  <div class="card-bonus-big__bottom">
+                    <div class="card-bonus-big__title">Бонусная карта</div>
+                    <div class="card-bonus-big__card-number">**** 1234</div>
+                  </div>
+                </div>
               </div>
             </div>
+            <div v-show="bonus.is_active_btn_bonus || Boolean(!isMobile)" class="bonus__cards-button">
+              <UIButton :text="bonus.btn_bonus_title" :is-filled="true" :has-full-width="true" @click="openModal" />
+            </div>
           </div>
+          <div class="bonus__calculate bonus-calculate">
+            <h6 class="bonus-calculate__title">Рассчитайте свою выгоду</h6>
 
-          <p class="bonus-calculate__text">
-            *бонусные баллы становятся доступны доступны через 14 дней после покупки и сохраняются втечение 6 месяцев.
-            Бонусная программа не распространяется на приобретение шин и аккумуляторов, услуги тонирования, бронирования
-            автомобиля и на малярно-кузовные работы. Условия бонусной программы могут меняться. Активация карты
-            начинается с первой покупки.
-          </p>
+            <div class="bonus-calculate__card card-bonus-calculate">
+              <div class="card-bonus-calculate__top">
+                <div class="card-bonus-calculate__top-title">Сумма которую вы тратите на обслуживание в год</div>
+                <div class="card-bonus-calculate__top-amount">{{ `${howMachSpendCount.toLocaleString('ru-RU')}₽` }}</div>
+              </div>
+              <div class="card-bonus-calculate__slider">
+                <Slider v-model="bonusSliderPercent" :lazy="false" :tooltips="false" orientation="horizontal" />
+              </div>
+              <div class="card-bonus-calculate__bottom">
+                <div class="card-bonus-calculate__bottom-title">Ваша выгода</div>
+                <div class="card-bonus-calculate__bottom-amount">
+                  {{ `${bonusAmountCount.toLocaleString('ru-RU')}₽` }}
+                </div>
+                <div class="card-bonus-calculate__bottom-text">
+                  Сумма, которую бы Вы сэкономили благодаря бонусной программе
+                </div>
+              </div>
+            </div>
+
+            <p class="bonus-calculate__text">
+              *бонусные баллы становятся доступны доступны через 14 дней после покупки и сохраняются втечение 6 месяцев.
+              Бонусная программа не распространяется на приобретение шин и аккумуляторов, услуги тонирования, бронирования
+              автомобиля и на малярно-кузовные работы. Условия бонусной программы могут меняться. Активация карты
+              начинается с первой покупки.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="bonus__form">
-      <ServiceForm />
-    </div>
-    <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
-      <AppCallbackForm title="Получить бонусную карту" />
-    </UIModal>
-  </section>
+      <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
+        <AppCallbackForm title="Получить бонусную карту" />
+      </UIModal>
+    </section>
+    <ServiceForm />
+  </div>
 </template>
 <style src="@vueform/slider/themes/default.css"></style>
 <style lang="scss">
@@ -165,11 +165,15 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
     }
   }
   &__cards-button {
-    .button {
-      background: #00a19c;
+    max-width: 206px;
+
+    @include media-range($tablet-from, 1145px) {
+      max-width: inherit;
     }
-  }
-  &__calculate {
+
+    @include mobile {
+      max-width: inherit;
+    }
   }
 }
 
@@ -310,8 +314,6 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
     .slider-connects {
       background: #e3e5e5;
     }
-  }
-  &__bottom {
   }
   &__bottom-title {
     font-size: 24px;

@@ -179,7 +179,6 @@ const sendRequest = () => {
 
       @include mobile {
         max-width: inherit;
-        margin-top: 30px;
       }
     }
   }

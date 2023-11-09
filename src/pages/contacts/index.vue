@@ -4,46 +4,46 @@ import { useMediaSizes } from '../../composables/useMediaSizes';
 const { isMobile } = useMediaSizes();
 </script>
 <template>
-  <section class="contacts">
-    <div class="container">
-      <div class="contacts__wrapper">
-        <h2 class="contacts__title">Контакты</h2>
-        <div class="contacts__body">
-          <div class="contacts__info info-contacts">
-            <div class="info-contacts__address">г. Ставрополь, ул. Доваторцев 47Б</div>
-            <a class="info-contacts__phone" href="tel:+78652333350">+7 (8652) 33-33-50</a>
-            <div class="info-contacts__time">пн-сб 9:00-19:00, вс 10:00-16:00</div>
-            <a class="info-contacts__email" href="mailto:info@sindikacentre.ru">info@sindikacentre.ru</a>
-          </div>
-          <div class="contacts__map map">
-            <div v-show="isMobile" class="map__button">
-              <a
-                class="map__button-link"
-                href="https://yandex.ru/maps/?rtext=~45.01151530529911%2C41.929150298237595"
-                target="_blank"
-                rel="noopener"
-              >
-                <UIButton text="Построить маршрут в навигаторе" />
-              </a>
+  <div>
+    <section class="contacts">
+      <div class="container">
+        <div class="contacts__wrapper">
+          <h2 class="contacts__title">Контакты</h2>
+          <div class="contacts__body">
+            <div class="contacts__info info-contacts">
+              <div class="info-contacts__address">г. Ставрополь, ул. Доваторцев 47Б</div>
+              <a class="info-contacts__phone" href="tel:+78652333350">+7 (8652) 33-33-50</a>
+              <div class="info-contacts__time">пн-сб 9:00-19:00, вс 10:00-16:00</div>
+              <a class="info-contacts__email" href="mailto:info@sindikacentre.ru">info@sindikacentre.ru</a>
             </div>
+            <div class="contacts__map map">
+              <div v-show="isMobile" class="map__button">
+                <a
+                    class="map__button-link"
+                    href="https://yandex.ru/maps/?rtext=~45.01151530529911%2C41.929150298237595"
+                    target="_blank"
+                    rel="noopener"
+                >
+                  <UIButton text="Построить маршрут в навигаторе" />
+                </a>
+              </div>
 
-            <div class="map__wrapper ibg">
-              <!--  eslint-disable-next-line vuejs-accessibility/iframe-has-title -->
-              <iframe
-                src="https://yandex.ru/map-widget/v1/?um=constructor%3Abf07745ef68e3a312fd40eec7814dc636979444f524d6b267d3c90c4c6cd9b01&source=constructor"
-                width="1039"
-                height="492"
-                frameborder="0"
-              ></iframe>
+              <div class="map__wrapper ibg">
+                <!--  eslint-disable-next-line vuejs-accessibility/iframe-has-title -->
+                <iframe
+                    src="https://yandex.ru/map-widget/v1/?um=constructor%3Abf07745ef68e3a312fd40eec7814dc636979444f524d6b267d3c90c4c6cd9b01&source=constructor"
+                    width="1039"
+                    height="492"
+                    frameborder="0"
+                ></iframe>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="contacts__form">
-      <ServiceForm />
-    </div>
-  </section>
+    </section>
+    <ServiceForm />
+  </div>
 </template>
 
 <style lang="scss">
