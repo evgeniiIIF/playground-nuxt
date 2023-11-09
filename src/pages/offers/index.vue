@@ -14,30 +14,30 @@ const showButton = computed(() => countItems.value < offersState.value.offersIte
 </script>
 
 <template>
-  <section class="offers">
-    <div class="container">
-      <div class="offers__wrapper">
-        <h1 class="offers__title">Акции</h1>
-        <div class="offers__cards">
-          <div v-for="item in offersItems" :key="item.id" class="offers__card">
-            <OffersItemCard
-              :title="item.title"
-              :text="item.preview_text"
-              :image="item.image"
-              :image-mobile="item.image_mobile"
-              :slug="item.slug"
-            />
+  <div>
+    <section class="offers">
+      <div class="container">
+        <div class="offers__wrapper">
+          <h1 class="offers__title">Акции</h1>
+          <div class="offers__cards">
+            <div v-for="item in offersItems" :key="item.id" class="offers__card">
+              <OffersItemCard
+                :title="item.title"
+                :text="item.preview_text"
+                :image="item.image"
+                :image-mobile="item.image_mobile"
+                :slug="item.slug"
+              />
+            </div>
+          </div>
+          <div v-if="showButton" class="offers__button">
+            <UIButton text="Загрузить еще" @click="incrementCountItems" />
           </div>
         </div>
-        <div v-if="showButton" class="offers__button">
-          <UIButton text="Загрузить еще" @click="incrementCountItems" />
-        </div>
       </div>
-    </div>
-    <div class="offers__form">
-      <ServiceForm />
-    </div>
-  </section>
+    </section>
+    <ServiceForm />
+  </div>
 </template>
 
 <style lang="scss">

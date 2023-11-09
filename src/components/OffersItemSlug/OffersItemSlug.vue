@@ -59,9 +59,6 @@ const anotherOffersItems = computed(() =>
         </div>
       </div>
     </div>
-    <div class="offers-item-slug__form">
-      <ServiceForm />
-    </div>
     <div class="offers-item-slug__modal">
       <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
         <AppCallbackForm title="Обратный звонок" />
@@ -161,7 +158,7 @@ const anotherOffersItems = computed(() =>
 }
 
 .another-offers {
-  padding: 40px 0 80px 0;
+  padding-top: 40px;
   &__row {
     @include row-flex();
   }
