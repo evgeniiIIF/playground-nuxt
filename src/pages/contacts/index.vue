@@ -28,7 +28,7 @@ const contacts = contactsState.value.contacts;
             <div class="contacts__map map">
               <div v-show="isMobile" class="map__button">
                 <a class="map__button-link" :href="contacts.route_link" target="_blank" rel="noopener">
-                  <UIButton text="Построить маршрут в навигаторе" :is-filled="true" :has-full-width="true"/>
+                  <UIButton text="Построить маршрут в навигаторе" :is-filled="true" :has-full-width="true" />
                 </a>
               </div>
               <div class="map__wrapper ibg">
