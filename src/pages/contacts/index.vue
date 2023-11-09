@@ -28,10 +28,9 @@ const contacts = contactsState.value.contacts;
             <div class="contacts__map map">
               <div v-show="isMobile" class="map__button">
                 <a class="map__button-link" :href="contacts.route_link" target="_blank" rel="noopener">
-                  <UIButton text="Построить маршрут в навигаторе" />
+                  <UIButton text="Построить маршрут в навигаторе" :is-filled="true" :has-full-width="true"/>
                 </a>
               </div>
-
               <div class="map__wrapper ibg">
                 <!--  eslint-disable-next-line vuejs-accessibility/iframe-has-title -->
                 <iframe
@@ -161,10 +160,6 @@ const contacts = contactsState.value.contacts;
   }
   &__button {
     margin: 0 20px 50px;
-    .button {
-      width: 100%;
-      background: #00a19c;
-    }
   }
 }
 </style>
