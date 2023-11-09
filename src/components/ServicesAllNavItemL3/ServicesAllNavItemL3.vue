@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import type { ServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItemChild, ServicesAllItemChildEmits } from '@/store/servicesAll/servicesAll.types';
 
 const { item } = defineProps<{ item: ServicesAllItemChild | undefined }>();
+const emits = defineEmits<ServicesAllItemChildEmits>();
 </script>
 
 <template>
-  <NuxtLink :to="`/services/${item?.slug}`" class="services-all-item-l3">
+  <div class="services-all-item-l3" @click.stop="emits('goTo', item)">
     <div class="services-all-item-l3__arrow">
       <IcArrowRight :font-controlled="false" :filled="true" />
     </div>
     <h2 class="services-all-item-l3__title">{{ item?.title }}</h2>
-  </NuxtLink>
+  </div>
 </template>
 
 <style lang="scss">

@@ -28,7 +28,7 @@ const { isMobile } = useMediaSizes();
             <a class="info-contacts__email" href="mailto:info@sindikacentre.ru">info@sindikacentre.ru</a>
           </div>
           <div class="contacts__map map">
-            <div v-if="isMobile" class="map__button">
+            <div v-show="isMobile" class="map__button">
               <a
                 class="map__button-link"
                 href="https://yandex.ru/maps/?rtext=~45.01151530529911%2C41.929150298237595"
