@@ -1,6 +1,10 @@
 <script lang="ts" setup>
-import { useServicesAllStore } from '@/store/servicesAll';
 import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import { useServicesAllStore } from '@/store/servicesAll';
+import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
+import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
+import { validateServicesDropdown } from '@/utils/validateServicesDropdown/validateServicesDropdown';
+import { leadsHttp } from '~/api/http/leadsHttp';
 
 const { servicesAllState, servicesAllEffects, servicesAllActions } = useServicesAllStore();
 
@@ -25,35 +29,57 @@ const hasError = ref(false);
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
-const errorDropdown = ref('');
-const sendRequest = () => {
-  errorNameInput.value = '';
-  errorPhoneInput.value = '';
-  errorDropdown.value = '';
+const errorServices = ref('');
+const sendRequest = async () => {
+  errorNameInput.value = validateNameInput(name.value);
+  errorPhoneInput.value = validatePhoneInput(phone.value);
+  errorServices.value = validateServicesDropdown(chooseServices.value);
+
+  if (errorNameInput.value || errorPhoneInput.value || errorServices.value) {
+    hasError.value = true;
+    return;
+  }
+
+  const requestData = {
+    name: name.value,
+    phone: phone.value,
+    services_list: chooseServices.value.map((service) => service.title).join(', '),
+  };
+
+  console.log(requestData);
+
+  const response = await leadsHttp.fetchServiceForm(requestData);
+
+  console.log(response.data.value);
   hasError.value = false;
-
-  if (name.value.trim().length < 2) {
-    errorNameInput.value = 'Имя должно состоять из 2 или больше символов';
-    hasError.value = true;
-  }
-
-  if (name.value.match(/[0-9]/)) {
-    errorNameInput.value = 'Имя не должно содержать цифры';
-    hasError.value = true;
-  }
-
-  if (phone.value.trim().length < 18) {
-    errorPhoneInput.value = 'Заполните поле полностью';
-    hasError.value = true;
-  }
-
-  if (chooseServices.value.length < 1) {
-    errorDropdown.value = 'Выберите 1 или больше услуг';
-    hasError.value = true;
-  }
-
-  if (hasError.value) return;
 };
+
+watch(
+  () => [name.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorNameInput.value = validateNameInput(name.value);
+    }
+  },
+);
+
+watch(
+  () => [phone.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorPhoneInput.value = validatePhoneInput(phone.value);
+    }
+  },
+);
+
+watch(
+  () => [chooseServices.value.length, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorServices.value = validateServicesDropdown(chooseServices.value);
+    }
+  },
+);
 </script>
 
 <template>
@@ -74,7 +100,7 @@ const sendRequest = () => {
             :without-title-margin="true"
             :items="services"
             :checked-services="chooseServices"
-            :error-message="errorDropdown"
+            :error-message="errorServices"
             @on-change-service="onChangeServiceHandler"
           />
         </div>

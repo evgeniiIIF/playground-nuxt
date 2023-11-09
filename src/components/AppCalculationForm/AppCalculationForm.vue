@@ -4,6 +4,10 @@ import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAl
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import { computed } from 'vue';
 import type { AppCalculationForm } from '@/components/AppCalculationForm/AppCalculationForm.types';
+import { validateNameInput } from '~/utils/validateNameInput/validateNameInput';
+import { validatePhoneInput } from '~/utils/validatePhoneInput/validatePhoneInput';
+import { validateServicesDropdown } from '~/utils/validateServicesDropdown/validateServicesDropdown';
+import { leadsHttp } from '~/api/http/leadsHttp';
 
 const props = defineProps<AppCalculationForm>();
 
@@ -13,7 +17,6 @@ const { servicesAllActions } = useServicesAllStore();
 const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
   servicesAllActions.changeChooseService(service);
 };
-
 const totalCost = computed(() => props.services.reduce((acc, service) => acc + service.price, 0));
 
 const name = ref('');
@@ -23,34 +26,59 @@ const hasError = ref(false);
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
 const errorServices = ref('');
-const sendRequest = () => {
-  errorNameInput.value = '';
-  errorPhoneInput.value = '';
-  errorServices.value = '';
+const sendRequest = async () => {
+  errorNameInput.value = validateNameInput(name.value);
+  errorPhoneInput.value = validatePhoneInput(phone.value);
+  errorServices.value = validateServicesDropdown(props.services);
+
+  if (errorNameInput.value || errorPhoneInput.value || errorServices.value) {
+    hasError.value = true;
+    return;
+  }
+
+  const requestData = {
+    name: name.value,
+    phone: phone.value,
+    car: `${props.carBrand} ${props.carModel}`,
+    services_list: props.services.map((service) => service.title).join(', '),
+  };
+
+  console.log(requestData);
+
+  const response = await leadsHttp.fetchCalculationForm(requestData);
+  const data = response.data.value?.success;
+
+  console.log(data);
+
   hasError.value = false;
-
-  if (name.value.trim().length < 2) {
-    errorNameInput.value = 'Имя должно состоять из 2 или больше символов';
-    hasError.value = true;
-  }
-
-  if (name.value.match(/[0-9]/)) {
-    errorNameInput.value = 'Имя не должно содержать цифры';
-    hasError.value = true;
-  }
-
-  if (phone.value.trim().length < 18) {
-    errorPhoneInput.value = 'Заполните поле полностью';
-    hasError.value = true;
-  }
-
-  if (props.services.length < 1) {
-    errorServices.value = 'Необходимо выбрать одну или несколько услуг';
-    hasError.value = true;
-  }
-
-  if (hasError.value) return;
 };
+
+watch(
+  () => [name.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorNameInput.value = validateNameInput(name.value);
+    }
+  },
+);
+
+watch(
+  () => [phone.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorPhoneInput.value = validatePhoneInput(phone.value);
+    }
+  },
+);
+
+watch(
+  () => [props.services.length, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorServices.value = validateServicesDropdown(props.services);
+    }
+  },
+);
 </script>
 
 <template>

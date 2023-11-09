@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
+import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
+
 defineProps<{ title: string }>();
 
 const name = ref('');
@@ -8,27 +11,34 @@ const hasError = ref(false);
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
 const sendRequest = () => {
-  errorNameInput.value = '';
-  errorPhoneInput.value = '';
+  errorNameInput.value = validateNameInput(name.value);
+  errorPhoneInput.value = validatePhoneInput(phone.value);
+
+  if (errorNameInput.value || errorPhoneInput.value) {
+    hasError.value = true;
+    return;
+  }
+
   hasError.value = false;
-
-  if (name.value.trim().length < 2) {
-    errorNameInput.value = 'Имя должно состоять из 2 или больше символов';
-    hasError.value = true;
-  }
-
-  if (name.value.match(/[0-9]/)) {
-    errorNameInput.value = 'Имя не должно содержать цифры';
-    hasError.value = true;
-  }
-
-  if (phone.value.trim().length < 18) {
-    errorPhoneInput.value = 'Заполните поле полностью';
-    hasError.value = true;
-  }
-
-  if (hasError.value) return;
 };
+
+watch(
+  () => [name.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorNameInput.value = validateNameInput(name.value);
+    }
+  },
+);
+
+watch(
+  () => [phone.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorPhoneInput.value = validatePhoneInput(phone.value);
+    }
+  },
+);
 </script>
 
 <template>
