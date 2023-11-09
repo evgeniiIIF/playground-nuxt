@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import { mobileMode } from './AppHeaderMobile.utils';
+import { useMediaSizes } from '@/composables/useMediaSizes';
+
+const { isDesktop } = useMediaSizes();
 
 const headerColorIsDark = computed(() => {
   const isDark = useRoute().path === '/';
@@ -10,9 +12,17 @@ const headerClass = computed(() => {
   return headerColorIsDark.value ? '' : 'header-mobile--light';
 });
 
-const [isOpenMobileMenu, , , toggleMobileMenu] = useBooleanState(false);
+const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = useBooleanState(false);
 
-onMounted(() => mobileMode());
+const clickOnLink = () => {
+  closeMobileMenu();
+};
+
+useRouter().afterEach((to, from) => {
+  if (from.path === '/services' && !isDesktop.value) {
+    openMobileMenu();
+  }
+});
 </script>
 
 <template>
@@ -50,7 +60,7 @@ onMounted(() => mobileMode());
       </div>
     </div>
     <div class="header-mobile__menu">
-      <AppMobileMenu :is-open="isOpenMobileMenu" position="left" />
+      <AppMobileMenu :is-open="isOpenMobileMenu" position="left" @clickOnLink="clickOnLink" />
     </div>
   </header>
 </template>

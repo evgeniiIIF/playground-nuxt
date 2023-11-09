@@ -3,13 +3,13 @@ import { useMediaSizes } from '@/composables/useMediaSizes';
 
 import AppWidget from '@/components/AppWidget/AppWidget.vue';
 
-const { isMobile } = useMediaSizes();
+const { isDesktop } = useMediaSizes();
 </script>
 
 <template>
   <div class="wrapper">
-    <AppHeader v-show="!isMobile" />
-    <AppHeaderMobile v-show="isMobile" />
+    <AppHeader v-show="isDesktop" />
+    <AppHeaderMobile v-show="!isDesktop" />
     <main>
       <slot />
     </main>
@@ -31,6 +31,9 @@ const { isMobile } = useMediaSizes();
 main {
   margin-top: 114px;
   flex: 1 1 auto;
+  @include to(1280px) {
+    margin-top: 91px;
+  }
 
   @include tablet {
     margin-top: 91px;
