@@ -1,15 +1,13 @@
 <script setup lang="ts">
+import { useContactsStore } from '~/store/contacts';
 import { useMediaSizes } from '../../composables/useMediaSizes';
-import {useContactsStore} from "~/store/contacts";
 
 const { isMobile } = useMediaSizes();
 
 const { contactsState, contactsEffects } = useContactsStore();
 
 await useAsyncData('layout', async () => {
-  await Promise.all([
-    Object.keys(contactsState.value.contacts).length === 0 && contactsEffects.fetchContacts(),
-  ]);
+  await Promise.all([Object.keys(contactsState.value.contacts).length === 0 && contactsEffects.fetchContacts()]);
 });
 
 const contacts = contactsState.value.contacts;
@@ -29,12 +27,7 @@ const contacts = contactsState.value.contacts;
             </div>
             <div class="contacts__map map">
               <div v-show="isMobile" class="map__button">
-                <a
-                  class="map__button-link"
-                  :href="contacts.route_link"
-                  target="_blank"
-                  rel="noopener"
-                >
+                <a class="map__button-link" :href="contacts.route_link" target="_blank" rel="noopener">
                   <UIButton text="Построить маршрут в навигаторе" />
                 </a>
               </div>
