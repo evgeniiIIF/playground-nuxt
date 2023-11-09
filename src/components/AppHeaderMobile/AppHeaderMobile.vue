@@ -10,7 +10,7 @@ const headerClass = computed(() => {
   return headerColorIsDark.value ? '' : 'header-mobile--light';
 });
 
-const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = useBooleanState(false);
+const [isOpenMobileMenu, , , toggleMobileMenu] = useBooleanState(false);
 
 onMounted(() => mobileMode());
 </script>
@@ -42,8 +42,8 @@ onMounted(() => mobileMode());
           </div>
           <div class="header-mobile__burger-menu">
             <button class="header-mobile__burger-menu-button" type="button" @click="toggleMobileMenu">
-              <IcBurgerMenuClose :font-controlled="false" :filled="true" v-if="isOpenMobileMenu" />
-              <IcBurgerMenu :font-controlled="false" :filled="true" v-if="!isOpenMobileMenu" />
+              <IcBurgerMenuClose v-if="isOpenMobileMenu" :font-controlled="false" :filled="true" />
+              <IcBurgerMenu v-if="!isOpenMobileMenu" :font-controlled="false" :filled="true" />
             </button>
           </div>
         </div>

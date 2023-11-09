@@ -3,13 +3,16 @@ import { Autoplay, Pagination } from 'swiper/modules';
 
 import 'swiper/scss';
 import 'swiper/scss/pagination';
+import type { AboutWelcome } from '@/components/AboutWelcome/AboutWelcome.types';
+
+defineProps<AboutWelcome>();
 </script>
 
 <template>
   <section class="about-welcome">
     <div class="container">
-      <h1 class="about-welcome__title">О компании</h1>
-      <p class="about-welcome__subtitle">Сеть автосервисов ABS-autoservice</p>
+      <h1 class="about-welcome__title">{{ aboutWelcome.title }}</h1>
+      <p class="about-welcome__subtitle">{{ aboutWelcome.subtitle }}</p>
       <Swiper
         class="about-welcome__slider"
         :modules="[Pagination, Autoplay]"
@@ -19,8 +22,13 @@ import 'swiper/scss/pagination';
         :autoplay="{ delay: 3000 }"
         loop
       >
-        <SwiperSlide v-for="slide in 2" :key="slide" class="about-welcome__slider-slide">
-          <NuxtImg src="/about-slide-1.jpeg" :class="'about-welcome__slider-slide-img'" loading="lazy" />
+        <SwiperSlide v-for="slide in aboutWelcome.slider" :key="slide.id" class="about-welcome__slider-slide">
+          <NuxtImg
+            class="about-welcome__slider-slide-img"
+            :src="slide.image_webp || slide.image"
+            :alt="slide.image_title || 'company-photo'"
+            loading="lazy"
+          />
         </SwiperSlide>
       </Swiper>
     </div>
@@ -65,7 +73,6 @@ import 'swiper/scss/pagination';
         height: 100%;
         max-height: 520px;
         object-fit: cover;
-        object-position: bottom;
       }
     }
 
@@ -90,6 +97,8 @@ import 'swiper/scss/pagination';
           width: 40px;
           height: 2px;
           border-radius: 0;
+          background-color: $color-gray;
+          opacity: 1;
 
           &-active {
             background-color: $color-second;

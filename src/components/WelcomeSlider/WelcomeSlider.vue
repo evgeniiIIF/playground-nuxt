@@ -130,6 +130,8 @@ const { isMobile } = useMediaSizes();
           width: 40px;
           height: 2px;
           border-radius: 0;
+          background-color: $color-gray;
+          opacity: 1;
 
           &-active {
             background-color: $color-second;

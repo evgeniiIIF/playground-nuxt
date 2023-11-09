@@ -1,27 +1,27 @@
 <script lang="ts" setup>
 import { useMediaSizes } from '@/composables/useMediaSizes';
+import type { AboutPartner } from '@/components/AboutPartner/AboutPartner.types';
 
 const { isMobile } = useMediaSizes();
+
+defineProps<AboutPartner>();
 </script>
 
 <template>
   <section class="about-partner">
     <div class="container">
-      <h2 class="about-partner__title">Стать партнером</h2>
+      <h2 class="about-partner__title">{{ aboutPartner.title }}</h2>
       <div class="about-partner__row">
-        <p class="about-partner__description">
-          Желаете открыть свой автосервис под брендом ABS-autoservice Заполните заявку на сайте и мы свяжемся с Вами для
-          уточнения деталей
-        </p>
-        <div v-show="!isMobile" class="about-partner__button">
-          <UIButton text="Стать партнером" :is-filled="true" :size-large="true" />
+        <div class="about-partner__description" v-html="aboutPartner.description"></div>
+        <div v-if="aboutPartner.showBtn && !isMobile" class="about-partner__button">
+          <UIButton :text="aboutPartner.btnTitle" :is-filled="true" :size-large="true" />
         </div>
       </div>
       <div class="about-partner__link">
-        <UILink type="a" text="перейти на сайт франшизы" link="/#" />
+        <UILink type="a" :text="aboutPartner.linkText" :link="aboutPartner.linkUrl" />
       </div>
-      <div v-show="isMobile" class="about-partner__button">
-        <UIButton text="Стать партнером" :is-filled="true" :size-large="true" />
+      <div v-if="aboutPartner.showBtn && isMobile" class="about-partner__button">
+        <UIButton :text="aboutPartner.btnTitle" :is-filled="true" :size-large="true" />
       </div>
     </div>
   </section>
@@ -59,6 +59,12 @@ const { isMobile } = useMediaSizes();
     max-width: 455px;
     @include text-main;
     color: $color-gray-dark;
+
+    p {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
   }
 
   &__button {
@@ -71,6 +77,8 @@ const { isMobile } = useMediaSizes();
   }
 
   &__link {
+    display: flex;
+
     @include mobile {
       margin-bottom: 30px;
     }

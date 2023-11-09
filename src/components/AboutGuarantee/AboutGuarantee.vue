@@ -1,15 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { AboutGuarantee } from '@/components/AboutGuarantee/AboutGuarantee.types';
+
+defineProps<AboutGuarantee>();
+</script>
 
 <template>
   <section class="about-guarantee">
     <div class="container">
       <div class="about-guarantee__wrapper">
-        <h2 class="about-guarantee__title">Гарантия качества</h2>
-        <p class="about-guarantee__description">
-          Каждый автотехцентр под брендом ABS-autoservice предоставляет 1 год гарантии на все устанавливаемые
-          автозапчасти и работы. Свяжитесь с нашей службой контроля качества, если у Вас возникли вопросы
-          по&nbsp;обслуживанию или запчастям
-        </p>
+        <h2 class="about-guarantee__title">{{ aboutGuarantee.title }}</h2>
+        <div class="about-guarantee__description" v-html="aboutGuarantee.description"></div>
       </div>
     </div>
   </section>
@@ -40,6 +40,12 @@
   &__description {
     @include text-main;
     color: $color-gray-dark;
+
+    p {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
   }
 }
 </style>

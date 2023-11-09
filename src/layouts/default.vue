@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { useMediaSizes } from '@/composables/useMediaSizes';
 
-const { isMobile } = useMediaSizes();
-
 import AppWidget from '@/components/AppWidget/AppWidget.vue';
+
+const { isMobile } = useMediaSizes();
 </script>
 
 <template>

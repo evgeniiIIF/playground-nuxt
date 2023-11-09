@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { UIModalEmits, UIModalProps } from '@/components/UIModal/UIModal.types';
+import type { UIModalProps } from '@/components/UIModal/UIModal.types';
 
 defineProps<UIModalProps>();
 </script>
