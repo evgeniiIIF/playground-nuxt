@@ -13,12 +13,21 @@ const navigationClass = computed(() => {
   <nav class="navigation" :class="navigationClass">
     <ul class="navigation__list">
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" active-class="navigation__item-link--active" to="/offers"
+        <NuxtLink
+          class="navigation__item-link"
+          active-class="navigation__item-link--active"
+          to="/offers"
+          @click="$emit('clickOnLink')"
           >Акции</NuxtLink
         >
       </li>
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" active-class="navigation__item-link--active" to="/services">
+        <NuxtLink
+          class="navigation__item-link"
+          active-class="navigation__item-link--active"
+          to="/services"
+          @click="$emit('clickOnLink')"
+        >
           <span class="navigation__item-link-text">Услуги</span>
           <span class="navigation__item-link-arrow">
             <IcArrowDownNavigation :font-controlled="false" :filled="true" />
@@ -26,17 +35,29 @@ const navigationClass = computed(() => {
         </NuxtLink>
       </li>
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" active-class="navigation__item-link--active" to="/bonus"
+        <NuxtLink
+          class="navigation__item-link"
+          active-class="navigation__item-link--active"
+          to="/bonus"
+          @click="$emit('clickOnLink')"
           >Бонусная программа</NuxtLink
         >
       </li>
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" active-class="navigation__item-link--active" to="/about"
+        <NuxtLink
+          class="navigation__item-link"
+          active-class="navigation__item-link--active"
+          to="/about"
+          @click="$emit('clickOnLink')"
           >О компании</NuxtLink
         >
       </li>
       <li class="navigation__item">
-        <NuxtLink class="navigation__item-link" active-class="navigation__item-link--active" to="/contacts"
+        <NuxtLink
+          class="navigation__item-link"
+          active-class="navigation__item-link--active"
+          to="/contacts"
+          @click="$emit('clickOnLink')"
           >Контакты</NuxtLink
         >
       </li>
