@@ -1,16 +1,10 @@
 <script lang="ts" setup>
-import whatsapp from '@/assets/icons/whatsapp.svg';
-import telegram from '@/assets/icons/telegram.svg';
-import vk from '@/assets/icons/vk.svg';
 import { useBooleanState } from '@/composables/useBooleanState';
 import { useClickOutside } from '@/composables/useClickOutside';
 import { ref } from 'vue';
+import type { AppWidget } from '@/components/AppWidget/AppWidget.types';
 
-const socials = [
-  { icon: whatsapp, backgroundColor: '#51CB5F' },
-  { icon: telegram, backgroundColor: '#29A9EB' },
-  { icon: vk, backgroundColor: '#0077FF' },
-];
+defineProps<AppWidget>();
 
 const WidgetNodeRef = ref<HTMLDivElement | null>(null);
 
@@ -28,17 +22,18 @@ useClickOutside(WidgetNodeRef, closeWidget);
     <div class="widget__content">
       <p class="widget__title">Запись на сервис</p>
       <ul class="widget__socials">
-        <li v-for="social in socials" :key="social.icon" class="widget__social">
-          <a
-            class="widget__social-link"
-            :href="'/#'"
-            :style="{ backgroundColor: social.backgroundColor }"
-            target="_blank"
-            rel="noopener"
-          >
-            <component :is="social.icon" :font-controlled="false" :filled="true" />
-          </a>
-        </li>
+        <template v-for="social in widgetSocials">
+          <li v-if="Number(social.is_active_widget) === 1" :key="social.id" class="widget__social">
+            <a
+              class="widget__social-link"
+              :href="social.link"
+              :style="{ backgroundImage: `url('${social.icon_widget}')` }"
+              target="_blank"
+              rel="noopener"
+            >
+            </a>
+          </li>
+        </template>
       </ul>
     </div>
   </div>
@@ -123,10 +118,10 @@ useClickOutside(WidgetNodeRef, closeWidget);
     &-link {
       width: 40px;
       height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border: 1px solid $color-white;
       border-radius: 50%;
+      background-position: center;
+      background-repeat: no-repeat;
       cursor: pointer;
     }
   }

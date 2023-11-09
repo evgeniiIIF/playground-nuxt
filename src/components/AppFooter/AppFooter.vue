@@ -3,7 +3,10 @@ import {
   mockedAboutCompanyFooter,
   mockedAdditionalServicesFooter,
   mockedServicesFooter,
-} from '~/components/AppFooter/AppFooter.constant';
+} from '@/components/AppFooter/AppFooter.constant';
+import type { AppFooter } from '@/components/AppFooter/AppFooter.types';
+
+defineProps<AppFooter>();
 </script>
 
 <template>
@@ -21,12 +24,12 @@ import {
             <FooterMenu :title="mockedAboutCompanyFooter.title" :items="mockedAboutCompanyFooter.items" />
           </div>
           <div class="footer__contacts">
-            <FooterContacts />
+            <FooterContacts :contacts="contacts" :socials="socials" />
           </div>
         </div>
         <div class="footer__footer">
           <div class="footer__footer-privacy">
-            <p class="footer__footer-privacy-name">© ABS-autoservice, 2022</p>
+            <p class="footer__footer-privacy-name">{{ contacts.content.copyright }}</p>
             <a class="footer__footer-privacy-policy" link="#">Политика конфиденциальности</a>
           </div>
           <ul class="footer__footer-payment-list">

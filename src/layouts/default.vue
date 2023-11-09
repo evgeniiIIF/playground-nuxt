@@ -1,9 +1,24 @@
 <script lang="ts" setup>
 import { useMediaSizes } from '@/composables/useMediaSizes';
-
+import { useContactsStore } from '@/store/contacts';
 import AppWidget from '@/components/AppWidget/AppWidget.vue';
+import type { Contacts } from '~/store/contacts/contacts.types';
 
 const { isMobile } = useMediaSizes();
+
+const { contactsState, contactsEffects } = useContactsStore();
+
+await useAsyncData('layout', async () => {
+  await Promise.all([
+    Object.keys(contactsState.value.contacts).length === 0 && contactsEffects.fetchContacts(),
+    contactsState.value.socials.length === 0 && contactsEffects.fetchContactsSocials(),
+    contactsState.value.widget.length === 0 && contactsEffects.fetchContactsWidget(),
+  ]);
+});
+
+const contacts = contactsState.value.contacts as Contacts;
+const socials = contactsState.value.socials;
+const widgetSocials = contactsState.value.widget;
 </script>
 
 <template>
@@ -13,9 +28,11 @@ const { isMobile } = useMediaSizes();
     <main>
       <slot />
     </main>
-    <AppWidget />
+    <AppWidget v-if="Number(contacts.content.is_active_widget) === 1" :widget-socials="widgetSocials" />
     <AppFooter
       v-if="$route.path.split('/').findIndex((item) => item === 'services') !== $route.path.split('/').length - 1"
+      :contacts="contacts"
+      :socials="socials"
     />
   </div>
 </template>

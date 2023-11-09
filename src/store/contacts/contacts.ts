@@ -2,7 +2,7 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
 import { contactsHttp } from '@/api/http';
-import type { Contacts, ContactsStore, Social, WidgetIcon } from '@/store/contacts/contacts.types';
+import type { Contacts, ContactsStore, Social, WidgetSocial } from '@/store/contacts/contacts.types';
 
 const DEFAULT_STATE: ContactsStore = {
   contacts: {},
@@ -21,7 +21,7 @@ export const contactsStore = defineStore('contactsStore', () => {
     state.value.socials = data;
   };
 
-  const setContactsWidget = (data: WidgetIcon[] | []) => {
+  const setContactsWidget = (data: WidgetSocial[] | []) => {
     state.value.widget = data;
   };
   const fetchContacts = async () => {
