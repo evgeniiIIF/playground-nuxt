@@ -22,7 +22,7 @@ const setCurrentServicesItemL1 = (item: ServicesAllItemParent) => {
       </li>
     </ul>
     <ul v-if="currentServicesItemL1" class="services-all-nav-mobile-l1">
-      <li v-for="itemL2 in currentServicesItemL1.children" :key="itemL2.id" class="services-all-nav-mobile-l1__item">
+      <li v-for="itemL2 in currentServicesItemL1?.children" :key="itemL2.id" class="services-all-nav-mobile-l1__item">
         <div class="item-services-all-l1">
           <div class="item-services-all-l1__title">{{ itemL2.title }}</div>
           <div class="item-services-all-l1__arrow"><IcArrowRight /></div>

@@ -2,9 +2,7 @@
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import { useContactsStore } from '@/store/contacts';
 import AppWidget from '@/components/AppWidget/AppWidget.vue';
-import type { Contacts } from '~/store/contacts/contacts.types';
-
-const { isMobile } = useMediaSizes();
+import type { Contacts } from '@/store/contacts/contacts.types';
 
 const { contactsState, contactsEffects } = useContactsStore();
 
@@ -19,12 +17,14 @@ await useAsyncData('layout', async () => {
 const contacts = contactsState.value.contacts as Contacts;
 const socials = contactsState.value.socials;
 const widgetSocials = contactsState.value.widget;
+
+const { isDesktop } = useMediaSizes();
 </script>
 
 <template>
   <div class="wrapper">
-    <AppHeader v-show="!isMobile" />
-    <AppHeaderMobile v-show="isMobile" />
+    <AppHeader v-show="isDesktop" />
+    <AppHeaderMobile v-show="!isDesktop" />
     <main>
       <slot />
     </main>
@@ -48,6 +48,9 @@ const widgetSocials = contactsState.value.widget;
 main {
   margin-top: 114px;
   flex: 1 1 auto;
+  @include to(1280px) {
+    margin-top: 91px;
+  }
 
   @include tablet {
     margin-top: 91px;

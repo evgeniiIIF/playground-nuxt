@@ -8,7 +8,7 @@ defineProps<UIModalProps>();
     <UIModal :is-open="isOpen" :position="position" :close-button="false">
       <div class="mobile-menu__wrapper">
         <div class="mobile-menu__nav">
-          <AppNavigation />
+          <AppNavigation @clickOnLink="$emit('clickOnLink')" />
         </div>
         <div class="mobile-menu__social">
           <IcSocialTelegram :font-controlled="false" :filled="true" />
@@ -68,11 +68,17 @@ defineProps<UIModalProps>();
     }
   }
 }
-.mobile-mode {
+.ui-modal {
+  display: none;
+}
+@include to(1280px) {
   .ui-modal {
+    display: block;
+    padding: 0;
     margin-top: 91px;
 
     &__container {
+      max-width: 100%;
       .mobile-menu__wrapper {
         height: calc(100vh - 91px);
 
