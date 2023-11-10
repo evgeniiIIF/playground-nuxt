@@ -5,7 +5,7 @@ import type {
   UIDropdownWithAccordion,
   UIDropdownWithAccordionEmits,
 } from '@/components/UIDropdownWithAccordion/UIDropdownWithAccordion.types';
-import type { ServicesAllItemChild, ServicesAllItemParent } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 import { setChecked } from '@/utils/setChecked/setChecked';
 import { flatServices } from '@/utils/flatServices/flatServices';
 
@@ -25,7 +25,7 @@ useClickOutside(DropdownNodeRef, closeDropdown);
 
 /* TODO */
 /* По-хорошему надо написать рекурсию и фильтровать по id, а не по path  */
-const checkedServicesCategory = (category: ServicesAllItemParent, checkedServices?: ServicesAllItemChild[]) => {
+const checkedServicesCategory = (category: ServicesAllItem, checkedServices?: ServicesAllItem[]) => {
   return checkedServices?.filter((service) => service.full_path.split('>')[0] === category.full_path);
 };
 
@@ -35,7 +35,7 @@ const filteredServices = computed(() => {
   return allServices.filter((service) => service.title.toLowerCase().includes(searchValue.value.toLowerCase()));
 });
 
-const setValue = (checkedServices?: ServicesAllItemChild[]) => {
+const setValue = (checkedServices?: ServicesAllItem[]) => {
   return checkedServices?.length ? `Выбрано ${checkedServices.length} услуг` : '';
 };
 </script>

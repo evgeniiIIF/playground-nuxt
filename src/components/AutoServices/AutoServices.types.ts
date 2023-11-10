@@ -1,5 +1,5 @@
-import type { ServicesAllItemParent } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 
 export type AutoServicesTypes = {
-  services: ServicesAllItemParent[];
+  services: ServicesAllItem[];
 };

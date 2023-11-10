@@ -1,7 +1,7 @@
-import type { ServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 
 export type AppCalculationForm = {
-  services: ServicesAllItemChild[];
+  services: ServicesAllItem[];
   carBrand: string;
   carModel: string;
 };

@@ -1,13 +1,12 @@
 import type {
-  ServicesAllItemChild,
-  ServicesAllItemParent,
-  changedServicesAllItemChild,
+  ServicesAllItem,
+  changedServicesAllItem,
 } from '@/store/servicesAll/servicesAll.types';
 
 export type UIDropdownWithAccordion = {
   title: string;
-  items: ServicesAllItemParent[];
-  checkedServices?: ServicesAllItemChild[];
+  items: ServicesAllItem[];
+  checkedServices?: ServicesAllItem[];
   value?: string;
   placeholder?: string;
   errorMessage?: string;
@@ -15,5 +14,5 @@ export type UIDropdownWithAccordion = {
 };
 
 export interface UIDropdownWithAccordionEmits {
-  (event: 'onChangeService', service: changedServicesAllItemChild): void;
+  (event: 'onChangeService', service: changedServicesAllItem): void;
 }

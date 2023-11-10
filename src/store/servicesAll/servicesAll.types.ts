@@ -1,59 +1,28 @@
-interface Extra {
-  is_additional: string;
-}
-
-export interface ServicesAllItemChild {
-  id: number;
-  created_at: string;
-  updated_at: string;
-  deleted_at: any;
-  sort_order: number;
-  parent_id: number;
-  nest_left: number;
-  nest_right: number;
-  nest_depth: number;
-  is_active: number;
-  is_in_bonus_program: number;
-  title: string;
-  subtitle: any;
-  slug: string;
-  preview_text: string;
-  full_text: string;
-  price: number;
-  old_price: any;
-  extra?: Extra;
-  additional_title?: string;
-  parents: string;
-  full_path: string;
-  children?: ServicesAllItemChild[];
-}
-
-export interface ServicesAllItemParent {
+export interface ServicesAllItem {
   id: number;
   parent_id: any;
-  is_active: number;
   title: string;
   slug: string;
+  price: number;
   icon?: string;
-  parents: string;
   full_path: string;
-  children: ServicesAllItemChild[];
+  children: ServicesAllItem[];
 }
 
-export interface changedServicesAllItemChild extends ServicesAllItemChild {
+export interface changedServicesAllItem extends ServicesAllItem {
   checked: boolean;
 }
 
 export interface ServicesAllItemsData {
-  data: ServicesAllItemParent[];
+  data: ServicesAllItem[];
 }
 
 export interface ServicesAllState {
-  servicesAllItems: ServicesAllItemParent[];
-  chooseServices: ServicesAllItemChild[];
+  servicesAllItems: ServicesAllItem[];
+  chooseServices: ServicesAllItem[];
 }
 
 // emits
-export interface ServicesAllItemChildEmits {
-  (event: 'goTo', item: ServicesAllItemChild | ServicesAllItemParent | undefined): void;
+export interface ServicesAllItemEmits {
+  (event: 'goTo', item: ServicesAllItem | undefined): void;
 }

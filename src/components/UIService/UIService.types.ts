@@ -1,7 +1,7 @@
-import type { changedServicesAllItemChild, ServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { changedServicesAllItem, ServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 
 export type UIServiceTypes = {
-  service: ServicesAllItemChild;
+  service: ServicesAllItem;
   checked?: boolean;
   withCheckbox?: boolean;
   withCrossButton?: boolean;
@@ -10,6 +10,6 @@ export type UIServiceTypes = {
 };
 
 export interface UIServiceEmits {
-  (event: 'onChange', service: changedServicesAllItemChild): void;
-  (event: 'onRemove', service: changedServicesAllItemChild): void;
+  (event: 'onChange', service: changedServicesAllItem): void;
+  (event: 'onRemove', service: changedServicesAllItem): void;
 }

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useServicesAllStore } from '@/store/servicesAll';
-import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { changedServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 
 const { servicesAllState, servicesAllEffects, servicesAllActions } = useServicesAllStore();
 
@@ -15,7 +15,7 @@ watchEffect(() => {
   chooseServices.value = servicesAllState.value.chooseServices;
 });
 
-const onChangeServiceHandler = (service: changedServicesAllItemChild) => {
+const onChangeServiceHandler = (service: changedServicesAllItem) => {
   servicesAllActions.changeChooseService(service);
 };
 

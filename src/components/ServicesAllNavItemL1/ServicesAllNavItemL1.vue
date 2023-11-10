@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { ServicesAllItemParent } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 
-const { item } = defineProps<{ item: ServicesAllItemParent }>();
+const { item } = defineProps<{ item: ServicesAllItem }>();
 </script>
 
 <template>

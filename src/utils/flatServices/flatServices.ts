@@ -1,6 +1,6 @@
-import type { ServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 
-const flatServices = (services: ServicesAllItemChild[]) => {
+const flatServices = (services: ServicesAllItem[]) => {
   return services
     .map((service) => {
       if (service.children?.length) {

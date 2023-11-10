@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { ServicesAllItemParent, ServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 
-const props = defineProps<{ services: ServicesAllItemParent[] }>();
+const props = defineProps<{ services: ServicesAllItem[] }>();
 
-const currentServicesItemL1 = ref<ServicesAllItemParent | undefined>();
+const currentServicesItemL1 = ref<ServicesAllItem | undefined>();
 
-const setCurrentServicesItemL1 = (item: ServicesAllItemParent) => {
+const setCurrentServicesItemL1 = (item: ServicesAllItem) => {
   currentServicesItemL1.value = item;
 };
 
-const goTo = (item: ServicesAllItemChild | ServicesAllItemParent | undefined) => {
+const goTo = (item: ServicesAllItem | undefined) => {
   navigateTo({ path: `/services/${item?.slug}` });
 };
 
