@@ -1,7 +1,4 @@
-import type {
-  ServicesAllItem,
-  changedServicesAllItem,
-} from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem, changedServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 
 export type UIAccordion = {
   title: string;
