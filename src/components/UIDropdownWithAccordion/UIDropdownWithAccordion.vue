@@ -7,7 +7,7 @@ import type {
 } from '@/components/UIDropdownWithAccordion/UIDropdownWithAccordion.types';
 import type { ServicesAllItemChild, ServicesAllItemParent } from '@/store/servicesAll/servicesAll.types';
 import { setChecked } from '@/utils/setChecked/setChecked';
-import {flatServices} from "@/utils/flatServices/flatServices";
+import { flatServices } from '@/utils/flatServices/flatServices';
 
 const props = defineProps<UIDropdownWithAccordion>();
 const emit = defineEmits<UIDropdownWithAccordionEmits>();
@@ -29,7 +29,7 @@ const checkedServicesCategory = (category: ServicesAllItemParent, checkedService
   return checkedServices?.filter((service) => service.full_path.split('>')[0] === category.full_path);
 };
 
-const allServices = props.items.map(item => flatServices(item.children)).flat()
+const allServices = props.items.map((item) => flatServices(item.children)).flat();
 
 const filteredServices = computed(() => {
   return allServices.filter((service) => service.title.toLowerCase().includes(searchValue.value.toLowerCase()));

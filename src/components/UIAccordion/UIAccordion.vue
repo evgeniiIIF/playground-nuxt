@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import type { UIAccordion, UIAccordionEmits } from '@/components/UIAccordion/UIAccordion.types';
 import { setChecked } from '@/utils/setChecked/setChecked';
-import {flatServices} from "@/utils/flatServices/flatServices";
+import { flatServices } from '@/utils/flatServices/flatServices';
 
 const props = defineProps<UIAccordion>();
 const emit = defineEmits<UIAccordionEmits>();
