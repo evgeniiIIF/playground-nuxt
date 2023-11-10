@@ -2,26 +2,14 @@
 import { ref } from 'vue';
 import type { UIAccordion, UIAccordionEmits } from '@/components/UIAccordion/UIAccordion.types';
 import { setChecked } from '@/utils/setChecked/setChecked';
+import {flatServices} from "@/utils/flatServices/flatServices";
 
 const props = defineProps<UIAccordion>();
 const emit = defineEmits<UIAccordionEmits>();
 
 const isOpen = ref(false);
 
-/* TODO */
-/* Привязываться к двум уровням вложенности не очень хорошо */
-/* т.к. могут добавить третий. Лучше написать рекурсию */
-/* которая будет вытаскивать все сервисы в один массив */
-/* сколько бы уровней не было */
-const allServicesCategory = props.servicesCategory.children
-  .map((child) => {
-    if (child.children?.length) {
-      return [child, ...child.children];
-    }
-
-    return child;
-  })
-  .flat();
+const allServicesCategory = flatServices(props.servicesCategory.children);
 </script>
 
 <template>
