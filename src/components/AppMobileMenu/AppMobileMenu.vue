@@ -1,14 +1,23 @@
 <script setup lang="ts">
 import type { UIModalProps } from '@/components/UIModal/UIModal.types';
 
-defineProps<UIModalProps>();
+interface AppMobileMenuProps extends UIModalProps {
+  isOpenServicesAllModal: boolean;
+}
+
+defineProps<AppMobileMenuProps>();
+const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'clickOnLink'): void }>();
 </script>
 <template>
   <div class="mobile-menu">
     <UIModal :is-open="isOpen" :position="position" :close-button="false">
       <div class="mobile-menu__wrapper">
         <div class="mobile-menu__nav">
-          <AppNavigation @clickOnLink="$emit('clickOnLink')" />
+          <AppNavigation
+            :is-open-services-all-modal="isOpenServicesAllModal"
+            @clickOnLink="emits('clickOnLink')"
+            @toggleServicesAllModal="emits('toggleServicesAllModal')"
+          />
         </div>
         <div class="mobile-menu__social">
           <IcSocialTelegram :font-controlled="false" :filled="true" />
