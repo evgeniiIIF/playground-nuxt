@@ -1,6 +1,6 @@
 import { useAppFetch } from '@/composables/useAppFetch';
 import type { ContactsResponse } from '@/api/http/contactsHttp/contactsHttp.types';
-import type { Social, WidgetIcon } from '@/store/contacts/contacts.types';
+import type { Social, WidgetSocial } from '@/store/contacts/contacts.types';
 
 const BASE_PATH = '/contacts';
 
@@ -25,7 +25,7 @@ const fetchContactsSocials = async () => {
 const fetchContactsWidget = async () => {
   const path = `${BASE_PATH}_vidzet`;
 
-  const response = await useAppFetch<WidgetIcon[]>(`${path}`, {
+  const response = await useAppFetch<WidgetSocial[]>(`${path}`, {
     method: 'GET',
   });
 

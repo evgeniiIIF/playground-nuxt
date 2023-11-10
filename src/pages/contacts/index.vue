@@ -1,7 +1,16 @@
 <script setup lang="ts">
+import { useContactsStore } from '~/store/contacts';
 import { useMediaSizes } from '../../composables/useMediaSizes';
 
 const { isMobile } = useMediaSizes();
+
+const { contactsState, contactsEffects } = useContactsStore();
+
+await useAsyncData('layout', async () => {
+  await Promise.all([Object.keys(contactsState.value.contacts).length === 0 && contactsEffects.fetchContacts()]);
+});
+
+const contacts = contactsState.value.contacts;
 </script>
 <template>
   <div>
@@ -11,23 +20,17 @@ const { isMobile } = useMediaSizes();
           <h2 class="contacts__title">Контакты</h2>
           <div class="contacts__body">
             <div class="contacts__info info-contacts">
-              <div class="info-contacts__address">г. Ставрополь, ул. Доваторцев 47Б</div>
-              <a class="info-contacts__phone" href="tel:+78652333350">+7 (8652) 33-33-50</a>
-              <div class="info-contacts__time">пн-сб 9:00-19:00, вс 10:00-16:00</div>
-              <a class="info-contacts__email" href="mailto:info@sindikacentre.ru">info@sindikacentre.ru</a>
+              <div class="info-contacts__address">{{ contacts.address }}</div>
+              <a class="info-contacts__phone" :href="`tel:${contacts.phone}`">{{ contacts.phone }}</a>
+              <div class="info-contacts__time">{{ contacts.schedule }}</div>
+              <a class="info-contacts__email" :href="`mailto:${contacts.email}`">{{ contacts.email }}</a>
             </div>
             <div class="contacts__map map">
               <div v-show="isMobile" class="map__button">
-                <a
-                  class="map__button-link"
-                  href="https://yandex.ru/maps/?rtext=~45.01151530529911%2C41.929150298237595"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <UIButton text="Построить маршрут в навигаторе" />
+                <a class="map__button-link" :href="contacts.route_link" target="_blank" rel="noopener">
+                  <UIButton text="Построить маршрут в навигаторе" :is-filled="true" :has-full-width="true" />
                 </a>
               </div>
-
               <div class="map__wrapper ibg">
                 <!--  eslint-disable-next-line vuejs-accessibility/iframe-has-title -->
                 <iframe
@@ -157,10 +160,6 @@ const { isMobile } = useMediaSizes();
   }
   &__button {
     margin: 0 20px 50px;
-    .button {
-      width: 100%;
-      background: #00a19c;
-    }
   }
 }
 </style>

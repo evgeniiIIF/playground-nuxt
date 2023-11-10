@@ -36,7 +36,7 @@ export interface Social {
   icon_mobile: string;
 }
 
-export interface WidgetIcon {
+export interface WidgetSocial {
   id: number;
   is_active_widget: string;
   name: string;
@@ -47,5 +47,5 @@ export interface WidgetIcon {
 export interface ContactsStore {
   contacts: Contacts | {};
   socials: Social[];
-  widget: WidgetIcon[];
+  widget: WidgetSocial[];
 }
