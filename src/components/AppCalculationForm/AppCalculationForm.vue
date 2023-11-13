@@ -13,7 +13,7 @@ import type { AsyncDataRequestStatus } from '#app/composables/asyncData';
 
 const props = defineProps<AppCalculationForm>();
 
-const { smallerThanDesktop } = useMediaSizes();
+const { isLessThanDesktop } = useMediaSizes();
 const { servicesAllActions } = useServicesAllStore();
 
 const onRemoveServiceHandler = (service: changedServicesAllItem) => {
@@ -101,7 +101,7 @@ watch(
           <div class="request-form__user-phone">
             <UIInput v-model="phone" type="phone" title="Телефон" :error-message="errorPhoneInput" />
           </div>
-          <div v-if="!smallerThanDesktop" class="request-form__button">
+          <div v-if="!isLessThanDesktop" class="request-form__button">
             <UIButton type="submit" text="Записаться на сервис" :is-filled="true" />
           </div>
         </div>
@@ -137,7 +137,7 @@ watch(
           </div>
         </div>
       </div>
-      <div v-if="smallerThanDesktop" class="request-form__button">
+      <div v-if="isLessThanDesktop" class="request-form__button">
         <UIButton type="submit" text="Записаться на сервис" :is-filled="true" :has-full-width="true" />
       </div>
     </form>
