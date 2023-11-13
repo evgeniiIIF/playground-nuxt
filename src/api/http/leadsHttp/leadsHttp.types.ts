@@ -19,7 +19,7 @@ export interface LeadsCalculationForm {
 }
 
 export interface LeadsCallbackForm {
-  form: 'callbackForm'
+  form: 'callbackForm';
   name: string;
   phone: string;
 }

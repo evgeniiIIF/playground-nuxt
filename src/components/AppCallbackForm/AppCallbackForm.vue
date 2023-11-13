@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
-import {leadsHttp} from "@/api/http/leadsHttp";
-import type {LeadsResponse} from "@/api/http/leadsHttp/leadsHttp.types";
-import type {AsyncDataRequestStatus} from "#app/composables/asyncData";
+import { leadsHttp } from '@/api/http/leadsHttp';
+import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
+import type { AsyncDataRequestStatus } from '#app/composables/asyncData';
 
 defineProps<{ title: string }>();
 
@@ -11,7 +11,7 @@ const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
 const formResponse = ref<LeadsResponse | null>(null);
-const statusRequest = ref<AsyncDataRequestStatus>('idle')
+const statusRequest = ref<AsyncDataRequestStatus>('idle');
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
@@ -31,9 +31,9 @@ const sendRequest = async () => {
   } as const;
 
   const { data, status } = await leadsHttp.postCallbackForm(requestData);
-  statusRequest.value = status.value
-  formResponse.value = data.value
-  hasError.value = false
+  statusRequest.value = status.value;
+  formResponse.value = data.value;
+  hasError.value = false;
 
   name.value = '';
   phone.value = '';
@@ -64,7 +64,7 @@ watch(
       <h6 class="callback-form__title">{{ title }}</h6>
       <div class="callback-form__inputs">
         <div class="callback-form__input">
-          <UIInput v-model="name" type="text" title="Ваше имя" placeholder="Ваше имя"  :error-message="errorNameInput" />
+          <UIInput v-model="name" type="text" title="Ваше имя" placeholder="Ваше имя" :error-message="errorNameInput" />
         </div>
         <div class="callback-form__input">
           <UIInput v-model="phone" type="phone" title="Ваш номер телефона" :error-message="errorPhoneInput" />
@@ -77,7 +77,9 @@ watch(
     </form>
     <div v-else-if="statusRequest === 'pending'" class="callback-form__loader">123</div>
     <div v-else class="callback-form__message">
-      <p class="callback-form__message-text">{{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}</p>
+      <p class="callback-form__message-text">
+        {{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}
+      </p>
     </div>
   </div>
 </template>

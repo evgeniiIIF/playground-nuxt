@@ -1,16 +1,16 @@
 <script lang="ts" setup>
 import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
-import type {LeadsResponse} from "@/api/http/leadsHttp/leadsHttp.types";
-import type {AsyncDataRequestStatus} from "#app/composables/asyncData";
+import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
+import type { AsyncDataRequestStatus } from '#app/composables/asyncData';
 import { useServicesAllStore } from '@/store/servicesAll';
-import {useBooleanState} from "@/composables/useBooleanState";
+import { useBooleanState } from '@/composables/useBooleanState';
 import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
 import { validateServicesDropdown } from '@/utils/validateServicesDropdown/validateServicesDropdown';
 import { leadsHttp } from '@/api/http/leadsHttp';
 
 const { servicesAllState, servicesAllEffects, servicesAllActions } = useServicesAllStore();
-const [ isOpenModal, openModal, closeModal ] = useBooleanState(false);
+const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 
 await useAsyncData('serviceForm', async () => {
   await Promise.all([servicesAllState.value.servicesAllItems.length === 0 && servicesAllEffects.fetchServicesAll()]);
@@ -31,7 +31,7 @@ const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
 const formResponse = ref<LeadsResponse | null>(null);
-const statusRequest = ref<AsyncDataRequestStatus>('idle')
+const statusRequest = ref<AsyncDataRequestStatus>('idle');
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
@@ -54,9 +54,9 @@ const sendRequest = async () => {
   } as const;
 
   const { data, status } = await leadsHttp.postServiceForm(requestData);
-  statusRequest.value = status.value
-  formResponse.value = data.value
-  hasError.value = false
+  statusRequest.value = status.value;
+  formResponse.value = data.value;
+  hasError.value = false;
 
   if (statusRequest.value === 'success' || status.value === 'error') {
     openModal();
@@ -125,7 +125,9 @@ watch(
     <div class="service-form__modal">
       <UIModal position="center" :is-open="isOpenModal" @on-close="closeModal">
         <div class="service-form__message">
-          <p class="request-form__message-text">{{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}</p>
+          <p class="request-form__message-text">
+            {{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}
+          </p>
         </div>
       </UIModal>
     </div>

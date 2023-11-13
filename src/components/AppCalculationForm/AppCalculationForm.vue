@@ -8,8 +8,8 @@ import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
 import { validateServicesDropdown } from '@/utils/validateServicesDropdown/validateServicesDropdown';
 import { leadsHttp } from '@/api/http/leadsHttp';
-import type {LeadsResponse} from "@/api/http/leadsHttp/leadsHttp.types";
-import type {AsyncDataRequestStatus} from "#app/composables/asyncData";
+import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
+import type { AsyncDataRequestStatus } from '#app/composables/asyncData';
 
 const props = defineProps<AppCalculationForm>();
 
@@ -25,7 +25,7 @@ const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
 const formResponse = ref<LeadsResponse | null>(null);
-const statusRequest = ref<AsyncDataRequestStatus>('idle')
+const statusRequest = ref<AsyncDataRequestStatus>('idle');
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
@@ -49,8 +49,8 @@ const sendRequest = async () => {
   } as const;
 
   const { data, status } = await leadsHttp.postCalculationForm(requestData);
-  statusRequest.value = status.value
-  formResponse.value = data.value
+  statusRequest.value = status.value;
+  formResponse.value = data.value;
   hasError.value = false;
 
   name.value = '';
@@ -115,15 +115,15 @@ watch(
             <ul v-if="services.length" class="request-form__services-list">
               <li v-for="service in services" :key="service.id" class="request-form__services-item">
                 <UIService
-                    :service="service"
-                    :with-cross-button="true"
-                    :with-small-padding="true"
-                    @on-remove="onRemoveServiceHandler"
+                  :service="service"
+                  :with-cross-button="true"
+                  :with-small-padding="true"
+                  @on-remove="onRemoveServiceHandler"
                 />
               </li>
             </ul>
             <div v-else class="request-form__services-body-empty">
-            <span class="request-form__services-body-empty-text">{{
+              <span class="request-form__services-body-empty-text">{{
                 errorServices || 'Для расчета стоимости выберите услуги'
               }}</span>
             </div>
@@ -143,7 +143,9 @@ watch(
     </form>
     <div v-else-if="statusRequest === 'pending'" class="request-form__loader">123</div>
     <div v-else class="request-form__message">
-      <p class="request-form__message-text">{{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}</p>
+      <p class="request-form__message-text">
+        {{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}
+      </p>
     </div>
   </div>
 </template>

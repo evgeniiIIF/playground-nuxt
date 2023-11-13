@@ -1,15 +1,16 @@
 import { useAppFetch } from '@/composables/useAppFetch';
 import type {
   LeadsCalculationForm,
-  LeadsCallbackForm, LeadsResponse,
-  LeadsServiceForm
+  LeadsCallbackForm,
+  LeadsResponse,
+  LeadsServiceForm,
 } from '@/api/http/leadsHttp/leadsHttp.types';
 
 const BASE_PATH = '/leads';
 
 const postServiceForm = async (data: LeadsServiceForm) => {
-  const formData = new FormData()
-  Object.entries(data).forEach(([key, value]) => formData.append(key, value))
+  const formData = new FormData();
+  Object.entries(data).forEach(([key, value]) => formData.append(key, value));
 
   const response = await useAppFetch<LeadsResponse>(`${BASE_PATH}`, {
     method: 'POST',
@@ -20,8 +21,8 @@ const postServiceForm = async (data: LeadsServiceForm) => {
 };
 
 const postCalculationForm = async (data: LeadsCalculationForm) => {
-  const formData = new FormData()
-  Object.entries(data).forEach(([key, value]) => formData.append(key, value))
+  const formData = new FormData();
+  Object.entries(data).forEach(([key, value]) => formData.append(key, value));
 
   const response = await useAppFetch<LeadsResponse>(`${BASE_PATH}`, {
     method: 'POST',
@@ -32,8 +33,8 @@ const postCalculationForm = async (data: LeadsCalculationForm) => {
 };
 
 const postCallbackForm = async (data: LeadsCallbackForm) => {
-  const formData = new FormData()
-  Object.entries(data).forEach(([key, value]) => formData.append(key, value))
+  const formData = new FormData();
+  Object.entries(data).forEach(([key, value]) => formData.append(key, value));
 
   const response = await useAppFetch<LeadsResponse>(`${BASE_PATH}`, {
     method: 'POST',
