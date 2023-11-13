@@ -10,7 +10,9 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'nuxt-swiper',
     '@nuxt/image',
+    'nuxt-viewport',
   ],
+
   googleFonts: {
     families: {
       Roboto: true,
@@ -64,5 +66,21 @@ export default defineNuxtConfig({
     public: {
       apiBaseUrl: 'NUXT_PUBLIC_API_BASE_URL',
     },
+  },
+  viewport: {
+    breakpoints: {
+      mobile: 768,
+      tabletSmall: 769,
+      tablet: 1024,
+      desktop: 1280,
+    },
+    cookieName: 'viewport',
+    defaultBreakpoints: {
+      mobile: 'mobile',
+      tabletSmall: 'tabletSmall',
+      tablet: 'tablet',
+      desktop: 'desktop',
+    },
+    fallbackBreakpoint: 'desktop',
   },
 });
