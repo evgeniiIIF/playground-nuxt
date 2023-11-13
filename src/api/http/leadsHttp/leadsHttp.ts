@@ -1,39 +1,50 @@
 import { useAppFetch } from '@/composables/useAppFetch';
-import type { LeadsCalculationForm, LeadsResponse, LeadsServiceForm } from '@/api/http/leadsHttp/leadsHttp.types';
+import type {
+  LeadsCalculationForm,
+  LeadsCallbackForm, LeadsResponse,
+  LeadsServiceForm
+} from '@/api/http/leadsHttp/leadsHttp.types';
 
 const BASE_PATH = '/leads';
 
-const fetchServiceForm = async (data: LeadsServiceForm) => {
+const postServiceForm = async (data: LeadsServiceForm) => {
+  const formData = new FormData()
+  Object.entries(data).forEach(([key, value]) => formData.append(key, value))
+
   const response = await useAppFetch<LeadsResponse>(`${BASE_PATH}`, {
     method: 'POST',
-    body: JSON.stringify({
-      form: 'shortServiceForm',
-      ...data,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    body: formData,
   });
 
   return response;
 };
 
-const fetchCalculationForm = async (data: LeadsCalculationForm) => {
+const postCalculationForm = async (data: LeadsCalculationForm) => {
+  const formData = new FormData()
+  Object.entries(data).forEach(([key, value]) => formData.append(key, value))
+
   const response = await useAppFetch<LeadsResponse>(`${BASE_PATH}`, {
     method: 'POST',
-    body: JSON.stringify({
-      form: 'fullServiceForm',
-      ...data,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    body: formData,
+  });
+
+  return response;
+};
+
+const postCallbackForm = async (data: LeadsCallbackForm) => {
+  const formData = new FormData()
+  Object.entries(data).forEach(([key, value]) => formData.append(key, value))
+
+  const response = await useAppFetch<LeadsResponse>(`${BASE_PATH}`, {
+    method: 'POST',
+    body: formData,
   });
 
   return response;
 };
 
 export const leadsHttp = {
-  fetchServiceForm,
-  fetchCalculationForm,
+  postServiceForm,
+  postCalculationForm,
+  postCallbackForm,
 };

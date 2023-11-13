@@ -4,12 +4,14 @@ export interface LeadsResponse {
 }
 
 export interface LeadsServiceForm {
+  form: 'shortServiceForm';
   name: string;
   phone: string;
   services_list: string;
 }
 
 export interface LeadsCalculationForm {
+  form: 'fullServiceForm';
   name: string;
   phone: string;
   services_list: string;
@@ -17,6 +19,7 @@ export interface LeadsCalculationForm {
 }
 
 export interface LeadsCallbackForm {
+  form: 'callbackForm'
   name: string;
   phone: string;
 }

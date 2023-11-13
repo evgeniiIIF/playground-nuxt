@@ -1,12 +1,16 @@
 <script lang="ts" setup>
 import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type {LeadsResponse} from "@/api/http/leadsHttp/leadsHttp.types";
+import type {AsyncDataRequestStatus} from "#app/composables/asyncData";
 import { useServicesAllStore } from '@/store/servicesAll';
+import {useBooleanState} from "@/composables/useBooleanState";
 import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
 import { validateServicesDropdown } from '@/utils/validateServicesDropdown/validateServicesDropdown';
-import { leadsHttp } from '~/api/http/leadsHttp';
+import { leadsHttp } from '@/api/http/leadsHttp';
 
 const { servicesAllState, servicesAllEffects, servicesAllActions } = useServicesAllStore();
+const [ isOpenModal, openModal, closeModal ] = useBooleanState(false);
 
 await useAsyncData('serviceForm', async () => {
   await Promise.all([servicesAllState.value.servicesAllItems.length === 0 && servicesAllEffects.fetchServicesAll()]);
@@ -26,6 +30,8 @@ const onChangeServiceHandler = (service: changedServicesAllItemChild) => {
 const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
+const formResponse = ref<LeadsResponse | null>(null);
+const statusRequest = ref<AsyncDataRequestStatus>('idle')
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
@@ -41,17 +47,24 @@ const sendRequest = async () => {
   }
 
   const requestData = {
+    form: 'shortServiceForm',
     name: name.value,
     phone: phone.value,
     services_list: chooseServices.value.map((service) => service.title).join(', '),
-  };
+  } as const;
 
-  console.log(requestData);
+  const { data, status } = await leadsHttp.postServiceForm(requestData);
+  statusRequest.value = status.value
+  formResponse.value = data.value
+  hasError.value = false
 
-  const response = await leadsHttp.fetchServiceForm(requestData);
+  if (statusRequest.value === 'success' || status.value === 'error') {
+    openModal();
+  }
 
-  console.log(response.data.value);
-  hasError.value = false;
+  name.value = '';
+  phone.value = '';
+  servicesAllActions.clearChooseServices();
 };
 
 watch(
@@ -108,6 +121,13 @@ watch(
           <UIButton type="submit" text="Записаться" :is-filled="true" :size-large="true" />
         </div>
       </form>
+    </div>
+    <div class="service-form__modal">
+      <UIModal position="center" :is-open="isOpenModal" @on-close="closeModal">
+        <div class="service-form__message">
+          <p class="request-form__message-text">{{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}</p>
+        </div>
+      </UIModal>
     </div>
   </section>
 </template>
@@ -206,6 +226,21 @@ watch(
       @include mobile {
         max-width: inherit;
       }
+    }
+  }
+
+  &__message {
+    padding: 100px;
+    background-color: $color-white;
+
+    @include mobile {
+      padding: 70px 16px;
+      height: 100%;
+    }
+
+    &-text {
+      text-align: center;
+      @include title-main-xxxsmall-grow;
     }
   }
 }

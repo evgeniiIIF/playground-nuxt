@@ -1,16 +1,21 @@
 <script lang="ts" setup>
 import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
+import {leadsHttp} from "@/api/http/leadsHttp";
+import type {LeadsResponse} from "@/api/http/leadsHttp/leadsHttp.types";
+import type {AsyncDataRequestStatus} from "#app/composables/asyncData";
 
 defineProps<{ title: string }>();
 
 const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
+const formResponse = ref<LeadsResponse | null>(null);
+const statusRequest = ref<AsyncDataRequestStatus>('idle')
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
-const sendRequest = () => {
+const sendRequest = async () => {
   errorNameInput.value = validateNameInput(name.value);
   errorPhoneInput.value = validatePhoneInput(phone.value);
 
@@ -19,7 +24,19 @@ const sendRequest = () => {
     return;
   }
 
-  hasError.value = false;
+  const requestData = {
+    form: 'callbackForm',
+    name: name.value,
+    phone: phone.value,
+  } as const;
+
+  const { data, status } = await leadsHttp.postCallbackForm(requestData);
+  statusRequest.value = status.value
+  formResponse.value = data.value
+  hasError.value = false
+
+  name.value = '';
+  phone.value = '';
 };
 
 watch(
@@ -42,21 +59,27 @@ watch(
 </script>
 
 <template>
-  <form class="callback-form" @submit.prevent="sendRequest">
-    <h6 class="callback-form__title">{{ title }}</h6>
-    <div class="callback-form__inputs">
-      <div class="callback-form__input">
-        <UIInput v-model="name" type="text" title="Ваше имя" placeholder="Ваше имя" :error-message="errorNameInput" />
+  <div class="callback-form">
+    <form v-if="statusRequest === 'idle'" class="callback-form__form" @submit.prevent="sendRequest">
+      <h6 class="callback-form__title">{{ title }}</h6>
+      <div class="callback-form__inputs">
+        <div class="callback-form__input">
+          <UIInput v-model="name" type="text" title="Ваше имя" placeholder="Ваше имя"  :error-message="errorNameInput" />
+        </div>
+        <div class="callback-form__input">
+          <UIInput v-model="phone" type="phone" title="Ваш номер телефона" :error-message="errorPhoneInput" />
+        </div>
       </div>
-      <div class="callback-form__input">
-        <UIInput v-model="phone" type="phone" title="Ваш номер телефона" :error-message="errorPhoneInput" />
+      <div class="callback-form__button">
+        <UIButton type="submit" text="Отправить" :is-filled="true" :has-full-width="true" />
       </div>
+      <div class="callback-form__policy">* Отправляя форму, Вы соглашаетесь с политикой конфиденциальности</div>
+    </form>
+    <div v-else-if="statusRequest === 'pending'" class="callback-form__loader">123</div>
+    <div v-else class="callback-form__message">
+      <p class="callback-form__message-text">{{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}</p>
     </div>
-    <div class="callback-form__button">
-      <UIButton type="submit" text="Отправить" :is-filled="true" :has-full-width="true" />
-    </div>
-    <div class="callback-form__policy">* Отправляя форму, Вы соглашаетесь с политикой конфиденциальности</div>
-  </form>
+  </div>
 </template>
 
 <style lang="scss">
@@ -113,6 +136,15 @@ watch(
     font-weight: 400;
     line-height: 15px; /* 150% */
     color: #b3baba;
+  }
+
+  &__message {
+    margin: 50px 0;
+
+    &-text {
+      text-align: center;
+      @include title-main-xxxsmall-grow;
+    }
   }
 }
 </style>

@@ -4,10 +4,12 @@ import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAl
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import { computed } from 'vue';
 import type { AppCalculationForm } from '@/components/AppCalculationForm/AppCalculationForm.types';
-import { validateNameInput } from '~/utils/validateNameInput/validateNameInput';
-import { validatePhoneInput } from '~/utils/validatePhoneInput/validatePhoneInput';
-import { validateServicesDropdown } from '~/utils/validateServicesDropdown/validateServicesDropdown';
-import { leadsHttp } from '~/api/http/leadsHttp';
+import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
+import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
+import { validateServicesDropdown } from '@/utils/validateServicesDropdown/validateServicesDropdown';
+import { leadsHttp } from '@/api/http/leadsHttp';
+import type {LeadsResponse} from "@/api/http/leadsHttp/leadsHttp.types";
+import type {AsyncDataRequestStatus} from "#app/composables/asyncData";
 
 const props = defineProps<AppCalculationForm>();
 
@@ -22,6 +24,8 @@ const totalCost = computed(() => props.services.reduce((acc, service) => acc + s
 const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
+const formResponse = ref<LeadsResponse | null>(null);
+const statusRequest = ref<AsyncDataRequestStatus>('idle')
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
@@ -37,20 +41,21 @@ const sendRequest = async () => {
   }
 
   const requestData = {
+    form: 'fullServiceForm',
     name: name.value,
     phone: phone.value,
     car: `${props.carBrand} ${props.carModel}`,
     services_list: props.services.map((service) => service.title).join(', '),
-  };
+  } as const;
 
-  console.log(requestData);
-
-  const response = await leadsHttp.fetchCalculationForm(requestData);
-  const data = response.data.value?.success;
-
-  console.log(data);
-
+  const { data, status } = await leadsHttp.postCalculationForm(requestData);
+  statusRequest.value = status.value
+  formResponse.value = data.value
   hasError.value = false;
+
+  name.value = '';
+  phone.value = '';
+  servicesAllActions.clearChooseServices();
 };
 
 watch(
@@ -82,59 +87,65 @@ watch(
 </script>
 
 <template>
-  <form class="request-form" @submit.prevent="sendRequest">
-    <div class="request-form__header">
-      <h4 class="request-form__title">Оставьте заявку</h4>
-      <p class="request-form__description">введите ваше имя и номер телефона, а также проверьте ваш заказ</p>
-    </div>
-    <div class="request-form__body">
-      <div class="request-form__user-info">
-        <div class="request-form__user-name">
-          <UIInput v-model="name" type="text" title="Имя" placeholder="Ваше имя" :error-message="errorNameInput" />
-        </div>
-        <div class="request-form__user-phone">
-          <UIInput v-model="phone" type="phone" title="Телефон" :error-message="errorPhoneInput" />
-        </div>
-        <div v-if="!smallerThanDesktop" class="request-form__button">
-          <UIButton type="submit" text="Записаться на сервис" :is-filled="true" />
-        </div>
+  <div class="request-form">
+    <form v-if="statusRequest === 'idle'" class="request-form__form" @submit.prevent="sendRequest">
+      <div class="request-form__header">
+        <h4 class="request-form__title">Оставьте заявку</h4>
+        <p class="request-form__description">введите ваше имя и номер телефона, а также проверьте ваш заказ</p>
       </div>
-      <div class="request-form__services" :class="{ 'request-form__services--error': errorServices }">
-        <div class="request-form__services-header">
-          <p class="request-form__services-auto">Автомобиль</p>
-          <p class="request-form__services-auto-model">{{ carBrand }} {{ carModel }}</p>
-          <p class="request-form__services-text">Выбранные услуги</p>
-        </div>
-        <div class="request-form__services-body">
-          <ul v-if="services.length" class="request-form__services-list">
-            <li v-for="service in services" :key="service.id" class="request-form__services-item">
-              <UIService
-                :service="service"
-                :with-cross-button="true"
-                :with-small-padding="true"
-                @on-remove="onRemoveServiceHandler"
-              />
-            </li>
-          </ul>
-          <div v-else class="request-form__services-body-empty">
-            <span class="request-form__services-body-empty-text">{{
-              errorServices || 'Для расчета стоимости выберите услуги'
-            }}</span>
+      <div class="request-form__body">
+        <div class="request-form__user-info">
+          <div class="request-form__user-name">
+            <UIInput v-model="name" type="text" title="Имя" placeholder="Ваше имя" :error-message="errorNameInput" />
+          </div>
+          <div class="request-form__user-phone">
+            <UIInput v-model="phone" type="phone" title="Телефон" :error-message="errorPhoneInput" />
+          </div>
+          <div v-if="!smallerThanDesktop" class="request-form__button">
+            <UIButton type="submit" text="Записаться на сервис" :is-filled="true" />
           </div>
         </div>
-        <div class="request-form__services-footer">
-          <p class="request-form__services-cost-text">Итого:</p>
-          <p class="request-form__services-cost-total">{{ totalCost }} ₽</p>
-          <p class="request-form__services-footnote">
-            * Указана примерная стоимость. Финальный расчет стоимости запчастей и работ рассчитывается индивидуально
-          </p>
+        <div class="request-form__services" :class="{ 'request-form__services--error': errorServices }">
+          <div class="request-form__services-header">
+            <p class="request-form__services-auto">Автомобиль</p>
+            <p class="request-form__services-auto-model">{{ carBrand }} {{ carModel }}</p>
+            <p class="request-form__services-text">Выбранные услуги</p>
+          </div>
+          <div class="request-form__services-body">
+            <ul v-if="services.length" class="request-form__services-list">
+              <li v-for="service in services" :key="service.id" class="request-form__services-item">
+                <UIService
+                    :service="service"
+                    :with-cross-button="true"
+                    :with-small-padding="true"
+                    @on-remove="onRemoveServiceHandler"
+                />
+              </li>
+            </ul>
+            <div v-else class="request-form__services-body-empty">
+            <span class="request-form__services-body-empty-text">{{
+                errorServices || 'Для расчета стоимости выберите услуги'
+              }}</span>
+            </div>
+          </div>
+          <div class="request-form__services-footer">
+            <p class="request-form__services-cost-text">Итого:</p>
+            <p class="request-form__services-cost-total">{{ totalCost }} ₽</p>
+            <p class="request-form__services-footnote">
+              * Указана примерная стоимость. Финальный расчет стоимости запчастей и работ рассчитывается индивидуально
+            </p>
+          </div>
         </div>
       </div>
+      <div v-if="smallerThanDesktop" class="request-form__button">
+        <UIButton type="submit" text="Записаться на сервис" :is-filled="true" :has-full-width="true" />
+      </div>
+    </form>
+    <div v-else-if="statusRequest === 'pending'" class="request-form__loader">123</div>
+    <div v-else class="request-form__message">
+      <p class="request-form__message-text">{{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}</p>
     </div>
-    <div v-if="smallerThanDesktop" class="request-form__button">
-      <UIButton type="submit" text="Записаться на сервис" :is-filled="true" :has-full-width="true" />
-    </div>
-  </form>
+  </div>
 </template>
 
 <style lang="scss">
@@ -312,6 +323,15 @@ watch(
           }
         }
       }
+    }
+  }
+
+  &__message {
+    margin: 50px 0;
+
+    &-text {
+      text-align: center;
+      @include title-main-xxxsmall-grow;
     }
   }
 }
