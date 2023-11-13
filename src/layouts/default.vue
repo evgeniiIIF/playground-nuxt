@@ -39,8 +39,8 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
     />
     <AppHeaderMobile
       v-if="!isDesktop"
-      :isOpenServicesAllModal="isOpenServicesAllModal"
-      :isOpenMobileMenu="isOpenMobileMenu"
+      :is-open-services-all-modal="isOpenServicesAllModal"
+      :is-open-mobile-menu="isOpenMobileMenu"
       @toggleServicesAllModal="toggleServicesAllModal"
       @openMobileMenu="openMobileMenu"
       @closeMobileMenu="closeMobileMenu"

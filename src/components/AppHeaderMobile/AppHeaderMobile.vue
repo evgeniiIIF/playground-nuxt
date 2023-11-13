@@ -69,7 +69,7 @@ useRouter().afterEach((to, from) => {
       <AppMobileMenu
         :is-open="isOpenMobileMenu"
         position="left"
-        :isOpenServicesAllModal="isOpenServicesAllModal"
+        :is-open-services-all-modal="isOpenServicesAllModal"
         @clickOnLink="clickOnLink"
         @toggleServicesAllModal="emits('toggleServicesAllModal')"
       />

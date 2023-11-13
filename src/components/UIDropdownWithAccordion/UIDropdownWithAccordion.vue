@@ -5,8 +5,9 @@ import type {
   UIDropdownWithAccordion,
   UIDropdownWithAccordionEmits,
 } from '@/components/UIDropdownWithAccordion/UIDropdownWithAccordion.types';
-import type { ServicesAllItemChild, ServicesAllItemParent } from '~/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 import { setChecked } from '@/utils/setChecked/setChecked';
+import { flatServices } from '@/utils/flatServices/flatServices';
 
 const props = defineProps<UIDropdownWithAccordion>();
 const emit = defineEmits<UIDropdownWithAccordionEmits>();
@@ -24,37 +25,17 @@ useClickOutside(DropdownNodeRef, closeDropdown);
 
 /* TODO */
 /* По-хорошему надо написать рекурсию и фильтровать по id, а не по path  */
-const checkedServicesCategory = (category: ServicesAllItemParent, checkedServices?: ServicesAllItemChild[]) => {
+const checkedServicesCategory = (category: ServicesAllItem, checkedServices?: ServicesAllItem[]) => {
   return checkedServices?.filter((service) => service.full_path.split('>')[0] === category.full_path);
 };
 
-/* TODO */
-/* Привязываться к двум уровням вложенности не очень хорошо */
-/* т.к. могут добавить третий. Лучше написать рекурсию */
-/* которая будет вытаскивать все сервисы в один массив */
-/* сколько бы уровней не было */
-
-const allServices = props.items
-  .map((item) => {
-    const parentChildren = item.children;
-
-    return parentChildren
-      .map((child) => {
-        if (child.children?.length) {
-          return [child, ...child.children];
-        }
-
-        return child;
-      })
-      .flat();
-  })
-  .flat();
+const allServices = props.items.map((item) => flatServices(item.children)).flat();
 
 const filteredServices = computed(() => {
   return allServices.filter((service) => service.title.toLowerCase().includes(searchValue.value.toLowerCase()));
 });
 
-const setValue = (checkedServices?: ServicesAllItemChild[]) => {
+const setValue = (checkedServices?: ServicesAllItem[]) => {
   return checkedServices?.length ? `Выбрано ${checkedServices.length} услуг` : '';
 };
 </script>

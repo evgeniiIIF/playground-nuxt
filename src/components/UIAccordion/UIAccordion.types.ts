@@ -1,15 +1,11 @@
-import type {
-  ServicesAllItemChild,
-  ServicesAllItemParent,
-  changedServicesAllItemChild,
-} from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem, changedServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 
 export type UIAccordion = {
   title: string;
-  servicesCategory: ServicesAllItemParent;
-  checkedServicesCategory?: ServicesAllItemChild[];
+  servicesCategory: ServicesAllItem;
+  checkedServicesCategory?: ServicesAllItem[];
 };
 
 export interface UIAccordionEmits {
-  (event: 'onChangeService', service: changedServicesAllItemChild): void;
+  (event: 'onChangeService', service: changedServicesAllItem): void;
 }
