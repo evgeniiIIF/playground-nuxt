@@ -28,19 +28,19 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
 <template>
   <div class="wrapper">
     <AppHeader
-      v-show="isDesktop"
+      v-if="isDesktop"
       :is-open-services-all-modal="isOpenServicesAllModal"
       @toggle-services-all-modal="toggleServicesAllModal"
     />
     <ServicesAllModal
-      v-if="isOpenServicesAllModal"
+      v-show="isOpenServicesAllModal"
       @closeServicesAllModal="closeServicesAllModal"
       @closeMobileMenu="closeMobileMenu"
     />
     <AppHeaderMobile
-      v-show="!isDesktop"
-      :is-open-services-all-modal="isOpenServicesAllModal"
-      :is-open-mobile-menu="isOpenMobileMenu"
+      v-if="!isDesktop"
+      :isOpenServicesAllModal="isOpenServicesAllModal"
+      :isOpenMobileMenu="isOpenMobileMenu"
       @toggleServicesAllModal="toggleServicesAllModal"
       @openMobileMenu="openMobileMenu"
       @closeMobileMenu="closeMobileMenu"

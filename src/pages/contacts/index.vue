@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useContactsStore } from '~/store/contacts';
-import type { Contacts } from '~/store/contacts/contacts.types';
+import type { Contacts } from '@/store/contacts/contacts.types';
 import { useMediaSizes } from '../../composables/useMediaSizes';
 
 const { isMobile } = useMediaSizes();
@@ -27,7 +27,7 @@ const contacts = contactsState.value.contacts as Contacts;
               <a class="info-contacts__email" :href="`mailto:${contacts.email}`">{{ contacts.email }}</a>
             </div>
             <div class="contacts__map map">
-              <div v-show="isMobile" class="map__button">
+              <div v-if="isMobile" class="map__button">
                 <a class="map__button-link" :href="contacts.route_link" target="_blank" rel="noopener">
                   <UIButton text="Построить маршрут в навигаторе" :is-filled="true" :has-full-width="true" />
                 </a>

@@ -57,7 +57,7 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
                 </div>
               </div>
             </div>
-            <div v-show="bonus.is_active_btn_bonus || Boolean(!isMobile)" class="bonus__cards-button">
+            <div v-if="bonus.is_active_btn_bonus || Boolean(!isMobile)" class="bonus__cards-button">
               <UIButton :text="bonus.btn_bonus_title" :is-filled="true" :has-full-width="true" @click="openModal" />
             </div>
           </div>
