@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+defineProps<{ isOpenServicesAllModal: boolean }>();
 const headerColorIsDark = computed(() => {
   const isDark = useRoute().path === '/';
   return isDark;
@@ -18,7 +19,10 @@ const headerClass = computed(() => {
           <IcLogoDark v-else :font-controlled="false" :filled="true" />
         </NuxtLink>
         <div class="header__navigation">
-          <AppNavigation />
+          <AppNavigation
+            :is-open-services-all-modal="isOpenServicesAllModal"
+            @toggleServicesAllModal="$emit('toggleServicesAllModal')"
+          />
         </div>
         <div class="header__contacts">
           <div class="header__calls">

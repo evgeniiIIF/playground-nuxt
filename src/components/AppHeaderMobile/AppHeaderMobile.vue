@@ -3,6 +3,14 @@ import { useMediaSizes } from '@/composables/useMediaSizes';
 
 const { isDesktop } = useMediaSizes();
 
+defineProps<{ isOpenServicesAllModal: boolean; isOpenMobileMenu: boolean }>();
+const emits = defineEmits<{
+  (event: 'toggleServicesAllModal'): void;
+  (event: 'closeMobileMenu'): void;
+  (event: 'openMobileMenu'): void;
+  (event: 'toggleMobileMenu'): void;
+}>();
+
 const headerColorIsDark = computed(() => {
   const isDark = useRoute().path === '/';
   return isDark;
@@ -12,15 +20,13 @@ const headerClass = computed(() => {
   return headerColorIsDark.value ? '' : 'header-mobile--light';
 });
 
-const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = useBooleanState(false);
-
 const clickOnLink = () => {
-  closeMobileMenu();
+  emits('closeMobileMenu');
 };
 
 useRouter().afterEach((to, from) => {
   if (from.path === '/services' && !isDesktop.value) {
-    openMobileMenu();
+    emits('openMobileMenu');
   }
 });
 </script>
@@ -51,7 +57,7 @@ useRouter().afterEach((to, from) => {
             </NuxtLink>
           </div>
           <div class="header-mobile__burger-menu">
-            <button class="header-mobile__burger-menu-button" type="button" @click="toggleMobileMenu">
+            <button class="header-mobile__burger-menu-button" type="button" @click="emits('toggleMobileMenu')">
               <IcBurgerMenuClose v-if="isOpenMobileMenu" :font-controlled="false" :filled="true" />
               <IcBurgerMenu v-if="!isOpenMobileMenu" :font-controlled="false" :filled="true" />
             </button>
@@ -60,7 +66,13 @@ useRouter().afterEach((to, from) => {
       </div>
     </div>
     <div class="header-mobile__menu">
-      <AppMobileMenu :is-open="isOpenMobileMenu" position="left" @clickOnLink="clickOnLink" />
+      <AppMobileMenu
+        :is-open="isOpenMobileMenu"
+        position="left"
+        :is-open-services-all-modal="isOpenServicesAllModal"
+        @clickOnLink="clickOnLink"
+        @toggleServicesAllModal="emits('toggleServicesAllModal')"
+      />
     </div>
   </header>
 </template>

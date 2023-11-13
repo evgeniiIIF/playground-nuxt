@@ -19,12 +19,34 @@ const socials = contactsState.value.socials;
 const widgetSocials = contactsState.value.widget;
 
 const { isDesktop } = useMediaSizes();
+
+const [isOpenServicesAllModal, , closeServicesAllModal, toggleServicesAllModal] =
+  useBooleanState(false);
+
+const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = useBooleanState(false);
 </script>
 
 <template>
   <div class="wrapper">
-    <AppHeader v-show="isDesktop" />
-    <AppHeaderMobile v-show="!isDesktop" />
+    <AppHeader
+      v-show="isDesktop"
+      :is-open-services-all-modal="isOpenServicesAllModal"
+      @toggle-services-all-modal="toggleServicesAllModal"
+    />
+    <ServicesAllModal
+      v-if="isOpenServicesAllModal"
+      @closeServicesAllModal="closeServicesAllModal"
+      @closeMobileMenu="closeMobileMenu"
+    />
+    <AppHeaderMobile
+      v-show="!isDesktop"
+      :is-open-services-all-modal="isOpenServicesAllModal"
+      :is-open-mobile-menu="isOpenMobileMenu"
+      @toggleServicesAllModal="toggleServicesAllModal"
+      @openMobileMenu="openMobileMenu"
+      @closeMobileMenu="closeMobileMenu"
+      @toggleMobileMenu="toggleMobileMenu"
+    />
     <main>
       <slot />
     </main>

@@ -50,11 +50,13 @@ const children = computed(() => {
     font-weight: 600;
     line-height: 25px; /* 156.25% */
     color: #18243c;
+    cursor: pointer;
   }
   &__list {
     @include mb(15px);
   }
   &__item {
+    cursor: pointer;
   }
   &__button {
   }

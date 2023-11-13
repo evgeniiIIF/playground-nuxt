@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useContactsStore } from '~/store/contacts';
+import type { Contacts } from '~/store/contacts/contacts.types';
 import { useMediaSizes } from '../../composables/useMediaSizes';
 
 const { isMobile } = useMediaSizes();
@@ -10,7 +11,7 @@ await useAsyncData('layout', async () => {
   await Promise.all([Object.keys(contactsState.value.contacts).length === 0 && contactsEffects.fetchContacts()]);
 });
 
-const contacts = contactsState.value.contacts;
+const contacts = contactsState.value.contacts as Contacts;
 </script>
 <template>
   <div>
