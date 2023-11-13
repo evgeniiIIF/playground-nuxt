@@ -76,10 +76,12 @@ const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'cl
       background: #00a19c;
     }
   }
+
+  .ui-modal {
+    display: none;
+  }
 }
-.ui-modal {
-  display: none;
-}
+
 @include to(1280px) {
   .ui-modal {
     display: block;
@@ -88,6 +90,7 @@ const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'cl
 
     &__container {
       max-width: 100%;
+
       .mobile-menu__wrapper {
         height: calc(100vh - 91px);
 
