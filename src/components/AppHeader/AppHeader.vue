@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 defineProps<{ isOpenServicesAllModal: boolean }>();
+defineEmits<{ (event: 'toggleServicesAllModal'): void; }>();
+
 const headerColorIsDark = computed(() => {
   const isDark = useRoute().path === '/';
   return isDark;
