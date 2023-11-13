@@ -20,8 +20,7 @@ const widgetSocials = contactsState.value.widget;
 
 const { isDesktop } = useMediaSizes();
 
-const [isOpenServicesAllModal, , closeServicesAllModal, toggleServicesAllModal] =
-  useBooleanState(false);
+const [isOpenServicesAllModal, , closeServicesAllModal, toggleServicesAllModal] = useBooleanState(false);
 
 const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = useBooleanState(false);
 </script>
