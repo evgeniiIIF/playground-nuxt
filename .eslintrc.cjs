@@ -40,6 +40,6 @@ module.exports = {
     'vue/no-v-html': 'off',
     'prefer-destructuring': 'off',
     'no-useless-return': 'off',
-    'vue/v-on-event-hyphenation': 'off'
+    'vue/v-on-event-hyphenation': 'off',
   },
 };
