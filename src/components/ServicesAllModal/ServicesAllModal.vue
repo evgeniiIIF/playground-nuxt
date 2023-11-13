@@ -16,13 +16,9 @@ const { isDesktop } = useMediaSizes();
 </script>
 <template>
   <section class="services-all-modal">
-    <ServicesAllDesktop
-      v-show="isDesktop"
-      :services="services"
-      @closeServicesAllModal="emits('closeServicesAllModal')"
-    />
+    <ServicesAllDesktop v-if="isDesktop" :services="services" @closeServicesAllModal="emits('closeServicesAllModal')" />
     <ServicesAllMobile
-      v-show="!isDesktop"
+      v-if="!isDesktop"
       :services="services"
       @closeServicesAllModal="emits('closeServicesAllModal')"
       @closeMobileMenu="emits('closeMobileMenu')"

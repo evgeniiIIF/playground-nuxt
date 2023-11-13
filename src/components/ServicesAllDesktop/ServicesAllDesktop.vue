@@ -35,20 +35,6 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
   <div class="services-all-desktop">
     <div class="container">
       <div class="services-all-desktop__top">
-        <!-- <div v-show="!isDesktop" class="services-all-modal__buttons-mobile mobile-buttons-service-all">
-        <button type="button" class="mobile-buttons-service-all__go-back" @click="$router.go(-1)">
-          <div class="mobile-buttons-service-all__go-back-arrow">
-            <IcArrowLeft :font-controlled="false" :filled="true" />
-          </div>
-          <div class="mobile-buttons-service-all__go-back-text">Назад</div>
-        </button>
-        <div class="mobile-buttons-service-all__close">
-          <IcClose :font-controlled="false" :filled="true" />
-        </div>
-      </div> -->
-        <!-- <div v-show="!isDesktop" class="mobile-buttons-service-all__input">
-        <UIInputSearch />
-      </div> -->
         <h2 class="services-all-desktop__top-title">Поиск по услугам автосервиса</h2>
         <div class="services-all-desktop__top-actions">
           <div class="services-all-desktop__top-input">
