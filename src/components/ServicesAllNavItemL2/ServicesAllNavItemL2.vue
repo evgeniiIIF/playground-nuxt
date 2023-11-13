@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { ServicesAllItemChild, ServicesAllItemChildEmits } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem, ServicesAllItemEmits } from '@/store/servicesAll/servicesAll.types';
 
-const { item } = defineProps<{ item: ServicesAllItemChild | undefined }>();
-const emits = defineEmits<ServicesAllItemChildEmits>();
+const { item } = defineProps<{ item: ServicesAllItem | undefined }>();
+const emits = defineEmits<ServicesAllItemEmits>();
 
 const hasButton = computed(() => item?.children?.length && item?.children?.length > 2);
 const [isOpenList, , , toggleList] = useBooleanState(false);
@@ -50,11 +50,13 @@ const children = computed(() => {
     font-weight: 600;
     line-height: 25px; /* 156.25% */
     color: #18243c;
+    cursor: pointer;
   }
   &__list {
     @include mb(15px);
   }
   &__item {
+    cursor: pointer;
   }
   &__button {
   }

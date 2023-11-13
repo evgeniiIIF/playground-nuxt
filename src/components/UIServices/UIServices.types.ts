@@ -1,10 +1,10 @@
-import type { ServicesAllItemChild, changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem, changedServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 
 export type UIServices = {
-  services: ServicesAllItemChild[];
+  services: ServicesAllItem[];
   onClickButton: () => void;
 };
 
 export interface UIServicesEmits {
-  (event: 'onRemoveService', service: changedServicesAllItemChild): void;
+  (event: 'onRemoveService', service: changedServicesAllItem): void;
 }

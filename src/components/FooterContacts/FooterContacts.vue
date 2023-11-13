@@ -1,48 +1,42 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { FooterContacts } from '@/components/FooterContacts/FooterContacts.types';
+
+defineProps<FooterContacts>();
+</script>
 
 <template>
   <div class="footer-contacts">
     <h3 class="footer-contacts__title">Контакты</h3>
     <ul class="footer-contacts__list">
       <li class="footer-contacts__phone">
-        <a class="footer-contacts__phone-link" href="tel:88652500520">+7 (8652) 500-520</a>
+        <a class="footer-contacts__phone-link" :href="`tel:${contacts.content.phone}`">{{ contacts.content.phone }}</a>
       </li>
       <li class="footer-contacts__address">
-        <p class="footer-contacts__address-text">г. Ставрополь, ул. Доваторцев 47Б</p>
-        <a
-          class="footer-contacts__address-link"
-          href="https://yandex.ru/maps/?rtext=~45.01151530529911%2C41.929150298237595"
-          target="_blank"
-          rel="noopener"
+        <p class="footer-contacts__address-text">{{ contacts.content.address }}</p>
+        <a class="footer-contacts__address-link" :href="contacts.content.route_link" target="_blank" rel="noopener"
           >проложить маршрут</a
         >
       </li>
-      <li class="footer-contacts__working-hours">пн-сб 9:00-19:00, вс 10:00-16:00</li>
+      <li class="footer-contacts__working-hours">{{ contacts.content.schedule }}</li>
       <li class="footer-contacts__mail">
-        <a class="footer-contacts__mail-link" href="mailto:info@abs-autoservice.ru">abs-auto@mail.ru</a>
+        <a class="footer-contacts__mail-link" :href="`mailto:${contacts.content.email}`">{{
+          contacts.content.email
+        }}</a>
       </li>
       <li class="footer-contacts__socials">
         <ul class="footer-contacts__socials-list">
-          <li class="footer-contacts__socials-item">
-            <a
-              class="footer-contacts-socials-item-link"
-              href="https://vk.com/absautocervice"
-              target="_blank"
-              rel="noopener"
-            >
-              <IcVkBlock :font-controlled="false" :filled="true" />
-            </a>
-          </li>
-          <li class="footer-contacts__socials-item">
-            <a class="footer-contacts-socials-item-link" href="#" target="_blank" rel="noopener">
-              <IcInstagram :font-controlled="false" :filled="true" />
-            </a>
-          </li>
-          <li class="footer-contacts__socials-item">
-            <a class="footer-contacts-socials-item-link" href="#" target="_blank" rel="noopener">
-              <IcFacebook :font-controlled="false" :filled="true" />
-            </a>
-          </li>
+          <template v-for="social in socials">
+            <li v-if="Number(social.is_active_footer) === 1" :key="social.id" class="footer-contacts__socials-item">
+              <a
+                class="footer-contacts__socials-item-link"
+                :href="social.link"
+                target="_blank"
+                rel="noopener"
+                :style="{ backgroundImage: `url('${social.icon_footer}')` }"
+              >
+              </a>
+            </li>
+          </template>
         </ul>
       </li>
     </ul>
@@ -113,12 +107,18 @@
     }
 
     &-item {
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-
       &-link {
-        color: $color-blue;
+        width: 40px;
+        height: 40px;
+        background-color: $color-footer-social-background;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: $color-footer-social-background-hover;
+        }
       }
     }
   }

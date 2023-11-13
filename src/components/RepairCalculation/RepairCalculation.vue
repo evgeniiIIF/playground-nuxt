@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { RepairCalculation } from '@/components/RepairCalculation/RepairCalculation.types';
 import { useServicesAllStore } from '@/store/servicesAll';
-import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { changedServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 
 const props = defineProps<RepairCalculation>();
 
@@ -22,11 +22,11 @@ const carsModelsOnSelectItemHandler = (value: string) => {
   carsModelsInput.value = value;
 };
 
-const onChangeServiceHandler = (service: changedServicesAllItemChild) => {
+const onChangeServiceHandler = (service: changedServicesAllItem) => {
   servicesAllActions.changeChooseService(service);
 };
 
-const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
+const onRemoveServiceHandler = (service: changedServicesAllItem) => {
   servicesAllActions.changeChooseService(service);
 };
 

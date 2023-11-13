@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { changedServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
 import type { AsyncDataRequestStatus } from '#app/composables/asyncData';
 import { useServicesAllStore } from '@/store/servicesAll';
@@ -23,7 +23,7 @@ watchEffect(() => {
   chooseServices.value = servicesAllState.value.chooseServices;
 });
 
-const onChangeServiceHandler = (service: changedServicesAllItemChild) => {
+const onChangeServiceHandler = (service: changedServicesAllItem) => {
   servicesAllActions.changeChooseService(service);
 };
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useServicesAllStore } from '@/store/servicesAll';
-import type { changedServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { changedServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import { computed } from 'vue';
 import type { AppCalculationForm } from '@/components/AppCalculationForm/AppCalculationForm.types';
@@ -16,7 +16,7 @@ const props = defineProps<AppCalculationForm>();
 const { smallerThanDesktop } = useMediaSizes();
 const { servicesAllActions } = useServicesAllStore();
 
-const onRemoveServiceHandler = (service: changedServicesAllItemChild) => {
+const onRemoveServiceHandler = (service: changedServicesAllItem) => {
   servicesAllActions.changeChooseService(service);
 };
 const totalCost = computed(() => props.services.reduce((acc, service) => acc + service.price, 0));
