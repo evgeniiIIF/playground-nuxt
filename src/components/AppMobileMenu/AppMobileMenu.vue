@@ -77,9 +77,7 @@ const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'cl
     }
   }
 }
-.ui-modal {
-  display: none;
-}
+
 @include to(1280px) {
   .ui-modal {
     display: block;
