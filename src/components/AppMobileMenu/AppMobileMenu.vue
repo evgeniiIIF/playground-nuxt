@@ -76,10 +76,6 @@ const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'cl
       background: #00a19c;
     }
   }
-
-  .ui-modal {
-    display: none;
-  }
 }
 
 @include to(1280px) {
