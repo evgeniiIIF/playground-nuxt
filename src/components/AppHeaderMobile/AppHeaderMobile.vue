@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useMediaSizes } from '@/composables/useMediaSizes';
-import type {Contacts, Social} from "@/store/contacts/contacts.types";
+import type { Contacts, Social } from '@/store/contacts/contacts.types';
 
 const { isDesktop } = useMediaSizes();
 
@@ -53,7 +53,9 @@ useRouter().afterEach((to, from) => {
             <p class="header-mobile__address-text">ул. Доваторцев, 47 Б</p>
           </a>
           <div v-if="contacts.content.phone" class="header-mobile__calls">
-            <a class="header-mobile__calls-phone" :href="`tel:${contacts.content.phone}`" rel="noopener">{{ contacts.content.phone }}</a>
+            <a class="header-mobile__calls-phone" :href="`tel:${contacts.content.phone}`" rel="noopener">{{
+              contacts.content.phone
+            }}</a>
           </div>
         </div>
         <div class="header-mobile__col">

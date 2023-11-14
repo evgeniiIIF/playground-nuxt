@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type {Contacts} from "@/store/contacts/contacts.types";
+import type { Contacts } from '@/store/contacts/contacts.types';
 
 defineProps<{
   isOpenServicesAllModal: boolean;
@@ -35,7 +35,9 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
         </div>
         <div class="header__contacts">
           <div class="header__calls">
-            <a class="header__calls-phone" :href="`tel:${contacts.content.phone}`" rel="noopener">{{ contacts.content.phone }}</a>
+            <a class="header__calls-phone" :href="`tel:${contacts.content.phone}`" rel="noopener">{{
+              contacts.content.phone
+            }}</a>
             <span class="header__calls-callback" @click="openModal">обратный звонок</span>
           </div>
           <a

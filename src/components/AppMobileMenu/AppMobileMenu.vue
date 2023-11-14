@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { UIModalProps } from '@/components/UIModal/UIModal.types';
-import type {Contacts, Social} from "@/store/contacts/contacts.types";
+import type { Contacts, Social } from '@/store/contacts/contacts.types';
 
 interface AppMobileMenuProps extends UIModalProps {
   isOpenServicesAllModal: boolean;
@@ -28,18 +28,24 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
           <template v-for="social in socials" :key="social.id">
             <li v-if="Object.keys(social).length" class="mobile-menu__social">
               <a
-                  class="mobile-menu__social-link"
-                  :href="social.link"
-                  target="_blank"
-                  rel="noopener"
-                  :style="{ backgroundImage: `url('${social.icon_mobile}')`}"
+                class="mobile-menu__social-link"
+                :href="social.link"
+                target="_blank"
+                rel="noopener"
+                :style="{ backgroundImage: `url('${social.icon_mobile}')` }"
               >
               </a>
             </li>
           </template>
         </ul>
         <div class="mobile-menu__calls">
-          <a v-if="contacts.content.phone" class="mobile-menu__phone" :href="`tel:${contacts.content.phone}`" rel="noopener">{{ contacts.content.phone }}</a>
+          <a
+            v-if="contacts.content.phone"
+            class="mobile-menu__phone"
+            :href="`tel:${contacts.content.phone}`"
+            rel="noopener"
+            >{{ contacts.content.phone }}</a
+          >
           <span class="mobile-menu__callback" @click="openModal">обратный звонок</span>
         </div>
         <div class="mobile-menu__button">
