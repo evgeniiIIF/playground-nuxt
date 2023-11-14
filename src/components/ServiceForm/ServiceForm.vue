@@ -229,8 +229,15 @@ watch(
   }
 
   &__message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 100px;
     background-color: $color-white;
+
+    @include tablet {
+      height: 100%;
+    }
 
     @include mobile {
       padding: 70px 16px;
@@ -238,7 +245,6 @@ watch(
     }
 
     &-text {
-      text-align: center;
       @include title-main-xxxsmall-grow;
     }
   }

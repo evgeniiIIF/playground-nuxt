@@ -84,6 +84,7 @@ watch(
 .callback-form {
   padding: 50px 100px 50px 100px;
   background: #fff;
+  overflow-y: auto;
 
   @include tablet {
     height: 100%;

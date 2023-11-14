@@ -24,7 +24,7 @@ watch(
 <template>
   <Teleport to="body">
     <Transition :name="UI_MODAL_POSITIONS[position]">
-      <div v-if="isOpen" :class="['ui-modal', UI_MODAL_POSITIONS[position]]">
+      <div v-if="isOpen" :class="['ui-modal', UI_MODAL_POSITIONS[position], withHeader ? 'ui-modal--with-header' : '']">
         <div class="ui-modal__mask" @click="$emit('onClose')"></div>
 
         <div class="ui-modal__container">

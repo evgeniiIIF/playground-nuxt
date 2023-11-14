@@ -150,6 +150,11 @@ watch(
 .request-form {
   padding: 50px 100px;
   background-color: $color-white;
+  overflow-y: auto;
+
+  @include tablet {
+    height: 100%;
+  }
 
   @include mobile {
     padding: 20px 16px;
