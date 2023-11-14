@@ -17,7 +17,7 @@ defineProps<BonusProgram>();
           <UIButton v-if="bonus.showBtn" :text="bonus.titleLink || 'Получить карту'" :link="bonus.urlLink || ''" />
         </div>
         <div class="bonus-program__cards">
-          <NuxtImg class="bonus-program__cards-img" src="/images/bonus-cards.png" alt="bonus-card" loading="lazy"/>
+          <NuxtImg class="bonus-program__cards-img" src="/images/bonus-cards.png" alt="bonus-card" loading="lazy" />
         </div>
       </div>
     </div>
