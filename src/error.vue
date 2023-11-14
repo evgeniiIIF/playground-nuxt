@@ -3,6 +3,7 @@ import { useMediaSizes } from '@/composables/useMediaSizes';
 import AppWidget from '@/components/AppWidget/AppWidget.vue';
 import { useContactsStore } from '@/store/contacts';
 import type { Contacts } from '@/store/contacts/contacts.types';
+// import errorCar from '@/assets/img/error-car.png'
 
 type ErrorType = {
   message: string;
@@ -42,6 +43,7 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
   <div class="wrapper">
     <AppHeader
       v-if="isDesktop"
+      :contacts="contacts"
       :is-open-services-all-modal="isOpenServicesAllModal"
       @toggle-services-all-modal="toggleServicesAllModal"
     />
@@ -52,6 +54,8 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
     />
     <AppHeaderMobile
       v-if="!isDesktop"
+      :contacts="contacts"
+      :socials="socials"
       :is-open-services-all-modal="isOpenServicesAllModal"
       :is-open-mobile-menu="isOpenMobileMenu"
       @toggleServicesAllModal="toggleServicesAllModal"
@@ -79,7 +83,7 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
             <div class="error-page__status">
               <h2 class="error-page__status-code">{{ error.statusCode }}</h2>
               <div v-if="error.statusCode === 404" class="error-page__status-image-container">
-                <NuxtImg class="error-page__status-image" src="/error-car.png" loading="lazy" />
+                <NuxtImg class="error-page__status-image" src="/images/error-car.png" loading="lazy" />
               </div>
             </div>
           </div>
