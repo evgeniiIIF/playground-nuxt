@@ -9,7 +9,6 @@ import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInpu
 import { validateServicesDropdown } from '@/utils/validateServicesDropdown/validateServicesDropdown';
 import { leadsHttp } from '@/api/http/leadsHttp';
 import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
-import type { AsyncDataRequestStatus } from '#app/composables/asyncData';
 
 const props = defineProps<AppCalculationForm>();
 
@@ -25,7 +24,6 @@ const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
 const formResponse = ref<LeadsResponse | null>(null);
-const statusRequest = ref<AsyncDataRequestStatus>('idle');
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
@@ -48,8 +46,7 @@ const sendRequest = async () => {
     services_list: props.services.map((service) => service.title).join(', '),
   } as const;
 
-  const { data, status } = await leadsHttp.postCalculationForm(requestData);
-  statusRequest.value = status.value;
+  const { data } = await leadsHttp.postCalculationForm(requestData);
   formResponse.value = data.value;
   hasError.value = false;
 
@@ -88,7 +85,7 @@ watch(
 
 <template>
   <div class="request-form">
-    <form v-if="statusRequest === 'idle'" class="request-form__form" @submit.prevent="sendRequest">
+    <form v-if="!formResponse" class="request-form__form" @submit.prevent="sendRequest">
       <div class="request-form__header">
         <h4 class="request-form__title">Оставьте заявку</h4>
         <p class="request-form__description">введите ваше имя и номер телефона, а также проверьте ваш заказ</p>
@@ -141,7 +138,6 @@ watch(
         <UIButton type="submit" text="Записаться на сервис" :is-filled="true" :has-full-width="true" />
       </div>
     </form>
-    <div v-else-if="statusRequest === 'pending'" class="request-form__loader">123</div>
     <div v-else class="request-form__message">
       <p class="request-form__message-text">
         {{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}

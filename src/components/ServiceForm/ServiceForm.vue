@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import type { changedServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
-import type { AsyncDataRequestStatus } from '#app/composables/asyncData';
 import { useServicesAllStore } from '@/store/servicesAll';
 import { useBooleanState } from '@/composables/useBooleanState';
 import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
@@ -31,7 +30,6 @@ const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
 const formResponse = ref<LeadsResponse | null>(null);
-const statusRequest = ref<AsyncDataRequestStatus>('idle');
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
@@ -53,12 +51,11 @@ const sendRequest = async () => {
     services_list: chooseServices.value.map((service) => service.title).join(', '),
   } as const;
 
-  const { data, status } = await leadsHttp.postServiceForm(requestData);
-  statusRequest.value = status.value;
+  const { data } = await leadsHttp.postServiceForm(requestData);
   formResponse.value = data.value;
   hasError.value = false;
 
-  if (statusRequest.value === 'success' || status.value === 'error') {
+  if (formResponse.value) {
     openModal();
   }
 

@@ -1,4 +1,4 @@
-import { useAppFetch } from '@/composables/useAppFetch';
+import {useAppFetch, useAppLazyFetch} from '@/composables/useAppFetch';
 import type {
   LeadsCalculationForm,
   LeadsCallbackForm,
@@ -24,7 +24,7 @@ const postCalculationForm = async (data: LeadsCalculationForm) => {
   const formData = new FormData();
   Object.entries(data).forEach(([key, value]) => formData.append(key, value));
 
-  const response = await useAppFetch<LeadsResponse>(`${BASE_PATH}`, {
+  const response = await useAppLazyFetch<LeadsResponse>(`${BASE_PATH}`, {
     method: 'POST',
     body: formData,
   });

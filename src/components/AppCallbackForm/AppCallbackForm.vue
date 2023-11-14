@@ -3,7 +3,6 @@ import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
 import { leadsHttp } from '@/api/http/leadsHttp';
 import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
-import type { AsyncDataRequestStatus } from '#app/composables/asyncData';
 
 defineProps<{ title: string }>();
 
@@ -11,7 +10,6 @@ const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
 const formResponse = ref<LeadsResponse | null>(null);
-const statusRequest = ref<AsyncDataRequestStatus>('idle');
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
@@ -30,8 +28,7 @@ const sendRequest = async () => {
     phone: phone.value,
   } as const;
 
-  const { data, status } = await leadsHttp.postCallbackForm(requestData);
-  statusRequest.value = status.value;
+  const { data } = await leadsHttp.postCallbackForm(requestData);
   formResponse.value = data.value;
   hasError.value = false;
 
@@ -60,7 +57,7 @@ watch(
 
 <template>
   <div class="callback-form">
-    <form v-if="statusRequest === 'idle'" class="callback-form__form" @submit.prevent="sendRequest">
+    <form v-if="!formResponse" class="callback-form__form" @submit.prevent="sendRequest">
       <h6 class="callback-form__title">{{ title }}</h6>
       <div class="callback-form__inputs">
         <div class="callback-form__input">
@@ -75,7 +72,6 @@ watch(
       </div>
       <div class="callback-form__policy">* Отправляя форму, Вы соглашаетесь с политикой конфиденциальности</div>
     </form>
-    <div v-else-if="statusRequest === 'pending'" class="callback-form__loader">123</div>
     <div v-else class="callback-form__message">
       <p class="callback-form__message-text">
         {{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}
