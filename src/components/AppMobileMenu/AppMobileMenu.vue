@@ -131,11 +131,11 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
         .mobile-menu__wrapper {
           height: calc(100vh - 91px);
 
-        .navigation {
-          &__list {
-            flex-direction: column;
-            align-items: flex-start;
-          }
+          .navigation {
+            &__list {
+              flex-direction: column;
+              align-items: flex-start;
+            }
 
             &__item-link {
               font-size: 16px;
