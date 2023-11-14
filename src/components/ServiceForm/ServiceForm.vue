@@ -1,8 +1,15 @@
 <script lang="ts" setup>
-import { useServicesAllStore } from '@/store/servicesAll';
 import type { changedServicesAllItem } from '@/store/servicesAll/servicesAll.types';
+import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
+import { useServicesAllStore } from '@/store/servicesAll';
+import { useBooleanState } from '@/composables/useBooleanState';
+import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
+import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
+import { validateServicesDropdown } from '@/utils/validateServicesDropdown/validateServicesDropdown';
+import { leadsHttp } from '@/api/http/leadsHttp';
 
 const { servicesAllState, servicesAllEffects, servicesAllActions } = useServicesAllStore();
+const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 
 await useAsyncData('serviceForm', async () => {
   await Promise.all([servicesAllState.value.servicesAllItems.length === 0 && servicesAllEffects.fetchServicesAll()]);
@@ -22,38 +29,67 @@ const onChangeServiceHandler = (service: changedServicesAllItem) => {
 const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
+const formResponse = ref<LeadsResponse | null>(null);
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
-const errorDropdown = ref('');
-const sendRequest = () => {
-  errorNameInput.value = '';
-  errorPhoneInput.value = '';
-  errorDropdown.value = '';
+const errorServices = ref('');
+const sendRequest = async () => {
+  errorNameInput.value = validateNameInput(name.value);
+  errorPhoneInput.value = validatePhoneInput(phone.value);
+  errorServices.value = validateServicesDropdown(chooseServices.value);
+
+  if (errorNameInput.value || errorPhoneInput.value || errorServices.value) {
+    hasError.value = true;
+    return;
+  }
+
+  const requestData = {
+    form: 'shortServiceForm',
+    name: name.value,
+    phone: phone.value,
+    services_list: chooseServices.value.map((service) => service.title).join(', '),
+  } as const;
+
+  const { data } = await leadsHttp.postServiceForm(requestData);
+  formResponse.value = data.value;
   hasError.value = false;
 
-  if (name.value.trim().length < 2) {
-    errorNameInput.value = 'Имя должно состоять из 2 или больше символов';
-    hasError.value = true;
+  if (formResponse.value) {
+    openModal();
   }
 
-  if (name.value.match(/[0-9]/)) {
-    errorNameInput.value = 'Имя не должно содержать цифры';
-    hasError.value = true;
-  }
-
-  if (phone.value.trim().length < 18) {
-    errorPhoneInput.value = 'Заполните поле полностью';
-    hasError.value = true;
-  }
-
-  if (chooseServices.value.length < 1) {
-    errorDropdown.value = 'Выберите 1 или больше услуг';
-    hasError.value = true;
-  }
-
-  if (hasError.value) return;
+  name.value = '';
+  phone.value = '';
+  servicesAllActions.clearChooseServices();
 };
+
+watch(
+  () => [name.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorNameInput.value = validateNameInput(name.value);
+    }
+  },
+);
+
+watch(
+  () => [phone.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorPhoneInput.value = validatePhoneInput(phone.value);
+    }
+  },
+);
+
+watch(
+  () => [chooseServices.value.length, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorServices.value = validateServicesDropdown(chooseServices.value);
+    }
+  },
+);
 </script>
 
 <template>
@@ -74,7 +110,7 @@ const sendRequest = () => {
             :without-title-margin="true"
             :items="services"
             :checked-services="chooseServices"
-            :error-message="errorDropdown"
+            :error-message="errorServices"
             @on-change-service="onChangeServiceHandler"
           />
         </div>
@@ -82,6 +118,15 @@ const sendRequest = () => {
           <UIButton type="submit" text="Записаться" :is-filled="true" :size-large="true" />
         </div>
       </form>
+    </div>
+    <div class="service-form__modal">
+      <UIModal position="center" :is-open="isOpenModal" @on-close="closeModal">
+        <div class="service-form__message">
+          <p class="request-form__message-text">
+            {{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}
+          </p>
+        </div>
+      </UIModal>
     </div>
   </section>
 </template>
@@ -180,6 +225,27 @@ const sendRequest = () => {
       @include mobile {
         max-width: inherit;
       }
+    }
+  }
+
+  &__message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+    background-color: $color-white;
+
+    @include tablet {
+      height: 100%;
+    }
+
+    @include mobile {
+      padding: 70px 16px;
+      height: 100%;
+    }
+
+    &-text {
+      @include title-main-xxxsmall-grow;
     }
   }
 }

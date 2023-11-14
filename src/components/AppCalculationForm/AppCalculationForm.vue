@@ -4,115 +4,157 @@ import type { changedServicesAllItem } from '@/store/servicesAll/servicesAll.typ
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import { computed } from 'vue';
 import type { AppCalculationForm } from '@/components/AppCalculationForm/AppCalculationForm.types';
+import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
+import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
+import { validateServicesDropdown } from '@/utils/validateServicesDropdown/validateServicesDropdown';
+import { leadsHttp } from '@/api/http/leadsHttp';
+import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
 
 const props = defineProps<AppCalculationForm>();
 
-const { smallerThanDesktop } = useMediaSizes();
+const { isLessThanDesktop } = useMediaSizes();
 const { servicesAllActions } = useServicesAllStore();
 
 const onRemoveServiceHandler = (service: changedServicesAllItem) => {
   servicesAllActions.changeChooseService(service);
 };
-
 const totalCost = computed(() => props.services.reduce((acc, service) => acc + service.price, 0));
 
 const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
+const formResponse = ref<LeadsResponse | null>(null);
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
 const errorServices = ref('');
-const sendRequest = () => {
-  errorNameInput.value = '';
-  errorPhoneInput.value = '';
-  errorServices.value = '';
+const sendRequest = async () => {
+  errorNameInput.value = validateNameInput(name.value);
+  errorPhoneInput.value = validatePhoneInput(phone.value);
+  errorServices.value = validateServicesDropdown(props.services);
+
+  if (errorNameInput.value || errorPhoneInput.value || errorServices.value) {
+    hasError.value = true;
+    return;
+  }
+
+  const requestData = {
+    form: 'fullServiceForm',
+    name: name.value,
+    phone: phone.value,
+    car: `${props.carBrand} ${props.carModel}`,
+    services_list: props.services.map((service) => service.title).join(', '),
+  } as const;
+
+  const { data } = await leadsHttp.postCalculationForm(requestData);
+  formResponse.value = data.value;
   hasError.value = false;
 
-  if (name.value.trim().length < 2) {
-    errorNameInput.value = 'Имя должно состоять из 2 или больше символов';
-    hasError.value = true;
-  }
-
-  if (name.value.match(/[0-9]/)) {
-    errorNameInput.value = 'Имя не должно содержать цифры';
-    hasError.value = true;
-  }
-
-  if (phone.value.trim().length < 18) {
-    errorPhoneInput.value = 'Заполните поле полностью';
-    hasError.value = true;
-  }
-
-  if (props.services.length < 1) {
-    errorServices.value = 'Необходимо выбрать одну или несколько услуг';
-    hasError.value = true;
-  }
-
-  if (hasError.value) return;
+  name.value = '';
+  phone.value = '';
+  servicesAllActions.clearChooseServices();
 };
+
+watch(
+  () => [name.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorNameInput.value = validateNameInput(name.value);
+    }
+  },
+);
+
+watch(
+  () => [phone.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorPhoneInput.value = validatePhoneInput(phone.value);
+    }
+  },
+);
+
+watch(
+  () => [props.services.length, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorServices.value = validateServicesDropdown(props.services);
+    }
+  },
+);
 </script>
 
 <template>
-  <form class="request-form" @submit.prevent="sendRequest">
-    <div class="request-form__header">
-      <h4 class="request-form__title">Оставьте заявку</h4>
-      <p class="request-form__description">введите ваше имя и номер телефона, а также проверьте ваш заказ</p>
-    </div>
-    <div class="request-form__body">
-      <div class="request-form__user-info">
-        <div class="request-form__user-name">
-          <UIInput v-model="name" type="text" title="Имя" placeholder="Ваше имя" :error-message="errorNameInput" />
-        </div>
-        <div class="request-form__user-phone">
-          <UIInput v-model="phone" type="phone" title="Телефон" :error-message="errorPhoneInput" />
-        </div>
-        <div v-if="!smallerThanDesktop" class="request-form__button">
-          <UIButton type="submit" text="Записаться на сервис" :is-filled="true" />
-        </div>
+  <div class="request-form">
+    <form v-if="!formResponse" class="request-form__form" @submit.prevent="sendRequest">
+      <div class="request-form__header">
+        <h4 class="request-form__title">Оставьте заявку</h4>
+        <p class="request-form__description">введите ваше имя и номер телефона, а также проверьте ваш заказ</p>
       </div>
-      <div class="request-form__services" :class="{ 'request-form__services--error': errorServices }">
-        <div class="request-form__services-header">
-          <p class="request-form__services-auto">Автомобиль</p>
-          <p class="request-form__services-auto-model">{{ carBrand }} {{ carModel }}</p>
-          <p class="request-form__services-text">Выбранные услуги</p>
-        </div>
-        <div class="request-form__services-body">
-          <ul v-if="services.length" class="request-form__services-list">
-            <li v-for="service in services" :key="service.id" class="request-form__services-item">
-              <UIService
-                :service="service"
-                :with-cross-button="true"
-                :with-small-padding="true"
-                @on-remove="onRemoveServiceHandler"
-              />
-            </li>
-          </ul>
-          <div v-else class="request-form__services-body-empty">
-            <span class="request-form__services-body-empty-text">{{
-              errorServices || 'Для расчета стоимости выберите услуги'
-            }}</span>
+      <div class="request-form__body">
+        <div class="request-form__user-info">
+          <div class="request-form__user-name">
+            <UIInput v-model="name" type="text" title="Имя" placeholder="Ваше имя" :error-message="errorNameInput" />
+          </div>
+          <div class="request-form__user-phone">
+            <UIInput v-model="phone" type="phone" title="Телефон" :error-message="errorPhoneInput" />
+          </div>
+          <div v-if="!isLessThanDesktop" class="request-form__button">
+            <UIButton type="submit" text="Записаться на сервис" :is-filled="true" />
           </div>
         </div>
-        <div class="request-form__services-footer">
-          <p class="request-form__services-cost-text">Итого:</p>
-          <p class="request-form__services-cost-total">{{ totalCost }} ₽</p>
-          <p class="request-form__services-footnote">
-            * Указана примерная стоимость. Финальный расчет стоимости запчастей и работ рассчитывается индивидуально
-          </p>
+        <div class="request-form__services" :class="{ 'request-form__services--error': errorServices }">
+          <div class="request-form__services-header">
+            <p class="request-form__services-auto">Автомобиль</p>
+            <p class="request-form__services-auto-model">{{ carBrand }} {{ carModel }}</p>
+            <p class="request-form__services-text">Выбранные услуги</p>
+          </div>
+          <div class="request-form__services-body">
+            <ul v-if="services.length" class="request-form__services-list">
+              <li v-for="service in services" :key="service.id" class="request-form__services-item">
+                <UIService
+                  :service="service"
+                  :with-cross-button="true"
+                  :with-small-padding="true"
+                  @on-remove="onRemoveServiceHandler"
+                />
+              </li>
+            </ul>
+            <div v-else class="request-form__services-body-empty">
+              <span class="request-form__services-body-empty-text">{{
+                errorServices || 'Для расчета стоимости выберите услуги'
+              }}</span>
+            </div>
+          </div>
+          <div class="request-form__services-footer">
+            <p class="request-form__services-cost-text">Итого:</p>
+            <p class="request-form__services-cost-total">{{ totalCost }} ₽</p>
+            <p class="request-form__services-footnote">
+              * Указана примерная стоимость. Финальный расчет стоимости запчастей и работ рассчитывается индивидуально
+            </p>
+          </div>
         </div>
       </div>
+      <div v-if="isLessThanDesktop" class="request-form__button">
+        <UIButton type="submit" text="Записаться на сервис" :is-filled="true" :has-full-width="true" />
+      </div>
+    </form>
+    <div v-else class="request-form__message">
+      <p class="request-form__message-text">
+        {{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}
+      </p>
     </div>
-    <div v-if="smallerThanDesktop" class="request-form__button">
-      <UIButton type="submit" text="Записаться на сервис" :is-filled="true" :has-full-width="true" />
-    </div>
-  </form>
+  </div>
 </template>
 
 <style lang="scss">
 .request-form {
   padding: 50px 100px;
   background-color: $color-white;
+  overflow-y: auto;
+
+  @include tablet {
+    height: 100%;
+  }
 
   @include mobile {
     padding: 20px 16px;
@@ -284,6 +326,15 @@ const sendRequest = () => {
           }
         }
       }
+    }
+  }
+
+  &__message {
+    margin: 50px 0;
+
+    &-text {
+      text-align: center;
+      @include title-main-xxxsmall-grow;
     }
   }
 }

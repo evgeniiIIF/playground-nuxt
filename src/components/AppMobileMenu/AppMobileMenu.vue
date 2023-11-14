@@ -15,7 +15,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 </script>
 <template>
   <div class="mobile-menu">
-    <UIModal :is-open="isOpen" :position="position" :close-button="false">
+    <UIModal :is-open="isOpen" :position="position" :close-button="false" :with-header="true">
       <div class="mobile-menu__wrapper">
         <div class="mobile-menu__nav">
           <AppNavigation
@@ -119,15 +119,17 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 }
 
 @include to(1280px) {
-  .ui-modal {
+  .ui-modal--with-header {
     display: block;
     padding: 0;
     margin-top: 100px;
 
-    &__container {
-      max-width: 100%;
-      .mobile-menu__wrapper {
-        height: calc(100vh - 91px);
+    .ui-modal {
+      &__container {
+        max-width: 100%;
+
+        .mobile-menu__wrapper {
+          height: calc(100vh - 91px);
 
         .navigation {
           &__list {
@@ -135,17 +137,18 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
             align-items: flex-start;
           }
 
-          &__item-link {
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 20px; /* 125% */
-            color: var(--Black, #18243c);
-          }
-          &__item-link-arrow {
-            svg {
-              transform: rotate(270deg);
-              @include fill-svg-and-path(#18243c);
+            &__item-link {
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 20px; /* 125% */
+              color: var(--Black, #18243c);
+            }
+            &__item-link-arrow {
+              svg {
+                transform: rotate(270deg);
+                @include fill-svg-and-path(#18243c);
+              }
             }
           }
         }

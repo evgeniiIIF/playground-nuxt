@@ -1,7 +1,8 @@
 export interface UIModalProps {
-  isOpen?: boolean;
   position: 'left' | 'right' | 'center';
+  isOpen?: boolean;
   closeButton?: boolean;
+  withHeader?: boolean;
 }
 
 export interface UIModalEmits {

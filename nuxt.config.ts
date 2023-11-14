@@ -71,7 +71,7 @@ export default defineNuxtConfig({
     breakpoints: {
       mobile: 768,
       tabletSmall: 769,
-      tablet: 1024,
+      tablet: 1025,
       desktop: 1280,
     },
     cookieName: 'viewport',
