@@ -11,6 +11,7 @@ export const serviceStore = defineStore('serviceStore', () => {
 
   const setService = (data: Service | {}) => {
     state.value = data;
+    console.log(state.value);
   };
 
   const fetchService = async (slug: string) => {

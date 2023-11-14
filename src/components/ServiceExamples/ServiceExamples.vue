@@ -1,9 +1,4 @@
 <script lang="ts" setup>
-import { Navigation } from 'swiper/modules';
-
-import 'swiper/scss';
-import 'swiper/scss/pagination';
-
 import type { ServiceExamples } from '@/components/ServiceExamples/ServiceExamples.types';
 
 defineProps<ServiceExamples>();
@@ -12,15 +7,9 @@ defineProps<ServiceExamples>();
 <template>
   <section class="service-examples">
     <div class="container">
-      <div class="service-examples__header">
-        <h2 class="service-examples__title">Примеры работ</h2>
-        <div class="service-examples__slider-navigation">
-          <UIArrowButton :arrow-direction="'left'" :class-for-swiper="'service-examples__slider-button-prev'" />
-          <UIArrowButton :arrow-direction="'right'" :class-for-swiper="'service-examples__slider-button-next'" />
-        </div>
-      </div>
-      <div class="service-examples__body">
-        <Swiper
+      <div class="service-examples__slider">
+        <AppSlider />
+        <!-- <Swiper
           class="service-examples__slider"
           :modules="[Navigation]"
           :slides-per-view="3"
@@ -44,7 +33,7 @@ defineProps<ServiceExamples>();
           <SwiperSlide v-for="image in 5" :key="image" class="service-examples__slider-slide">
             <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
           </SwiperSlide>
-        </Swiper>
+        </Swiper> -->
       </div>
     </div>
   </section>
@@ -101,4 +90,16 @@ defineProps<ServiceExamples>();
     filter: grayscale(0);
   }
 }
+
+// change native settings for Swiper
+// .swiper-wrapper {
+//   align-items: center;
+// }
+// .swiper-slide {
+//   width: 24.166666667% !important;
+// }
+// .swiper-slide-active {
+//   transition: all 0.3s ease 0s !important;
+//   width: 48.333333333% !important;
+// }
 </style>
