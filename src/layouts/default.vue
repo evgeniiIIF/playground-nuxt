@@ -63,8 +63,6 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
   display: flex;
   flex-direction: column;
   height: inherit;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 main {
   margin-top: 114px;
