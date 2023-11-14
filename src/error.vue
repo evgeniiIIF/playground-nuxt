@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { useMediaSizes } from '@/composables/useMediaSizes';
+import AppWidget from '@/components/AppWidget/AppWidget.vue';
+import { useContactsStore } from '@/store/contacts';
+import type { Contacts } from '@/store/contacts/contacts.types';
+
 type ErrorType = {
   message: string;
   stack: string;
@@ -12,12 +17,48 @@ type ErrorPage = {
 };
 
 defineProps<ErrorPage>();
+
+const { contactsState, contactsEffects } = useContactsStore();
+
+await useAsyncData('error', async () => {
+  await Promise.all([
+    Object.keys(contactsState.value.contacts).length === 0 && contactsEffects.fetchContacts(),
+    contactsState.value.socials.length === 0 && contactsEffects.fetchContactsSocials(),
+    contactsState.value.widget.length === 0 && contactsEffects.fetchContactsWidget(),
+  ]);
+});
+
+const contacts = contactsState.value.contacts as Contacts;
+const socials = contactsState.value.socials;
+const widgetSocials = contactsState.value.widget;
+
+const { isDesktop } = useMediaSizes();
+
+const [isOpenServicesAllModal, , closeServicesAllModal, toggleServicesAllModal] = useBooleanState(false);
+const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = useBooleanState(false);
 </script>
 
 <template>
   <div class="wrapper">
-    <AppHeaderMobile />
-    <AppHeader />
+    <AppHeader
+      v-if="isDesktop"
+      :is-open-services-all-modal="isOpenServicesAllModal"
+      @toggle-services-all-modal="toggleServicesAllModal"
+    />
+    <ServicesAllModal
+      v-show="isOpenServicesAllModal"
+      @closeServicesAllModal="closeServicesAllModal"
+      @closeMobileMenu="closeMobileMenu"
+    />
+    <AppHeaderMobile
+      v-if="!isDesktop"
+      :is-open-services-all-modal="isOpenServicesAllModal"
+      :is-open-mobile-menu="isOpenMobileMenu"
+      @toggleServicesAllModal="toggleServicesAllModal"
+      @openMobileMenu="openMobileMenu"
+      @closeMobileMenu="closeMobileMenu"
+      @toggleMobileMenu="toggleMobileMenu"
+    />
     <main>
       <section class="error-page">
         <div class="container">
@@ -46,7 +87,8 @@ defineProps<ErrorPage>();
       </section>
       <ServiceForm />
     </main>
-    <AppFooter />
+    <AppWidget v-if="Number(contacts.content.is_active_widget) === 1" :widget-socials="widgetSocials" />
+    <AppFooter :contacts="contacts" :socials="socials" />
   </div>
 </template>
 

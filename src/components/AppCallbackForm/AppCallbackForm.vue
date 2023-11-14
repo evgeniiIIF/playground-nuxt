@@ -1,58 +1,90 @@
 <script lang="ts" setup>
+import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
+import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
+import { leadsHttp } from '@/api/http/leadsHttp';
+import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
+
 defineProps<{ title: string }>();
 
 const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
+const formResponse = ref<LeadsResponse | null>(null);
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
-const sendRequest = () => {
-  errorNameInput.value = '';
-  errorPhoneInput.value = '';
+const sendRequest = async () => {
+  errorNameInput.value = validateNameInput(name.value);
+  errorPhoneInput.value = validatePhoneInput(phone.value);
+
+  if (errorNameInput.value || errorPhoneInput.value) {
+    hasError.value = true;
+    return;
+  }
+
+  const requestData = {
+    form: 'callbackForm',
+    name: name.value,
+    phone: phone.value,
+  } as const;
+
+  const { data } = await leadsHttp.postCallbackForm(requestData);
+  formResponse.value = data.value;
   hasError.value = false;
 
-  if (name.value.trim().length < 2) {
-    errorNameInput.value = 'Имя должно состоять из 2 или больше символов';
-    hasError.value = true;
-  }
-
-  if (name.value.match(/[0-9]/)) {
-    errorNameInput.value = 'Имя не должно содержать цифры';
-    hasError.value = true;
-  }
-
-  if (phone.value.trim().length < 18) {
-    errorPhoneInput.value = 'Заполните поле полностью';
-    hasError.value = true;
-  }
-
-  if (hasError.value) return;
+  name.value = '';
+  phone.value = '';
 };
+
+watch(
+  () => [name.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorNameInput.value = validateNameInput(name.value);
+    }
+  },
+);
+
+watch(
+  () => [phone.value, hasError.value],
+  () => {
+    if (hasError.value) {
+      errorPhoneInput.value = validatePhoneInput(phone.value);
+    }
+  },
+);
 </script>
 
 <template>
-  <form class="callback-form" @submit.prevent="sendRequest">
-    <h6 class="callback-form__title">{{ title }}</h6>
-    <div class="callback-form__inputs">
-      <div class="callback-form__input">
-        <UIInput v-model="name" type="text" title="Ваше имя" placeholder="Ваше имя" :error-message="errorNameInput" />
+  <div class="callback-form">
+    <form v-if="!formResponse" class="callback-form__form" @submit.prevent="sendRequest">
+      <h6 class="callback-form__title">{{ title }}</h6>
+      <div class="callback-form__inputs">
+        <div class="callback-form__input">
+          <UIInput v-model="name" type="text" title="Ваше имя" placeholder="Ваше имя" :error-message="errorNameInput" />
+        </div>
+        <div class="callback-form__input">
+          <UIInput v-model="phone" type="phone" title="Ваш номер телефона" :error-message="errorPhoneInput" />
+        </div>
       </div>
-      <div class="callback-form__input">
-        <UIInput v-model="phone" type="phone" title="Ваш номер телефона" :error-message="errorPhoneInput" />
+      <div class="callback-form__button">
+        <UIButton type="submit" text="Отправить" :is-filled="true" :has-full-width="true" />
       </div>
+      <div class="callback-form__policy">* Отправляя форму, Вы соглашаетесь с политикой конфиденциальности</div>
+    </form>
+    <div v-else class="callback-form__message">
+      <p class="callback-form__message-text">
+        {{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}
+      </p>
     </div>
-    <div class="callback-form__button">
-      <UIButton type="submit" text="Отправить" :is-filled="true" :has-full-width="true" />
-    </div>
-    <div class="callback-form__policy">* Отправляя форму, Вы соглашаетесь с политикой конфиденциальности</div>
-  </form>
+  </div>
 </template>
 
 <style lang="scss">
 .callback-form {
   padding: 50px 100px 50px 100px;
   background: #fff;
+  overflow-y: auto;
 
   @include tablet {
     height: 100%;
@@ -103,6 +135,15 @@ const sendRequest = () => {
     font-weight: 400;
     line-height: 15px; /* 150% */
     color: #b3baba;
+  }
+
+  &__message {
+    margin: 50px 0;
+
+    &-text {
+      text-align: center;
+      @include title-main-xxxsmall-grow;
+    }
   }
 }
 </style>

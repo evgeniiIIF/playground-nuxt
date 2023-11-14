@@ -10,7 +10,7 @@ const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'cl
 </script>
 <template>
   <div class="mobile-menu">
-    <UIModal :is-open="isOpen" :position="position" :close-button="false">
+    <UIModal :is-open="isOpen" :position="position" :close-button="false" :with-header="true">
       <div class="mobile-menu__wrapper">
         <div class="mobile-menu__nav">
           <AppNavigation
@@ -79,32 +79,35 @@ const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'cl
 }
 
 @include to(1280px) {
-  .ui-modal {
+  .ui-modal--with-header {
     display: block;
     padding: 0;
     margin-top: 91px;
 
-    &__container {
-      max-width: 100%;
-      .mobile-menu__wrapper {
-        height: calc(100vh - 91px);
+    .ui-modal {
+      &__container {
+        max-width: 100%;
 
-        .navigation {
-          &__list {
-            flex-direction: column;
-          }
+        .mobile-menu__wrapper {
+          height: calc(100vh - 91px);
 
-          &__item-link {
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 20px; /* 125% */
-            color: var(--Black, #18243c);
-          }
-          &__item-link-arrow {
-            svg {
-              transform: rotate(270deg);
-              @include fill-svg-and-path(#18243c);
+          .navigation {
+            &__list {
+              flex-direction: column;
+            }
+
+            &__item-link {
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 20px; /* 125% */
+              color: var(--Black, #18243c);
+            }
+            &__item-link-arrow {
+              svg {
+                transform: rotate(270deg);
+                @include fill-svg-and-path(#18243c);
+              }
             }
           }
         }

@@ -34,10 +34,15 @@ export const servicesAllStore = defineStore('servicesAllStore', () => {
     }
   };
 
+  const clearChooseServices = () => {
+    state.value.chooseServices = [];
+  };
+
   return {
     state,
     actions: {
       changeChooseService,
+      clearChooseServices,
     },
     effects: {
       fetchServicesAll,
