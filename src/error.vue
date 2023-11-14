@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {useMediaSizes} from "@/composables/useMediaSizes";
-import AppWidget from "@/components/AppWidget/AppWidget.vue";
-import {useContactsStore} from "@/store/contacts";
-import type {Contacts} from "@/store/contacts/contacts.types";
+import { useMediaSizes } from '@/composables/useMediaSizes';
+import AppWidget from '@/components/AppWidget/AppWidget.vue';
+import { useContactsStore } from '@/store/contacts';
+import type { Contacts } from '@/store/contacts/contacts.types';
 
 type ErrorType = {
   message: string;
@@ -41,23 +41,23 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
 <template>
   <div class="wrapper">
     <AppHeader
-        v-if="isDesktop"
-        :is-open-services-all-modal="isOpenServicesAllModal"
-        @toggle-services-all-modal="toggleServicesAllModal"
+      v-if="isDesktop"
+      :is-open-services-all-modal="isOpenServicesAllModal"
+      @toggle-services-all-modal="toggleServicesAllModal"
     />
     <ServicesAllModal
-        v-show="isOpenServicesAllModal"
-        @closeServicesAllModal="closeServicesAllModal"
-        @closeMobileMenu="closeMobileMenu"
+      v-show="isOpenServicesAllModal"
+      @closeServicesAllModal="closeServicesAllModal"
+      @closeMobileMenu="closeMobileMenu"
     />
     <AppHeaderMobile
-        v-if="!isDesktop"
-        :is-open-services-all-modal="isOpenServicesAllModal"
-        :is-open-mobile-menu="isOpenMobileMenu"
-        @toggleServicesAllModal="toggleServicesAllModal"
-        @openMobileMenu="openMobileMenu"
-        @closeMobileMenu="closeMobileMenu"
-        @toggleMobileMenu="toggleMobileMenu"
+      v-if="!isDesktop"
+      :is-open-services-all-modal="isOpenServicesAllModal"
+      :is-open-mobile-menu="isOpenMobileMenu"
+      @toggleServicesAllModal="toggleServicesAllModal"
+      @openMobileMenu="openMobileMenu"
+      @closeMobileMenu="closeMobileMenu"
+      @toggleMobileMenu="toggleMobileMenu"
     />
     <main>
       <section class="error-page">
@@ -88,10 +88,7 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
       <ServiceForm />
     </main>
     <AppWidget v-if="Number(contacts.content.is_active_widget) === 1" :widget-socials="widgetSocials" />
-    <AppFooter
-        :contacts="contacts"
-        :socials="socials"
-    />
+    <AppFooter :contacts="contacts" :socials="socials" />
   </div>
 </template>
 
