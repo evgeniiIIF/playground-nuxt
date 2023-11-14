@@ -23,6 +23,22 @@ export interface AdditionalService {
   full_path: string;
 }
 
+export interface GalleryOriginTypes {
+  id: number;
+  disk_name: string;
+  file_name: string;
+  file_size: number;
+  content_type: string;
+  title: any;
+  description: any;
+  field: string;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+  path: string;
+  extension: string;
+}
+
 export interface Service {
   id: number;
   slug: string;
@@ -30,7 +46,7 @@ export interface Service {
   is_in_bonus_program: number;
   image_origin: string;
   image_webp: string;
-  gallery_origin: string[];
+  gallery_origin: GalleryOriginTypes[];
   gallery_webp: string[];
   title: string;
   subtitle: string | null;
