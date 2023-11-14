@@ -1,5 +1,10 @@
 <script lang="ts" setup>
-defineProps<{ isOpenServicesAllModal: boolean }>();
+import type { Contacts } from '@/store/contacts/contacts.types';
+
+defineProps<{
+  isOpenServicesAllModal: boolean;
+  contacts: Contacts;
+}>();
 defineEmits<{ (event: 'toggleServicesAllModal'): void }>();
 
 const headerColorIsDark = computed(() => {
@@ -10,6 +15,8 @@ const headerColorIsDark = computed(() => {
 const headerClass = computed(() => {
   return headerColorIsDark.value ? '' : 'header--light';
 });
+
+const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 </script>
 
 <template>
@@ -28,8 +35,10 @@ const headerClass = computed(() => {
         </div>
         <div class="header__contacts">
           <div class="header__calls">
-            <a class="header__calls-phone" href="tel:88652500520" rel="noopener">+7 (8652) 500-520</a>
-            <span class="header__calls-callback">обратный звонок</span>
+            <a class="header__calls-phone" :href="`tel:${contacts.content.phone}`" rel="noopener">{{
+              contacts.content.phone
+            }}</a>
+            <span class="header__calls-callback" @click="openModal">обратный звонок</span>
           </div>
           <a
             class="header__whatsapp"
@@ -42,6 +51,9 @@ const headerClass = computed(() => {
         </div>
       </div>
     </div>
+    <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
+      <AppCallbackForm title="Обратный звонок" />
+    </UIModal>
   </header>
 </template>
 

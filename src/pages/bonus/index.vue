@@ -94,9 +94,9 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
           </div>
         </div>
       </div>
-      <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
-        <AppCallbackForm title="Получить бонусную карту" />
-      </UIModal>
+      <LazyUIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
+        <LazyAppCallbackForm title="Получить бонусную карту" />
+      </LazyUIModal>
     </section>
     <ServiceForm />
   </div>

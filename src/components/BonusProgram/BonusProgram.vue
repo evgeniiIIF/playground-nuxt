@@ -17,7 +17,7 @@ defineProps<BonusProgram>();
           <UIButton v-if="bonus.showBtn" :text="bonus.titleLink || 'Получить карту'" :link="bonus.urlLink || ''" />
         </div>
         <div class="bonus-program__cards">
-          <img class="bonus-program__cards-img" src="@/assets/img/bonus-cards.png" alt="bonus-card" />
+          <NuxtImg class="bonus-program__cards-img" src="/images/bonus-cards.png" alt="bonus-card" loading="lazy" />
         </div>
       </div>
     </div>
@@ -38,6 +38,10 @@ defineProps<BonusProgram>();
     flex-direction: column;
     align-items: flex-start;
     padding: 60px 0;
+
+    @include tablet {
+      align-items: inherit;
+    }
 
     @include mobile {
       padding: 38px 0 50px 0;
@@ -72,6 +76,10 @@ defineProps<BonusProgram>();
     @include text-main;
     color: $color-white;
 
+    @include tablet {
+      max-width: inherit;
+    }
+
     @include mobile {
       max-width: inherit;
       margin-bottom: 30px;
@@ -79,11 +87,17 @@ defineProps<BonusProgram>();
   }
 
   &__cards {
+    width: 100%;
+    max-width: 570px;
     display: flex;
     margin-right: 45px;
 
     @include media-range($desktop-form, $screen-medium-min) {
       margin-right: 0;
+    }
+
+    @include tablet {
+      display: none;
     }
 
     @include mobile {

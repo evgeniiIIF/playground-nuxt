@@ -29,16 +29,19 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
   <div class="wrapper">
     <AppHeader
       v-if="isDesktop"
+      :contacts="contacts"
       :is-open-services-all-modal="isOpenServicesAllModal"
       @toggle-services-all-modal="toggleServicesAllModal"
     />
-    <ServicesAllModal
+    <LazyServicesAllModal
       v-show="isOpenServicesAllModal"
       @closeServicesAllModal="closeServicesAllModal"
       @closeMobileMenu="closeMobileMenu"
     />
     <AppHeaderMobile
       v-if="!isDesktop"
+      :contacts="contacts"
+      :socials="socials"
       :is-open-services-all-modal="isOpenServicesAllModal"
       :is-open-mobile-menu="isOpenMobileMenu"
       @toggleServicesAllModal="toggleServicesAllModal"

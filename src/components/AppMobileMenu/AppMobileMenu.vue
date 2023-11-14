@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import type { UIModalProps } from '@/components/UIModal/UIModal.types';
+import type { Contacts, Social } from '@/store/contacts/contacts.types';
 
 interface AppMobileMenuProps extends UIModalProps {
   isOpenServicesAllModal: boolean;
+  contacts: Contacts;
+  socials: Social[];
 }
 
 defineProps<AppMobileMenuProps>();
 const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'clickOnLink'): void }>();
+
+const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 </script>
 <template>
   <div class="mobile-menu">
@@ -19,19 +24,37 @@ const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'cl
             @toggleServicesAllModal="emits('toggleServicesAllModal')"
           />
         </div>
-        <div class="mobile-menu__social">
-          <IcSocialTelegram :font-controlled="false" :filled="true" />
-          <IcSocialWhatsapp :font-controlled="false" :filled="true" />
-          <IcSocialVk :font-controlled="false" :filled="true" />
-        </div>
+        <ul v-if="socials.length" class="mobile-menu__socials">
+          <template v-for="social in socials" :key="social.id">
+            <li v-if="Object.keys(social).length" class="mobile-menu__social">
+              <a
+                class="mobile-menu__social-link"
+                :href="social.link"
+                target="_blank"
+                rel="noopener"
+                :style="{ backgroundImage: `url('${social.icon_mobile}')` }"
+              >
+              </a>
+            </li>
+          </template>
+        </ul>
         <div class="mobile-menu__calls">
-          <a class="mobile-menu__phone" href="tel:88652500520" rel="noopener">+7 (8652) 500-520</a>
-          <span class="mobile-menu__callback">обратный звонок</span>
+          <a
+            v-if="contacts.content.phone"
+            class="mobile-menu__phone"
+            :href="`tel:${contacts.content.phone}`"
+            rel="noopener"
+            >{{ contacts.content.phone }}</a
+          >
+          <span class="mobile-menu__callback" @click="openModal">обратный звонок</span>
         </div>
         <div class="mobile-menu__button">
           <UIButton text="Записаться на сервис" />
         </div>
       </div>
+    </UIModal>
+    <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
+      <LazyAppCallbackForm title="Обратный звонок" />
     </UIModal>
   </div>
 </template>
@@ -47,11 +70,28 @@ const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'cl
   &__nav {
     margin-bottom: 34px;
   }
-  &__social {
+  &__socials {
+    display: flex;
+    gap: 20px;
     margin-bottom: 74px;
-    @include mr(20px);
+    list-style-type: none;
+  }
+  &__social {
+    width: 24px;
+    height: 24px;
+
+    &-link {
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      text-decoration: none;
+    }
   }
   &__calls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 43px;
   }
   &__phone {
@@ -82,7 +122,7 @@ const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'cl
   .ui-modal--with-header {
     display: block;
     padding: 0;
-    margin-top: 91px;
+    margin-top: 100px;
 
     .ui-modal {
       &__container {
@@ -94,6 +134,7 @@ const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'cl
           .navigation {
             &__list {
               flex-direction: column;
+              align-items: flex-start;
             }
 
             &__item-link {

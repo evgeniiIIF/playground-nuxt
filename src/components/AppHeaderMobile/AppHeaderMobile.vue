@@ -1,9 +1,15 @@
 <script lang="ts" setup>
 import { useMediaSizes } from '@/composables/useMediaSizes';
+import type { Contacts, Social } from '@/store/contacts/contacts.types';
 
 const { isDesktop } = useMediaSizes();
 
-defineProps<{ isOpenServicesAllModal: boolean; isOpenMobileMenu: boolean }>();
+defineProps<{
+  isOpenServicesAllModal: boolean;
+  isOpenMobileMenu: boolean;
+  contacts: Contacts;
+  socials: Social[];
+}>();
 const emits = defineEmits<{
   (event: 'toggleServicesAllModal'): void;
   (event: 'closeMobileMenu'): void;
@@ -37,17 +43,20 @@ useRouter().afterEach((to, from) => {
       <div class="header-mobile__wrapper">
         <div class="header-mobile__col">
           <a
+            v-if="contacts.content.route_link"
             class="header-mobile__address"
-            href="https://yandex.ru/maps/?rtext=~45.01151530529911%2C41.929150298237595"
+            :href="contacts.content.route_link"
             target="_blank"
             rel="noopener"
           >
             <IcNavigationArrow :font-controlled="false" :filled="true" />
             <p class="header-mobile__address-text">ул. Доваторцев, 47 Б</p>
           </a>
-          <!-- <div class="header-mobile__calls">
-            <a class="header-mobile__calls-phone" href="tel:88652500520" rel="noopener">+7 (8652) 500-520</a>
-          </div> -->
+          <div v-if="contacts.content.phone" class="header-mobile__calls">
+            <a class="header-mobile__calls-phone" :href="`tel:${contacts.content.phone}`" rel="noopener">{{
+              contacts.content.phone
+            }}</a>
+          </div>
         </div>
         <div class="header-mobile__col">
           <div class="header-mobile__logo">
@@ -66,7 +75,9 @@ useRouter().afterEach((to, from) => {
       </div>
     </div>
     <div class="header-mobile__menu">
-      <AppMobileMenu
+      <LazyAppMobileMenu
+        :contacts="contacts"
+        :socials="socials"
         :is-open="isOpenMobileMenu"
         position="left"
         :is-open-services-all-modal="isOpenServicesAllModal"

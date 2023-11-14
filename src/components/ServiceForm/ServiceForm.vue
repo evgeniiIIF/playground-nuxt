@@ -120,13 +120,13 @@ watch(
       </form>
     </div>
     <div class="service-form__modal">
-      <UIModal position="center" :is-open="isOpenModal" @on-close="closeModal">
+      <LazyUIModal position="center" :is-open="isOpenModal" @on-close="closeModal">
         <div class="service-form__message">
           <p class="request-form__message-text">
             {{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}
           </p>
         </div>
-      </UIModal>
+      </LazyUIModal>
     </div>
   </section>
 </template>
