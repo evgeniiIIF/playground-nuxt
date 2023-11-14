@@ -1,4 +1,4 @@
-import {useAppFetch, useAppLazyFetch} from '@/composables/useAppFetch';
+import { useAppFetch, useAppLazyFetch } from '@/composables/useAppFetch';
 import type {
   LeadsCalculationForm,
   LeadsCallbackForm,
