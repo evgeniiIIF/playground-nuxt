@@ -33,7 +33,7 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
       :is-open-services-all-modal="isOpenServicesAllModal"
       @toggle-services-all-modal="toggleServicesAllModal"
     />
-    <ServicesAllModal
+    <LazyServicesAllModal
       v-show="isOpenServicesAllModal"
       @closeServicesAllModal="closeServicesAllModal"
       @closeMobileMenu="closeMobileMenu"

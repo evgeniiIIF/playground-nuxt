@@ -78,9 +78,9 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
       </div>
     </div>
     <div class="repair-calculation__modal">
-      <UIModal position="center" :is-open="isOpenModal" @on-close="closeModal">
-        <AppCalculationForm :services="chooseServices" :car-brand="carsBrandsInput" :car-model="carsModelsInput" />
-      </UIModal>
+      <LazyUIModal position="center" :is-open="isOpenModal" @on-close="closeModal">
+        <LazyAppCalculationForm :services="chooseServices" :car-brand="carsBrandsInput" :car-model="carsModelsInput" />
+      </LazyUIModal>
     </div>
   </section>
 </template>

@@ -75,7 +75,7 @@ useRouter().afterEach((to, from) => {
       </div>
     </div>
     <div class="header-mobile__menu">
-      <AppMobileMenu
+      <LazyAppMobileMenu
         :contacts="contacts"
         :socials="socials"
         :is-open="isOpenMobileMenu"

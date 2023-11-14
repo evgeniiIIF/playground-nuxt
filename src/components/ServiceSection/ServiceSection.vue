@@ -50,9 +50,9 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
         </div>
       </div>
     </div>
-    <UIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
-      <AppCallbackForm title="Обратный звонок" />
-    </UIModal>
+    <LazyUIModal :is-open="isOpenModal" position="center" @on-close="closeModal">
+      <LazyAppCallbackForm title="Обратный звонок" />
+    </LazyUIModal>
   </section>
 </template>
 
