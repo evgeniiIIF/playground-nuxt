@@ -1,10 +1,10 @@
 import { useAppFetch } from '@/composables/useAppFetch';
-import type {MenuResponse} from "@/api/http/menuHttp/menuHttp.types";
+import type { MenuResponse } from '@/api/http/menuHttp/menuHttp.types';
 
 const BASE_PATH = '/menu';
 
 const fetchHeaderMenu = async () => {
-  const path = `${BASE_PATH}/header_menu`
+  const path = `${BASE_PATH}/header_menu`;
 
   const response = await useAppFetch<MenuResponse>(path, {
     method: 'GET',
@@ -14,7 +14,7 @@ const fetchHeaderMenu = async () => {
 };
 
 const fetchFooterServicesMenu = async () => {
-  const path = `${BASE_PATH}/footer_menu_services`
+  const path = `${BASE_PATH}/footer_menu_services`;
 
   const response = await useAppFetch<MenuResponse>(path, {
     method: 'GET',
@@ -24,7 +24,7 @@ const fetchFooterServicesMenu = async () => {
 };
 
 const fetchFooterAdditionalServicesMenu = async () => {
-  const path = `${BASE_PATH}/footer_menu_additional_services`
+  const path = `${BASE_PATH}/footer_menu_additional_services`;
 
   const response = await useAppFetch<MenuResponse>(path, {
     method: 'GET',
@@ -36,5 +36,5 @@ const fetchFooterAdditionalServicesMenu = async () => {
 export const menuHttp = {
   fetchHeaderMenu,
   fetchFooterServicesMenu,
-  fetchFooterAdditionalServicesMenu
+  fetchFooterAdditionalServicesMenu,
 };

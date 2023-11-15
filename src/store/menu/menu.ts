@@ -1,8 +1,7 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import {menuHttp} from "@/api/http";
-import type {MenuStore} from "@/store/menu/menu.types";
-import type {MenuItem} from "@/store/menu/menu.types";
+import { menuHttp } from '@/api/http';
+import type { MenuStore, MenuItem } from '@/store/menu/menu.types';
 
 const DEFAULT_STATE: MenuStore = {
   headerMenu: [],

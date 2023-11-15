@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import {
-  mockedAboutCompanyFooter,
-} from '@/components/AppFooter/AppFooter.constant';
+import { mockedAboutCompanyFooter } from '@/components/AppFooter/AppFooter.constant';
 import type { AppFooter } from '@/components/AppFooter/AppFooter.types';
 
 defineProps<AppFooter>();

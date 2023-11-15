@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type {MenuItem} from "@/store/menu/menu.types";
+import type { MenuItem } from '@/store/menu/menu.types';
 
 defineProps<{
   isOpenServicesAllModal: boolean;
@@ -28,7 +28,8 @@ const navigationClass = computed(() => {
             :active-class="!isOpenServicesAllModal ? 'navigation__item-link--active' : ''"
             :to="item.link"
             @click="emits('clickOnLink')"
-          >{{ item.title }}</NuxtLink>
+            >{{ item.title }}</NuxtLink
+          >
           <div
             v-else
             :class="['navigation__item-link', isOpenServicesAllModal ? 'navigation__item-link--active' : '']"

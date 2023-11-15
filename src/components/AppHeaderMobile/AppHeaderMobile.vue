@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import type { Contacts, Social } from '@/store/contacts/contacts.types';
-import type {MenuItem} from "@/store/menu/menu.types";
+import type { MenuItem } from '@/store/menu/menu.types';
 
 const { isDesktop } = useMediaSizes();
 

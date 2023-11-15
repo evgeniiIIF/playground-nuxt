@@ -1,4 +1,4 @@
-import type {MenuItem} from "@/store/menu/menu.types";
+import type { MenuItem } from '@/store/menu/menu.types';
 
 export type FooterMenu = {
   title: string;

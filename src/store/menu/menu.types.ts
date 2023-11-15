@@ -1,9 +1,9 @@
 export interface MenuItem {
-  id: number,
-  title: string,
-  link: string,
-  is_active: string,
-  is_modal: string
+  id: number;
+  title: string;
+  link: string;
+  is_active: string;
+  is_modal: string;
 }
 
 export interface MenuStore {

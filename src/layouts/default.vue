@@ -3,7 +3,7 @@ import { useMediaSizes } from '@/composables/useMediaSizes';
 import { useContactsStore } from '@/store/contacts';
 import AppWidget from '@/components/AppWidget/AppWidget.vue';
 import type { Contacts } from '@/store/contacts/contacts.types';
-import {useMenuStore} from "@/store/menu";
+import { useMenuStore } from '@/store/menu';
 
 const { contactsState, contactsEffects } = useContactsStore();
 const { menuState, menuEffects } = useMenuStore();

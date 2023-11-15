@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Contacts } from '@/store/contacts/contacts.types';
-import type {MenuItem} from "@/store/menu/menu.types";
+import type { MenuItem } from '@/store/menu/menu.types';
 
 defineProps<{
   isOpenServicesAllModal: boolean;

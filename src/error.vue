@@ -3,7 +3,7 @@ import { useMediaSizes } from '@/composables/useMediaSizes';
 import AppWidget from '@/components/AppWidget/AppWidget.vue';
 import { useContactsStore } from '@/store/contacts';
 import type { Contacts } from '@/store/contacts/contacts.types';
-import {useMenuStore} from "@/store/menu";
+import { useMenuStore } from '@/store/menu';
 
 type ErrorType = {
   message: string;
@@ -101,7 +101,12 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
       <ServiceForm />
     </main>
     <AppWidget v-if="Number(contacts.content.is_active_widget) === 1" :widget-socials="widgetSocials" />
-    <AppFooter :contacts="contacts" :socials="socials" :services-menu="footerServicesMenu" :additional-services-menu="footerAdditionalServicesMenu" />
+    <AppFooter
+      :contacts="contacts"
+      :socials="socials"
+      :services-menu="footerServicesMenu"
+      :additional-services-menu="footerAdditionalServicesMenu"
+    />
   </div>
 </template>
 

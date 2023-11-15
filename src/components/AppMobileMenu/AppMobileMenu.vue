@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { UIModalProps } from '@/components/UIModal/UIModal.types';
 import type { Contacts, Social } from '@/store/contacts/contacts.types';
-import type {MenuItem} from "@/store/menu/menu.types";
+import type { MenuItem } from '@/store/menu/menu.types';
 
 interface AppMobileMenuProps extends UIModalProps {
   isOpenServicesAllModal: boolean;

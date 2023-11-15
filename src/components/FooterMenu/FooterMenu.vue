@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type {FooterMenu} from "@/components/FooterMenu/FooterMenu.types";
+import type { FooterMenu } from '@/components/FooterMenu/FooterMenu.types';
 
 defineProps<FooterMenu>();
 </script>
