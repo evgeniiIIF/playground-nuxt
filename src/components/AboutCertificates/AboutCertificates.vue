@@ -115,6 +115,7 @@ const handleClickCertificate = (certificate: AboutCertificate) => {
     height: 100%;
     max-width: 285px;
     min-width: 135px;
+    cursor: pointer;
 
     &-image {
       width: 100%;
