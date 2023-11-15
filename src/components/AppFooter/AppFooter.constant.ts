@@ -1,34 +1,11 @@
-const mockedServicesFooter = {
-  title: 'Услуги',
-  items: [
-    { text: 'Техническое обслуживание', link: '#' },
-    { text: 'Компьютерная диагностика', link: '#' },
-    { text: 'Ремонт двигателя', link: '#' },
-    { text: 'Ремонт КПП', link: '#' },
-    { text: 'Кузовной ремонт', link: '#' },
-    { text: 'Автомойка', link: '#' },
-    { text: 'Шиномонтаж', link: '#' },
-  ],
-};
-
-const mockedAdditionalServicesFooter = {
-  title: 'Доп. услуги',
-  items: [
-    { text: 'Химчистка', link: '#' },
-    { text: 'Тонировка', link: '#' },
-    { text: 'Полировка', link: '#' },
-    { text: 'Бронирование', link: '#' },
-  ],
-};
-
 const mockedAboutCompanyFooter = {
   title: 'О компании',
   items: [
-    { text: 'О нас', link: '#' },
-    { text: 'Бонусная программа', link: '#' },
-    { text: 'Партнеры и сертификаты', link: '#' },
-    { text: 'Гарантия', link: '#' },
+    { id: 1, title: 'О нас', link: '/about', is_active: '1', is_modal: '0' },
+    { id: 1, title: 'Бонусная программа', link: '/bonus', is_active: '1', is_modal: '0' },
+    { id: 1, title: 'Партнеры и сертификаты', link: '/about', is_active: '1', is_modal: '0' },
+    { id: 1, title: 'Гарантия', link: '/about', is_active: '1', is_modal: '0' },
   ],
 };
 
-export { mockedServicesFooter, mockedAdditionalServicesFooter, mockedAboutCompanyFooter };
+export { mockedAboutCompanyFooter };

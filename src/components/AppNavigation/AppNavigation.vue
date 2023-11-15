@@ -1,5 +1,10 @@
 <script lang="ts" setup>
-defineProps<{ isOpenServicesAllModal: boolean }>();
+import type {MenuItem} from "@/store/menu/menu.types";
+
+defineProps<{
+  isOpenServicesAllModal: boolean;
+  menu: MenuItem[];
+}>();
 const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'clickOnLink'): void }>();
 
 const navigationColorIsDark = computed(() => {
@@ -15,53 +20,27 @@ const navigationClass = computed(() => {
 <template>
   <nav class="navigation" :class="navigationClass">
     <ul class="navigation__list">
-      <li class="navigation__item">
-        <NuxtLink
-          class="navigation__item-link"
-          :active-class="!isOpenServicesAllModal ? 'navigation__item-link--active' : ''"
-          to="/offers"
-          @click="emits('clickOnLink')"
-          >Акции</NuxtLink
-        >
-      </li>
-      <li class="navigation__item">
-        <div
-          :class="['navigation__item-link', isOpenServicesAllModal ? 'navigation__item-link--active' : '']"
-          @click="emits('toggleServicesAllModal')"
-        >
-          <span class="navigation__item-link-text">Услуги</span>
-          <span class="navigation__item-link-arrow">
-            <IcArrowDownNavigation :font-controlled="false" :filled="true" />
-          </span>
-        </div>
-      </li>
-      <li class="navigation__item">
-        <NuxtLink
-          class="navigation__item-link"
-          :active-class="!isOpenServicesAllModal ? 'navigation__item-link--active' : ''"
-          to="/bonus"
-          @click="emits('clickOnLink')"
-          >Бонусная программа</NuxtLink
-        >
-      </li>
-      <li class="navigation__item">
-        <NuxtLink
-          class="navigation__item-link"
-          :active-class="!isOpenServicesAllModal ? 'navigation__item-link--active' : ''"
-          to="/about"
-          @click="emits('clickOnLink')"
-          >О компании</NuxtLink
-        >
-      </li>
-      <li class="navigation__item">
-        <NuxtLink
-          class="navigation__item-link"
-          :active-class="!isOpenServicesAllModal ? 'navigation__item-link--active' : ''"
-          to="/contacts"
-          @click="emits('clickOnLink')"
-          >Контакты</NuxtLink
-        >
-      </li>
+      <template v-for="item in menu" :key="item.id">
+        <li v-if="Number(item.is_active) === 1" class="navigation__item">
+          <NuxtLink
+            v-if="Number(item.is_modal) === 0"
+            class="navigation__item-link"
+            :active-class="!isOpenServicesAllModal ? 'navigation__item-link--active' : ''"
+            :to="item.link"
+            @click="emits('clickOnLink')"
+          >{{ item.title }}</NuxtLink>
+          <div
+            v-else
+            :class="['navigation__item-link', isOpenServicesAllModal ? 'navigation__item-link--active' : '']"
+            @click="emits('toggleServicesAllModal')"
+          >
+            <span class="navigation__item-link-text">{{ item.title }}</span>
+            <span class="navigation__item-link-arrow">
+              <IcArrowDownNavigation :font-controlled="false" :filled="true" />
+            </span>
+          </div>
+        </li>
+      </template>
     </ul>
   </nav>
 </template>

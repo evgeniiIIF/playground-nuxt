@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useMediaSizes } from '@/composables/useMediaSizes';
 import type { Contacts, Social } from '@/store/contacts/contacts.types';
+import type {MenuItem} from "@/store/menu/menu.types";
 
 const { isDesktop } = useMediaSizes();
 
@@ -9,6 +10,7 @@ defineProps<{
   isOpenMobileMenu: boolean;
   contacts: Contacts;
   socials: Social[];
+  menu: MenuItem[];
 }>();
 const emits = defineEmits<{
   (event: 'toggleServicesAllModal'): void;
@@ -78,6 +80,7 @@ useRouter().afterEach((to, from) => {
       <LazyAppMobileMenu
         :contacts="contacts"
         :socials="socials"
+        :menu="menu"
         :is-open="isOpenMobileMenu"
         position="left"
         :is-open-services-all-modal="isOpenServicesAllModal"

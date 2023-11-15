@@ -1,10 +1,7 @@
 <script lang="ts" setup>
-type Props = {
-  title: string;
-  items: { text: string; link: string }[];
-};
+import type {FooterMenu} from "@/components/FooterMenu/FooterMenu.types";
 
-defineProps<Props>();
+defineProps<FooterMenu>();
 </script>
 
 <template>
@@ -13,8 +10,8 @@ defineProps<Props>();
       {{ title }}
     </h3>
     <ul class="footer-menu__list">
-      <NuxtLink v-for="item in items" :key="item.text" class="footer-menu__item" :to="item.link">
-        {{ item.text }}
+      <NuxtLink v-for="item in items" :key="item.id" class="footer-menu__item" :to="item.link">
+        {{ item.title }}
       </NuxtLink>
     </ul>
   </div>

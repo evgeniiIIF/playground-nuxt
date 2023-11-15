@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import type { Contacts } from '@/store/contacts/contacts.types';
+import type {MenuItem} from "@/store/menu/menu.types";
 
 defineProps<{
   isOpenServicesAllModal: boolean;
   contacts: Contacts;
+  menu: MenuItem[];
 }>();
 defineEmits<{ (event: 'toggleServicesAllModal'): void }>();
 
@@ -29,6 +31,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
         </NuxtLink>
         <div class="header__navigation">
           <AppNavigation
+            :menu="menu"
             :is-open-services-all-modal="isOpenServicesAllModal"
             @toggleServicesAllModal="$emit('toggleServicesAllModal')"
           />
