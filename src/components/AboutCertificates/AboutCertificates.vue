@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import type { AboutCertificates } from '@/components/AboutCertificates/AboutCertificates.types';
-import type {AboutCertificate} from "@/store/about/about.types";
+import type { AboutCertificate } from '@/store/about/about.types';
 
 defineProps<AboutCertificates>();
 const zoomImageSrc = ref('');
-const zoomImageAlt = ref('')
+const zoomImageAlt = ref('');
 
 const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 
 const handleClickCertificate = (certificate: AboutCertificate) => {
-  zoomImageSrc.value = certificate.image_webp || certificate.image
-  zoomImageAlt.value = certificate.image_title || 'Сертификат'
-  openModal()
-}
+  zoomImageSrc.value = certificate.image_webp || certificate.image;
+  zoomImageAlt.value = certificate.image_title || 'Сертификат';
+  openModal();
+};
 </script>
 
 <template>
@@ -40,12 +40,7 @@ const handleClickCertificate = (certificate: AboutCertificate) => {
     </div>
     <LazyUIModal :is-open="isOpenModal" position="center" :has-zoom="true" @on-close="closeModal">
       <div class="about-certificates__zoom">
-        <NuxtImg
-            class="about-certificates__zoom-image"
-            :src="zoomImageSrc"
-            :alt="zoomImageAlt"
-            loading="lazy"
-        />
+        <NuxtImg class="about-certificates__zoom-image" :src="zoomImageSrc" :alt="zoomImageAlt" loading="lazy" />
       </div>
     </LazyUIModal>
   </section>
