@@ -35,6 +35,7 @@ useRouter().afterEach((to, from) => {
     emits('openMobileMenu');
   }
 });
+const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 </script>
 
 <template>
@@ -60,7 +61,7 @@ useRouter().afterEach((to, from) => {
         </div>
         <div class="header-mobile__col">
           <div class="header-mobile__logo">
-            <NuxtLink class="header__logo" to="/">
+            <NuxtLink class="header__logo" to="/" @click="scrollToTop">
               <IcLogoMobile v-if="headerColorIsDark" :font-controlled="false" :filled="true" />
               <IcLogoMobileDark v-else :font-controlled="false" :filled="true" />
             </NuxtLink>
