@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { ServicesAllItemParent, ServicesAllItemChild } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem } from '@/store/servicesAll/servicesAll.types';
 
-const props = defineProps<{ services: ServicesAllItemParent[] }>();
+const props = defineProps<{ services: ServicesAllItem[] }>();
 const emits = defineEmits<{ (event: 'closeServicesAllModal'): void; (event: 'closeMobileMenu'): void }>();
 
-const currentServicesItemL1 = ref<ServicesAllItemParent | undefined>();
-const currentServicesItemL2 = ref<ServicesAllItemChild | undefined>();
+const currentServicesItemL1 = ref<ServicesAllItem | undefined>();
+const currentServicesItemL2 = ref<ServicesAllItem | undefined>();
 const step = ref(0);
 const currentTitle = computed(() => {
   let title = 'Услуги';
@@ -16,11 +16,11 @@ const currentTitle = computed(() => {
   return title;
 });
 
-const setCurrentServicesItemL1 = (item: ServicesAllItemParent) => {
+const setCurrentServicesItemL1 = (item: ServicesAllItem) => {
   currentServicesItemL1.value = item;
   step.value += 1;
 };
-const setCurrentServicesItemL2 = (item: ServicesAllItemChild) => {
+const setCurrentServicesItemL2 = (item: ServicesAllItem) => {
   currentServicesItemL2.value = item;
   step.value += 1;
 };
@@ -29,7 +29,7 @@ const goBackOneStep = () => {
   console.log(step.value);
 };
 
-const goTo = (item: ServicesAllItemChild | undefined) => {
+const goTo = (item: ServicesAllItem | undefined) => {
   emits('closeServicesAllModal');
   emits('closeMobileMenu');
 

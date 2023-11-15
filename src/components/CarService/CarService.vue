@@ -63,12 +63,13 @@ const CAR_SERVICE_CARDS = [
 .item-car-service {
   border: 1px solid var(--input-gray, #c4cccc);
   background: var(--1, #fff);
+
   &__image {
     padding-top: 64.2599278%;
     margin-bottom: 20px;
   }
   &__text {
-    padding: 0 16px;
+    padding: 0 16px 40px 16px;
     color: var(--4, #3f3f41);
     text-align: center;
     font-size: 24px;
@@ -77,7 +78,7 @@ const CAR_SERVICE_CARDS = [
     line-height: 30px; /* 125% */
 
     @include mobile {
-      padding: 0 8px;
+      padding: 0 8px 16px 8px;
       font-size: 16px;
       line-height: 20px; /* 125% */
     }
