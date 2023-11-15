@@ -33,8 +33,19 @@ const fetchFooterAdditionalServicesMenu = async () => {
   return response;
 };
 
+const fetchFooterAboutCompanyMenu = async () => {
+  const path = `${BASE_PATH}/footer_menu_about_company`;
+
+  const response = await useAppFetch<MenuResponse>(path, {
+    method: 'GET',
+  });
+
+  return response;
+};
+
 export const menuHttp = {
   fetchHeaderMenu,
   fetchFooterServicesMenu,
   fetchFooterAdditionalServicesMenu,
+  fetchFooterAboutCompanyMenu,
 };

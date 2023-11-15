@@ -16,6 +16,7 @@ await useAsyncData('layout', async () => {
     menuState.value.headerMenu.length === 0 && menuEffects.fetchHeaderMenu(),
     menuState.value.footerServicesMenu.length === 0 && menuEffects.fetchFooterServicesMenu(),
     menuState.value.footerAdditionalServicesMenu.length === 0 && menuEffects.fetchFooterAdditionalServicesMenu(),
+    menuState.value.footerAboutCompanyMenu.length === 0 && menuEffects.fetchFooterAboutCompanyMenu(),
   ]);
 });
 
@@ -25,6 +26,7 @@ const widgetSocials = contactsState.value.widget;
 const headerMenu = menuState.value.headerMenu;
 const footerServicesMenu = menuState.value.footerServicesMenu;
 const footerAdditionalServicesMenu = menuState.value.footerAdditionalServicesMenu;
+const footerAboutCompanyMenu = menuState.value.footerAboutCompanyMenu;
 
 const { isDesktop } = useMediaSizes();
 
@@ -68,6 +70,7 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
       :socials="socials"
       :services-menu="footerServicesMenu"
       :additional-services-menu="footerAdditionalServicesMenu"
+      :about-company-menu="footerAboutCompanyMenu"
     />
   </div>
 </template>

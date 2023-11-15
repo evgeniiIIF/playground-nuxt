@@ -7,6 +7,7 @@ const DEFAULT_STATE: MenuStore = {
   headerMenu: [],
   footerServicesMenu: [],
   footerAdditionalServicesMenu: [],
+  footerAboutCompanyMenu: [],
 };
 
 export const menuStore = defineStore('menuStore', () => {
@@ -22,6 +23,10 @@ export const menuStore = defineStore('menuStore', () => {
 
   const setFooterAdditionalServicesMenu = (data: MenuItem[]) => {
     state.value.footerAdditionalServicesMenu = data;
+  };
+
+  const setFooterAboutCompanyMenu = (data: MenuItem[]) => {
+    state.value.footerAboutCompanyMenu = data;
   };
 
   const fetchHeaderMenu = async () => {
@@ -54,6 +59,16 @@ export const menuStore = defineStore('menuStore', () => {
     }
   };
 
+  const fetchFooterAboutCompanyMenu = async () => {
+    try {
+      const { data } = await menuHttp.fetchFooterAboutCompanyMenu();
+
+      setFooterAboutCompanyMenu(data.value?.data ?? []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     state,
     actions: {},
@@ -61,6 +76,7 @@ export const menuStore = defineStore('menuStore', () => {
       fetchHeaderMenu,
       fetchFooterServicesMenu,
       fetchFooterAdditionalServicesMenu,
+      fetchFooterAboutCompanyMenu,
     },
   };
 });

@@ -10,4 +10,5 @@ export interface MenuStore {
   headerMenu: MenuItem[];
   footerServicesMenu: MenuItem[];
   footerAdditionalServicesMenu: MenuItem[];
+  footerAboutCompanyMenu: MenuItem[];
 }

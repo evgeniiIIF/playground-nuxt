@@ -6,4 +6,5 @@ export type AppFooter = {
   socials: Social[];
   servicesMenu: MenuItem[];
   additionalServicesMenu: MenuItem[];
+  aboutCompanyMenu: MenuItem[];
 };

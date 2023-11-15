@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { mockedAboutCompanyFooter } from '@/components/AppFooter/AppFooter.constant';
 import type { AppFooter } from '@/components/AppFooter/AppFooter.types';
 
 defineProps<AppFooter>();
@@ -17,7 +16,7 @@ defineProps<AppFooter>();
             <FooterMenu title="Доп. услуги" :items="additionalServicesMenu" />
           </div>
           <div class="footer__menu">
-            <FooterMenu :title="mockedAboutCompanyFooter.title" :items="mockedAboutCompanyFooter.items" />
+            <FooterMenu title="О компании" :items="aboutCompanyMenu" />
           </div>
           <div class="footer__contacts">
             <FooterContacts :contacts="contacts" :socials="socials" />
