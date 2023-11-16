@@ -19,13 +19,15 @@ const headerClass = computed(() => {
 });
 
 const [isOpenModal, openModal, closeModal] = useBooleanState(false);
+
+const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 </script>
 
 <template>
   <header class="header" :class="headerClass">
     <div class="container">
       <div class="header__wrapper">
-        <NuxtLink class="header__logo" to="/">
+        <NuxtLink class="header__logo" to="/" @click="scrollToTop">
           <IcLogo v-if="headerColorIsDark" :font-controlled="false" :filled="true" />
           <IcLogoDark v-else :font-controlled="false" :filled="true" />
         </NuxtLink>

@@ -65,6 +65,7 @@ const partnersData = {
 <template>
   <div>
     <WelcomeSlider v-if="Number(home.content?.is_active_welcome) === 1" :slides="welcomeSlides" />
+    <CarService />
     <RepairCalculation
       v-if="Number(home.content?.is_active_calculator) === 1"
       :cars="cars"

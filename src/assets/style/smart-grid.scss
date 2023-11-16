@@ -448,6 +448,8 @@ $fields_lg: 20px;
   flex-wrap: wrap;
   margin-left: math.div($offset, -2);
   margin-right: math.div($offset, -2);
+  margin-top: math.div($offset, -2);
+  margin-bottom: math.div($offset, -2);
 }
 
 @mixin u-col($offset) {
@@ -455,6 +457,8 @@ $fields_lg: 20px;
   word-wrap: break-word;
   margin-left: ($offset * 0.5);
   margin-right: ($offset * 0.5);
+  margin-top: ($offset * 0.5);
+  margin-bottom: ($offset * 0.5);
 }
 
 @mixin u-size($n, $columns, $offset) {

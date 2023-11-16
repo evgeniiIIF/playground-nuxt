@@ -4,6 +4,7 @@ import { useContactsStore } from '@/store/contacts';
 import AppWidget from '@/components/AppWidget/AppWidget.vue';
 import type { Contacts } from '@/store/contacts/contacts.types';
 import { useMenuStore } from '@/store/menu';
+import { bodyLock, bodyUnlock } from '@/components/UIModal/UIModal.utils';
 
 const { contactsState, contactsEffects } = useContactsStore();
 const { menuState, menuEffects } = useMenuStore();
@@ -30,8 +31,18 @@ const footerAboutCompanyMenu = menuState.value.footerAboutCompanyMenu;
 
 const { isDesktop } = useMediaSizes();
 
-const [isOpenServicesAllModal, , closeServicesAllModal, toggleServicesAllModal] = useBooleanState(false);
+const [isOpenServicesAllModal, , useCloseServicesAllModal, useToggleServicesAllModal] = useBooleanState(false);
+
 const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = useBooleanState(false);
+
+const toggleServicesAllModal = () => {
+  useToggleServicesAllModal();
+  isOpenServicesAllModal.value ? bodyLock() : bodyUnlock();
+};
+const closeServicesAllModal = () => {
+  useCloseServicesAllModal();
+  isOpenServicesAllModal.value ? bodyLock() : bodyUnlock();
+};
 </script>
 
 <template>
