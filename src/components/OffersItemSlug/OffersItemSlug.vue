@@ -179,7 +179,7 @@ const anotherOffersItems = computed(() =>
     max-width: 1200px;
     height: 1px;
     content: '';
-    background-color: #F0F0F5;
+    background-color: #f0f0f5;
   }
 
   @include mobile {
