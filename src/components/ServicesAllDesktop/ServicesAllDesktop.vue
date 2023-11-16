@@ -15,6 +15,25 @@ const goTo = (item: ServicesAllItem | undefined) => {
   navigateTo({ path: `/services/${item?.slug}` });
 };
 
+const searchServicesValue = ref('');
+
+const setSearchServicesValue = (value: string) => {
+  searchServicesValue.value = value;
+};
+
+// const foundServicesItems = computed(() => {
+//   console.log(props.services);
+
+//   const foundItems = props.services.filter((itemL1) => {
+//     return itemL1.children.filter((itemL2) => {
+//       return itemL2.children.filter((itemL3) => {
+//         return itemL3.title.includes(searchServicesValue.value);
+//       });
+//     });
+//   });
+//   return foundItems;
+// });
+
 const packagedColumnsItems = computed(() => {
   const arrayOfObjects = currentServicesItemL1.value?.children;
   const countItems = arrayOfObjects?.length ?? 0;
@@ -30,6 +49,8 @@ const packagedColumnsItems = computed(() => {
 });
 
 onMounted(() => setCurrentServicesItemL1(props.services[0]));
+
+// [{ id: 1, childeren: [{ id: 2, childeren: [{ id: 3, title: 'value' }] }] }];
 </script>
 <template>
   <div class="services-all-desktop">
@@ -38,7 +59,7 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
         <h2 class="services-all-desktop__top-title">Поиск по услугам автосервиса</h2>
         <div class="services-all-desktop__top-actions">
           <div class="services-all-desktop__top-input">
-            <UIInputSearch />
+            <UIInputSearch @onInput="setSearchServicesValue($event)" />
           </div>
           <div class="services-all-desktop__top-close" @click="emits('closeServicesAllModal')">
             <IcClose :font-controlled="false" :filled="true" />
@@ -46,7 +67,7 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
         </div>
       </div>
       <nav class="services-all-desktop__nav">
-        <ul class="services-all-desktop__l1 services-all-desktop-l1">
+        <ul class="services-all-desktop__col-left services-all-desktop-l1">
           <li
             v-for="servicesItemL1 in props.services"
             :key="servicesItemL1.id"
@@ -63,7 +84,7 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
             />
           </li>
         </ul>
-        <ul class="services-all-desktop__l2 services-all-desktop-l2">
+        <ul v-if="Boolean(!searchServicesValue)" class="services-all-desktop__col-right services-all-desktop-l2">
           <li
             v-for="(packagedColumnsItem, index) in packagedColumnsItems"
             :key="index"
@@ -79,6 +100,12 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
               </li>
             </ul>
           </li>
+        </ul>
+        <ul v-else class="services-all-desktop__col-right services-all-desktop-found">
+          <!-- <li class="services-all-desktop-found__item" v-for="foundItem in foundServicesItems"> -->
+          <!-- <ServicesAllNavItemL2 :item="servicesItemL2" @go-to="goTo($event)" /> -->
+          <!-- <ServicesAllNavItemL3 :item="foundItem" @go-to="emits('goTo', $event)" /> -->
+          <!-- </li> -->
         </ul>
       </nav>
     </div>
@@ -122,11 +149,11 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
     }
   }
 
-  &__l1 {
+  &__col-left {
     flex: 0 0 360px;
     margin-right: 47px;
   }
-  &__l2 {
+  &__col-right {
     flex: 1 1 auto;
     @include mb(30px);
   }
@@ -144,6 +171,7 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
   }
 }
 .services-all-desktop-l2 {
+  @include scrollbar-y();
   height: calc(100vh - (115px + 138px));
 
   display: flex;

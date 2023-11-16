@@ -1,6 +1,16 @@
+<script setup lang="ts">
+const emits = defineEmits<{
+  (event: 'onInput', payload: string): void;
+}>();
+
+const onInput = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  emits('onInput', target.value);
+};
+</script>
 <template>
   <label class="input-search">
-    <input class="input-search__input" type="text" placeholder="Поиск услуг" />
+    <input class="input-search__input" type="text" placeholder="Поиск услуг" @input="onInput" />
     <div class="input-search__icon">
       <IcSearch :font-controlled="false" :filled="true" />
     </div>

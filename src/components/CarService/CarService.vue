@@ -15,7 +15,7 @@ const CAR_SERVICE_CARDS = [
         <div v-for="item in CAR_SERVICE_CARDS" :key="item.text" class="car-service__col">
           <div class="car-service__item item-car-service">
             <div class="item-car-service__image ibg">
-              <NuxtImg :src="item.image" loading="lazy" />
+              <NuxtImg format="webp" :src="item.image" loading="lazy" />
             </div>
             <div class="item-car-service__text">{{ item.text }}</div>
           </div>
