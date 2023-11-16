@@ -34,6 +34,21 @@ const emits = defineEmits<ServicesAllItemEmits>();
     font-weight: 400;
     line-height: 20px; /* 142.857% */
     color: var(--3, #868789);
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    .services-all-item-l3 {
+      &__arrow {
+        svg {
+          @include fill-svg-and-path($color-second,  100ms);
+        }
+      }
+
+      &__title {
+        color: $color-second;
+      }
+    }
   }
 }
 </style>
