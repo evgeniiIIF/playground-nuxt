@@ -244,6 +244,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
       ul {
         margin: 16px 0;
         padding-left: 30px;
+        list-style-type: inherit;
       }
 
       li {
