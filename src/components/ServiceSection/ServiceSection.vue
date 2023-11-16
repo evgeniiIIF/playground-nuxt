@@ -24,13 +24,12 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
               <span class="service-section__service-price-icon">
                 <IcPriceTag :font-controlled="false" :filled="true" />
               </span>
-              <span class="service-section__service-price-text">от {{ service.price }} ₽</span>
+              <span class="service-section__service-price-text">от&nbsp;{{ service.price }}&nbsp;₽</span>
             </div>
           </div>
           <div class="service-section__service-info-image">
             <NuxtImg
               :src="service.image_webp ? service.image_webp : service.image_origin"
-              fit="contain"
               loading="lazy"
             />
           </div>
@@ -46,7 +45,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
           </div>
         </div>
         <div class="service-section__service-image">
-          <NuxtImg :src="service.image_webp ? service.image_webp : service.image_origin" fit="contain" loading="lazy" />
+          <NuxtImg :src="service.image_webp ? service.image_webp : service.image_origin" loading="lazy" />
         </div>
       </div>
     </div>
@@ -85,6 +84,14 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
     display: flex;
     justify-content: space-between;
     gap: 10px;
+
+    @include tablet {
+      display: block;
+    }
+
+    @include mobile {
+      display: block;
+    }
 
     &-path {
       display: flex;

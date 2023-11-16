@@ -133,6 +133,10 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
       @include text-phone-mobile;
       color: $color-white;
       text-decoration: none;
+
+      @include to(320px) {
+        font-size: 12px;
+      }
     }
   }
 

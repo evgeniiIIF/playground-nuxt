@@ -90,6 +90,11 @@ defineProps<PopularServices>();
       max-width: inherit;
     }
 
+    @include to(320px) {
+      max-width: inherit;
+      padding: 20px;
+    }
+
     &-title {
       margin-bottom: 37px;
       @include text-main-xlarge-bold;

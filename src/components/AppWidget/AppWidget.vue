@@ -45,17 +45,12 @@ useClickOutside(WidgetNodeRef, closeWidget);
   bottom: 60px;
   right: 30px;
   width: 100%;
-  max-width: 390px;
+  max-width: clamp(248px, calc(100% - 32px), 390px);
   z-index: 100;
 
   @include mobile {
     right: 16px;
     bottom: 32px;
-    max-width: 328px;
-  }
-
-  @include media-range(320px, 360px) {
-    max-width: 288px;
   }
 
   &__button {
@@ -110,6 +105,7 @@ useClickOutside(WidgetNodeRef, closeWidget);
 
   &__socials {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     list-style-type: none;
   }
