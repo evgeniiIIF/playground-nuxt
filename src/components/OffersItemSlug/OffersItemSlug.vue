@@ -7,7 +7,10 @@ const { offersEffects, offersState } = useOffersStore();
 const { slug } = useRoute().params;
 
 await useAsyncData('offer', async () => {
-  await Promise.all([offersState.value.offersItemSlug.slug !== slug && offersEffects.fetchOffersItems(slug as string)]);
+  await Promise.all([
+    offersState.value.offersItemSlug.slug !== slug && offersEffects.fetchOffersItems(slug as string),
+    Object.keys(offersState.value.offersItemSlug).length && offersEffects.fetchOffersItems(),
+  ]);
 });
 
 const [isOpenModal, openModal, closeModal] = useBooleanState(false);
@@ -43,7 +46,7 @@ const anotherOffersItems = computed(() =>
             </div>
           </div>
         </div>
-        <div class="offers-item-slug__another another-offers">
+        <div v-if="anotherOffersItems.length" class="offers-item-slug__another another-offers">
           <h2 class="another-offers__title">Другие акции</h2>
           <div class="another-offers__row">
             <div v-for="item in anotherOffersItems" :key="item.id" class="another-offers__card">
@@ -106,6 +109,14 @@ const anotherOffersItems = computed(() =>
   &__content {
     flex: 0 0 46.6666667%;
   }
+
+  &__description {
+    margin-bottom: 80px;
+
+    @include mobile {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .content-offers-item-slug {
@@ -114,7 +125,6 @@ const anotherOffersItems = computed(() =>
   padding-top: 5px;
   @include mobile() {
     padding-top: 0;
-    margin-bottom: 30px;
   }
   &__text {
     flex: 1 1 auto;
@@ -158,7 +168,26 @@ const anotherOffersItems = computed(() =>
 }
 
 .another-offers {
+  position: relative;
   padding-top: 40px;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 1200px;
+    height: 1px;
+    content: '';
+    background-color: #F0F0F5;
+  }
+
+  @include mobile {
+    &::before {
+      display: none;
+    }
+  }
+
   &__row {
     @include row-flex();
   }
