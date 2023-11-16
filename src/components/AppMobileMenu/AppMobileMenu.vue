@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import type { UIModalProps } from '@/components/UIModal/UIModal.types';
 import type { Contacts, Social } from '@/store/contacts/contacts.types';
+import type { MenuItem } from '@/store/menu/menu.types';
 
 interface AppMobileMenuProps extends UIModalProps {
   isOpenServicesAllModal: boolean;
   contacts: Contacts;
   socials: Social[];
+  menu: MenuItem[];
 }
 
 defineProps<AppMobileMenuProps>();
@@ -19,6 +21,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
       <div class="mobile-menu__wrapper">
         <div class="mobile-menu__nav">
           <AppNavigation
+            :menu="menu"
             :is-open-services-all-modal="isOpenServicesAllModal"
             @clickOnLink="emits('clickOnLink')"
             @toggleServicesAllModal="emits('toggleServicesAllModal')"

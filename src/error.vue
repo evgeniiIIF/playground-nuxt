@@ -3,7 +3,7 @@ import { useMediaSizes } from '@/composables/useMediaSizes';
 import AppWidget from '@/components/AppWidget/AppWidget.vue';
 import { useContactsStore } from '@/store/contacts';
 import type { Contacts } from '@/store/contacts/contacts.types';
-// import errorCar from '@/assets/img/error-car.png'
+import { useMenuStore } from '@/store/menu';
 
 type ErrorType = {
   message: string;
@@ -20,18 +20,27 @@ type ErrorPage = {
 defineProps<ErrorPage>();
 
 const { contactsState, contactsEffects } = useContactsStore();
+const { menuState, menuEffects } = useMenuStore();
 
 await useAsyncData('error', async () => {
   await Promise.all([
     Object.keys(contactsState.value.contacts).length === 0 && contactsEffects.fetchContacts(),
     contactsState.value.socials.length === 0 && contactsEffects.fetchContactsSocials(),
     contactsState.value.widget.length === 0 && contactsEffects.fetchContactsWidget(),
+    menuState.value.headerMenu.length === 0 && menuEffects.fetchHeaderMenu(),
+    menuState.value.footerServicesMenu.length === 0 && menuEffects.fetchFooterServicesMenu(),
+    menuState.value.footerAdditionalServicesMenu.length === 0 && menuEffects.fetchFooterAdditionalServicesMenu(),
+    menuState.value.footerAboutCompanyMenu.length === 0 && menuEffects.fetchFooterAboutCompanyMenu(),
   ]);
 });
 
 const contacts = contactsState.value.contacts as Contacts;
 const socials = contactsState.value.socials;
 const widgetSocials = contactsState.value.widget;
+const headerMenu = menuState.value.headerMenu;
+const footerServicesMenu = menuState.value.footerServicesMenu;
+const footerAdditionalServicesMenu = menuState.value.footerAdditionalServicesMenu;
+const footerAboutCompanyMenu = menuState.value.footerAboutCompanyMenu;
 
 const { isDesktop } = useMediaSizes();
 
@@ -44,6 +53,7 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
     <AppHeader
       v-if="isDesktop"
       :contacts="contacts"
+      :menu="headerMenu"
       :is-open-services-all-modal="isOpenServicesAllModal"
       @toggle-services-all-modal="toggleServicesAllModal"
     />
@@ -56,6 +66,7 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
       v-if="!isDesktop"
       :contacts="contacts"
       :socials="socials"
+      :menu="headerMenu"
       :is-open-services-all-modal="isOpenServicesAllModal"
       :is-open-mobile-menu="isOpenMobileMenu"
       @toggleServicesAllModal="toggleServicesAllModal"
@@ -92,7 +103,13 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
       <ServiceForm />
     </main>
     <AppWidget v-if="Number(contacts.content.is_active_widget) === 1" :widget-socials="widgetSocials" />
-    <AppFooter :contacts="contacts" :socials="socials" />
+    <AppFooter
+      :contacts="contacts"
+      :socials="socials"
+      :services-menu="footerServicesMenu"
+      :additional-services-menu="footerAdditionalServicesMenu"
+      :about-company-menu="footerAboutCompanyMenu"
+    />
   </div>
 </template>
 
