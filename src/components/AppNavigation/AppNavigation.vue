@@ -52,10 +52,6 @@ const navigationClass = computed(() => {
     display: flex;
     gap: 30px;
     list-style-type: none;
-
-    @include media-range($desktop-form, $screen-medium-min) {
-      gap: 20px;
-    }
   }
 
   &__item {
