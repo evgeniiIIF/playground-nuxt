@@ -28,10 +28,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
             </div>
           </div>
           <div class="service-section__service-info-image">
-            <NuxtImg
-              :src="service.image_webp ? service.image_webp : service.image_origin"
-              loading="lazy"
-            />
+            <NuxtImg :src="service.image_webp ? service.image_webp : service.image_origin" loading="lazy" />
           </div>
           <div class="service-section__service-description" v-html="service.full_text || ''"></div>
           <div v-if="service.is_in_bonus_program" class="service-section__service-bonus-program">
