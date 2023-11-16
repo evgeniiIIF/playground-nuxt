@@ -20,6 +20,7 @@ defineProps<AboutWelcome>();
           clickable: true,
         }"
         :autoplay="{ delay: 3000 }"
+        :speed="500"
         loop
       >
         <SwiperSlide v-for="slide in aboutWelcome.slider" :key="slide.id" class="about-welcome__slider-slide">

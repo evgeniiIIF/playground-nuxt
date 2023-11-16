@@ -21,6 +21,7 @@ const { isMobile } = useMediaSizes();
         clickable: true,
       }"
       :autoplay="{ delay: 3000 }"
+      :speed="750"
       loop
     >
       <SwiperSlide v-for="slide in slides" :key="slide.id" class="welcome__slider-slide">

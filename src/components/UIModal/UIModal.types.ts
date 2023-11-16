@@ -3,6 +3,7 @@ export interface UIModalProps {
   isOpen?: boolean;
   closeButton?: boolean;
   withHeader?: boolean;
+  hasZoom?: boolean;
 }
 
 export interface UIModalEmits {

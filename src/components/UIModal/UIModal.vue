@@ -24,7 +24,15 @@ watch(
 <template>
   <Teleport to="body">
     <Transition :name="UI_MODAL_POSITIONS[position]">
-      <div v-if="isOpen" :class="['ui-modal', UI_MODAL_POSITIONS[position], withHeader ? 'ui-modal--with-header' : '']">
+      <div
+        v-if="isOpen"
+        :class="[
+          'ui-modal',
+          UI_MODAL_POSITIONS[position],
+          withHeader ? 'ui-modal--with-header' : '',
+          hasZoom ? 'ui-modal--zoom' : '',
+        ]"
+      >
         <div class="ui-modal__mask" @click="$emit('onClose')"></div>
 
         <div class="ui-modal__container">
@@ -132,6 +140,22 @@ $during: 0.3s;
 
     &:hover {
       background: #eee;
+    }
+  }
+
+  &--zoom {
+    .ui-modal {
+      &__container {
+        width: auto;
+
+        @include tablet {
+          height: auto;
+        }
+
+        @include mobile {
+          height: auto;
+        }
+      }
     }
   }
 }

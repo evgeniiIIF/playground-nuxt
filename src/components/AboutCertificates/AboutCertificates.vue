@@ -1,7 +1,18 @@
 <script setup lang="ts">
 import type { AboutCertificates } from '@/components/AboutCertificates/AboutCertificates.types';
+import type { AboutCertificate } from '@/store/about/about.types';
 
 defineProps<AboutCertificates>();
+const zoomImageSrc = ref('');
+const zoomImageAlt = ref('');
+
+const [isOpenModal, openModal, closeModal] = useBooleanState(false);
+
+const handleClickCertificate = (certificate: AboutCertificate) => {
+  zoomImageSrc.value = certificate.image_webp || certificate.image;
+  zoomImageAlt.value = certificate.image_title || 'Сертификат';
+  openModal();
+};
 </script>
 
 <template>
@@ -15,6 +26,7 @@ defineProps<AboutCertificates>();
             v-for="certificate in aboutCertificates.certificates"
             :key="certificate.id"
             class="about-certificates__certificate"
+            @click="handleClickCertificate(certificate)"
           >
             <NuxtImg
               class="about-certificates__certificate-image"
@@ -26,6 +38,11 @@ defineProps<AboutCertificates>();
         </ul>
       </div>
     </div>
+    <LazyUIModal :is-open="isOpenModal" position="center" :has-zoom="true" @on-close="closeModal">
+      <div class="about-certificates__zoom">
+        <NuxtImg class="about-certificates__zoom-image" :src="zoomImageSrc" :alt="zoomImageAlt" loading="lazy" />
+      </div>
+    </LazyUIModal>
   </section>
 </template>
 <style lang="scss">
@@ -93,11 +110,25 @@ defineProps<AboutCertificates>();
     height: 100%;
     max-width: 285px;
     min-width: 135px;
+    cursor: pointer;
 
     &-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+  }
+
+  &__zoom {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+
+    &-image {
+      max-width: 550px;
+      width: 100%;
     }
   }
 }
