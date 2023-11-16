@@ -161,7 +161,7 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
       content: '';
       width: 2px;
       height: 75%;
-      background-color: #F3F3F3;
+      background-color: #f3f3f3;
     }
   }
   &__col-right {

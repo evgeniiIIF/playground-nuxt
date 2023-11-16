@@ -41,7 +41,7 @@ const emits = defineEmits<ServicesAllItemEmits>();
     .services-all-item-l3 {
       &__arrow {
         svg {
-          @include fill-svg-and-path($color-second,  100ms);
+          @include fill-svg-and-path($color-second, 100ms);
         }
       }
 
