@@ -10,14 +10,18 @@ await useAsyncData('service', async () => {
 });
 
 const service = serviceState.value;
-const examplesGallery = serviceState.value.gallery_webp || serviceState.value.gallery_origin;
+const examplesGallery = serviceState.value.gallery_origin;
 </script>
 
 <template>
   <div>
     <ServiceSection :service="service" />
-    <ServiceExamples :images="examplesGallery" />
-    <PopularServices :title="service.additional_title" :additional-services="service.additional_services" />
+    <ServiceExamples v-if="examplesGallery?.length" :gallery-items="examplesGallery" />
+    <PopularServices
+      v-if="service.additional_services?.length"
+      :title="service.additional_title"
+      :additional-services="service.additional_services"
+    />
     <ServiceForm />
   </div>
 </template>

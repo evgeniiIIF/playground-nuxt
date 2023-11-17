@@ -8,32 +8,7 @@ defineProps<ServiceExamples>();
   <section class="service-examples">
     <div class="container">
       <div class="service-examples__slider">
-        <AppSlider />
-        <!-- <Swiper
-          class="service-examples__slider"
-          :modules="[Navigation]"
-          :slides-per-view="3"
-          :space-between="20"
-          :navigation="{
-            prevEl: '.service-examples__slider-button-prev',
-            nextEl: '.service-examples__slider-button-next',
-          }"
-          :breakpoints="{
-            1025: {
-              slidesPerView: 3,
-            },
-            769: {
-              slidesPerView: 2,
-            },
-            320: {
-              slidesPerView: 'auto',
-            },
-          }"
-        >
-          <SwiperSlide v-for="image in 5" :key="image" class="service-examples__slider-slide">
-            <NuxtImg src="/service-examples-1.jpg" fit="contain" loading="lazy" />
-          </SwiperSlide>
-        </Swiper> -->
+        <AppSlider :gallery-items="galleryItems" />
       </div>
     </div>
   </section>

@@ -2,12 +2,12 @@
 import type { Contacts } from '@/store/contacts/contacts.types';
 import type { MenuItem } from '@/store/menu/menu.types';
 
-defineProps<{
+const props = defineProps<{
   isOpenServicesAllModal: boolean;
   contacts: Contacts;
   menu: MenuItem[];
 }>();
-defineEmits<{ (event: 'toggleServicesAllModal'): void }>();
+const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'closeServicesAllModal'): void }>();
 
 const headerColorIsDark = computed(() => {
   const isDark = useRoute().path === '/';
@@ -21,13 +21,19 @@ const headerClass = computed(() => {
 const [isOpenModal, openModal, closeModal] = useBooleanState(false);
 
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+const handleClickLogo = () => {
+  scrollToTop();
+  if (props.isOpenServicesAllModal) {
+    emits('closeServicesAllModal');
+  }
+};
 </script>
 
 <template>
   <header class="header" :class="headerClass">
     <div class="container">
       <div class="header__wrapper">
-        <NuxtLink class="header__logo" to="/" @click="scrollToTop">
+        <NuxtLink class="header__logo" to="/" @click="handleClickLogo">
           <IcLogo v-if="headerColorIsDark" :font-controlled="false" :filled="true" />
           <IcLogoDark v-else :font-controlled="false" :filled="true" />
         </NuxtLink>
@@ -35,7 +41,8 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
           <AppNavigation
             :menu="menu"
             :is-open-services-all-modal="isOpenServicesAllModal"
-            @toggleServicesAllModal="$emit('toggleServicesAllModal')"
+            @toggleServicesAllModal="emits('toggleServicesAllModal')"
+            @close-services-all-modal="emits('closeServicesAllModal')"
           />
         </div>
         <div class="header__contacts">

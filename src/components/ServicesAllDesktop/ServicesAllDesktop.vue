@@ -150,11 +150,23 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
   }
 
   &__col-left {
+    position: relative;
     flex: 0 0 360px;
-    margin-right: 47px;
+    margin-right: 32px;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      right: -32px;
+      content: '';
+      width: 2px;
+      height: 75%;
+      background-color: #f3f3f3;
+    }
   }
   &__col-right {
     flex: 1 1 auto;
+    margin-left: 30px;
     @include mb(30px);
   }
 }

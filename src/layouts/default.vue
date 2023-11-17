@@ -53,6 +53,7 @@ const closeServicesAllModal = () => {
       :menu="headerMenu"
       :is-open-services-all-modal="isOpenServicesAllModal"
       @toggle-services-all-modal="toggleServicesAllModal"
+      @close-services-all-modal="closeServicesAllModal"
     />
     <LazyServicesAllModal
       v-show="isOpenServicesAllModal"
@@ -70,6 +71,7 @@ const closeServicesAllModal = () => {
       @openMobileMenu="openMobileMenu"
       @closeMobileMenu="closeMobileMenu"
       @toggleMobileMenu="toggleMobileMenu"
+      @close-services-all-modal="closeServicesAllModal"
     />
     <main>
       <slot />

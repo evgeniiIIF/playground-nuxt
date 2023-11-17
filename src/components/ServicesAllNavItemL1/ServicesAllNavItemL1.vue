@@ -6,8 +6,8 @@ const { item } = defineProps<{ item: ServicesAllItem }>();
 
 <template>
   <div class="services-all-item-l1">
-    <div class="services-all-item-l1__icon">
-      <img :src="item.icon" alt="." />
+    <div v-if="item.icon" class="services-all-item-l1__icon">
+      <img :src="item.icon" alt="Иконка категории" />
     </div>
     <h2 class="services-all-item-l1__title">{{ item.title }}</h2>
     <div class="services-all-item-l1__arrow">

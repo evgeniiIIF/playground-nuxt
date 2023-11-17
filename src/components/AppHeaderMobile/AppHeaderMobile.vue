@@ -5,7 +5,7 @@ import type { MenuItem } from '@/store/menu/menu.types';
 
 const { isDesktop } = useMediaSizes();
 
-defineProps<{
+const props = defineProps<{
   isOpenServicesAllModal: boolean;
   isOpenMobileMenu: boolean;
   contacts: Contacts;
@@ -14,6 +14,7 @@ defineProps<{
 }>();
 const emits = defineEmits<{
   (event: 'toggleServicesAllModal'): void;
+  (event: 'closeServicesAllModal'): void;
   (event: 'closeMobileMenu'): void;
   (event: 'openMobileMenu'): void;
   (event: 'toggleMobileMenu'): void;
@@ -38,6 +39,17 @@ useRouter().afterEach((to, from) => {
   }
 });
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+const handleClickLogo = () => {
+  scrollToTop();
+  if (props.isOpenServicesAllModal) {
+    emits('closeServicesAllModal');
+  }
+
+  if (props.isOpenMobileMenu) {
+    emits('closeMobileMenu');
+  }
+};
 </script>
 
 <template>
@@ -63,7 +75,7 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
         </div>
         <div class="header-mobile__col">
           <div class="header-mobile__logo">
-            <NuxtLink class="header__logo" to="/" @click="scrollToTop">
+            <NuxtLink class="header__logo" to="/" @click="handleClickLogo">
               <IcLogoMobile v-if="headerColorIsDark" :font-controlled="false" :filled="true" />
               <IcLogoMobileDark v-else :font-controlled="false" :filled="true" />
             </NuxtLink>
@@ -133,6 +145,10 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
       @include text-phone-mobile;
       color: $color-white;
       text-decoration: none;
+
+      @include to(320px) {
+        font-size: 12px;
+      }
     }
   }
 

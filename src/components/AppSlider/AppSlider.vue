@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { useServiceStore } from '@/store/service';
+import type { AppSlider } from '@/components/AppSlider/AppSlider.types';
+
+const props = defineProps<AppSlider>();
 
 const { isMobile } = useMediaSizes();
-
-const { serviceState } = useServiceStore();
 
 const sliderNode = ref();
 const sliderRowNode = ref();
 
 const currentSlideIndex = ref(0);
 const offsetWidth = ref(0);
-const galleryItems = serviceState.value.gallery_origin;
 
 const setOffsetWidth = () => {
   const slide = sliderNode.value?.querySelector('.app-slider__slide:not(.app-slider__slide--active)');
@@ -24,7 +23,7 @@ const setOffsetWidth = () => {
 };
 
 const goNext = () => {
-  galleryItems && galleryItems.length && currentSlideIndex.value + 1 >= galleryItems?.length
+  props.galleryItems && props.galleryItems.length && currentSlideIndex.value + 1 >= props.galleryItems?.length
     ? (currentSlideIndex.value = 0)
     : (currentSlideIndex.value += 1);
 
@@ -32,8 +31,8 @@ const goNext = () => {
 };
 
 const goBack = () => {
-  galleryItems && galleryItems.length && currentSlideIndex.value <= 0
-    ? (currentSlideIndex.value = galleryItems.length - 1)
+  props.galleryItems && props.galleryItems.length && currentSlideIndex.value <= 0
+    ? (currentSlideIndex.value = props.galleryItems.length - 1)
     : (currentSlideIndex.value -= 1);
 
   setOffsetWidth();
@@ -52,7 +51,7 @@ const goBack = () => {
     </div>
     <div ref="sliderRowNode" class="app-slider__row">
       <div
-        v-for="(image, index) in serviceState.gallery_origin"
+        v-for="(image, index) in galleryItems"
         :key="index"
         :class="['app-slider__slide', index === currentSlideIndex ? 'app-slider__slide--active' : '']"
       >
@@ -67,7 +66,7 @@ const goBack = () => {
       <h4 class="app-slider__title">Примеры работ</h4>
     </div>
     <div class="app-slider__row">
-      <div v-for="(image, index) in serviceState.gallery_origin" :key="index" :class="['app-slider__slide']">
+      <div v-for="(image, index) in galleryItems" :key="index" :class="['app-slider__slide']">
         <div class="app-slider__image ibg">
           <NuxtImg :src="image?.path" fit="contain" loading="lazy" />
         </div>
