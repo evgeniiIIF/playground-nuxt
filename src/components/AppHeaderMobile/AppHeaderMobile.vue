@@ -49,7 +49,7 @@ const handleClickLogo = () => {
   if (props.isOpenMobileMenu) {
     emits('closeMobileMenu');
   }
-}
+};
 </script>
 
 <template>

@@ -5,7 +5,11 @@ const props = defineProps<{
   isOpenServicesAllModal: boolean;
   menu: MenuItem[];
 }>();
-const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'clickOnLink'): void; (event: 'closeServicesAllModal'): void }>();
+const emits = defineEmits<{
+  (event: 'toggleServicesAllModal'): void;
+  (event: 'clickOnLink'): void;
+  (event: 'closeServicesAllModal'): void;
+}>();
 
 const navigationColorIsDark = computed(() => {
   const isDark = useRoute().path === '/';
@@ -21,9 +25,8 @@ const handleClickOnNuxtLink = () => {
 
   if (props.isOpenServicesAllModal) {
     emits('closeServicesAllModal');
-
   }
-}
+};
 </script>
 
 <template>

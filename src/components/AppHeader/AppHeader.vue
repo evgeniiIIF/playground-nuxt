@@ -26,7 +26,7 @@ const handleClickLogo = () => {
   if (props.isOpenServicesAllModal) {
     emits('closeServicesAllModal');
   }
-}
+};
 </script>
 
 <template>
