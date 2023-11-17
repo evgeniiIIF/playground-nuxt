@@ -9,7 +9,7 @@ import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInpu
 import { validateServicesDropdown } from '@/utils/validateServicesDropdown/validateServicesDropdown';
 import { leadsHttp } from '@/api/http/leadsHttp';
 import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
-import AppLoader from "~/components/AppLoader/AppLoader.vue";
+import AppLoader from '~/components/AppLoader/AppLoader.vue';
 
 const props = defineProps<AppCalculationForm>();
 

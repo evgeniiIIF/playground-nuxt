@@ -3,7 +3,7 @@ import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
 import { leadsHttp } from '@/api/http/leadsHttp';
 import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
-import AppLoader from "~/components/AppLoader/AppLoader.vue";
+import AppLoader from '~/components/AppLoader/AppLoader.vue';
 
 defineProps<{ title: string }>();
 
