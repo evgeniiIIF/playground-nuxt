@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { MenuItem } from '@/store/menu/menu.types';
 
-defineProps<{
+const props = defineProps<{
   isOpenServicesAllModal: boolean;
   menu: MenuItem[];
 }>();
-const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'clickOnLink'): void }>();
+const emits = defineEmits<{ (event: 'toggleServicesAllModal'): void; (event: 'clickOnLink'): void; (event: 'closeServicesAllModal'): void }>();
 
 const navigationColorIsDark = computed(() => {
   const isDark = useRoute().path === '/';
@@ -15,6 +15,15 @@ const navigationColorIsDark = computed(() => {
 const navigationClass = computed(() => {
   return navigationColorIsDark.value ? '' : 'navigation--light';
 });
+
+const handleClickOnNuxtLink = () => {
+  emits('clickOnLink');
+
+  if (props.isOpenServicesAllModal) {
+    emits('closeServicesAllModal');
+
+  }
+}
 </script>
 
 <template>
@@ -27,7 +36,7 @@ const navigationClass = computed(() => {
             class="navigation__item-link"
             :active-class="!isOpenServicesAllModal ? 'navigation__item-link--active' : ''"
             :to="item.link"
-            @click="emits('clickOnLink')"
+            @click="handleClickOnNuxtLink"
             >{{ item.title }}</NuxtLink
           >
           <div
