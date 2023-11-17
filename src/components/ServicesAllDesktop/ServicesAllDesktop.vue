@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { ServicesAllItem } from '@/store/servicesAll/servicesAll.types';
+import type { ServicesAllItem, ServicesAllItemEmits } from '@/store/servicesAll/servicesAll.types';
 
 const props = defineProps<{ services: ServicesAllItem[] }>();
-const emits = defineEmits<{ (event: 'closeServicesAllModal'): void }>();
+const emits = defineEmits<ServicesAllItemEmits>();
 
 const currentServicesItemL1 = ref<ServicesAllItem | undefined>();
 
@@ -11,8 +11,13 @@ const setCurrentServicesItemL1 = (item: ServicesAllItem) => {
 };
 
 const goTo = (item: ServicesAllItem | undefined) => {
-  emits('closeServicesAllModal');
   navigateTo({ path: `/services/${item?.slug}` });
+  closeServicesAllModal();
+};
+
+const closeServicesAllModal = () => {
+  emits('closeServicesAllModal');
+  setSearchServicesValue('');
 };
 
 const searchServicesValue = ref('');
@@ -21,18 +26,28 @@ const setSearchServicesValue = (value: string) => {
   searchServicesValue.value = value;
 };
 
-// const foundServicesItems = computed(() => {
-//   console.log(props.services);
+const foundServicesItems = computed(() => {
+  // const foundItems = props.services;
+  const found: ServicesAllItem[] = [];
 
-//   const foundItems = props.services.filter((itemL1) => {
-//     return itemL1.children.filter((itemL2) => {
-//       return itemL2.children.filter((itemL3) => {
-//         return itemL3.title.includes(searchServicesValue.value);
-//       });
-//     });
-//   });
-//   return foundItems;
-// });
+  const getLastLevelItems = (arr: ServicesAllItem[]) => {
+    return arr.reduce((acc, item) => {
+      if (
+        item.full_path.split('>').length === 3 &&
+        !item.children.length &&
+        item.title.toLowerCase().includes(searchServicesValue.value.toLowerCase())
+      ) {
+        acc.push(item);
+        return acc;
+      }
+
+      getLastLevelItems(item.children);
+      return acc;
+    }, found);
+  };
+
+  return getLastLevelItems(props.services);
+});
 
 const packagedColumnsItems = computed(() => {
   const arrayOfObjects = currentServicesItemL1.value?.children;
@@ -50,7 +65,7 @@ const packagedColumnsItems = computed(() => {
 
 onMounted(() => setCurrentServicesItemL1(props.services[0]));
 
-// [{ id: 1, childeren: [{ id: 2, childeren: [{ id: 3, title: 'value' }] }] }];
+// [{ id: 1, children: [{ id: 2, children: [{ id: 3, title: 'value' }] }] }];
 </script>
 <template>
   <div class="services-all-desktop">
@@ -59,9 +74,9 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
         <h2 class="services-all-desktop__top-title">Поиск по услугам автосервиса</h2>
         <div class="services-all-desktop__top-actions">
           <div class="services-all-desktop__top-input">
-            <UIInputSearch @onInput="setSearchServicesValue($event)" />
+            <UIInputSearch :value="searchServicesValue" @onInput="setSearchServicesValue($event)" />
           </div>
-          <div class="services-all-desktop__top-close" @click="emits('closeServicesAllModal')">
+          <div class="services-all-desktop__top-close" @click="closeServicesAllModal">
             <IcClose :font-controlled="false" :filled="true" />
           </div>
         </div>
@@ -102,10 +117,9 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
           </li>
         </ul>
         <ul v-else class="services-all-desktop__col-right services-all-desktop-found">
-          <!-- <li class="services-all-desktop-found__item" v-for="foundItem in foundServicesItems"> -->
-          <!-- <ServicesAllNavItemL2 :item="servicesItemL2" @go-to="goTo($event)" /> -->
-          <!-- <ServicesAllNavItemL3 :item="foundItem" @go-to="emits('goTo', $event)" /> -->
-          <!-- </li> -->
+          <li v-for="foundItem in foundServicesItems" :key="foundItem.id" class="services-all-desktop-found__item">
+            <ServicesAllNavItemL3 :item="foundItem" @go-to="goTo(foundItem)" :searchValue="searchServicesValue" />
+          </li>
         </ul>
       </nav>
     </div>
@@ -166,8 +180,11 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
   }
   &__col-right {
     flex: 1 1 auto;
-    margin-left: 30px;
+    height: calc(100vh - (115px + 138px));
+    padding-bottom: 100px;
+    overflow-y: auto;
     @include mb(30px);
+    @include scrollbar-y();
   }
 }
 .services-all-desktop-l1 {
@@ -183,11 +200,8 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
   }
 }
 .services-all-desktop-l2 {
-  @include scrollbar-y();
-  height: calc(100vh - (115px + 138px));
-
   display: flex;
-  overflow-y: auto;
+
   list-style: none;
   @include mr(35px);
 
@@ -200,6 +214,11 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
   }
 
   &__column-item {
+  }
+}
+.services-all-desktop-found {
+  &__item {
+    cursor: pointer;
   }
 }
 </style>

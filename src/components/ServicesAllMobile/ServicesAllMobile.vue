@@ -26,12 +26,15 @@ const setCurrentServicesItemL2 = (item: ServicesAllItem) => {
 };
 const goBackOneStep = () => {
   step.value <= 0 ? emits('closeServicesAllModal') : (step.value -= 1);
-  console.log(step.value);
+  if (searchServicesValue.value) {
+    setSearchServicesValue('');
+  }
 };
 
 const goTo = (item: ServicesAllItem | undefined) => {
   emits('closeServicesAllModal');
   emits('closeMobileMenu');
+  setSearchServicesValue('');
 
   navigateTo({ path: `/services/${item?.slug}` });
 };
@@ -39,7 +42,37 @@ const goTo = (item: ServicesAllItem | undefined) => {
 const closeAllModals = () => {
   emits('closeServicesAllModal');
   emits('closeMobileMenu');
+  setSearchServicesValue('');
 };
+
+const searchServicesValue = ref('');
+
+const setSearchServicesValue = (value: string) => {
+  searchServicesValue.value = value;
+};
+
+const foundServicesItems = computed(() => {
+  // const foundItems = props.services;
+  const found: ServicesAllItem[] = [];
+
+  const getLastLevelItems = (arr: ServicesAllItem[]) => {
+    return arr.reduce((acc, item) => {
+      if (
+        item.full_path.split('>').length === 3 &&
+        !item.children.length &&
+        item.title.toLowerCase().includes(searchServicesValue.value.toLowerCase())
+      ) {
+        acc.push(item);
+        return acc;
+      }
+
+      getLastLevelItems(item.children);
+      return acc;
+    }, found);
+  };
+
+  return getLastLevelItems(props.services);
+});
 </script>
 
 <template>
@@ -60,15 +93,14 @@ const closeAllModals = () => {
         </div>
 
         <div class="buttons-service-all__input">
-          <UIInputSearch />
+          <UIInputSearch :value="searchServicesValue" @onInput="setSearchServicesValue($event)" />
         </div>
+      </div>
 
+      <nav v-if="!searchServicesValue" class="services-all-mobile__nav">
         <h2 class="services-all-mobile__title">
           {{ currentTitle }}
         </h2>
-      </div>
-
-      <nav class="services-all-mobile__nav">
         <ul v-if="step === 0" class="services-all-mobile-l1">
           <li v-for="itemL1 in props.services" :key="itemL1.id" class="services-all-mobile-l1__item">
             <div class="item-services-all-l1" @click="setCurrentServicesItemL1(itemL1)">
@@ -95,6 +127,14 @@ const closeAllModals = () => {
           </li>
         </ul>
       </nav>
+      <nav v-else class="services-all-mobile__nav">
+        <h2 class="services-all-mobile__title">Результаты поиска</h2>
+        <ul class="services-all-mobile-l3">
+          <li v-for="foundItem in foundServicesItems" :key="foundItem.id" class="services-all-desktop-found__item">
+            <ServicesAllNavItemL3 :item="foundItem" @go-to="goTo(foundItem)" :searchValue="searchServicesValue" />
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </template>
@@ -106,7 +146,8 @@ const closeAllModals = () => {
   height: inherit;
 
   &__top {
-    padding: 10px 0 25px 0;
+    padding: 15px 0 10px 0;
+    margin-bottom: 13px;
   }
   &__buttons {
     margin-bottom: 12px;
@@ -116,6 +157,7 @@ const closeAllModals = () => {
   }
 
   &__title {
+    margin-bottom: 23px;
     color: var(--Black, #18243c);
     font-size: 20px;
     font-style: normal;
@@ -214,7 +256,6 @@ const closeAllModals = () => {
     }
   }
   &__input {
-    margin-bottom: 23px;
     .input-search__input {
       width: 100%;
       padding: 10px;
