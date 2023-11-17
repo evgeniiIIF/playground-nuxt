@@ -1,8 +1,17 @@
 <script setup lang="ts">
 import type { ServicesAllItem, ServicesAllItemEmits } from '@/store/servicesAll/servicesAll.types';
+import { wrapSubstringWithSpan } from '@/components/ServicesAllNavItemL3/ServicesAllNavItemL3.utils';
 
-const { item } = defineProps<{ item: ServicesAllItem | undefined }>();
+const props = defineProps<{
+  item: ServicesAllItem | undefined;
+  searchValue?: string;
+}>();
+
 const emits = defineEmits<ServicesAllItemEmits>();
+
+const textHigLight = computed(() => {
+  return wrapSubstringWithSpan(props.item?.title, props.searchValue);
+});
 </script>
 
 <template>
@@ -10,11 +19,16 @@ const emits = defineEmits<ServicesAllItemEmits>();
     <div class="services-all-item-l3__arrow">
       <IcArrowRight :font-controlled="false" :filled="true" />
     </div>
-    <h2 class="services-all-item-l3__title">{{ item?.title }}</h2>
+    <h2 v-if="!searchValue" class="services-all-item-l3__title">{{ item?.title }}</h2>
+    <h2 v-else class="services-all-item-l3__title" v-html="textHigLight"></h2>
   </div>
 </template>
 
 <style lang="scss">
+.underline {
+  font-weight: 500;
+  color: #00a19c;
+}
 .services-all-item-l3 {
   display: flex;
   align-items: center;
