@@ -9,6 +9,7 @@ import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInpu
 import { validateServicesDropdown } from '@/utils/validateServicesDropdown/validateServicesDropdown';
 import { leadsHttp } from '@/api/http/leadsHttp';
 import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
+import AppLoader from "~/components/AppLoader/AppLoader.vue";
 
 const props = defineProps<AppCalculationForm>();
 
@@ -24,6 +25,7 @@ const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
 const formResponse = ref<LeadsResponse | null>(null);
+const loading = ref(false);
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
@@ -46,9 +48,11 @@ const sendRequest = async () => {
     services_list: props.services.map((service) => service.title).join(', '),
   } as const;
 
+  loading.value = true;
   const { data } = await leadsHttp.postCalculationForm(requestData);
   formResponse.value = data.value;
   hasError.value = false;
+  loading.value = false;
 
   name.value = '';
   phone.value = '';
@@ -85,7 +89,7 @@ watch(
 
 <template>
   <div class="request-form">
-    <form v-if="!formResponse" class="request-form__form" @submit.prevent="sendRequest">
+    <form v-if="!formResponse && !loading" class="request-form__form" @submit.prevent="sendRequest">
       <div class="request-form__header">
         <h4 class="request-form__title">Оставьте заявку</h4>
         <p class="request-form__description">введите ваше имя и номер телефона, а также проверьте ваш заказ</p>
@@ -138,6 +142,9 @@ watch(
         <UIButton type="submit" text="Записаться на сервис" :is-filled="true" :has-full-width="true" />
       </div>
     </form>
+    <div v-else-if="loading" class="request-form__loader">
+      <AppLoader />
+    </div>
     <div v-else class="request-form__message">
       <p class="request-form__message-text">
         {{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}
@@ -329,8 +336,35 @@ watch(
     }
   }
 
+  &__loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    height: 250px;
+
+    @include tablet {
+      height: 100%;
+    }
+
+    @include mobile {
+      height: 100%;
+    }
+  }
+
   &__message {
-    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+
+    @include tablet {
+      height: 100%;
+    }
+
+    @include mobile {
+      height: 100%;
+    }
 
     &-text {
       text-align: center;

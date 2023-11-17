@@ -3,6 +3,7 @@ import { validateNameInput } from '@/utils/validateNameInput/validateNameInput';
 import { validatePhoneInput } from '@/utils/validatePhoneInput/validatePhoneInput';
 import { leadsHttp } from '@/api/http/leadsHttp';
 import type { LeadsResponse } from '@/api/http/leadsHttp/leadsHttp.types';
+import AppLoader from "~/components/AppLoader/AppLoader.vue";
 
 defineProps<{ title: string }>();
 
@@ -10,6 +11,7 @@ const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
 const formResponse = ref<LeadsResponse | null>(null);
+const loading = ref(false);
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
@@ -28,9 +30,11 @@ const sendRequest = async () => {
     phone: phone.value,
   } as const;
 
+  loading.value = true;
   const { data } = await leadsHttp.postCallbackForm(requestData);
   formResponse.value = data.value;
   hasError.value = false;
+  loading.value = false;
 
   name.value = '';
   phone.value = '';
@@ -57,7 +61,7 @@ watch(
 
 <template>
   <div class="callback-form">
-    <form v-if="!formResponse" class="callback-form__form" @submit.prevent="sendRequest">
+    <form v-if="!formResponse && !loading" class="callback-form__form" @submit.prevent="sendRequest">
       <h6 class="callback-form__title">{{ title }}</h6>
       <div class="callback-form__inputs">
         <div class="callback-form__input">
@@ -72,6 +76,9 @@ watch(
       </div>
       <div class="callback-form__policy">* Отправляя форму, Вы соглашаетесь с политикой конфиденциальности</div>
     </form>
+    <div v-else-if="loading" class="request-form__loader">
+      <AppLoader />
+    </div>
     <div v-else class="callback-form__message">
       <p class="callback-form__message-text">
         {{ formResponse?.success ? 'Ваша заявка успешно отправлена!' : formResponse?.error_message }}
@@ -135,6 +142,22 @@ watch(
     font-weight: 400;
     line-height: 15px; /* 150% */
     color: #b3baba;
+  }
+
+  &__loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    height: 250px;
+
+    @include tablet {
+      height: 100%;
+    }
+
+    @include mobile {
+      height: 100%;
+    }
   }
 
   &__message {
