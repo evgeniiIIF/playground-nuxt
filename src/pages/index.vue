@@ -5,6 +5,7 @@ import { usePartnersStore } from '@/store/partners';
 import { useWelcomeStore } from '@/store/welcome';
 import { useCarsStore } from '@/store/cars';
 import { useHomeAboutSliderStore } from '@/store/homeAboutSlider';
+import { useIndexAdvantagesStore } from '@/store/indexAdvantages';
 import type { Partners } from '@/store/partners/partners.types';
 
 const { homeState, homeEffects } = useHomeStore();
@@ -13,6 +14,7 @@ const { servicesAllEffects, servicesAllState } = useServicesAllStore();
 const { partnersState, partnersEffects } = usePartnersStore();
 const { welcomeState, welcomeEffects } = useWelcomeStore();
 const { homeAboutSliderState, homeAboutSliderEffects } = useHomeAboutSliderStore();
+const { indexAdvantagesState, indexAdvantagesEffects } = useIndexAdvantagesStore();
 
 await useAsyncData('home', async () => {
   await Promise.all([
@@ -23,6 +25,7 @@ await useAsyncData('home', async () => {
     Object.keys(partnersState.value.partners).length === 0 && partnersEffects.fetchPartners(),
     partnersState.value.items.length === 0 && partnersEffects.fetchPartnersItems(),
     homeAboutSliderState.value.length === 0 && homeAboutSliderEffects.fetchHomeAboutSlider(),
+    indexAdvantagesState.value.length === 0 && indexAdvantagesEffects.fetchIndexAdvantagesItems(),
   ]);
 });
 

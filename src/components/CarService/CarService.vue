@@ -1,23 +1,24 @@
 <script setup lang="ts">
-const CAR_SERVICE_CARDS = [
-  { image: '/images/car-service1.png', text: '13 постов обслуживания' },
-  { image: '/images/car-service2.png', text: '25 + лет на рынке' },
-  { image: '/images/car-service3.png', text: '55 000 автозапчастей в наличии' },
-  { image: '/images/car-service4.png', text: '5 000 довольных клиентов' },
-];
+import { useHomeStore } from '@/store/home/home.hooks';
+import { useIndexAdvantagesStore } from '@/store/indexAdvantages';
+
+const { homeState } = useHomeStore();
+const { indexAdvantagesState } = useIndexAdvantagesStore();
+
+onMounted(() => console.log(indexAdvantagesState, 'indexAdvantagesState'));
 </script>
 
 <template>
   <section class="car-service">
     <div class="container">
-      <h1 class="car-service__title">Автосервис ABS-AUTO</h1>
+      <h1 class="car-service__title">{{ homeState.advantages }}</h1>
       <div class="car-service__row">
-        <div v-for="item in CAR_SERVICE_CARDS" :key="item.text" class="car-service__col">
+        <div v-for="item in indexAdvantagesState" :key="item.id" class="car-service__col">
           <div class="car-service__item item-car-service">
             <div class="item-car-service__image ibg">
-              <NuxtImg format="webp" :src="item.image" loading="lazy" />
+              <NuxtPicture format="webp" :src="item.image_origin" loading="lazy" :alt="item.image_alt" />
             </div>
-            <div class="item-car-service__text">{{ item.text }}</div>
+            <div class="item-car-service__text">{{ item.title }}</div>
           </div>
         </div>
       </div>
