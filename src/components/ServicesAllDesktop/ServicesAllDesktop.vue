@@ -118,7 +118,7 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
         </ul>
         <ul v-else class="services-all-desktop__col-right services-all-desktop-found">
           <li v-for="foundItem in foundServicesItems" :key="foundItem.id" class="services-all-desktop-found__item">
-            <ServicesAllNavItemL3 :item="foundItem" @go-to="goTo(foundItem)" :searchValue="searchServicesValue" />
+            <ServicesAllNavItemL3 :item="foundItem" :search-value="searchServicesValue" @go-to="goTo(foundItem)" />
           </li>
         </ul>
       </nav>
