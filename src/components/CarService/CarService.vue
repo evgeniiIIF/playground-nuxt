@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useHomeStore } from '@/store/home/home.hooks';
-import { useIndexAdvantagesStore } from '@/store/indexAdvantages';
+import { useAdvantagesStore } from '@/store/advantages';
 
 const { homeState } = useHomeStore();
-const { indexAdvantagesState } = useIndexAdvantagesStore();
+const { advantagesState } = useAdvantagesStore();
 
-onMounted(() => console.log(indexAdvantagesState, 'indexAdvantagesState'));
+onMounted(() => console.log(advantagesState, 'advantagesState'));
 </script>
 
 <template>
@@ -13,7 +13,7 @@ onMounted(() => console.log(indexAdvantagesState, 'indexAdvantagesState'));
     <div class="container">
       <h1 class="car-service__title">{{ homeState.advantages }}</h1>
       <div class="car-service__row">
-        <div v-for="item in indexAdvantagesState" :key="item.id" class="car-service__col">
+        <div v-for="item in advantagesState" :key="item.id" class="car-service__col">
           <div class="car-service__item item-car-service">
             <div class="item-car-service__image ibg">
               <NuxtPicture format="webp" :src="item.image_origin" loading="lazy" :alt="item.image_alt" />
