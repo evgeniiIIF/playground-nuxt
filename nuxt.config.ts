@@ -59,6 +59,7 @@ export default defineNuxtConfig({
     styleLang: 'scss',
   },
   image: {
+    domains: [process.env.NUXT_PUBLIC_API_DOMAIN as string],
     format: ['webp', 'jpg', 'png'],
   },
   runtimeConfig: {
