@@ -131,7 +131,7 @@ const foundServicesItems = computed(() => {
         <h2 class="services-all-mobile__title">Результаты поиска</h2>
         <ul class="services-all-mobile-l3">
           <li v-for="foundItem in foundServicesItems" :key="foundItem.id" class="services-all-desktop-found__item">
-            <ServicesAllNavItemL3 :item="foundItem" @go-to="goTo(foundItem)" :searchValue="searchServicesValue" />
+            <ServicesAllNavItemL3 :item="foundItem" :search-value="searchServicesValue" @go-to="goTo(foundItem)" />
           </li>
         </ul>
       </nav>

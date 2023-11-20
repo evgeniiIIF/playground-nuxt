@@ -8,6 +8,7 @@ export type UIDropdownWithAccordion = {
   placeholder?: string;
   errorMessage?: string;
   withoutTitleMargin?: boolean;
+  disabled?: boolean;
 };
 
 export interface UIDropdownWithAccordionEmits {

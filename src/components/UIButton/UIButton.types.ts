@@ -7,4 +7,5 @@ export type UIButtonTypes = {
   onClick?: () => void;
   hasFullWidth?: boolean;
   sizeLarge?: boolean;
+  withLoader?: boolean;
 };
