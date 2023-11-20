@@ -25,4 +25,5 @@ export interface ServicesAllState {
 // emits
 export interface ServicesAllItemEmits {
   (event: 'goTo', item: ServicesAllItem | undefined): void;
+  (event: 'closeServicesAllModal'): void;
 }

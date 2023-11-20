@@ -1,4 +1,5 @@
 <script setup lang="ts">
+defineProps<{ value?: string }>();
 const emits = defineEmits<{
   (event: 'onInput', payload: string): void;
 }>();
@@ -10,7 +11,7 @@ const onInput = (e: Event) => {
 </script>
 <template>
   <label class="input-search">
-    <input class="input-search__input" type="text" placeholder="Поиск услуг" @input="onInput" />
+    <input class="input-search__input" type="text" placeholder="Поиск услуг" @input="onInput" :value="value" />
     <div class="input-search__icon">
       <IcSearch :font-controlled="false" :filled="true" />
     </div>
