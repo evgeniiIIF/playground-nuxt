@@ -183,6 +183,7 @@ onMounted(() => setCurrentServicesItemL1(props.services[0]));
     height: calc(100vh - (115px + 138px));
     padding-bottom: 100px;
     overflow-y: auto;
+    margin-left: 30px;
     @include mb(30px);
     @include scrollbar-y();
   }
