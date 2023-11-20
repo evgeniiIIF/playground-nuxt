@@ -184,6 +184,14 @@ const bonusAmountCount = computed(() => Math.floor(howMachSpendCount.value * 0.1
   padding: 26px 30px;
   border: 1px solid var(--input-gray, #c4cccc);
   background: var(--1, #fff);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0px 24px 24px -16px rgba(65, 64, 66, 0.20);
+    background-color: $color-light-gray-light;
+    border-color: $color-light-gray-darker;
+    transform: translateY(-5px);
+  }
   &__title {
     margin-bottom: 9px;
     font-size: 24px;
