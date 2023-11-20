@@ -1,4 +1,4 @@
-export interface indexAdvantagesHttpItem {
+export interface AdvantagesHttpItem {
   id: number;
   title: string;
   image_alt: string;

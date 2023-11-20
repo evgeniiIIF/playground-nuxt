@@ -12,4 +12,4 @@ export * from './bonusHttp';
 export * from './aboutHttp';
 export * from './contactsHttp';
 export * from './menuHttp';
-export * from './indexAdvantagesHttp';
+export * from './advantagesHttp';
