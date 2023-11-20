@@ -29,6 +29,7 @@ onMounted(() => console.log(indexAdvantagesState, 'indexAdvantagesState'));
 <style lang="scss">
 .car-service {
   padding: 60px 0;
+  background-color: $color-light-gray-light;
 
   &__title {
     margin-bottom: 20px;
