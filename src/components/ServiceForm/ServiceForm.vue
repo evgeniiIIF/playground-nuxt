@@ -101,10 +101,23 @@ watch(
       <h2 class="service-form__title">Записаться на сервис</h2>
       <form class="service-form__form" @submit.prevent="sendRequest">
         <div class="service-form__form-name">
-          <UIInput v-model="name" type="text" title="Ваше имя" placeholder="Ваше имя" :error-message="errorNameInput" :disabled="loading" />
+          <UIInput
+            v-model="name"
+            type="text"
+            title="Ваше имя"
+            placeholder="Ваше имя"
+            :error-message="errorNameInput"
+            :disabled="loading"
+          />
         </div>
         <div class="service-form__form-phone">
-          <UIInput v-model="phone" type="phone" title="Ваш номер телефона" :error-message="errorPhoneInput" :disabled="loading"/>
+          <UIInput
+            v-model="phone"
+            type="phone"
+            title="Ваш номер телефона"
+            :error-message="errorPhoneInput"
+            :disabled="loading"
+          />
         </div>
         <div class="service-form__form-service">
           <UIDropdownWithAccordion
