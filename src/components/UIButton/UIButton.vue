@@ -19,14 +19,16 @@ defineProps<UIButtonTypes>();
       class="button"
       :class="{
         'button--filled': isFilled,
-        'button--disabled': disabled,
         'button--full-width': hasFullWidth,
         'button--size-large': sizeLarge,
       }"
-      :disabled="disabled"
+      :disabled="disabled || withLoader"
       @click="onClick"
     >
-      {{ text }}
+      <div v-if="withLoader" class="button__loader"></div>
+      <template v-else>
+        {{ text }}
+      </template>
     </button>
   </template>
 </template>
@@ -60,10 +62,6 @@ defineProps<UIButtonTypes>();
     background-color: $color-second;
   }
 
-  &--disabled {
-    opacity: 0.5;
-  }
-
   &--size-large {
     width: 100%;
     padding: 15px 33px;
@@ -84,6 +82,31 @@ defineProps<UIButtonTypes>();
   &:active {
     border-color: #00b5af;
     background-color: #00b5af;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &__loader {
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border: 3px solid $color-white;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: rotation 1s linear infinite;
+
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
   }
 }
 </style>

@@ -30,6 +30,7 @@ const name = ref('');
 const phone = ref('');
 const hasError = ref(false);
 const formResponse = ref<LeadsResponse | null>(null);
+const loading = ref(false);
 
 const errorNameInput = ref('');
 const errorPhoneInput = ref('');
@@ -51,9 +52,11 @@ const sendRequest = async () => {
     services_list: chooseServices.value.map((service) => service.title).join(', '),
   } as const;
 
+  loading.value = true;
   const { data } = await leadsHttp.postServiceForm(requestData);
   formResponse.value = data.value;
   hasError.value = false;
+  loading.value = false;
 
   if (formResponse.value) {
     openModal();
@@ -98,10 +101,10 @@ watch(
       <h2 class="service-form__title">Записаться на сервис</h2>
       <form class="service-form__form" @submit.prevent="sendRequest">
         <div class="service-form__form-name">
-          <UIInput v-model="name" type="text" title="Ваше имя" placeholder="Ваше имя" :error-message="errorNameInput" />
+          <UIInput v-model="name" type="text" title="Ваше имя" placeholder="Ваше имя" :error-message="errorNameInput" :disabled="loading" />
         </div>
         <div class="service-form__form-phone">
-          <UIInput v-model="phone" type="phone" title="Ваш номер телефона" :error-message="errorPhoneInput" />
+          <UIInput v-model="phone" type="phone" title="Ваш номер телефона" :error-message="errorPhoneInput" :disabled="loading"/>
         </div>
         <div class="service-form__form-service">
           <UIDropdownWithAccordion
@@ -111,11 +114,12 @@ watch(
             :items="services"
             :checked-services="chooseServices"
             :error-message="errorServices"
+            :disabled="!services.length || loading"
             @on-change-service="onChangeServiceHandler"
           />
         </div>
         <div class="service-form__form-button">
-          <UIButton type="submit" text="Записаться" :is-filled="true" :size-large="true" />
+          <UIButton type="submit" text="Записаться" :is-filled="true" :size-large="true" :with-loader="loading" />
         </div>
       </form>
     </div>

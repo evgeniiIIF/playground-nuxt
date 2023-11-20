@@ -17,7 +17,7 @@ const DropdownNodeRef = ref<HTMLDivElement | null>(null);
 const searchValue = ref('');
 
 const toggleHandler = () => {
-  if (props.items.length === 0) return;
+  if (props.disabled) return;
   toggleDropdown();
 };
 
@@ -59,9 +59,9 @@ const setValue = (checkedServices?: ServicesAllItem[]) => {
           :placeholder="placeholder"
           :value="setValue(checkedServices)"
           readOnly
-          :disabled="props.items.length === 0"
+          :disabled="disabled"
         />
-        <button type="button" class="dropdown-accordion__button">
+        <button type="button" class="dropdown-accordion__button" :disabled="disabled">
           <span class="dropdown-accordion__button-arrow">
             <IcArrowDown :font-controlled="false" :filled="true" />
           </span>
@@ -144,6 +144,10 @@ const setValue = (checkedServices?: ServicesAllItem[]) => {
     &::placeholder {
       color: $color-gray-light;
     }
+
+    &:disabled {
+      cursor: auto;
+    }
   }
 
   &__button {
@@ -152,6 +156,10 @@ const setValue = (checkedServices?: ServicesAllItem[]) => {
     padding: 12px 15px;
     outline: none;
     cursor: pointer;
+
+    &:disabled {
+      cursor: auto;
+    }
 
     &-arrow {
       width: 24px;
