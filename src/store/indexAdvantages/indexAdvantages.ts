@@ -16,7 +16,6 @@ export const indexAdvantagesStore = defineStore('indexAdvantagesStore', () => {
   const fetchIndexAdvantagesItems = async () => {
     try {
       const { data } = await indexAdvantagesHttp.fetchIndexAdvantagesItems();
-      console.log(data);
 
       setIndexAdvantagesItems(data.value ?? []);
     } catch (error) {

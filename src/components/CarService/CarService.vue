@@ -4,8 +4,6 @@ import { useIndexAdvantagesStore } from '@/store/indexAdvantages';
 
 const { homeState } = useHomeStore();
 const { indexAdvantagesState } = useIndexAdvantagesStore();
-
-onMounted(() => console.log(indexAdvantagesState, 'indexAdvantagesState'));
 </script>
 
 <template>
