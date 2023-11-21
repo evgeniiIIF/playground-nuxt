@@ -4,8 +4,6 @@ import { useAdvantagesStore } from '@/store/advantages';
 
 const { homeState } = useHomeStore();
 const { advantagesState } = useAdvantagesStore();
-
-onMounted(() => console.log(advantagesState, 'advantagesState'));
 </script>
 
 <template>
