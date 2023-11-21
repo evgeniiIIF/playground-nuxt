@@ -95,17 +95,10 @@ const closeServicesAllModal = () => {
   height: inherit;
 }
 main {
-  margin-top: 114px;
+  margin-top: 115px;
   flex: 1 1 auto;
+
   @include to(1280px) {
-    margin-top: 100px;
-  }
-
-  @include tablet {
-    margin-top: 100px;
-  }
-
-  @include mobile {
     margin-top: 100px;
   }
 }

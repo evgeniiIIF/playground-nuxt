@@ -117,6 +117,7 @@ const { isMobile } = useMediaSizes();
 
     .swiper {
       &-pagination {
+        bottom: 32px;
         &-bullets {
           display: flex;
           justify-content: center;
@@ -128,14 +129,28 @@ const { isMobile } = useMediaSizes();
         }
 
         &-bullet {
+          position: relative;
           width: 40px;
-          height: 2px;
+          height: 40px;
           border-radius: 0;
-          background-color: $color-gray;
-          opacity: 1;
+          background-color: transparent;
+          opacity: inherit;
+
+          &::before {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 2px;
+            content: '';
+            background-color: $color-gray;
+          }
 
           &-active {
-            background-color: $color-second;
+            &::before {
+              background-color: $color-second;
+            }
           }
 
           &:not(:last-child) {
