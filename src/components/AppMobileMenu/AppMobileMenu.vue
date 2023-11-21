@@ -132,7 +132,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
         max-width: 100%;
 
         .mobile-menu__wrapper {
-          height: calc(100vh - 91px);
+          height: calc(100vh - 100px);
 
           .navigation {
             &__list {
