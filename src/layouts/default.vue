@@ -98,15 +98,15 @@ main {
   margin-top: 114px;
   flex: 1 1 auto;
   @include to(1280px) {
-    margin-top: 91px;
+    margin-top: 100px;
   }
 
   @include tablet {
-    margin-top: 91px;
+    margin-top: 100px;
   }
 
   @include mobile {
-    margin-top: 91px;
+    margin-top: 100px;
   }
 }
 </style>
