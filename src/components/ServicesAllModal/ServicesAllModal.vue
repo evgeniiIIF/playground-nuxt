@@ -36,6 +36,11 @@ const { isDesktop } = useMediaSizes();
   overflow: hidden;
   background: #fff;
 
+  @include to(1280px) {
+    top: 100px;
+    height: 100vh;
+  }
+
   @include tablet {
     top: 0;
     height: 100vh;
