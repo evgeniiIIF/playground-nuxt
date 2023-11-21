@@ -49,10 +49,10 @@ onMounted(() => {
       if (counter >= maxAutoBrandsListWidth) {
         counter = 0;
       } else {
-        counter += 1;
+        counter += 0.5;
         AutoBrandsListWidth.value = counter;
       }
-    }, 30);
+    }, 8);
   }
 });
 
