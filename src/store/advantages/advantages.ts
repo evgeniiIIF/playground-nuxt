@@ -16,7 +16,6 @@ export const advantagesStore = defineStore('advantagesStore', () => {
   const fetchadvantagesItems = async () => {
     try {
       const { data } = await advantagesHttp.fetchadvantagesItems();
-      console.log(data);
 
       setadvantagesItems(data.value ?? []);
     } catch (error) {

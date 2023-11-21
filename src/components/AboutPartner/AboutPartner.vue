@@ -14,14 +14,14 @@ defineProps<AboutPartner>();
       <div class="about-partner__row">
         <div class="about-partner__description" v-html="aboutPartner.description"></div>
         <div v-if="aboutPartner.showBtn && !isMobile" class="about-partner__button">
-          <UIButton :text="aboutPartner.btnTitle" :is-filled="true" :size-large="true" />
+          <UIButton :text="aboutPartner.btnTitle" :is-filled="true" :size-large="true" :link="aboutPartner.linkUrl" />
         </div>
       </div>
       <div class="about-partner__link">
         <UILink type="a" :text="aboutPartner.linkText" :link="aboutPartner.linkUrl" />
       </div>
       <div v-if="aboutPartner.showBtn && isMobile" class="about-partner__button">
-        <UIButton :text="aboutPartner.btnTitle" :is-filled="true" :size-large="true" />
+        <UIButton :text="aboutPartner.btnTitle" :is-filled="true" :size-large="true" :link="aboutPartner.linkUrl" />
       </div>
     </div>
   </section>
