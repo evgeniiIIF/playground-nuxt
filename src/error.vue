@@ -185,10 +185,6 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
       @include error-page-text;
       color: $color-blue;
 
-      @include media-range($desktop-form, $screen-medium-min) {
-        font-size: 350px;
-      }
-
       @include tablet {
         font-size: 90px;
         line-height: 90px;
@@ -225,19 +221,6 @@ const [isOpenMobileMenu, openMobileMenu, closeMobileMenu, toggleMobileMenu] = us
         }
       }
     }
-  }
-}
-
-main {
-  margin-top: 114px;
-  flex: 1 1 auto;
-
-  @include tablet {
-    margin-top: 100px;
-  }
-
-  @include mobile {
-    margin-top: 100px;
   }
 }
 </style>

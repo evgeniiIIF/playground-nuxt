@@ -1,191 +1,7 @@
 @import './variables.scss';
 // typography
 
-@mixin title-slug {
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 40px; /* 133.333% */
-}
 
-@mixin title-main-large-bold {
-  font-size: 40px;
-  line-height: 50px;
-  font-weight: 600;
-}
-
-@mixin title-main-big-bold {
-  font-size: 40px;
-  line-height: 45px;
-  font-weight: 600;
-}
-
-@mixin title-main-bold {
-  font-size: 30px;
-  line-height: 40px;
-  font-weight: 600;
-}
-
-@mixin title-main-small-grow {
-  font-size: 24px;
-  line-height: 30px;
-  font-weight: 500;
-}
-
-@mixin title-main-small-bold {
-  font-size: 24px;
-  line-height: 30px;
-  font-weight: 600;
-}
-
-@mixin title-main-xsmall-grow {
-  font-size: 24px;
-  line-height: 20px;
-  font-weight: 500;
-}
-
-@mixin title-main-xxsmall-grow {
-  font-size: 20px;
-  line-height: 30px;
-  font-weight: 500;
-}
-
-@mixin title-main-xxsmall-bold {
-  font-size: 20px;
-  line-height: 30px;
-  font-weight: 600;
-}
-
-@mixin title-main-xxxsmall-grow {
-  font-size: 17px;
-  line-height: 25px;
-  font-weight: 500;
-}
-
-@mixin title-main-xxxsmall {
-  font-size: 17px;
-  line-height: 25px;
-  font-weight: 400;
-}
-
-@mixin text-counter {
-  font-size: 30px;
-  line-height: 30px;
-  font-weight: 500;
-}
-
-@mixin text-main-xxlarge-medium {
-  font-size: 18px;
-  line-height: 20px;
-  font-weight: 500;
-}
-
-@mixin text-main-xlarge-bold {
-  font-size: 16px;
-  line-height: 25px;
-  font-weight: 600;
-}
-
-@mixin text-main-large-bold {
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 600;
-}
-@mixin text-main-large-medium {
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
-}
-
-@mixin text-main-large-medium {
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
-}
-
-@mixin text-main-big {
-  font-size: 15px;
-  line-height: 20px;
-  font-weight: 400;
-}
-
-@mixin text-main-medium {
-  font-size: 14px;
-  line-height: 30px;
-  font-weight: 500;
-}
-
-@mixin text-main {
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 400;
-}
-
-@mixin text-main-grow {
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 500;
-}
-
-@mixin text-main-small-grow {
-  font-size: 12px;
-  line-height: 20px;
-  font-weight: 500;
-}
-
-@mixin text-main-small {
-  font-size: 12px;
-  line-height: 20px;
-  font-weight: 400;
-}
-
-@mixin text-main-xsmall {
-  font-size: 12px;
-  line-height: 15px;
-  font-weight: 400;
-}
-
-@mixin text-main-xxsmall {
-  font-size: 10px;
-  line-height: 15px;
-  font-weight: 400;
-}
-
-@mixin text-phone-mobile {
-  font-size: 16px;
-  line-height: 30px;
-  font-weight: 600;
-}
-
-@mixin button-text-big-grow {
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
-}
-
-@mixin button-text-big {
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 400;
-}
-
-@mixin button-text {
-  font-size: 14px;
-  line-height: 30px;
-  font-weight: 400;
-}
-
-@mixin button-text-grow {
-  font-size: 14px;
-  line-height: 30px;
-  font-weight: 500;
-}
-
-@mixin error-page-text {
-  font-size: 400px;
-  line-height: 350px;
-  font-weight: 400;
-}
 
 @mixin scrollbar-y {
   &::-webkit-scrollbar {
@@ -217,78 +33,45 @@
   }
 }
 
-// breakpoints
-$screen-small-max: 768px;
+// <breakpoints Desktop First>
+$screen-mobile-to: 768px;
+$screen-tablet-to: 1024px;
+$screen-desktop-to: 1280px;
 
 @mixin mobile {
-  @media screen and (max-width: #{$screen-small-max}) {
+  @media screen and (max-width: #{$screen-mobile-to}) {
     @content;
   }
 }
-
-$tablet-from: 769px;
-$tablet-to: 1024px;
 
 @mixin tablet {
-  @media screen and (min-width: #{$tablet-from}) and (max-width: #{$tablet-to}) {
+  @media screen and (max-width: #{$screen-tablet-to}) {
     @content;
   }
 }
-
-$desktop-form: 1025px;
 
 @mixin desktop {
-  @media screen and (min-width: #{$desktop-form}) {
+  @media screen and (max-width: #{$screen-desktop-to}) {
     @content;
   }
 }
+// </breakpoints Desktop First>
 
-@mixin footer-media {
-  @media screen and (max-width: #{$tablet-to}) {
-    @content;
-  }
-}
-
-$screen-xsmall-max: 567px;
-
-@mixin xsmall {
-  @media screen and (max-width: #{$screen-xsmall-max}) {
-    @content;
-  }
-}
-
-$screen-medium-min: 1200px;
-
-$screen-large-min: 1600px;
-
-@mixin media-start-from($val) {
-  @media screen and (min-width: #{$val}) {
-    @content;
-  }
-}
-
-@mixin media-end-to($val) {
+// <breakpoints custom>
+@mixin media-to($val) {
   @media screen and (max-width: #{$val}) {
     @content;
   }
 }
 
-@mixin media-range($min, $max) {
-  @media screen and (max-width: #{$max}) and (min-width: #{$min}) {
+@mixin media-from($val) {
+  @media screen and (min-width: #{$val}) {
     @content;
   }
 }
+// </breakpoints custom>
 
-@mixin reset-h {
-  margin: 0;
-  padding: 0;
-}
 
-@mixin container($max-width: 1232px) {
-  padding: 0 16px;
-  margin: 0 auto;
-  max-width: $max-width;
-}
 
 @mixin centered-flexbox {
   display: flex;
@@ -304,7 +87,7 @@ $screen-large-min: 1600px;
   bottom: 0;
 }
 
-@mixin fill-svg-and-path($color, $transition-duration: 200ms) {
+@mixin svg-color($color, $transition-duration: 0ms) {
   transition: all $transition-duration;
   fill: $color;
 
@@ -375,6 +158,7 @@ $screen-large-min: 1600px;
 @mixin mr($margin) {
   & > * {
     margin-right: $margin;
+    
     &:last-child {
       margin-right: 0;
     }
@@ -384,6 +168,7 @@ $screen-large-min: 1600px;
 @mixin mb($margin) {
   & > * {
     margin-bottom: $margin;
+
     &:last-child {
       margin-bottom: 0;
     }

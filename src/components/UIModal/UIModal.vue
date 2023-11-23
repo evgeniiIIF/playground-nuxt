@@ -135,7 +135,7 @@ $during: 0.3s;
     cursor: pointer;
 
     svg {
-      @include fill-svg-and-path(#000);
+      @include svg-color(#000);
     }
 
     &:hover {

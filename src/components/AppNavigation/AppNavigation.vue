@@ -83,7 +83,7 @@ const handleClickOnNuxtLink = () => {
 
         .navigation__item-link-arrow {
           svg {
-            @include fill-svg-and-path($color-second-lighter, 100ms);
+            @include svg-color($color-second-lighter, 100ms);
           }
         }
       }
@@ -93,7 +93,7 @@ const handleClickOnNuxtLink = () => {
 
         .navigation__item-link-arrow {
           svg {
-            @include fill-svg-and-path($color-second, 100ms);
+            @include svg-color($color-second, 100ms);
           }
         }
       }
@@ -105,7 +105,7 @@ const handleClickOnNuxtLink = () => {
         transition: rotate 0.2s ease;
 
         svg {
-          @include fill-svg-and-path($color-white, 100ms);
+          @include svg-color($color-white, 100ms);
         }
       }
 
@@ -116,7 +116,7 @@ const handleClickOnNuxtLink = () => {
           transform: rotate(180deg);
 
           svg {
-            @include fill-svg-and-path($color-second, 100ms);
+            @include svg-color($color-second, 100ms);
           }
         }
       }
@@ -132,7 +132,7 @@ const handleClickOnNuxtLink = () => {
 
         .navigation__item-link-arrow {
           svg {
-            @include fill-svg-and-path($color-second-lighter, 100ms);
+            @include svg-color($color-second-lighter, 100ms);
           }
         }
       }
@@ -142,14 +142,14 @@ const handleClickOnNuxtLink = () => {
 
         .navigation__item-link-arrow {
           svg {
-            @include fill-svg-and-path($color-second, 100ms);
+            @include svg-color($color-second, 100ms);
           }
         }
       }
 
       &-arrow {
         svg {
-          @include fill-svg-and-path($color-blue, 100ms);
+          @include svg-color($color-blue, 100ms);
         }
       }
 
@@ -160,7 +160,7 @@ const handleClickOnNuxtLink = () => {
           transform: rotate(180deg);
 
           svg {
-            @include fill-svg-and-path($color-second, 100ms);
+            @include svg-color($color-second, 100ms);
           }
         }
       }

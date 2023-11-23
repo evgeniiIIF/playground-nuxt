@@ -49,6 +49,7 @@ export default defineNuxtConfig({
           additionalData: `
             @import "@/assets/style/variables.scss";
             @import "@/assets/style/mixins.scss";
+            @import "@/assets/style/fonts.scss";
             @import "@/assets/style/smart-grid.scss";
           `,
         },

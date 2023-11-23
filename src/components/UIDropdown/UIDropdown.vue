@@ -127,7 +127,7 @@ const handleDropdownItemClick = (item: string) => {
       color: $color-second;
 
       svg {
-        @include fill-svg-and-path($color-second);
+        @include svg-color($color-second);
       }
     }
   }

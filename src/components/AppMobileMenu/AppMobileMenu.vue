@@ -150,7 +150,7 @@ const [isOpenModal, openModal, closeModal] = useBooleanState(false);
             &__item-link-arrow {
               svg {
                 transform: rotate(270deg);
-                @include fill-svg-and-path(#18243c);
+                @include svg-color(#18243c);
               }
             }
           }

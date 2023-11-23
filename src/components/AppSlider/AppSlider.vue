@@ -56,7 +56,7 @@ const goBack = () => {
         :class="['app-slider__slide', index === currentSlideIndex ? 'app-slider__slide--active' : '']"
       >
         <div class="app-slider__image ibg">
-          <NuxtImg :src="image?.path" fit="contain" loading="lazy" />
+          <NuxtImg :src="image?.path" fit="contain" loading="lazy" format="webp" />
         </div>
       </div>
     </div>
