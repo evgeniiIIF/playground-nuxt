@@ -2,8 +2,8 @@
 
 <template>
   <div>
-    <AppPlayground />
-    <!-- <AppMediaMixinsTest /> -->
+    <!-- <AppPlayground /> -->
+    <AppMediaMixinsTest />
   </div>
 </template>
 

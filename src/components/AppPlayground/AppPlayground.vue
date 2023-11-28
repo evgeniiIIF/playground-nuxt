@@ -53,6 +53,46 @@ const galleryItems = [
           fugiat explicabo fuga officia dolor laudantium minus laborum. Deserunt quam molestias repellendus totam
           molestiae iure.
         </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam id aut, sunt corrupti voluptatem voluptas
+          fugiat explicabo fuga officia dolor laudantium minus laborum. Deserunt quam molestias repellendus totam
+          molestiae iure.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam id aut, sunt corrupti voluptatem voluptas
+          fugiat explicabo fuga officia dolor laudantium minus laborum. Deserunt quam molestias repellendus totam
+          molestiae iure.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam id aut, sunt corrupti voluptatem voluptas
+          fugiat explicabo fuga officia dolor laudantium minus laborum. Deserunt quam molestias repellendus totam
+          molestiae iure.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam id aut, sunt corrupti voluptatem voluptas
+          fugiat explicabo fuga officia dolor laudantium minus laborum. Deserunt quam molestias repellendus totam
+          molestiae iure.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam id aut, sunt corrupti voluptatem voluptas
+          fugiat explicabo fuga officia dolor laudantium minus laborum. Deserunt quam molestias repellendus totam
+          molestiae iure.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam id aut, sunt corrupti voluptatem voluptas
+          fugiat explicabo fuga officia dolor laudantium minus laborum. Deserunt quam molestias repellendus totam
+          molestiae iure.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam id aut, sunt corrupti voluptatem voluptas
+          fugiat explicabo fuga officia dolor laudantium minus laborum. Deserunt quam molestias repellendus totam
+          molestiae iure.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam id aut, sunt corrupti voluptatem voluptas
+          fugiat explicabo fuga officia dolor laudantium minus laborum. Deserunt quam molestias repellendus totam
+          molestiae iure.
+        </p>
 
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam id aut, sunt corrupti voluptatem voluptas
@@ -142,6 +182,9 @@ const galleryItems = [
           format="webp"
           threshold="50%"
         />
+      </div>
+      <div class="wrap-img ibg">
+        <NuxtImg src="/images/error-car.png" loading="lazy" format="webp" threshold="50%" />
       </div>
     </div>
   </div>

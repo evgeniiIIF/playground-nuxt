@@ -50,7 +50,7 @@ export default defineNuxtConfig({
             @import "@/assets/style/variables.scss";
             @import "@/assets/style/mixins.scss";
             @import "@/assets/style/fonts.scss";
-            @import "@/assets/style/smart-grid.scss";
+            @import "@/assets/style/smart-grid--mobile-first.scss";
           `,
         },
       },

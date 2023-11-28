@@ -23,26 +23,28 @@
 <style lang="scss">
 .cards {
   &__row {
-    @include row-flex();
+    @include tablet {
+      @include row-flex();
+    }
   }
   &__item {
+    border: 1px solid #000;
+    background: green;
+    @include media($xs) {
+      background: red;
+    }
+
     @include hover {
       background: red;
     }
-    @include col();
-    @include size(3);
-    background: green;
-
-    @include desktop {
-      @include size(4);
-    }
 
     @include tablet {
+      @include col();
       @include size(6);
     }
 
-    @include mobile {
-      @include size(12);
+    @include desktop {
+      @include size(4);
     }
   }
 }

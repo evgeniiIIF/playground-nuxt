@@ -32,44 +32,68 @@
     background-color: $color-white-lighter;
   }
 }
+// ==============================================================
+// <breakpoints Mobile First>
+$screen-tablet-from: 768px;
+$screen-desktop-from: 1024px;
 
+@mixin tablet {
+  @media screen and (min-width: #{$screen-tablet-from}) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media screen and (min-width: #{$screen-desktop-from}) {
+    @content;
+  }
+}
+
+// breakpoints custom
+$xs: 425px;
+$sm: 576px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
+$xxl: 1400px;
+
+@mixin media($val) {
+  @media screen and (min-width: #{$val}) {
+    @content;
+  }
+}
+
+// </breakpoints Mobile First>
+// ==============================================================
 // <breakpoints Desktop First>
 $screen-mobile-to: 768px;
 $screen-tablet-to: 1024px;
 $screen-desktop-to: 1280px;
 
-@mixin mobile {
+@mixin d-mobile {
   @media screen and (max-width: #{$screen-mobile-to}) {
     @content;
   }
 }
 
-@mixin tablet {
+@mixin d-tablet {
   @media screen and (max-width: #{$screen-tablet-to}) {
     @content;
   }
 }
 
-@mixin desktop {
+@mixin d-desktop {
   @media screen and (max-width: #{$screen-desktop-to}) {
     @content;
   }
 }
-// </breakpoints Desktop First>
 
-// <breakpoints custom>
-@mixin media-to($val) {
+@mixin d-media($val) {
   @media screen and (max-width: #{$val}) {
     @content;
   }
 }
-
-@mixin media-from($val) {
-  @media screen and (min-width: #{$val}) {
-    @content;
-  }
-}
-// </breakpoints custom>
+// </breakpoints Desktop First>
+// ==============================================================
 
 
 
